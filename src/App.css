@@ -1,0 +1,270 @@
+@import url('https://fonts.googleapis.com/css2?family=Calistoga&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    touch-action: manipulation;
+    overflow: hidden;
+    height: 100vh;
+    background: linear-gradient(180deg, rgba(252, 32, 32, 0) 0%, #FC2020 100%) no-repeat;
+    color: #ffffff;
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
+.dashboard {
+
+}
+
+.dashboard > .add-pad {
+    padding: 2rem 2rem;
+}
+
+.coin-image-holder {
+    touch-action: manipulation;
+    width: 350px;
+    height: 350px;
+}
+
+.coin-image-holder > div:first-child {
+    margin-bottom: 2rem;
+    touch-action: manipulation;
+    animation: zoomIn 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+    border-radius: 50%;
+    z-index: 600;
+}
+.floating-div-holder {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    touch-action: manipulation;
+}
+.floating-div {
+    width: 100%;
+    height: 100%;
+    touch-action: manipulation;
+}
+.coin-image-holder > div:last-child {
+    position: absolute;
+    top: 20px;
+    left: 0px;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    /*// blured background color grendent filter*/
+    background: linear-gradient(88.09deg, #ff4528 0%, #ff904c 96.78%);
+    filter: blur(40px);
+    z-index: 400;
+}
+.coin-image {
+    position: relative;
+    border-radius: 50%;
+}
+
+.score-holder > img {
+    width: 37px;
+    height: 37px;
+}
+
+.score-holder > p {
+    font-size: 40px;
+    font-family: 'Calistoga', serif;
+    font-weight: 400;
+    height: 100%;
+}
+
+.league-squad-holder {
+    background: linear-gradient(0deg, rgba(161, 160, 169, 0.2), rgba(161, 160, 169, 0.2));
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 24px;
+    width: 368px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.db-league {
+    padding: 1rem 3rem;
+    height: 80%;
+    width: 50%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.col-divider {
+    width: 1px;
+    height: 80%;
+    background: rgba(255, 255, 255, 1);
+    border: 0.5px solid rgba(255, 255, 255, 1);
+    opacity: 0.5;
+}
+
+.db-squad {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
+
+.db-squad > div:first-child {
+    font-size: 15px;
+    font-family: 'Arial', serif;
+    font-weight: 500;
+    margin-right: .5rem;
+    color: #fff;
+}
+
+.db-squad > div:last-child {
+    position: relative;
+    font-size: 20px;
+    font-weight: 600;
+    height: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.energy-value {
+    font-size: 1.2rem;
+    font-weight: 600;
+    font-family: 'Kanit', sans-serif;
+}
+
+.energy-holder {
+    padding: 1.5rem 0 0 1.5rem;
+}
+
+.energy-value > span:last-child {
+    font-size: .8rem;
+    font-weight: 500;
+    font-family: 'Kanit', sans-serif;
+    color: gray;
+}
+
+.bm-box {
+    display: flex;
+    flex-direction: column;
+    padding: 0 1rem;
+}
+
+.bottom-market {
+    padding: .5rem 0rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+.bm-box > span:last-child {
+    font-size: .7rem;
+    font-weight: 500;
+}
+
+.energy-bar {
+    position: relative;
+    width: 100%;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.energy-bar-slider {
+    position: relative;
+    display: block;
+    height: 100%;
+    background: linear-gradient(88.09deg, #E3452D 0%, #FAAF5E 96.78%);
+    border-radius: 10px;
+    transition: width 1s ease-in-out;
+}
+
+.energy-bar > span > span {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(88.09deg, #E3452D 0%, #FAAF5E 96.78%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    transition: all 1s ease-in-out;
+}
+
+.ds-tools {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    background: linear-gradient(0deg, rgba(252, 32, 32, 0) 0%, rgba(164, 0, 0, 0.77) 60%);
+    box-shadow: 0px 1px 1px 0px rgba(192, 192, 192, 0.25) inset;
+    border-radius: 24px 24px 0 0;
+    width: 100%;
+    height: 15vh;
+    padding: 2rem;
+    z-index: 1000;
+}
+.ds-tool-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ds-tool-box > p {
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.ds-tool-box > img {
+    width: 42px !important;
+    height: 42px !important;
+    margin-bottom: 5px;
+}
+.coin-itself {
+    position: absolute;
+    top: -30px;
+}
+.floating-score {
+    position: absolute;
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+}
+.floating-score > span {
+    background: darkmagenta;
+    width: 100%;
+    position: absolute;
+    font-size: 50px;
+    font-family: 'Calistoga', serif;
+    font-weight: 300;
+    opacity: .8;
+    animation: float-up .7s ease-in;
+    z-index: 1000;
+    transition: all 1s ease-in-out;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes float-up {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-100%);
+        opacity: 0;
+        display: none;
+        visibility: hidden;
+    }
+}
