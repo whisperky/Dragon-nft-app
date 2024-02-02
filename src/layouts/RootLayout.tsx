@@ -9,9 +9,9 @@ import {setScore} from "../store/score.ts";
 import {userData} from "../types/user.ts";
 
 const RootLayout = () => {
-    // WebApp.expand();
-    // WebApp.setBackgroundColor('#000000');
-    // WebApp.setHeaderColor('#000000');
+    WebApp.expand();
+    WebApp.setBackgroundColor('#000000');
+    WebApp.setHeaderColor('#000000');
     let { token } = useParams();
     const user = useSelector((state: any) => state.user);
     const load = useSelector((state: any) => state.loading);

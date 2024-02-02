@@ -6,6 +6,7 @@ import RootLayout from "./layouts/RootLayout.tsx";
 import ErrorPage from "./pages/ErrorPage.tsx";
 import {increaseEnergy, resetCoolDown, setEnergyTimeout} from "./store/score.ts";
 import {energyValue, randomRange, rechargeValue, tapValue} from "./helpers/score.helper.ts";
+import WebApp from "@twa-dev/sdk";
 
 function App() {
     const score = useSelector((state: any) => state.score);
@@ -46,29 +47,30 @@ function App() {
         [
             {
                 path: '/',
-                element: <RootLayout />,
-                errorElement: <ErrorPage />,
+                element: <RootLayout/>,
+                errorElement: <ErrorPage/>,
                 children: [
                     {
                         path: ':token',
-                        element: <Dashboard />
+                        element: <Dashboard/>
                     }
                 ]
             }
         ]
     );
-    // if (WebApp.platform !== 'ios' && WebApp.platform !== 'android')
-    //     return (
-    //         <div id='noDesktop'>
-    //             <span>Desktop is Boring</span>
-    //             <span>open on phone</span>
-    //         </div>
-    //     )
-    // else
-    return (
-        <div className="App">
-            <RouterProvider router={router}/>
-        </div>
-    );}
+    if (WebApp.platform !== 'ios' && WebApp.platform !== 'android')
+        return (
+            <div id='noDesktop'>
+                <span>Desktop is Boring</span>
+                <span>open on phone</span>
+            </div>
+        )
+    else
+        return (
+            <div className="App">
+                <RouterProvider router={router}/>
+            </div>
+        );
+}
 
 export default App
