@@ -1,26 +1,26 @@
 import WebApp from "@twa-dev/sdk";
 import {useDispatch, useSelector} from "react-redux";
-import {decreaseEnergy, increment} from "../../store/score.ts";
+import {dump_increment, increment, setTapTimeout} from "../../store/score.ts";
 import coin from '../../../public/skin/bitcoin.svg';
 import React from "react";
+import {loadCoin} from "../../store/loading.ts";
+import {tapValue} from "../../helpers/score.helper.ts";
 
 const CoinImage = () => {
     const imgH = React.useRef<HTMLDivElement>(null)
     const img = React.useRef<HTMLImageElement>(null)
-    const energy:number = useSelector((state: any) => state.score.energy);
+    const score  = useSelector((state: any) => state.score);
     const dispatch = useDispatch();
     const TapTap = () => {
+        clearTimeout(score.tapTimeout);
         setTimeout(() => {
             dispatch(increment())
         }, 500);
-        dispatch(decreaseEnergy())
         WebApp.HapticFeedback.impactOccurred('medium')
-        // const item = img.current!;
-        // const e = imgH.current!;
         return true;
     }
     const onTapBegin = (e: any) => {
-        if (['coin-step-mother', 'coin-mother', 'coin-ex'].includes(e.target.parentNode.id) && energy > 0) {
+        if (['coin-step-mother', 'coin-mother', 'coin-ex'].includes(e.target.parentNode.id) && score.energy > 0) {
             TapTap();
             const item = img.current!;
             const container = document.querySelector(".coin-itself")!;
@@ -29,7 +29,7 @@ const CoinImage = () => {
 
             let touch = document.createElement('div');
             let one = document.createElement('span');
-            one.innerHTML = '1';
+            one.innerHTML = tapValue(score.tap_lvl).toString();
             one.style.position = 'absolute';
             touch.id = 'coin-step-mother'
             touch.className = 'floating-score';
@@ -38,7 +38,6 @@ const CoinImage = () => {
             touch.style.left = `${clientX - (clientX / 3.7)}px`;
             container.appendChild(touch);
             // Remove the element after 1 second.
-            console.log(container.children.length)
             // if (container.children.length > 40) {
             //     let i = 0;
             //     while (i < container.children.length) {
@@ -67,27 +66,38 @@ const CoinImage = () => {
             let calcAngleY = ((y - halfHeight) / 14) * -1;
 
             // Set the items transform CSS property
-            item.style.transform = `rotateY(${calcAngleX}deg) rotateX(${calcAngleY}deg)`;
-
+            if (Math.floor(calcAngleX) === 0 && Math.floor(calcAngleY) === 0) {
+                item.style.transform = `rotateY(${calcAngleX}deg) rotateX(${calcAngleY}deg) scale(.99)`;
+            } else {
+                item.style.transform = `rotateY(${calcAngleX}deg) rotateX(${calcAngleY}deg)`;
+            }
             // And set its container's perspective.
             imgH.current!.style.perspective = `${halfWidth * 4}px`
             item.style.perspective = `${halfWidth * 4}px`
         }
     }
     const onTapEnds = () => {
+        if (score.tapTimeout) {
+            clearTimeout(score.tapTimeout);
+            dispatch(setTapTimeout(null));
+        }
+        dispatch(setTapTimeout(setTimeout(() => {
+            console.log('Mine dis Coin')
+            dispatch(dump_increment())
+        }, 2000)))
         const item = img.current!;
         item.style.transform = `rotateY(0deg) rotateX(0deg)`
     }
-    return (energy > 0) ? (
+    return (score.energy > 0 && !score.coolDown) ? (
         <div className='coin-image-holder flex justify-around relative'>
-            <div id='coin-mother' ref={imgH} onTouchStart={onTapBegin} onTouchEnd={onTapEnds} onTouchCancel={onTapEnds}>
+            <div id='coin-mother' ref={imgH} onTouchStart={onTapBegin} onTouchEnd={onTapEnds}>
                 <div id='coin-ex' className='coin-itself'></div>
-                <img onSelect={() => false} ref={img} id='coinIcon' className='coin-image' src={coin}
+                <img onSelect={() => false} ref={img} id='coinIcon' className='coin-image' src={coin} onLoad={() => dispatch(loadCoin())}
                      alt='DragonCoin'/>
             </div>
             <div></div>
         </div>
-    ) : (<div className='coin-image-holder flex items-center justify-center'>No Energy</div>);
+    ) : (<div className='coin-image-holder flex items-center justify-center' style={{height: '350px'}}>No Energy</div>);
 };
 
 export default CoinImage;

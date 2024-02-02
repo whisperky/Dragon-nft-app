@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik+Burned&display=swap');
+@font-face {
+    font-family: PingFang;
+    src: url('../public/fonts/pingfang.ttf') format('truetype');
+}
 body {
     margin: 0;
     padding: 0;
@@ -22,4 +26,30 @@ body {
     font-size: 20px;
     font-weight: 600;
     font-family: 'Rubik Burned', system-ui;
+}
+
+
+/* HTML: <div class="loader"></div> */
+.loader {
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 30px;
+    display: inline-grid;
+}
+.loader:before,
+.loader:after {
+    content:"Loading...";
+    grid-area: 1/1;
+    -webkit-mask: linear-gradient(90deg,#000 50%,#0000 0) 0 50%/2ch 100%;
+    animation: l11 1s infinite cubic-bezier(0.5,220,0.5,-220);
+}
+.loader:after {
+    -webkit-mask-position:1ch 50%;
+    --s:-1;
+}
+@keyframes l11 {100%{transform: translateY(calc(var(--s,1)*0.1%));}}
+.preloader {
+    width: 100%;
+    height: 100vh;
+    background: #000;
 }
