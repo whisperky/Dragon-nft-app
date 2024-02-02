@@ -5,7 +5,7 @@ import Energy from "../components/dashboard/Energy.tsx";
 import DSTools from "../components/dashboard/DSTools.tsx";
 import '../App.css'
 import WebApp from "@twa-dev/sdk";
-
+import '../fixed_bg.css'
 const Dashboard = () => {
     WebApp.BackButton.hide()
     return (
