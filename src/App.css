@@ -20,7 +20,9 @@ body {
 }
 
 .dashboard > .add-pad {
-    padding: 2rem 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 2rem;
     height: 80%;
 }
 
