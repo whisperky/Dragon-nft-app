@@ -26,7 +26,7 @@ const scoreSlice = createSlice({
             state.last_tap_time = action.payload.last_tap_time == null ? Math.floor(Date.now() / 1000) : action.payload.last_tap_time;
             state.energy = action.payload.last_tap_time == null ? energyValue(state.energy_lvl) : currentEnergy(state.last_tap_time, action.payload.last_energy_left, state.energy_lvl, state.recharge_lvl);
         },
-        increment: (state) => {
+        increment: (state, action) => {
             if ((state.energy - tapValue(state.tap_lvl)) <= 0) {
                 console.log('Down bad')
                 state.coolDown = true;
@@ -34,7 +34,7 @@ const scoreSlice = createSlice({
                 state.temp_value += state.energy;
                 state.energy = 0;
                 state.last_tap_time = Math.floor(Date.now() / 1000);
-                Service.Connect().emit('mine', {
+                action.payload.emit('mine', {
                     value: state.temp_value,
                     energy: state.energy,
                     time: state.last_tap_time,
@@ -46,7 +46,7 @@ const scoreSlice = createSlice({
                 state.energy -= tapValue(state.tap_lvl);
                 state.last_tap_time = Math.floor(Date.now() / 1000);
                 if (state.temp_value >= 300) {
-                    Service.Connect().emit('mine', {
+                    action.payload.emit('mine', {
                         value: state.temp_value,
                         energy: state.energy,
                         time: state.last_tap_time,
@@ -55,10 +55,10 @@ const scoreSlice = createSlice({
                 }
             }
         },
-        dump_increment: (state) => {
+        dump_increment: (state, action) => {
             // if last tap time is greater than 5 seconds
             if (state.temp_value > 0) {
-                Service.Connect().emit('mine', {
+                action.payload.emit('mine', {
                     value: state.temp_value,
                     energy: state.energy,
                     time: state.last_tap_time,

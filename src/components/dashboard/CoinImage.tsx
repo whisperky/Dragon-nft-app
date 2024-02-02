@@ -9,12 +9,13 @@ import {tapValue} from "../../helpers/score.helper.ts";
 const CoinImage = () => {
     const imgH = React.useRef<HTMLDivElement>(null)
     const img = React.useRef<HTMLImageElement>(null)
+    const user  = useSelector((state: any) => state.user);
     const score  = useSelector((state: any) => state.score);
     const dispatch = useDispatch();
     const TapTap = () => {
         clearTimeout(score.tapTimeout);
         setTimeout(() => {
-            dispatch(increment())
+            dispatch(increment(user.websocket))
         }, 500);
         WebApp.HapticFeedback.impactOccurred('medium')
         return true;
@@ -83,7 +84,7 @@ const CoinImage = () => {
         }
         dispatch(setTapTimeout(setTimeout(() => {
             console.log('Mine dis Coin')
-            dispatch(dump_increment())
+            dispatch(dump_increment(user.websocket))
         }, 2000)))
         const item = img.current!;
         item.style.transform = `rotateY(0deg) rotateX(0deg)`

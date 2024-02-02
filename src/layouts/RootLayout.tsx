@@ -20,8 +20,7 @@ const RootLayout = () => {
         if (!user.dataRequested) {
             localStorage.setItem('token', token ?? '');
             localStorage.setItem('tg_id', (WebApp?.initDataUnsafe?.user?.id ?? '').toString());
-            const socket = Service.Connect();
-            socket.on('receive-user', (udata: userData) => {
+            user.websocket.on('receive-user', (udata: userData) => {
                 console.log('Got user: ', udata);
                 if (udata.success) {
                     dispatch(setUser(udata));

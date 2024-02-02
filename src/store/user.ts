@@ -1,10 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
+import Service from "../service/Service.ts";
 
 const userSlice = createSlice({
     name: 'user',
     initialState: {
         dataRequested: false,
         data: null,
+        websocket: Service.Connect()
     },
     reducers: {
         requestUserData: (state) => {
