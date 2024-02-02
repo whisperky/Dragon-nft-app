@@ -1,5 +1,7 @@
 import Score from "../components/dashboard/Score.tsx";
 import '../App.css'
+import '../not_fixed_bg.css'
+
 import DailyBoosters from "../components/boosts/DailyBoosters.tsx";
 import BoosterList from "../components/boosts/BoosterList.tsx";
 import WebApp from "@twa-dev/sdk";

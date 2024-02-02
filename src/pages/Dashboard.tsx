@@ -4,8 +4,8 @@ import League from "../components/dashboard/League.tsx";
 import Energy from "../components/dashboard/Energy.tsx";
 import DSTools from "../components/dashboard/DSTools.tsx";
 import '../App.css'
-import WebApp from "@twa-dev/sdk";
 import '../fixed_bg.css'
+import WebApp from "@twa-dev/sdk";
 const Dashboard = () => {
     WebApp.BackButton.hide()
     return (
