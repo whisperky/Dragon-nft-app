@@ -1,4 +1,4 @@
-import Dashboard from "./pages/dashboard/Dashboard.tsx";
+import Dashboard from "./pages/Dashboard.tsx";
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
@@ -6,6 +6,7 @@ import RootLayout from "./layouts/RootLayout.tsx";
 import ErrorPage from "./pages/ErrorPage.tsx";
 import {increaseEnergy, resetCoolDown, setEnergyTimeout} from "./store/score.ts";
 import {energyValue, randomRange, rechargeValue, tapValue} from "./helpers/score.helper.ts";
+import Boosts from "./pages/Boosts.tsx";
 import WebApp from "@twa-dev/sdk";
 
 function App() {
@@ -52,7 +53,16 @@ function App() {
                 children: [
                     {
                         path: ':token',
-                        element: <Dashboard/>
+                        children: [
+                            {
+                                index: true,
+                                element: <Dashboard/>,
+                            },
+                            {
+                                path: 'boosts',
+                                element: <Boosts/>,
+                            }
+                        ]
                     }
                 ]
             }
