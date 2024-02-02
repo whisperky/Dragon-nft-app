@@ -19,12 +19,13 @@ body {
 
 .dashboard > .add-pad {
     padding: 2rem 2rem;
+    height: 80%;
 }
-
 
 .coin-image-holder {
     touch-action: manipulation;
     width: 100%;
+    height: 70%;
 }
 
 .coin-image-holder > div:first-child {
@@ -248,16 +249,20 @@ body {
     z-index: 1000;
     transition: all 1s ease-in-out;
 }
-
+.energy-label {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
 .energy-label > span:first-child {
-    font-size: 1.1rem;
+    font-size: 14px;
     font-weight: 700;
     font-family: 'PingFang';
     color: rgba(255, 255, 255, 1);
 }
 .energy-label > span:last-child {
     padding-left: 2px;
-    font-size: .9rem;
+    font-size: 12px;
     font-weight: 600;
     font-family: 'PingFang';
     color: rgba(255, 255, 255, 0.4);

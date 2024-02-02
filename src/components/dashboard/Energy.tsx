@@ -6,7 +6,7 @@ const Energy = () => {
     const percentage = (score.energy/ energyValue(score.energy_lvl)) * 100;
 
     return (
-        <div className='flex items-center justify-between'>
+        <div className='flex items-center justify-between' style={{gap: '10px'}}>
             <div className="w-4/5">
                 <div className='energy-bar'>
                 <span className='energy-bar-slider' style={{width: percentage + '%'}}>
