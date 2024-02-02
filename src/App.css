@@ -25,7 +25,10 @@ body {
     padding-top: 2rem;
     height: 80%;
 }
-
+.noMovement {
+    height: 100vh !important;
+    overflow: hidden;
+}
 .coin-image-holder {
     touch-action: manipulation;
     width: 100%;

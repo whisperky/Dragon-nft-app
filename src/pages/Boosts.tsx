@@ -1,13 +1,11 @@
 import Score from "../components/dashboard/Score.tsx";
 import '../App.css'
-import '../not_fixed_bg.css'
-
 import DailyBoosters from "../components/boosts/DailyBoosters.tsx";
 import BoosterList from "../components/boosts/BoosterList.tsx";
 import WebApp from "@twa-dev/sdk";
 import {useNavigate} from "react-router-dom";
 
-const Dashboard = () => {
+const Boosts = () => {
     const navigate = useNavigate();
     WebApp.BackButton.onClick(() => navigate(-1))
     WebApp.BackButton.show();
@@ -24,4 +22,4 @@ const Dashboard = () => {
 };
 
 
-export default Dashboard;
+export default Boosts;

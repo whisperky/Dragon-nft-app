@@ -37,7 +37,7 @@ const RootLayout = () => {
             dispatch(requestUserData());
         }
     }, []);
-    return !load.allLoaded ? (<div><div className='preloader flex items-center justify-around'><div className="loader"></div></div><div className="w-full"><Outlet/></div></div>) : (<div className="w-full"><Outlet/></div>)
+    return !load.allLoaded ? (<div><div className='preloader flex items-center justify-around'><div className="loader"></div></div><div className="w-full hidden"><Outlet/></div></div>) : (<div className="w-full"><Outlet/></div>)
 }
 
 export default RootLayout;
