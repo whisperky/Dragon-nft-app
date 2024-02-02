@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import Service from "../service/Service.ts";
 import {currentEnergy, energyValue, rechargeValue, tapValue} from "../helpers/score.helper.ts";
 import {scoreInit} from "../types/user.ts";
 

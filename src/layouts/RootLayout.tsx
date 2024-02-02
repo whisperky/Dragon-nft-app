@@ -4,7 +4,6 @@ import WebApp from "@twa-dev/sdk";
 import {useDispatch, useSelector} from "react-redux";
 import {requestUserData, setUser} from "../store/user.ts";
 import {loadUser} from "../store/loading.ts";
-import Service from "../service/Service.ts";
 import {setScore} from "../store/score.ts";
 import {userData} from "../types/user.ts";
 
