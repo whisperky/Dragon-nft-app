@@ -33,12 +33,14 @@ const scoreSlice = createSlice({
                 state.temp_value += state.energy;
                 state.energy = 0;
                 state.last_tap_time = Math.floor(Date.now() / 1000);
-                action.payload.emit('mine', {
-                    value: state.temp_value,
-                    energy: state.energy,
-                    time: state.last_tap_time,
-                });
-                state.temp_value = 0;
+                if (state.temp_value > 0) {
+                    action.payload.emit('mine', {
+                        value: state.temp_value,
+                        energy: state.energy,
+                        time: state.last_tap_time,
+                    });
+                    state.temp_value = 0;
+                }
             }else {
                 state.value += tapValue(state.tap_lvl);
                 state.temp_value += tapValue(state.tap_lvl);
