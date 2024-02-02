@@ -35,6 +35,9 @@ body {
     border-radius: 50%;
     z-index: 600;
 }
+.coin-mother {
+    perspective: 582.4px;
+}
 .floating-div-holder {
     position: relative;
     width: 100%;
