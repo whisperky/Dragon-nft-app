@@ -12,7 +12,9 @@ body {
     user-select: none; /* Standard */
 }
 .dashboard {
+    position: fixed;
     height: 100vh;
+    width: 100%;
     overflow: hidden;
     background: linear-gradient(180deg, rgba(252, 32, 32, 0) 0%, #FC2020 100%) no-repeat;
 }
