@@ -10,11 +10,11 @@ const Dashboard = () => {
     WebApp.BackButton.hide()
     useEffect(()  => {
         document.body.classList.add('noMovement');
-
         return () => {
             document.body.classList.remove('noMovement');
         };
-    });
+    }, []);
+
     return (
         <div className='dashboard'>
             <div className='add-pad'>

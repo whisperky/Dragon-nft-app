@@ -1,4 +1,4 @@
-import logo from "/public/icon/small-coin.svg";
+import logo from "../../../public/icon/main/small-coin.svg";
 import {useSelector} from "react-redux";
 import {AnimatedCounter} from "react-animated-counter";
 

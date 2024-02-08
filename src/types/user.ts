@@ -31,4 +31,5 @@ export type scoreInit = {
     tapTimeout: any
     energyTimeout: any
     coolDown: boolean
+    energyTimerStarted: boolean
 }

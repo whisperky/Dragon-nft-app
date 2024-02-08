@@ -1,6 +1,6 @@
-import toy from '../../../public/icon/toy.svg';
-import coin from '../../../public/icon/small-coin.svg';
-import dragon from '../../../public/icon/dragon.svg';
+import toy from '../../../public/icon/main/toy.svg';
+import coin from '../../../public/icon/main/small-coin.svg';
+import dragon from '../../../public/icon/main/dragon.svg';
 import {useNavigate} from "react-router-dom";
 
 const DSTools = () => {
