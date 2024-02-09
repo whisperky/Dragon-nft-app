@@ -36,7 +36,10 @@ const Fren = () => {
                 </div>
             </div>
             <div className='invite-fren-btn-con'>
-                <button className='invite-fren-btn' onClick={() => WebApp.openLink(`https://t.me/${WebApp.initDataUnsafe.receiver?.username}?start=fren`)}>Invite a Fren</button>
+                <button className='invite-fren-btn' onClick={() => {
+                    WebApp.openTelegramLink(`https://t.me/${WebApp.initDataUnsafe.receiver?.username}?start=fren`);
+                    WebApp.close();
+                }}>Invite a Fren</button>
             </div>
         </div>
     );
