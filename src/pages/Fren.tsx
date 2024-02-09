@@ -37,7 +37,7 @@ const Fren = () => {
             </div>
             <div className='invite-fren-btn-con'>
                 <button className='invite-fren-btn' onClick={() => {
-                    WebApp.openTelegramLink(`https://t.me/${WebApp.initDataUnsafe.receiver?.username}?start=fren`);
+                    WebApp.openTelegramLink(`https://t.me/DragonDotDevBot?start=fren`);
                     WebApp.close();
                 }}>Invite a Fren</button>
             </div>
