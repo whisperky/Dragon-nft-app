@@ -13,8 +13,9 @@ export type userData = {
     tap_lvl: number,
     last_energy_left: number
     balance_updated_at: number,
-    fren_link: string,
+    fren_token: string,
     invited_by: string,
+    invited_users: number
     status: string,
     createdAt: Date,
     updatedAt: Date,

@@ -520,9 +520,11 @@
 }
 .bs-button {
     margin-top: 30px;
-    background-color: #2e2eff;
-    padding: .7em 12em;
+    color: var(--tg-theme-button-text-color);
+    background-color: var(--tg-theme-button-color);
+    padding: .7em;
     border-radius: 10px;
+    width: 90%;
 }
 .react-modal-sheet-backdrop {
 }

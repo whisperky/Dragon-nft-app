@@ -6,6 +6,7 @@ import Boosts from "./pages/Boosts.tsx";
 import League from "./pages/League.tsx";
 import {Toaster} from "react-hot-toast";
 import WebApp from "@twa-dev/sdk";
+import Fren from "./pages/Fren.tsx";
 
 function App() {
     const router = createBrowserRouter(
@@ -29,6 +30,10 @@ function App() {
                             {
                                 path: 'league',
                                 element: <League />,
+                            },
+                            {
+                                path: 'fren',
+                                element: <Fren />
                             }
                         ]
                     }

@@ -14,3 +14,7 @@ export const currentEnergy = (time: number, energy: number, energy_lvl: number,r
 export const randomRange = (min: number, max: number) => { // min and max included
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
+
+export const numify = (x: number) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}

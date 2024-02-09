@@ -4,8 +4,9 @@ import check from "../../../public/icon/defaults/check.svg";
 import lockedImg from "../../../public/icon/boosts/locked.svg";
 import {showBottomSheet} from "../../store/game.ts";
 import {useDispatch} from "react-redux";
+import getImage from "../../helpers/image.helper.ts";
 
-const BoostItem = ({image, title, subtitle, subtitleColor, coin, locked, level, disabled = false, trailing}: {
+const BoostItem = ({image, title, subtitle, subtitleColor, coin, locked, level, disabled = false, trailing, item}: {
     title: string,
     subtitle?: string,
     subtitleColor?: 'gold' | 'grey',
@@ -14,15 +15,16 @@ const BoostItem = ({image, title, subtitle, subtitleColor, coin, locked, level, 
     locked?: boolean,
     level?: number,
     disabled?: boolean,
-    trailing?: 'enabled' | 'disabled' | 'opener' | 'completed'
+    trailing?: 'enabled' | 'disabled' | 'opener' | 'completed',
+    item: any
 }) => {
     const dispatch = useDispatch();
-
+    const itemType = level != undefined ? 'booster' : 'skin';
     return (
         <div className='b-item glass-hover my-3' style={{opacity: disabled ? .3 : 1}}
-             onClick={() => !disabled ? dispatch(showBottomSheet()) : {}}>
+             onClick={() => !disabled ? dispatch(showBottomSheet({item: item, type: itemType})) : {}}>
             <div className='flex items-center'>
-                <img className='b-item-image' src={image}/>
+                <img className='b-item-image' src={getImage(image ?? '')}/>
                 <div className='b-item-desc'>
                     <p className='b-item-title'>{title}</p>
                     <div className='b-item-pricing'>

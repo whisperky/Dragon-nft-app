@@ -7,7 +7,7 @@ const DSTools = () => {
     const navigate = useNavigate();
 
     const toFrens = () => {
-        alert('Under Construction')
+        navigate('fren')
     }
     const toEarn = () => {
         alert('Under Construction')

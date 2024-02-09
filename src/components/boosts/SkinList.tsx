@@ -1,11 +1,10 @@
 // import {useDispatch, useSelector} from "react-redux";
 // import Flickity from "react-flickity-component";
 
-import defaualtCoin from '../../../public/icon/boosts/skin/defualt.svg';
-import bitCoin from '../../../public/icon/boosts/skin/bitcoin.svg';
-import jadeCoin from '../../../public/icon/boosts/skin/jade-coin.svg';
-import voteCoin from '../../../public/icon/boosts/skin/vote.svg';
 import BoostItem from "./BoostItem.tsx";
+import {useSelector} from "react-redux";
+import {skinData} from "../../types/data.ts";
+import {numify} from "../../helpers/score.helper.ts";
 
 const SkinList = () => {
     // const score  = useSelector((state: any) => state.score);
@@ -15,6 +14,8 @@ const SkinList = () => {
     //     prevNextButtons: false,
     //     pageDots: false,
     // };
+    const skins = useSelector((state:any) => state.skin);
+
     return (
         <div className=''>
             <p className='boost-title'>Buy Skins</p>
@@ -28,10 +29,15 @@ const SkinList = () => {
             {/*>*/}
                 <div className={'skin-item'}>
                     <div className='boosters-list glass'>
-                        <BoostItem title='Basic' image={defaualtCoin} trailing='enabled'/>
-                        <BoostItem title='Diamond' subtitle='Diamond league exclusive' subtitleColor='gold' image={bitCoin} locked={true} />
-                        <BoostItem title='Diamond' subtitle='You own it' subtitleColor='grey' image={voteCoin} trailing='disabled' />
-                        <BoostItem title='Diamond' subtitle='500,000' subtitleColor='gold' image={jadeCoin} coin={true} trailing='opener' />
+                        {
+                            skins.list.map((skin: skinData) => {
+                                return <BoostItem item={skin} key={skin.id} title={skin.name} subtitle={numify(skin.price)} image={skin.image} coin={true} subtitleColor={"gold"}  trailing='opener'/>
+                            })
+                        }
+                        {/*<BoostItem title='Basic' image={defaualtCoin} trailing='enabled'/>*/}
+                        {/*<BoostItem title='Diamond' subtitle='Diamond league exclusive' subtitleColor='gold' image={bitCoin} locked={true} />*/}
+                        {/*<BoostItem title='Diamond' subtitle='You own it' subtitleColor='grey' image={voteCoin} trailing='disabled' />*/}
+                        {/*<BoostItem title='Diamond' subtitle='500,000' subtitleColor='gold' image={jadeCoin} coin={true} trailing='opener' />*/}
                     </div>
                 </div>
 

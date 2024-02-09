@@ -18,8 +18,9 @@ export type userData = {
     tap_lvl: number
     energy_lvl: number
     recharge_lvl: number
-    fren_link: string | null
+    fren_token: string | null
     invited_by: string | null
+    invited_users: number
     last_energy_left: number | null
     balance_updated_at: number | null
     status: userStatusData | null
