@@ -12,7 +12,7 @@ const Friend = ({name, username, is_premium, balance, earned}: {
     earned: number,
     username: string | null
 }) => {
-    const shortName = name.split(' ').map((n: string) => n[0]).join(' ');
+    const shortName = name.split(' ').map((n: string) => n[0]).join('');
     return (
         <div className='friend-container' onClick={() => username != null ? WebApp.openTelegramLink(`https://t.me/${username}`) : {}}>
             <div className='flex items-center'>
