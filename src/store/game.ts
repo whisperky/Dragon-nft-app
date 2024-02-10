@@ -6,6 +6,10 @@ const gameSlice = createSlice({
         item: null,
         itemType: null,
         bottomSheet: false,
+    } as {
+        item: any | null,
+        itemType: 'daily_booster' | 'skin' | 'booster' | null,
+        bottomSheet: boolean
     },
     reducers: {
         showBottomSheet: (state, action) => {

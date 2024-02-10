@@ -99,7 +99,7 @@ const RootLayout = () => {
                 dispatch(completeItemPurchase('error'));
             }
         });
-    }, [purchase.toast]);
+    }, [purchase.isPurchasing]);
     return !load.allLoaded ? (<div>
         <div className='preloader flex items-center justify-around'>
             <div className="loader"></div>

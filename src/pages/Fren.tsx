@@ -9,6 +9,7 @@ import {numShort} from "../helpers/score.helper.ts";
 import Friend from "../components/fren/Friend.tsx";
 import {frenData} from "../types/data.ts";
 import {getFullName} from "../helpers/format.helper.ts";
+import FrenSkeleton from "../skeleton/FrenSkeleton.tsx";
 
 
 const Fren = () => {
@@ -55,11 +56,7 @@ const Fren = () => {
                 }}>Invite a Fren</button>
             </div>
         </div>
-    ) : (
-        <div className='flex items-center justify-center h-full'>
-            <div className="loader"></div>
-        </div>
-    );
+    ) : (<FrenSkeleton />);
 };
 
 export default Fren;

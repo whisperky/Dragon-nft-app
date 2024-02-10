@@ -1,47 +1,16 @@
 import {useDispatch, useSelector} from "react-redux";
 import {dailyBoosterData, userDailyBoost} from "../../types/data.ts";
 import getImage from "../../helpers/image.helper.ts";
-import toast from "react-hot-toast";
-import {setPurchaseItem, setToast} from "../../store/purchase.ts";
+import {showBottomSheet} from "../../store/game.ts";
 
 const DailyBoosters = () => {
     const boost = useSelector((state: any) => state.boost);
-    const user = useSelector((state: any) => state.user);
     const dispatch = useDispatch();
     const dailyBoosts: dailyBoosterData[] = boost.dailyBoosts;
     const leftDailyBoosts: userDailyBoost[] = boost.leftDailyBoosts;
     const buyBooster = async (id: string) => {
         const item = dailyBoosts.filter((b: any) => id === b.id)[0];
-        toast.loading( `Buying ${item.name}`, {
-            id: id,
-            position: 'bottom-center',
-            style: {
-                borderRadius: '10px',
-                background: '#333',
-                color: '#fff',
-            },
-        });
-        dispatch(setToast(id));
-        const leftBoost = item.limit - ((leftDailyBoosts.filter((b: any) => id === b.id)[0]).used);
-        if (leftBoost <= 0) {
-            toast.error('You have reached your limit', {
-                id: id,
-                position: 'bottom-center',
-                style: {
-                    borderRadius: '10px',
-                    background: '#333',
-                    color: '#fff',
-                },
-            });
-        } else {
-            console.log(item.limit, " - ", ((leftDailyBoosts.filter((b: any) => id === b.id)[0]).used))
-            console.log("Shiit")
-            user.websocket.emit('buyDailyBoost', {
-                type: 'daily',
-                item: id,
-            });
-            dispatch(setPurchaseItem(id))
-        }
+        dispatch(showBottomSheet({item: item, type: 'daily_booster'}))
     };
     return (
         <div className=''>

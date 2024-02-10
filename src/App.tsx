@@ -7,33 +7,34 @@ import League from "./pages/League.tsx";
 import {Toaster} from "react-hot-toast";
 import WebApp from "@twa-dev/sdk";
 import Fren from "./pages/Fren.tsx";
+import 'react-loading-skeleton/dist/skeleton.css';
 
 function App() {
     const router = createBrowserRouter(
         [
             {
                 path: '/',
-                element: <RootLayout />,
-                errorElement: <ErrorPage />,
+                element: <RootLayout/>,
+                errorElement: <ErrorPage/>,
                 children: [
                     {
                         path: ':token',
                         children: [
                             {
                                 index: true,
-                                element: <Dashboard />,
+                                element: <Dashboard/>,
                             },
                             {
                                 path: 'boosts',
-                                element: <Boosts />,
+                                element: <Boosts/>,
                             },
                             {
                                 path: 'league',
-                                element: <League />,
+                                element: <League/>,
                             },
                             {
                                 path: 'fren',
-                                element: <Fren />
+                                element: <Fren/>
                             }
                         ]
                     }
@@ -49,12 +50,26 @@ function App() {
             </div>
         )
     else
-    return (
-        <div className="App">
-            <div><Toaster/></div>
-            <RouterProvider router={router}/>
-        </div>
-    );
+        return (
+            <div className="App">
+                <div>
+                    <Toaster
+                        position='bottom-center'
+                        toastOptions={{
+                            style: {
+                                borderRadius: '10px',
+                                textAlign: 'center',
+                                background: '#333',
+                                color: '#fff',
+                                fontSize: '15px',
+                                height: '35px',
+                            }
+                        }}
+                    />
+                </div>
+                <RouterProvider router={router}/>
+            </div>
+        );
 }
 
 export default App

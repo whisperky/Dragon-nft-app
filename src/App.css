@@ -65,6 +65,7 @@
 .score-holder > img {
     width: 37px;
     height: 37px;
+    border-radius: 50%;
 }
 
 .score-holder > p {
@@ -314,6 +315,10 @@
     justify-content: center;
     align-items: center;
     gap: 5px;
+}
+.single-booster > div > img {
+    width: 44px;
+    height: 44px;
 }
 .single-booster > div:last-child > p:first-child > .daily-boost-limit {
     opacity: .3;

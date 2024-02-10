@@ -17,7 +17,7 @@ const BoosterList = () => {
                 {
                     boost.boosts.map((item: boosterData) => {
                         const level = item.image == 'MULTI_TAP' ? user.tap_lvl : (item.image == 'ENERGY_LIMIT' ? user.energy_lvl : (item.image == 'RECHARGING_SPEED' ? user.recharge_lvl : 0));
-                        return <BoostItem item={item} key={item.id} title={item.name} subtitle={numify(item.price)} level={level} image={item.image} coin={true} trailing='opener'/>
+                        return <BoostItem item={item} key={item.id} title={item.name} subtitle={numify(item.price)} maxLevel={item.max_lvl} level={level} image={item.image} coin={true} trailing='opener'/>
                     })
                 }
                 {/*<BoostItem title='Tap Bot' subtitle='521,000' level={9} image={tapBot} coin={true} trailing='opener'/>*/}

@@ -131,6 +131,17 @@
     position: fixed;
     bottom: 15px;
 }
+
+.invite-fren-btn-skeleton {
+    border-radius: 32px;
+    padding: 0.7em 0em;
+    cursor: pointer;
+    overflow: hidden;
+    width: 88% !important;
+    display: block;
+    position: fixed;
+    bottom: 15px;
+}
 .friend-container {
     display: flex;
     justify-content: space-between;

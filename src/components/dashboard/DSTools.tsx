@@ -2,15 +2,17 @@ import toy from '../../../public/icon/main/toy.svg';
 import coin from '../../../public/icon/main/small-coin.svg';
 import dragon from '../../../public/icon/main/dragon.svg';
 import {useNavigate} from "react-router-dom";
+import toast from "react-hot-toast";
+import {useSelector} from "react-redux";
 
 const DSTools = () => {
+    const purchase = useSelector((state: any) => state.purchase);
     const navigate = useNavigate();
-
     const toFrens = () => {
         navigate('fren')
     }
     const toEarn = () => {
-        alert('Under Construction')
+        toast('Coming soon', {id: purchase.toast})
     }
     const toBoosts = () => {
         navigate(`boosts`);

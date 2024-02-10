@@ -10,7 +10,6 @@ export default class Service {
             auth: {
                 token: localStorage.getItem('token'),
                 tg_id: localStorage.getItem('tg_id'),
-                // tg_id: '353575758'
             }
         });
         socket.on('connection', () => {
