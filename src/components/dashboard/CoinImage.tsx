@@ -1,7 +1,7 @@
 import WebApp from "@twa-dev/sdk";
 import {useDispatch, useSelector} from "react-redux";
 import {dump_increment, increment, setTapTimeout} from "../../store/score.ts";
-import coin from '../../../public/skin/bitcoin.svg';
+import coin from '../../../public/skin/coin.svg';
 import React from "react";
 import {loadCoin} from "../../store/loading.ts";
 import {tapValue} from "../../helpers/score.helper.ts";
