@@ -15,7 +15,6 @@ const scoreSlice = createSlice({
         tapTimeout: null,
         energyTimeout: null,
         coolDown: false,
-        energyTimerStarted: false,
     } as scoreInit,
     reducers: {
         setScore: (state, action) => {
@@ -79,7 +78,6 @@ const scoreSlice = createSlice({
         },
         setEnergyTimeout: (state, action) => {
             state.energyTimeout = action.payload;
-            state.energyTimerStarted = true;
         },
         resetCoolDown: (state) => {
             state.coolDown = false;

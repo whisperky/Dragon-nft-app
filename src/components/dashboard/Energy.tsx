@@ -8,39 +8,35 @@ const Energy = () => {
     const percentage = (score.energy/ energyValue(score.energy_lvl)) * 100;
     const dispatch = useDispatch();
     useEffect(() => {
-        console.log('called')
         let tempEnergy = score.energy;
-        if (!score.energyTimerStarted) {
-            if (score.energyTimeout !== null) {
-                clearTimeout(score.energyTimeout);
-                dispatch(setEnergyTimeout(null))
-                dispatch(setEnergyTimeout(
-                    setInterval(() => {
-                        console.log(`Add Energy : ${score.coolDown} --- ${score.energy}`)
-                        dispatch(increaseEnergy())
-                        if (tempEnergy < energyValue(score.energy_lvl)) {
-                            let energy_to_be = tempEnergy + rechargeValue(score.recharge_lvl);
-                            tempEnergy = energy_to_be > energyValue(score.energy_lvl) ? energyValue(score.energy_lvl) : energy_to_be;
-                        }
-                        if (score.coolDown && (tempEnergy > randomRange(tapValue(score.tap_lvl), tapValue(score.tap_lvl) + 7))) {
-                            console.log("Reset Cool Down")
-                            dispatch(resetCoolDown())
-                        }
-                    }, 1000)
-                ))
-            } else {
-                console.log("---------- first --------------")
-                dispatch(setEnergyTimeout(
-                    setInterval(() => {
-                        console.log(`Add Energy : ${score.coolDown}`)
-                        dispatch(increaseEnergy())
-                        if (score.coolDown && (score.energy > randomRange(tapValue(score.tap_lvl), tapValue(score.tap_lvl) + 7))) {
-                            console.log("Reset Cool Down")
-                            dispatch(resetCoolDown())
-                        }
-                    }, 1000)
-                ))
-            }
+        if (score.energyTimeout !== null) {
+            clearTimeout(score.energyTimeout);
+            dispatch(setEnergyTimeout(null))
+            dispatch(setEnergyTimeout(
+                setInterval(() => {
+                    console.log(`Add Energy : ${score.coolDown} --- ${score.energy}`)
+                    dispatch(increaseEnergy())
+                    if (tempEnergy < energyValue(score.energy_lvl)) {
+                        let energy_to_be = tempEnergy + rechargeValue(score.recharge_lvl);
+                        tempEnergy = energy_to_be > energyValue(score.energy_lvl) ? energyValue(score.energy_lvl) : energy_to_be;
+                    }
+                    if (score.coolDown && (tempEnergy > randomRange(tapValue(score.tap_lvl), tapValue(score.tap_lvl) + 7))) {
+                        console.log("Reset Cool Down")
+                        dispatch(resetCoolDown())
+                    }
+                }, 1000)
+            ))
+        } else {
+            dispatch(setEnergyTimeout(
+                setInterval(() => {
+                    console.log(`Add Energy : ${score.coolDown}`)
+                    dispatch(increaseEnergy())
+                    if (score.coolDown && (score.energy > randomRange(tapValue(score.tap_lvl), tapValue(score.tap_lvl) + 7))) {
+                        console.log("Reset Cool Down")
+                        dispatch(resetCoolDown())
+                    }
+                }, 1000)
+            ))
         }
     }, [score.coolDown])
     return (
