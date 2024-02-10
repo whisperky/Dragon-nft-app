@@ -15,7 +15,7 @@ import toast from "react-hot-toast";
 import {setFrens} from "../store/fren.ts";
 
 const RootLayout = () => {
-    let { token } = useParams();
+    let {token} = useParams();
     const user = useSelector((state: any) => state.user);
     const load = useSelector((state: any) => state.loading);
     const purchase = useSelector((state: any) => state.purchase);
@@ -66,7 +66,6 @@ const RootLayout = () => {
     useEffect(() => {
         console.log('Purchase updated');
         user.websocket.on('purchaseSuccess', (data: purchaseReturnData) => {
-            console.log("Inside purchase")
             if (purchase.isPurchasing) {
                 if (data.success) {
                     toast.success(data.message, {
@@ -92,8 +91,21 @@ const RootLayout = () => {
                 }
             }
         });
+        user.websocket.on('purchaseError', (data: purchaseReturnData) => {
+            if (purchase.isPurchasing) {
+                toast.error(data.message, {
+                    id: purchase.toast,
+                })
+                dispatch(completeItemPurchase('error'));
+            }
+        });
     }, [purchase.toast]);
-    return !load.allLoaded ? (<div><div className='preloader flex items-center justify-around'><div className="loader"></div></div><div className="w-full hidden"><Outlet/></div></div>) : (<div className="w-full"><Outlet/><BottomSheet /></div>)
+    return !load.allLoaded ? (<div>
+        <div className='preloader flex items-center justify-around'>
+            <div className="loader"></div>
+        </div>
+        <div className="w-full hidden"><Outlet/></div>
+    </div>) : (<div className="w-full"><Outlet/><BottomSheet/></div>)
 }
 
 export default RootLayout;
