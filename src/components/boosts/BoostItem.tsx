@@ -5,7 +5,6 @@ import lockedImg from "../../../public/icon/boosts/locked.svg";
 import {showBottomSheet} from "../../store/game.ts";
 import {useDispatch, useSelector} from "react-redux";
 import getImage from "../../helpers/image.helper.ts";
-import {skinData} from "../../types/data.ts";
 
 const BoostItem = ({image, title, subtitle, subtitleColor, coin, locked, level, maxLevel, disabled = false, trailing, item}: {
     title: string,
