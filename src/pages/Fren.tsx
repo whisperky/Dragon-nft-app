@@ -29,7 +29,7 @@ const Fren = () => {
                     </div>
                     <div className='fren-divider'></div>
                     <div className='fren-earn-info'>
-                        📣 Top 30 <span className='text-glass'>leaders</span>
+                        <span className='fren-emoji'>📣</span> Top 30 <span className='text-glass'>leaders</span>
                     </div>
                 </div>
                 {/*<img className='fren-opener-arrow opacity-less mr-1' src={arrow} alt='opener'/>*/}
