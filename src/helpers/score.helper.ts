@@ -18,3 +18,11 @@ export const randomRange = (min: number, max: number) => { // min and max includ
 export const numify = (x: number) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+export const numShort = (num: number): string => {
+    if (num < 1000) return num.toString(); // less than 1000
+    if (num < 1000000) return (num / 1000).toFixed(1) + 'k'; // less than 1 million
+    if (num < 1000000000) return (num / 1000000).toFixed(1) + 'M'; // less than 1 billion
+    if (num < 1000000000000) return (num / 1000000000).toFixed(1) + 'B'; // less than 1 trillion
+    return (num / 1000000000000).toFixed(1) + 'Tr'; // 1 trillion or more
+}

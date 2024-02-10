@@ -7,11 +7,12 @@ import {loadUser} from "../store/loading.ts";
 import {setScore} from "../store/score.ts";
 import {userData} from "../types/user.ts";
 import BottomSheet from "../components/BottomSheet.tsx";
-import {boostWebHookData, purchaseReturnData} from "../types/data.ts";
+import {boostWebHookData, frenWebHookData, purchaseReturnData} from "../types/data.ts";
 import {setSkins, setUserSkins} from "../store/skin.ts";
 import {setBoost, setLeftDailyBoosts} from "../store/boost.ts";
 import {completeItemPurchase} from "../store/purchase.ts";
 import toast from "react-hot-toast";
+import {setFrens} from "../store/fren.ts";
 
 const RootLayout = () => {
     let { token } = useParams();
@@ -51,6 +52,11 @@ const RootLayout = () => {
                     }))
                 }
             })
+            user.websocket.on('frenData', (fdata: frenWebHookData) => {
+                if (fdata.success) {
+                    dispatch(setFrens(fdata.data.frens));
+                }
+            });
             dispatch(requestUserData());
         }
         WebApp.expand();

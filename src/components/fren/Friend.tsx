@@ -2,23 +2,31 @@ import coin from "../../../public/icon/main/small-coin.svg";
 import bronze from "../../../public/icon/rank/small/bronze.svg";
 import premium from "../../../public/icon/tg_premium.svg";
 import openerImg from "../../../public/icon/defaults/open-arrow.svg";
+import {numify, numShort} from "../../helpers/score.helper.ts";
 
-const Friend = () => {
+const Friend = ({name, is_premium, balance, earned}: {
+    name: string,
+    is_premium: boolean,
+    balance: number,
+    earned: number
+}) => {
+    const shortName = name.split(' ').map((n: string) => n[0]).join(' ');
     return (
         <div className='friend-container'>
             <div className='flex items-center'>
-                <div className='friend-image'>BA</div>
+                <div className='friend-image'>{shortName}</div>
                 <div className='friend-info'>
-                    <div className='friend-name'>Bamlak <img src={premium} alt='premium'/></div>
+                    <div className='friend-name'>{name} {is_premium ? <img src={premium} alt='premium'/> : <></>}</div>
                     <div className='friend-subtitle'>
                         <div className='friend-league'><img src={bronze} alt='bronze'/> <span>Bronze</span></div>
                         <span>•</span>
-                        <div className='friend-coin'><img src={coin} alt='coin'/> <span>1,295</span></div>
+                        <div className='friend-coin'><img src={coin} alt='coin'/> <span>{numify(balance)}</span></div>
                     </div>
                 </div>
             </div>
             <div className='friend-trailer-container'>
-            <img className='friend-trailer-img' src={openerImg} alt='bronze'/>
+                <span className='friend-earned'>+{numShort(earned)}</span>
+                <img className='friend-trailer-img' src={openerImg} alt='bronze'/>
             </div>
         </div>
     );

@@ -215,3 +215,8 @@
     letter-spacing: 0px;
     text-align: center;
 }
+.friend-earned {
+    font-size: 13px;
+    color: #FFD041;
+    margin-right: 10px;
+}

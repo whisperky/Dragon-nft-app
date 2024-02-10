@@ -115,17 +115,11 @@ export type transactionData = {
 export type frenData = {
     id: string
     user_id: string
-    token: string
-    invited_users: number
-    createdAt: Date
-    updatedAt: Date
-}
-export type frenListData = {
-    id: string
-    fren_id: string
-    user_id: string
+    iuser_id: string
     is_premium: boolean
     earned: number
+    iuser?: userData,
+    user?: userData,
     createdAt: Date
     updatedAt: Date
 }
@@ -146,6 +140,12 @@ export type boostWebHookData = {
         skins: skinData[],
         userSkins: userSkinData[],
         leftDailyBoosts: userDailyBoost[]
+    }
+}
+export type frenWebHookData = {
+    success: boolean,
+    data: {
+        frens: frenData[]
     }
 }
 export type userDailyBoost = {
