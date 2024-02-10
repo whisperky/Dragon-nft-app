@@ -44,7 +44,7 @@
     background: linear-gradient(0deg, rgba(40, 39, 47, 0.5), rgba(40, 39, 47, 0.5)),
     linear-gradient(0deg, rgba(73, 72, 79, 0.5), rgba(73, 72, 79, 0.5));
     width: 100%;
-    padding: .8em 0em;
+    padding: 1em 0em;
     border-radius: 15px;
 }
 
@@ -142,8 +142,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 45px;
-    height: 45px;
+    width: 55px;
+    height: 55px;
     font-size: 18px;
     border-radius: 50%;
     background-color: #4fffcb;
@@ -158,9 +158,9 @@
 .friend-name {
     display: flex;
     align-items: center;
-    font-size: 15px;
-    font-weight: 500;
-    line-height: 22px;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 25px;
     letter-spacing: -0.01em;
     text-align: left;
 }
@@ -202,7 +202,7 @@
     width: 12px;
 }
 .friend-trailer-img {
-    width: 7px;
+    width: 8px;
     opacity: .3;
     text-align: center;
 }
@@ -216,7 +216,7 @@
     text-align: center;
 }
 .friend-earned {
-    font-size: 13px;
+    font-size: 15px;
     color: #FFD041;
     margin-right: 10px;
 }

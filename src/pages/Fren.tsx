@@ -2,7 +2,7 @@ import {useNavigate} from "react-router-dom";
 import coin from '../../public/icon/main/small-coin.svg';
 import WebApp from "@twa-dev/sdk";
 import '../fren.css';
-import arrow from "../../public/icon/defaults/open-arrow.svg";
+// import arrow from "../../public/icon/defaults/open-arrow.svg";
 import toy from "../../public/icon/main/toy.svg";
 import {useSelector} from "react-redux";
 import {numShort} from "../helpers/score.helper.ts";
@@ -32,7 +32,7 @@ const Fren = () => {
                         📣 Top 30 <span className='text-glass'>leaders</span>
                     </div>
                 </div>
-                <img className='fren-opener-arrow opacity-less mr-1' src={arrow} alt='opener'/>
+                {/*<img className='fren-opener-arrow opacity-less mr-1' src={arrow} alt='opener'/>*/}
             </div>
             <p className='fren-list-title'>Frens List</p>
             <div className='fren-list'>
@@ -40,7 +40,7 @@ const Fren = () => {
                     fren.list.length > 0 ?
                      fren.list.map((fren: frenData) => {
                         return (
-                            <Friend name={getFullName(fren.iuser?.fName,fren.iuser?.lName)} balance={fren.iuser?.balance ?? 0} earned={fren.earned} is_premium={fren.is_premium} />
+                            <Friend name={getFullName(fren.iuser?.fName,fren.iuser?.lName)} username={fren.iuser?.username ?? null} balance={fren.iuser?.balance ?? 0} earned={fren.earned} is_premium={fren.is_premium} />
                         )
                     }) : (<div className='no-fren-con'>
                             <img src={toy} alt='toy'/>
