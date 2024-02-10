@@ -23,14 +23,14 @@ const BoostItem = ({image, title, subtitle, subtitleColor, coin, locked, level, 
     const dispatch = useDispatch();
     const itemType = level != undefined ? 'booster' : 'skin';
     const skins: any[] = useSelector((state:any) => state.skin.userSkins);
-    const ownSkin = skins.some((skin: skinData) => skin.id == item.id);
+    const ownSkin = skins.some((skin: any) => skin.skin_id == item.id);
     if (itemType == 'skin' && ownSkin) {
         coin = false;
         locked = false;
     }
     return (
         <div className='b-item glass-hover my-3' style={{opacity: disabled ? .3 : 1}}
-             onClick={() => !disabled ? dispatch(showBottomSheet({item: item, type: itemType})) : {}}>
+             onClick={() => disabled || ownSkin  ? {} : dispatch(showBottomSheet({item: item, type: itemType}))}>
             <div className='flex items-center'>
                 <img className='b-item-image' src={getImage(image ?? '')}/>
                 <div className='b-item-desc'>
@@ -49,11 +49,10 @@ const BoostItem = ({image, title, subtitle, subtitleColor, coin, locked, level, 
                     </div>
                 </div>
             </div>
-            {trailing && (trailing == 'opener' ? <img className='b-item-arrow opacity-less' src={arrow} alt='opener'/>
+            {!ownSkin && (trailing == 'opener' ? <img className='b-item-arrow opacity-less' src={arrow} alt='opener'/>
                 : trailing == 'enabled' ?
                     <span className='b-item-badge glass b-item-badge-enabled'>enabled</span> : trailing == 'disabled' ?
-                        <span className='b-item-badge glass'>turn on</span> : trailing == 'completed' ?
-                            <img className='b-item-arrow' src={check} alt='completed'/> : <></>)}
+                        <span className='b-item-badge glass'>turn on</span> : trailing == 'completed' ? <img className='b-item-arrow' src={check} alt='completed'/> : <></>)}
         </div>
     );
 };
