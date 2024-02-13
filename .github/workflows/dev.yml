@@ -1,0 +1,23 @@
+name: DragonDot Client Dev
+on:
+  push:
+    branches: [ dev ]
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        script: |
+          cd /root/dragonDot/dev/server
+          git pull "https://${{ secrets.ACCESS_TOKEN }}@github.com/mikiyasET/Dragon-Dot-Web-App.git" dev
+          git status
+          npm run build
+          cp /root/dragonDot/dev/client/dist /var/www/game_dev -r
