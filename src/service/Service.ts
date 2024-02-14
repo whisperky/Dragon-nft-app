@@ -1,4 +1,5 @@
 import {Manager} from "socket.io-client";
+import WebApp from "@twa-dev/sdk";
 
 export default class Service {
     static Connect() {
@@ -8,8 +9,8 @@ export default class Service {
         });
         const socket = manager.socket('/game',{
             auth: {
-                tg_id: localStorage.getItem('tg_id'),
-                initDate: localStorage.getItem('initDate'),
+                tg_id: (WebApp?.initDataUnsafe?.user?.id ?? '').toString(),
+                initDate: WebApp.initData,
             }
         });
         socket.on('connection', () => {
