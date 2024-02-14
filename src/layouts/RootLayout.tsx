@@ -28,6 +28,7 @@ const RootLayout = () => {
             //     }
             // });
             user.websocket.on('receive-user', (udata: userData) => {
+                alert("Received user data")
                 if (udata.success) {
                     dispatch(setUser(udata));
                     dispatch(setScore({
@@ -104,7 +105,7 @@ const RootLayout = () => {
     }, [purchase.isPurchasing]);
     return !load.allLoaded ? (<div>
         <div className='preloader flex items-center justify-around'>
-            <div className="loader">XXX - {import.meta.env.VITE_REACT_APP_BACKEND_URL} - XXX</div>
+            <div className="loader">XXX - {load.allLoaded.toString()} - XXX</div>
         </div>
         <div className="w-full hidden"><Outlet/></div>
     </div>) : (<div className="w-full"><Outlet/><BottomSheet/></div>)
