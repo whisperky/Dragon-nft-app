@@ -28,7 +28,6 @@ const RootLayout = () => {
                 }
             });
             user.websocket.on('receive-user', (udata: userData) => {
-                alert("Received user data")
                 if (udata.success) {
                     dispatch(setUser(udata));
                     dispatch(setScore({
