@@ -19,5 +19,6 @@ jobs:
           cd /root/dragonDot/dev/server
           git pull "https://${{ secrets.ACCESS_TOKEN }}@github.com/mikiyasET/Dragon-Dot-Web-App.git" dev
           git status
+          npm install
           npm run build
           cp /root/dragonDot/dev/client/dist /var/www/game_dev -r
