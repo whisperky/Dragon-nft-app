@@ -104,7 +104,7 @@ const RootLayout = () => {
     }, [purchase.isPurchasing]);
     return !load.allLoaded ? (<div>
         <div className='preloader flex items-center justify-around'>
-            <div className="loader">{import.meta.env.VITE_REACT_APP_BACKEND_URL}</div>
+            <div className="loader">XXX - {import.meta.env.VITE_REACT_APP_BACKEND_URL} - XXX</div>
         </div>
         <div className="w-full hidden"><Outlet/></div>
     </div>) : (<div className="w-full"><Outlet/><BottomSheet/></div>)
