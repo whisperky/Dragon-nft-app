@@ -105,7 +105,19 @@ const RootLayout = () => {
     }, [purchase.isPurchasing]);
     return !load.allLoaded ? (<div>
         <div className='preloader flex items-center justify-around'>
-            <div className="loader"></div>
+            <div className="loader">
+                <div className="loader-inner ball-grid-pulse">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
         </div>
         <div className="w-full hidden"><Outlet/></div>
     </div>) : (<div className="w-full"><Outlet/><BottomSheet/></div>)

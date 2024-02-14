@@ -15,6 +15,7 @@
     "@vkruglikov/react-telegram-web-app": "^2.1.9",
     "flickity": "2.3.0",
     "framer-motion": "^11.0.3",
+    "loaders.css": "^0.1.2",
     "react": "^18.2.0",
     "react-animated-counter": "^1.7.6",
     "react-aria": "^3.31.1",
