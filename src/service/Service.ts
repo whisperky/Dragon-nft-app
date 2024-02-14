@@ -16,7 +16,7 @@ export default class Service {
         socket.on('connection', () => {
 
         }).on('connect_error', (err: any) => {
-            alert("Websocket connection error: " + err.message);
+            console.log("Websocket connection error: " + err.message);
         })
         return socket;
     }

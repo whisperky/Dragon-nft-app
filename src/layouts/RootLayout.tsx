@@ -1,9 +1,9 @@
 import {Outlet} from "react-router-dom";
-import {useEffect} from "react";
+import  {useEffect} from "react";
 import WebApp from "@twa-dev/sdk";
 import {useDispatch, useSelector} from "react-redux";
 import {requestUserData, setUser, setUserPurchaseReturn} from "../store/user.ts";
-import {loadUser} from "../store/loading.ts";
+import {loadCoin, loadUser} from "../store/loading.ts";
 import {setScore} from "../store/score.ts";
 import {userData} from "../types/user.ts";
 import BottomSheet from "../components/BottomSheet.tsx";
@@ -13,6 +13,7 @@ import {setBoost, setLeftDailyBoosts} from "../store/boost.ts";
 import {completeItemPurchase} from "../store/purchase.ts";
 import toast from "react-hot-toast";
 import {setFrens} from "../store/fren.ts";
+import coin from "../../public/skin/coin.svg";
 
 const RootLayout = () => {
     const user = useSelector((state: any) => state.user);
@@ -118,6 +119,9 @@ const RootLayout = () => {
                 </div>
             </div>
         </div>
+        <img style={{display: 'none'}} onSelect={() => false}  id='coinIcon' className='coin-image' src={coin}
+             onLoad={() => dispatch(loadCoin())}
+             alt='DragonCoin'/>
         <div className="w-full hidden"><Outlet/></div>
     </div>) : (<div className="w-full"><Outlet/><BottomSheet/></div>)
 }
