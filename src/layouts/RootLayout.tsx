@@ -13,7 +13,6 @@ import {setBoost, setLeftDailyBoosts} from "../store/boost.ts";
 import {completeItemPurchase} from "../store/purchase.ts";
 import toast from "react-hot-toast";
 import {setFrens} from "../store/fren.ts";
-import { terminal } from 'virtual:terminal';
 
 const RootLayout = () => {
     const user = useSelector((state: any) => state.user);
@@ -22,17 +21,13 @@ const RootLayout = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         if (!user.dataRequested) {
-            terminal.warn(WebApp?.initDataUnsafe);
-            localStorage.setItem('initDate', WebApp.initData);
-            localStorage.setItem('tg_id', (WebApp?.initDataUnsafe?.user?.id ?? '').toString());
-            user.websocket.on('AUTH', (adata: { success: boolean, msg: string, code: 'INVALID_USER' | 'INVALID_SIGNATURE' | 'INVALID_AUTH_DATA' }) => {
-                if (!adata.success) {
-                    WebApp.showAlert(adata.msg);
-                    WebApp.close();
-                }
-            });
+            // user.websocket.on('AUTH', (adata: { success: boolean, msg: string, code: 'INVALID_USER' | 'INVALID_SIGNATURE' | 'INVALID_AUTH_DATA' }) => {
+            //     if (!adata.success) {
+            //         WebApp.showAlert(adata.msg);
+            //         WebApp.close();
+            //     }
+            // });
             user.websocket.on('receive-user', (udata: userData) => {
-                terminal.warn('Got user: ', udata);
                 if (udata.success) {
                     dispatch(setUser(udata));
                     dispatch(setScore({
@@ -44,7 +39,6 @@ const RootLayout = () => {
                         last_energy_left: udata.last_energy_left,
                     }))
                     dispatch(loadUser());
-                    terminal.warn("Loaded everything")
                 }
             });
             user.websocket.on('boostData', (bdata: boostWebHookData) => {
@@ -110,7 +104,7 @@ const RootLayout = () => {
     }, [purchase.isPurchasing]);
     return !load.allLoaded ? (<div>
         <div className='preloader flex items-center justify-around'>
-            <div className="loader"></div>
+            <div className="loader">{import.meta.env.VITE_REACT_APP_BACKEND_URL}</div>
         </div>
         <div className="w-full hidden"><Outlet/></div>
     </div>) : (<div className="w-full"><Outlet/><BottomSheet/></div>)
