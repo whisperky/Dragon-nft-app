@@ -21,4 +21,5 @@ jobs:
           git status
           npm install
           npm run build
+          rm /var/www/game_dev -R
           cp dist /var/www/game_dev -r
