@@ -1,4 +1,5 @@
 import {Manager} from "socket.io-client";
+import WebApp from "@twa-dev/sdk";
 
 export default class Service {
     static Connect() {
@@ -8,13 +9,15 @@ export default class Service {
         });
         const socket = manager.socket('/game',{
             auth: {
-                token: localStorage.getItem('token'),
-                tg_id: localStorage.getItem('tg_id'),
+                tg_id: (WebApp?.initDataUnsafe?.user?.id ?? '').toString(),
+                initDate: WebApp.initData,
             }
         });
         socket.on('connection', () => {
 
-        });
+        }).on('connect_error', (err: any) => {
+            console.log("Websocket connection error: " + err.message);
+        })
         return socket;
     }
 }

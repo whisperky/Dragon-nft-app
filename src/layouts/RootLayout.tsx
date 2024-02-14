@@ -1,9 +1,9 @@
-import {Outlet, useParams} from "react-router-dom";
-import {useEffect} from "react";
+import {Outlet} from "react-router-dom";
+import  {useEffect} from "react";
 import WebApp from "@twa-dev/sdk";
 import {useDispatch, useSelector} from "react-redux";
 import {requestUserData, setUser, setUserPurchaseReturn} from "../store/user.ts";
-import {loadUser} from "../store/loading.ts";
+import {loadCoin, loadUser} from "../store/loading.ts";
 import {setScore} from "../store/score.ts";
 import {userData} from "../types/user.ts";
 import BottomSheet from "../components/BottomSheet.tsx";
@@ -13,19 +13,22 @@ import {setBoost, setLeftDailyBoosts} from "../store/boost.ts";
 import {completeItemPurchase} from "../store/purchase.ts";
 import toast from "react-hot-toast";
 import {setFrens} from "../store/fren.ts";
+import coin from "../../public/skin/coin.svg";
 
 const RootLayout = () => {
-    let {token} = useParams();
     const user = useSelector((state: any) => state.user);
     const load = useSelector((state: any) => state.loading);
     const purchase = useSelector((state: any) => state.purchase);
     const dispatch = useDispatch();
     useEffect(() => {
         if (!user.dataRequested) {
-            localStorage.setItem('token', token ?? '');
-            localStorage.setItem('tg_id', (WebApp?.initDataUnsafe?.user?.id ?? '').toString());
+            user.websocket.on('AUTH', (adata: { success: boolean, msg: string, code: 'INVALID_USER' | 'INVALID_SIGNATURE' | 'INVALID_AUTH_DATA' }) => {
+                if (!adata.success) {
+                    WebApp.showAlert(adata.msg);
+                    WebApp.close();
+                }
+            });
             user.websocket.on('receive-user', (udata: userData) => {
-                console.log('Got user: ', udata);
                 if (udata.success) {
                     dispatch(setUser(udata));
                     dispatch(setScore({
@@ -102,8 +105,23 @@ const RootLayout = () => {
     }, [purchase.isPurchasing]);
     return !load.allLoaded ? (<div>
         <div className='preloader flex items-center justify-around'>
-            <div className="loader"></div>
+            <div className="loader">
+                <div className="loader-inner ball-grid-pulse">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
         </div>
+        <img style={{display: 'none'}} onSelect={() => false}  id='coinIcon' className='coin-image' src={coin}
+             onLoad={() => dispatch(loadCoin())}
+             alt='DragonCoin'/>
         <div className="w-full hidden"><Outlet/></div>
     </div>) : (<div className="w-full"><Outlet/><BottomSheet/></div>)
 }
