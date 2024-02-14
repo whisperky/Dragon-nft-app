@@ -21,4 +21,4 @@ jobs:
           git status
           npm install
           npm run build
-          cp /root/dragonDot/dev/client/dist /var/www/game_dev -r
+          cp dist /var/www/game_dev -r
