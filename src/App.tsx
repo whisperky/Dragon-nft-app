@@ -5,7 +5,7 @@ import ErrorPage from "./pages/ErrorPage.tsx";
 import Boosts from "./pages/Boosts.tsx";
 import League from "./pages/League.tsx";
 import {Toaster} from "react-hot-toast";
-// import WebApp from "@twa-dev/sdk";
+import WebApp from "@twa-dev/sdk";
 import Fren from "./pages/Fren.tsx";
 import 'react-loading-skeleton/dist/skeleton.css';
 
@@ -37,14 +37,14 @@ function App() {
             }
         ]
     );
-    // if (WebApp.platform !== 'ios' && WebApp.platform !== 'android')
-    //     return (
-    //         <div id='noDesktop'>
-    //             <span>Desktop is Boring</span>
-    //             <span>open on phone</span>
-    //         </div>
-    //     )
-    // else
+    if (WebApp.platform !== 'ios' && WebApp.platform !== 'android')
+        return (
+            <div id='noDesktop'>
+                <span>Desktop is Boring</span>
+                <span>open on phone</span>
+            </div>
+        )
+    else
         return (
             <div className="App">
                 <div>

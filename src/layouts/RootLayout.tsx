@@ -21,12 +21,12 @@ const RootLayout = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         if (!user.dataRequested) {
-            // user.websocket.on('AUTH', (adata: { success: boolean, msg: string, code: 'INVALID_USER' | 'INVALID_SIGNATURE' | 'INVALID_AUTH_DATA' }) => {
-            //     if (!adata.success) {
-            //         WebApp.showAlert(adata.msg);
-            //         WebApp.close();
-            //     }
-            // });
+            user.websocket.on('AUTH', (adata: { success: boolean, msg: string, code: 'INVALID_USER' | 'INVALID_SIGNATURE' | 'INVALID_AUTH_DATA' }) => {
+                if (!adata.success) {
+                    WebApp.showAlert(adata.msg);
+                    WebApp.close();
+                }
+            });
             user.websocket.on('receive-user', (udata: userData) => {
                 alert("Received user data")
                 if (udata.success) {
@@ -105,7 +105,7 @@ const RootLayout = () => {
     }, [purchase.isPurchasing]);
     return !load.allLoaded ? (<div>
         <div className='preloader flex items-center justify-around'>
-            <div className="loader">XXX - {load.allLoaded.toString()} - XXX</div>
+            <div className="loader"></div>
         </div>
         <div className="w-full hidden"><Outlet/></div>
     </div>) : (<div className="w-full"><Outlet/><BottomSheet/></div>)
