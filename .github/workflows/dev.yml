@@ -16,7 +16,7 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
         script: |
-          cd /root/dragonDot/dev/server
+          cd /root/dragonDot/dev/client
           git pull "https://${{ secrets.ACCESS_TOKEN }}@github.com/mikiyasET/Dragon-Dot-Web-App.git" dev
           git status
           npm install
