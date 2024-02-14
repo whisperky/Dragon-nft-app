@@ -3,7 +3,6 @@ import App from './App.tsx'
 import './index.css'
 import {Provider} from "react-redux";
 import {store} from "./store/store.ts";
-
 import WebApp from "@twa-dev/sdk";
 
 if (WebApp.initData !== '' && WebApp.initData !== undefined) {

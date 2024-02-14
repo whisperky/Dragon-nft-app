@@ -18,25 +18,20 @@ function App() {
                 errorElement: <ErrorPage/>,
                 children: [
                     {
-                        path: ':token',
-                        children: [
-                            {
-                                index: true,
-                                element: <Dashboard/>,
-                            },
-                            {
-                                path: 'boosts',
-                                element: <Boosts/>,
-                            },
-                            {
-                                path: 'league',
-                                element: <League/>,
-                            },
-                            {
-                                path: 'fren',
-                                element: <Fren/>
-                            }
-                        ]
+                        index: true,
+                        element: <Dashboard/>,
+                    },
+                    {
+                        path: 'boosts',
+                        element: <Boosts/>,
+                    },
+                    {
+                        path: 'league',
+                        element: <League/>,
+                    },
+                    {
+                        path: 'fren',
+                        element: <Fren/>
                     }
                 ]
             }

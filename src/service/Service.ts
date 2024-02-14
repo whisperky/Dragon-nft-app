@@ -8,8 +8,8 @@ export default class Service {
         });
         const socket = manager.socket('/game',{
             auth: {
-                token: localStorage.getItem('token'),
                 tg_id: localStorage.getItem('tg_id'),
+                initDate: localStorage.getItem('initDate'),
             }
         });
         socket.on('connection', () => {
