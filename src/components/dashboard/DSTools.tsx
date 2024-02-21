@@ -26,7 +26,7 @@ const DSTools = () => {
             </div>
             <div className='ds-tool-box' onClick={toEarn}>
                 <img src={coin} alt='coin'/>
-                <p>Earn</p>
+                <p>Earn Dev</p>
             </div>
             <div className='ds-tool-box' onClick={toBoosts}>
                 <img src={dragon} alt='drogon'/>
