@@ -1,0 +1,25 @@
+name: Dragon Client Pro
+on:
+  push:
+    branches: [ main ]
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        script: |
+          cd /root/dragon/pro/client
+          git pull "https://${{ secrets.ACCESS_TOKEN }}@github.com/mikiyasET/Dragon-Web-App.git" main
+          git status
+          npm install
+          npm run build
+          rm /var/www/game -R
+          cp dist /var/www/game -r
