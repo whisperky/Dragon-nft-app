@@ -6,6 +6,7 @@ export default class Service {
         const URL = import.meta.env.VITE_REACT_APP_BACKEND_URL ?? "http://localhost:5000";
         const manager = new  Manager(URL, {
             // reconnectionDelayMax: 10000,
+            transports: ["websocket"],
         });
         const socket = manager.socket('/game',{
             auth: {

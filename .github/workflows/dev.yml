@@ -1,4 +1,4 @@
-name: DragonDot Client Dev
+name: Dragon Client Dev
 on:
   push:
     branches: [ dev ]
@@ -16,8 +16,8 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
         script: |
-          cd /root/dragonDot/dev/client
-          git pull "https://${{ secrets.ACCESS_TOKEN }}@github.com/mikiyasET/Dragon-Dot-Web-App.git" dev
+          cd /root/dragon/dev/client
+          git pull "https://${{ secrets.ACCESS_TOKEN }}@github.com/mikiyasET/Dragon-Web-App.git" dev
           git status
           npm install
           npm run build
