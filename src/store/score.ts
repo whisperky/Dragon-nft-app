@@ -69,7 +69,7 @@ const scoreSlice = createSlice({
         },
         increaseEnergy: (state) => {
             if (state.energy < energyValue(state.energy_lvl)) {
-                let energy_to_be = state.energy + rechargeValue(state.recharge_lvl);
+                const energy_to_be = state.energy + rechargeValue(state.recharge_lvl);
                 state.energy = energy_to_be > energyValue(state.energy_lvl) ? energyValue(state.energy_lvl) : energy_to_be;
             }
         },

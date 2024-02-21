@@ -4,7 +4,7 @@ import {useEffect} from "react";
 import {increaseEnergy, resetCoolDown, setEnergyTimeout} from "../../store/score.ts";
 
 const Energy = () => {
-    const score = useSelector((state:any) => state.score);
+    const score = useSelector((state: any) => state.score);
     const percentage = (score.energy/ energyValue(score.energy_lvl)) * 100;
     const dispatch = useDispatch();
     useEffect(() => {
@@ -17,7 +17,7 @@ const Energy = () => {
                     console.log(`Add Energy : ${score.coolDown} --- ${score.energy}`)
                     dispatch(increaseEnergy())
                     if (tempEnergy < energyValue(score.energy_lvl)) {
-                        let energy_to_be = tempEnergy + rechargeValue(score.recharge_lvl);
+                        const energy_to_be = tempEnergy + rechargeValue(score.recharge_lvl);
                         tempEnergy = energy_to_be > energyValue(score.energy_lvl) ? energyValue(score.energy_lvl) : energy_to_be;
                     }
                     if (score.coolDown && (tempEnergy > randomRange(tapValue(score.tap_lvl), tapValue(score.tap_lvl) + 7))) {
