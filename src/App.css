@@ -546,6 +546,10 @@
     /* custom styles */
 }
 
+.ticker-digit {
+    text-align: center !important;
+}
+
 .svg-colored {
     filter: invert(90%) sepia(0%) saturate(0%) hue-rotate(81deg) brightness(104%) contrast(98%);
 }
