@@ -4,15 +4,19 @@ import premium from "../../../public/icon/tg_premium.svg";
 import openerImg from "../../../public/icon/defaults/open-arrow.svg";
 import {numify, numShort} from "../../helpers/score.helper.ts";
 import WebApp from "@twa-dev/sdk";
+import {getFullName} from "../../helpers/format.helper.ts";
 
-const Friend = ({name, username, is_premium, balance, earned}: {
-    name: string,
+const Friend = ({fName,lName,username, is_premium, balance, earned}: {
+    fName: string,
+    lName: string,
     is_premium: boolean,
     balance: number,
     earned: number,
     username: string | null
 }) => {
-    const shortName = name.split(' ').map((n: string) => n[0]).join('');
+    // only 2 letters
+    const name = getFullName(fName, lName);
+    const shortName = ((fName ? fName.charAt(0) : '') + (lName ? lName.charAt(0) : '')).toUpperCase();
     return (
         <div className='friend-container' onClick={() => username != null ? WebApp.openTelegramLink(`https://t.me/${username}`) : {}}>
             <div className='flex items-center'>

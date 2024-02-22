@@ -8,7 +8,6 @@ import {useSelector} from "react-redux";
 import {numShort} from "../helpers/score.helper.ts";
 import Friend from "../components/fren/Friend.tsx";
 import {frenData} from "../types/data.ts";
-import {getFullName} from "../helpers/format.helper.ts";
 import FrenSkeleton from "../skeleton/FrenSkeleton.tsx";
 
 
@@ -41,7 +40,7 @@ const Fren = () => {
                     fren.list.length > 0 ?
                      fren.list.map((fren: frenData) => {
                         return (
-                            <Friend name={getFullName(fren.iuser?.fName,fren.iuser?.lName)} username={fren.iuser?.username ?? null} balance={fren.iuser?.balance ?? 0} earned={fren.earned} is_premium={fren.is_premium} />
+                            <Friend fName={fren.iuser?.fName} lName={fren.iuser?.lName} username={fren.iuser?.username ?? null} balance={fren.iuser?.balance ?? 0} earned={fren.earned} is_premium={fren.is_premium} />
                         )
                     }) : (<div className='no-fren-con'>
                             <img src={toy} alt='toy'/>
