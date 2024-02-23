@@ -547,7 +547,7 @@
 }
 
 .ticker-digit {
-    text-align: center !important;
+    font-feature-settings: "tnum";
 }
 
 .svg-colored {
