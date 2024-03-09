@@ -5,15 +5,15 @@ import {useDispatch, useSelector} from "react-redux";
 import {requestUserData, setUser, setUserPurchaseReturn} from "../store/user.ts";
 import {loadCoin, loadUser} from "../store/loading.ts";
 import {setScore} from "../store/score.ts";
-import {userData} from "../types/user.ts";
 import BottomSheet from "../components/BottomSheet.tsx";
-import {boostWebHookData, frenWebHookData, purchaseReturnData} from "../types/data.ts";
+import {boostWebHookData, frenWebHookData, purchaseReturnData, UserWebhookData} from "../types/data.ts";
 import {setSkins, setUserSkins} from "../store/skin.ts";
 import {setBoost, setLeftDailyBoosts} from "../store/boost.ts";
 import {completeItemPurchase} from "../store/purchase.ts";
 import toast from "react-hot-toast";
 import {setFrens} from "../store/fren.ts";
 import coin from "../../public/skin/coin.svg";
+import {setAutoTapEarn} from "../store/game.ts";
 
 const RootLayout = () => {
     const user = useSelector((state: any) => state.user);
@@ -28,18 +28,20 @@ const RootLayout = () => {
                     WebApp.close();
                 }
             });
-            user.websocket.on('receive-user', (udata: userData) => {
+            user.websocket.on('receive-user', (udata: UserWebhookData) => {
                 if (udata.success) {
                     dispatch(setUser(udata));
                     dispatch(setScore({
                         tap_lvl: udata.tap_lvl,
                         energy_lvl: udata.energy_lvl,
                         recharge_lvl: udata.recharge_lvl,
+                        bot_lvl: udata.bot_lvl,
                         value: udata.balance,
                         last_tap_time: udata.balance_updated_at,
                         last_energy_left: udata.last_energy_left,
                     }))
                     dispatch(loadUser());
+                    dispatch(setAutoTapEarn(udata.botEarn));
                 }
             });
             user.websocket.on('boostData', (bdata: boostWebHookData) => {
@@ -60,6 +62,16 @@ const RootLayout = () => {
                     dispatch(setFrens(fdata.data.frens));
                 }
             });
+            user.websocket.on('claimBotEarnSuccess', (data: {success: boolean, message: string}) => {
+                    toast.success(data.message, {
+                        id: 'claiming',
+                    });
+            })
+            user.websocket.on('claimBotEarnError', (data: {success: boolean, message: string}) => {
+                    toast.error(data.message, {
+                        id: 'claiming',
+                    });
+            })
             dispatch(requestUserData());
         }
         WebApp.expand();
@@ -78,6 +90,7 @@ const RootLayout = () => {
                         tap_lvl: data.user.tap_lvl,
                         energy_lvl: data.user.energy_lvl,
                         recharge_lvl: data.user.recharge_lvl,
+                        bot_lvl: data.user.bot_lvl,
                         value: data.user.balance,
                         last_tap_time: data.user.balance_updated_at,
                         last_energy_left: data.user.last_energy_left,

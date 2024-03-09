@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import {currentEnergy, energyValue, rechargeValue, tapValue} from "../helpers/score.helper.ts";
-import {scoreInit} from "../types/user.ts";
+import {ScoreSliceType} from "../types/store.ts";
 
 const scoreSlice = createSlice({
     name: 'score',
@@ -11,16 +11,18 @@ const scoreSlice = createSlice({
         energy: 1000,
         energy_lvl: 0,
         recharge_lvl: 0,
+        bot_lvl: 0,
         last_tap_time: Date.now(),
         tapTimeout: null,
         energyTimeout: null,
         coolDown: false,
-    } as scoreInit,
+    } as ScoreSliceType,
     reducers: {
         setScore: (state, action) => {
             state.tap_lvl = action.payload.tap_lvl;
             state.energy_lvl = action.payload.energy_lvl;
             state.recharge_lvl = action.payload.recharge_lvl;
+            state.bot_lvl = action.payload.bot_lvl;
             state.value = action.payload.value;
             state.last_tap_time = action.payload.last_tap_time == null ? Math.floor(Date.now() / 1000) : action.payload.last_tap_time;
             state.energy = action.payload.last_tap_time == null ? energyValue(state.energy_lvl) : currentEnergy(state.last_tap_time, action.payload.last_energy_left, state.energy_lvl, state.recharge_lvl);

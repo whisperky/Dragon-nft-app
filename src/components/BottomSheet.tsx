@@ -12,14 +12,16 @@ import {
     FocusScope,
     useDialog,
 } from 'react-aria';
-import {boosterData, skinData, userDailyBoost} from "../types/data.ts";
+import {boosterData, skinData, userDailyBoost, UserData} from "../types/data.ts";
 import getImage from "../helpers/image.helper.ts";
 import {numify} from "../helpers/score.helper.ts";
 import toast from "react-hot-toast";
 import {setPurchaseItem} from "../store/purchase.ts";
+import {GameSliceType, UserSliceType} from "../types/store.ts";
+import {calculateBoostPrice, getLevels} from "../helpers/helper.ts";
 
 const BottomSheet = () => {
-    const game = useSelector((state: any) => state.game);
+    const game: GameSliceType = useSelector((state: any) => state.game);
     const dispatch = useDispatch();
 
     return (
@@ -41,15 +43,19 @@ const BottomSheet = () => {
 };
 
 const SheetComp = () => {
-    const user = useSelector((state: any) => state.user.data);
+    const user: UserData = useSelector((state: any) => state.user.data);
     const websocket = useSelector((state: any) => state.user.websocket);
-    const game = useSelector((state: any) => state.game);
+    const game: GameSliceType = useSelector((state: any) => state.game);
     const purchase = useSelector((state: any) => state.purchase);
     const boost = useSelector((state: any) => state.boost);
     const dispatch = useDispatch();
     const item: skinData | boosterData = game.item;
-    const level = game.item != null ? (item.image == 'MULTI_TAP' ? user.tap_lvl : item.image == 'ENERGY_LIMIT' ? user.energy_lvl : item.image == 'RECHARGING_SPEED' ? user.recharge_lvl : 0) : 0;
-    const containerRef = useRef(null);
+    const item_lvl = getLevels(user, item);
+    const itemPrice = ((item as boosterData).lvl_diff !== undefined) ? calculateBoostPrice({
+        price: item.price,
+        level: item_lvl,
+        diff: (item as boosterData).lvl_diff,
+    }) : item.price;    const containerRef = useRef(null);
     const dialog = useDialog({}, containerRef);
     const overlay = useOverlay(
         { onClose: () => dispatch(hideBottomSheet()), isOpen: game.bottomSheet, isDismissable: true },
@@ -75,14 +81,47 @@ const SheetComp = () => {
                     },
                 });
             } else {
-                websocket.emit('buyDailyBoost', {
-                    type: 'daily',
+                websocket.emit('purchase', {
+                    type: game.itemType,
                     item: game.item.id,
                 });
                 dispatch(setPurchaseItem(game.item.id))
             }
         } else {
-            toast('Coming soon', {id: purchase.toast})
+            if (itemPrice > user.balance) {
+                toast.error('You do not have enough coins', {
+                    id: purchase.toast,
+                    position: 'bottom-center',
+                    style: {
+                        borderRadius: '10px',
+                        background: '#333',
+                        color: '#fff',
+                    },
+                });
+            } else if (
+                (game.itemType == 'booster' && game.item.image == 'ENERGY_LIMIT' && game.item.max_lvl !== 0 && game.item.max_lvl <= user.energy_lvl) ||
+                (game.itemType == 'booster' && game.item.image == 'AUTO_TAP_BOT' && game.item.max_lvl !== 0 && game.item.max_lvl <= user.bot_lvl) ||
+                (game.itemType == 'booster' && game.item.image == 'MULTI_TAP' && game.item.max_lvl !== 0 && game.item.max_lvl <= user.tap_lvl) ||
+                (game.itemType == 'booster' && game.item.image == 'RECHARGING_SPEED' && game.item.max_lvl !== 0 && game.item.max_lvl <= user.recharge_lvl)
+            ) {
+                toast.error('You have reached the maximum level', {
+                    id: purchase.toast,
+                    position: 'bottom-center',
+                    style: {
+                        borderRadius: '10px',
+                        background: '#333',
+                        color: '#fff',
+                    },
+                });
+            }
+            else {
+                websocket.emit('purchase', {
+                    type: game.itemType,
+                    item: game.item.id,
+                });
+                dispatch(setPurchaseItem(game.item.id))
+                // toast(`${game.item.price} > ${user.balance} Coming soon ${game.itemType} + ${game.item.id} + ${game.item.name} `, {id: purchase.toast})
+            }
         }
     }
     // In real world usage this would be a separate React component
@@ -109,9 +148,9 @@ const SheetComp = () => {
                         {/*<span className='bs-over-subtitle'>{item.}</span>*/}
                         <div className='bs-pricing'>
                             <div className='bs-price'>
-                                <img src={coin} alt='coin'/> <span>{item.price == 0 ? 'Free' : numify(item.price)}</span>
+                                <img src={coin} alt='coin'/> <span>{item.price == 0 ? 'Free' : numify(itemPrice)}</span>
                             </div>
-                            { game.itemType == 'booster' && <span>/ Level {level}</span>}
+                            { game.itemType == 'booster' && <span>/ Level {item_lvl}</span>}
                         </div>
                         <button className='bs-button' onClick={onPurchaseHandler}>Get</button>
                     </div>

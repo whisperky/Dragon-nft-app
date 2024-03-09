@@ -6,7 +6,7 @@ export type adminData = {
     createdAt: Date
     updatedAt: Date
 }
-export type userData = {
+export type UserData = {
     id: string
     tg_id: string
     fName: string | null
@@ -18,6 +18,7 @@ export type userData = {
     tap_lvl: number
     energy_lvl: number
     recharge_lvl: number
+    bot_lvl: number
     fren_token: string | null
     invited_by: string | null
     invited_users: number
@@ -59,7 +60,7 @@ export type dailyBoosterData = {
     name: string
     price: number
     limit: number
-    image: string
+    image: 'RECHARGING_SPEED' | 'MULTI_TAP' | 'AUTO_TAP_BOT' | 'ENERGY_LIMIT';
     createdAt: Date
     updatedAt: Date
 }
@@ -118,8 +119,8 @@ export type frenData = {
     iuser_id: string
     is_premium: boolean
     earned: number
-    iuser?: userData,
-    user?: userData,
+    iuser?: UserData,
+    user?: UserData,
     createdAt: Date
     updatedAt: Date
 }
@@ -132,6 +133,30 @@ export type taskCategoryData = 'onboarding' | 'specials' | 'web3_world';
 export type transactionTypeData = 'skin' | 'booster' | 'daily_booster';
 
 // helper
+export type UserWebhookData = {
+    success: boolean,
+    id: string,
+    tg_id: string,
+    fName: string,
+    lName: string,
+    username: string,
+    balance: number,
+    squad_id: string,
+    league_id: string,
+    recharge_lvl: number,
+    energy_lvl: number,
+    tap_lvl: number,
+    bot_lvl: number,
+    last_energy_left: number
+    balance_updated_at: number,
+    fren_token: string,
+    invited_by: string,
+    invited_users: number
+    status: string,
+    createdAt: Date,
+    updatedAt: Date,
+    botEarn: number
+}
 export type boostWebHookData = {
     success: boolean,
     data: {
@@ -163,6 +188,7 @@ export type purchaseReturnData = {
         energy_lvl: number
         recharge_lvl: number
         tap_lvl: number
+        bot_lvl: number
         balance_updated_at: number | null
         last_energy_left: number | null
         createdAt: Date

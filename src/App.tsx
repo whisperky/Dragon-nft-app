@@ -8,6 +8,7 @@ import {Toaster} from "react-hot-toast";
 import WebApp from "@twa-dev/sdk";
 import Fren from "./pages/Fren.tsx";
 import 'react-loading-skeleton/dist/skeleton.css';
+import BotBottomSheet from "./components/BotBottomSheet.tsx";
 
 function App() {
     const router = createBrowserRouter(
@@ -63,6 +64,7 @@ function App() {
                     />
                 </div>
                 <RouterProvider router={router}/>
+                <BotBottomSheet />
             </div>
         );
 }

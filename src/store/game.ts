@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import {GameSliceType} from "../types/store.ts";
 
 const gameSlice = createSlice({
     name: 'game',
@@ -6,11 +7,9 @@ const gameSlice = createSlice({
         item: null,
         itemType: null,
         bottomSheet: false,
-    } as {
-        item: any | null,
-        itemType: 'daily_booster' | 'skin' | 'booster' | null,
-        bottomSheet: boolean
-    },
+        botBottomSheet: false,
+        botEarn: 0,
+    } as GameSliceType,
     reducers: {
         showBottomSheet: (state, action) => {
             state.bottomSheet = true;
@@ -19,9 +18,18 @@ const gameSlice = createSlice({
         },
         hideBottomSheet: (state) => {
             state.bottomSheet = false;
+        },
+        setAutoTapEarn: (state, action) => {
+            state.botEarn = action.payload;
+            if (state.botEarn > 0) {
+                state.botBottomSheet = true;
+            }
+        },
+        hideBotBottomSheet: (state) => {
+            state.botBottomSheet = false;
         }
     }
 })
 
-export const { showBottomSheet, hideBottomSheet } = gameSlice.actions
+export const { showBottomSheet, hideBottomSheet, setAutoTapEarn, hideBotBottomSheet } = gameSlice.actions
 export default gameSlice.reducer

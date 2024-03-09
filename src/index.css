@@ -55,3 +55,61 @@ body {
         visibility: hidden;
     }
 }
+
+
+.glitch-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.grayscale-image {
+    filter: grayscale(100%);
+    transition: filter 0.3s ease-out;
+}
+
+.glitch-animation {
+    position: relative;
+    animation: glitch 2s infinite;
+}
+
+.glitch-animation::before,
+.glitch-animation::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to right, transparent, red, transparent);
+    opacity: 0.8;
+    z-index: 1;
+    animation: smoke 2s infinite linear;
+}
+
+@keyframes glitch {
+    0%, 20%, 40%, 60%, 80%, 100% {
+        transform: translate(0, 0);
+        filter: grayscale(100%) hue-rotate(0deg);
+    }
+    25% {
+        transform: translate(2px, -2px);
+        filter: grayscale(0%) hue-rotate(30deg);
+    }
+    50% {
+        transform: translate(-2px, 2px);
+        filter: grayscale(100%) hue-rotate(60deg);
+    }
+    75% {
+        transform: translate(2px, 2px);
+        filter: grayscale(0%) hue-rotate(90deg);
+    }
+}
+
+@keyframes smoke {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}

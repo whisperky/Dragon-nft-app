@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
+import {FrenSliceType} from "../types/store.ts";
 const frenSlice = createSlice({
     name: 'fren',
     initialState: {
         haveData: false,
         list: [],
-    },
+    } as FrenSliceType,
     reducers: {
         setFrens: (state, action) => {
             console.log(action.payload);
