@@ -3,14 +3,14 @@ import BoostItem from "./BoostItem.tsx";
 import {useSelector} from "react-redux";
 import {boosterData, UserData} from "../../types/data.ts";
 import {numify} from "../../helpers/score.helper.ts";
-import {BoostSliceType} from "../../types/store.ts";
+import {BoostSliceType, ScoreSliceType} from "../../types/store.ts";
 import {calculateBoostPrice, getLevels} from "../../helpers/helper.ts";
 
 const BoosterList = () => {
     // const score  = useSelector((state: any) => state.score);
     // const dispatch = useDispatch();
     // const user: UserData = useSelector((state: any) => state.user.data);
-    const score = useSelector((state: any) => state.score);
+    const score: ScoreSliceType = useSelector((state: any) => state.score);
     const boost: BoostSliceType = useSelector((state: any) => state.boost);
     console.log(boost.boosts)
     return (
@@ -46,10 +46,11 @@ const BoosterList = () => {
                                 image: item.image,
                                 coin: true,
                                 trailing: trailing, //  "opener" | "enabled" | "disabled" | "completed"
+                                haveEnough: score.value >= itemPrice,
                             };
                         })
                         .sort((a, b) => (a.isMax && !b.isMax ? 1 : b.isMax && !a.isMax ? -1 : 0))
-                        .map(({isMax, item, key, title, subtitle, maxLevel, level, image, coin, trailing}) => (
+                        .map(({isMax, item, key, title, subtitle, maxLevel, level, image, coin, trailing, haveEnough}) => (
                             <BoostItem
                                 isMax={isMax}
                                 item={item}
@@ -60,6 +61,7 @@ const BoosterList = () => {
                                 level={level}
                                 image={image}
                                 coin={coin}
+                                haveEnough={haveEnough}
                                 trailing={trailing as "opener" | "enabled" | "disabled" | "completed" | "none"}
                             />
                         ))

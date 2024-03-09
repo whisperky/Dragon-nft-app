@@ -78,12 +78,6 @@ const SheetComp = () => {
             if (leftBoost <= 0) {
                 toast.error('You have reached your limit', {
                     id: purchase.toast,
-                    position: 'bottom-center',
-                    style: {
-                        borderRadius: '10px',
-                        background: '#333',
-                        color: '#fff',
-                    },
                 });
             } else {
                 websocket.emit('purchase', {
@@ -96,12 +90,6 @@ const SheetComp = () => {
             if (itemPrice > score.value) {
                 toast.error('You do not have enough coins', {
                     id: purchase.toast,
-                    position: 'bottom-center',
-                    style: {
-                        borderRadius: '10px',
-                        background: '#333',
-                        color: '#fff',
-                    },
                 });
             } else if (
                 (game.itemType == 'booster' && game.item.image == 'ENERGY_LIMIT' && game.item.max_lvl !== 0 && game.item.max_lvl <= score.energy_lvl) ||
@@ -111,12 +99,6 @@ const SheetComp = () => {
             ) {
                 toast.error('You have reached the maximum level', {
                     id: purchase.toast,
-                    position: 'bottom-center',
-                    style: {
-                        borderRadius: '10px',
-                        background: '#333',
-                        color: '#fff',
-                    },
                 });
             }
             else {
