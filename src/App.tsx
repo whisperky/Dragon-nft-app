@@ -59,6 +59,7 @@ function App() {
                                 color: '#fff',
                                 fontSize: '15px',
                                 height: '35px',
+                                marginBottom: '10px'
                             }
                         }}
                     />
