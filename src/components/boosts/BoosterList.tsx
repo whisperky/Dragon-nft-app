@@ -9,7 +9,8 @@ import {calculateBoostPrice, getLevels} from "../../helpers/helper.ts";
 const BoosterList = () => {
     // const score  = useSelector((state: any) => state.score);
     // const dispatch = useDispatch();
-    const user: UserData = useSelector((state: any) => state.user.data);
+    // const user: UserData = useSelector((state: any) => state.user.data);
+    const score = useSelector((state: any) => state.score);
     const boost: BoostSliceType = useSelector((state: any) => state.boost);
     console.log(boost.boosts)
     return (
@@ -20,7 +21,12 @@ const BoosterList = () => {
 
                     boost.boosts
                         .map((item: boosterData) => {
-                            const item_lvl = getLevels(user, item);
+                            const item_lvl = getLevels({
+                                tap_lvl: score.tap_lvl,
+                                recharge_lvl: score.recharge_lvl,
+                                bot_lvl: score.bot_lvl,
+                                energy_lvl: score.energy_lvl,
+                            }, item);
                             const itemPrice = calculateBoostPrice({
                                 price: item.price,
                                 level: item_lvl,

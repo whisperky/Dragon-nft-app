@@ -16,9 +16,7 @@ import {boosterData, skinData, userDailyBoost, UserData} from "../types/data.ts"
 import getImage from "../helpers/image.helper.ts";
 import {numify} from "../helpers/score.helper.ts";
 import toast from "react-hot-toast";
-import {setPurchaseItem} from "../store/purchase.ts";
-import {GameSliceType, UserSliceType} from "../types/store.ts";
-import {calculateBoostPrice, getLevels} from "../helpers/helper.ts";
+import {GameSliceType} from "../types/store.ts";
 
 const BotBottomSheet = () => {
     const game: GameSliceType = useSelector((state: any) => state.game);

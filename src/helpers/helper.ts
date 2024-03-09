@@ -1,6 +1,11 @@
 import {boosterData, dailyBoosterData, skinData, UserData} from "../types/data.ts";
 
-export const getLevels = (user: UserData, item: dailyBoosterData | boosterData | skinData): number => {
+export const getLevels = (user: {
+    energy_lvl: number,
+    bot_lvl: number,
+    tap_lvl: number,
+    recharge_lvl: number
+}, item: dailyBoosterData | boosterData | skinData): number => {
     let lvl = 0;
     if (item.image === 'ENERGY_LIMIT') {
         lvl += user.energy_lvl;

@@ -1,7 +1,7 @@
 import Sheet from 'react-modal-sheet';
 import {useDispatch, useSelector} from "react-redux";
 import {hideBottomSheet} from "../store/game.ts";
-import { useRef } from 'react';
+import {useEffect, useRef} from 'react';
 import coin from '../../public/icon/main/small-coin.svg';
 import close from '../../public/icon/defaults/close.svg';
 
@@ -17,7 +17,7 @@ import getImage from "../helpers/image.helper.ts";
 import {numify} from "../helpers/score.helper.ts";
 import toast from "react-hot-toast";
 import {setPurchaseItem} from "../store/purchase.ts";
-import {GameSliceType, UserSliceType} from "../types/store.ts";
+import {GameSliceType, ScoreSliceType, UserSliceType} from "../types/store.ts";
 import {calculateBoostPrice, getLevels} from "../helpers/helper.ts";
 
 const BottomSheet = () => {
@@ -43,14 +43,19 @@ const BottomSheet = () => {
 };
 
 const SheetComp = () => {
-    const user: UserData = useSelector((state: any) => state.user.data);
+    const score: ScoreSliceType = useSelector((state: any) => state.score);
     const websocket = useSelector((state: any) => state.user.websocket);
     const game: GameSliceType = useSelector((state: any) => state.game);
     const purchase = useSelector((state: any) => state.purchase);
     const boost = useSelector((state: any) => state.boost);
     const dispatch = useDispatch();
     const item: skinData | boosterData = game.item;
-    const item_lvl = getLevels(user, item);
+    const item_lvl = getLevels({
+        tap_lvl: score.tap_lvl,
+        recharge_lvl: score.recharge_lvl,
+        bot_lvl: score.bot_lvl,
+        energy_lvl: score.energy_lvl,
+    }, item);
     const itemPrice = ((item as boosterData).lvl_diff !== undefined) ? calculateBoostPrice({
         price: item.price,
         level: item_lvl,
@@ -88,7 +93,7 @@ const SheetComp = () => {
                 dispatch(setPurchaseItem(game.item.id))
             }
         } else {
-            if (itemPrice > user.balance) {
+            if (itemPrice > score.value) {
                 toast.error('You do not have enough coins', {
                     id: purchase.toast,
                     position: 'bottom-center',
@@ -99,10 +104,10 @@ const SheetComp = () => {
                     },
                 });
             } else if (
-                (game.itemType == 'booster' && game.item.image == 'ENERGY_LIMIT' && game.item.max_lvl !== 0 && game.item.max_lvl <= user.energy_lvl) ||
-                (game.itemType == 'booster' && game.item.image == 'AUTO_TAP_BOT' && game.item.max_lvl !== 0 && game.item.max_lvl <= user.bot_lvl) ||
-                (game.itemType == 'booster' && game.item.image == 'MULTI_TAP' && game.item.max_lvl !== 0 && game.item.max_lvl <= user.tap_lvl) ||
-                (game.itemType == 'booster' && game.item.image == 'RECHARGING_SPEED' && game.item.max_lvl !== 0 && game.item.max_lvl <= user.recharge_lvl)
+                (game.itemType == 'booster' && game.item.image == 'ENERGY_LIMIT' && game.item.max_lvl !== 0 && game.item.max_lvl <= score.energy_lvl) ||
+                (game.itemType == 'booster' && game.item.image == 'AUTO_TAP_BOT' && game.item.max_lvl !== 0 && game.item.max_lvl <= score.bot_lvl) ||
+                (game.itemType == 'booster' && game.item.image == 'MULTI_TAP' && game.item.max_lvl !== 0 && game.item.max_lvl <= score.tap_lvl) ||
+                (game.itemType == 'booster' && game.item.image == 'RECHARGING_SPEED' && game.item.max_lvl !== 0 && game.item.max_lvl <= score.recharge_lvl)
             ) {
                 toast.error('You have reached the maximum level', {
                     id: purchase.toast,
