@@ -14,8 +14,7 @@ const userSlice = createSlice({
         requestUserData: (state) => {
             state.dataRequested = true;
         },
-        setUser: (state, action) => {
-            delete action.payload.success;
+        setUser: (state, action: {payload: UserData}) => {
             state.data = action.payload;
         },
         setUserPurchaseReturn: (state, action) => {

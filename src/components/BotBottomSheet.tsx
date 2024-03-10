@@ -81,19 +81,18 @@ const SheetComp = () => {
                 <Sheet.Content>
                     <div className="bs-container">
                         <div style={{fontSize: '7rem'}}>🤖</div>
-                        <div className='bs-title'>{game.botEarn}</div>
-                        <span className='bs-subtitle' style={{width: '50%'}}>Earned by Auto Tap bot for you</span>
-                        {/*<span className='bs-over-subtitle'>{item.}</span>*/}
+                        <div className='bot-bs-title'><p>+{numify(game.botEarn)}</p> <img src={coin} alt='coin'/></div>
+                        <span className='bot-bs-subtitle'>Earned by Auto Tap bot for you</span>
                         <div className='bs-inner-box glass'>
                             <div>
                                 <p>🦾</p>
                                 <div className='bs-inner-desc'>
                                     <p>Auto Tap</p>
-                                    <p>if you don't play for one hour</p>
+                                    <p>if not played for 1 hour</p>
                                 </div>
                             </div>
                             <div>
-                                <p>🦾</p>
+                                <p>⏳</p>
                                 <div className='bs-inner-desc'>
                                     <p>Works for</p>
                                     <p>12 hours</p>

@@ -1,5 +1,5 @@
 import {Outlet} from "react-router-dom";
-import  {useEffect} from "react";
+import {useEffect} from "react";
 import WebApp from "@twa-dev/sdk";
 import {useDispatch, useSelector} from "react-redux";
 import {requestUserData, setUser, setUserPurchaseReturn} from "../store/user.ts";
@@ -22,7 +22,11 @@ const RootLayout = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         if (!user.dataRequested) {
-            user.websocket.on('AUTH', (adata: { success: boolean, msg: string, code: 'INVALID_USER' | 'INVALID_SIGNATURE' | 'INVALID_AUTH_DATA' }) => {
+            user.websocket.on('AUTH', (adata: {
+                success: boolean,
+                msg: string,
+                code: 'INVALID_USER' | 'INVALID_SIGNATURE' | 'INVALID_AUTH_DATA'
+            }) => {
                 if (!adata.success) {
                     WebApp.showAlert(adata.msg);
                     WebApp.close();
@@ -30,7 +34,29 @@ const RootLayout = () => {
             });
             user.websocket.on('receive-user', (udata: UserWebhookData) => {
                 if (udata.success) {
-                    dispatch(setUser(udata));
+                    dispatch(setUser({
+                        id: udata.id,
+                        tg_id: udata.tg_id,
+                        username: udata.username,
+                        fName: udata.fName,
+                        lName: udata.lName,
+                        balance: udata.balance,
+                        bot_lvl: udata.bot_lvl,
+                        energy_lvl: udata.energy_lvl,
+                        recharge_lvl: udata.recharge_lvl,
+                        tap_lvl: udata.tap_lvl,
+                        last_energy_left: udata.last_energy_left,
+                        balance_updated_at: udata.balance_updated_at,
+                        league_id: udata.league_id,
+                        squad_id: udata.squad_id,
+                        fren_token: udata.fren_token,
+                        invited_by: udata.invited_by,
+                        invited_users: udata.invited_users,
+                        botEarn: udata.botEarn,
+                        status: udata.status,
+                        createdAt: udata.createdAt,
+                        updatedAt: udata.updatedAt,
+                    }));
                     dispatch(setScore({
                         tap_lvl: udata.tap_lvl,
                         energy_lvl: udata.energy_lvl,
@@ -62,15 +88,15 @@ const RootLayout = () => {
                     dispatch(setFrens(fdata.data.frens));
                 }
             });
-            user.websocket.on('claimBotEarnSuccess', (data: {success: boolean, message: string}) => {
-                    toast.success(data.message, {
-                        id: 'claiming',
-                    });
+            user.websocket.on('claimBotEarnSuccess', (data: { success: boolean, message: string }) => {
+                toast.success(data.message, {
+                    id: 'claiming',
+                });
             })
-            user.websocket.on('claimBotEarnError', (data: {success: boolean, message: string}) => {
-                    toast.error(data.message, {
-                        id: 'claiming',
-                    });
+            user.websocket.on('claimBotEarnError', (data: { success: boolean, message: string }) => {
+                toast.error(data.message, {
+                    id: 'claiming',
+                });
             })
             dispatch(requestUserData());
         }
@@ -132,7 +158,7 @@ const RootLayout = () => {
                 </div>
             </div>
         </div>
-        <img style={{display: 'none'}} onSelect={() => false}  id='coinIcon' className='coin-image' src={coin}
+        <img style={{display: 'none'}} onSelect={() => false} id='coinIcon' className='coin-image' src={coin}
              onLoad={() => dispatch(loadCoin())}
              alt='DragonCoin'/>
         <div className="w-full hidden"><Outlet/></div>
