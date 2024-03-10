@@ -9,6 +9,7 @@ import {numShort} from "../helpers/score.helper.ts";
 import Friend from "../components/fren/Friend.tsx";
 import {frenData} from "../types/data.ts";
 import FrenSkeleton from "../skeleton/FrenSkeleton.tsx";
+import {useEffect} from "react";
 
 
 const Fren = () => {
@@ -19,6 +20,18 @@ const Fren = () => {
     const fren = useSelector((state: any) => state.fren);
     const earned = fren.list.reduce((acc: number, fren: any) => acc + fren.earned, 0);
     if (fren.haveData === false) user.websocket.emit('getFrenData');
+    useEffect(()  => {
+        document.body.classList.add('noMovement');
+        setTimeout(() => {
+            document.getElementById('fren-list').scrollTop = 100;
+        }, 500);
+        setTimeout(() => {
+            document.getElementById('fren-list').scrollTop = 0;
+        }, 1000);
+        return () => {
+            document.body.classList.remove('noMovement');
+        };
+    }, []);
     return fren.haveData ? (
         <div className='fren-zone-container'>
             <p className='fren-title'>Fren Zone</p>
@@ -35,7 +48,7 @@ const Fren = () => {
                 {/*<img className='fren-opener-arrow opacity-less mr-1' src={arrow} alt='opener'/>*/}
             </div>
             <p className='fren-list-title'>Frens List</p>
-            <div className='fren-list'>
+            <div id='fren-list' className='fren-list'>
                 {
                     fren.list.length > 0 ?
                      fren.list.map((fren: frenData) => {
