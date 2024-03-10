@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import {LoadingSliceType} from "../types/store.ts";
 
 const loadingSlice = createSlice({
     name: 'loading',
@@ -6,7 +7,7 @@ const loadingSlice = createSlice({
         allLoaded: false,
         coinLoaded: false,
         userLoaded: false,
-    },
+    } as LoadingSliceType,
     reducers: {
         loadCoin: (state) => {
             state.coinLoaded = true;

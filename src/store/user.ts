@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import Service from "../service/Service.ts";
-import {userData} from "../types/data.ts";
+import {UserData} from "../types/data.ts";
+import {UserSliceType} from "../types/store.ts";
 
 const userSlice = createSlice({
     name: 'user',
@@ -8,16 +9,12 @@ const userSlice = createSlice({
         dataRequested: false,
         data: null,
         websocket: Service.Connect()
-    } as {
-        dataRequested: boolean,
-        websocket: any,
-        data: userData | null
-    },
+    } as UserSliceType,
     reducers: {
         requestUserData: (state) => {
             state.dataRequested = true;
         },
-        setUser: (state, action) => {
+        setUser: (state, action: {payload: UserData}) => {
             state.data = action.payload;
         },
         setUserPurchaseReturn: (state, action) => {
@@ -26,6 +23,7 @@ const userSlice = createSlice({
                 state.data.energy_lvl = action.payload.energy_lvl;
                 state.data.balance = action.payload.balance;
                 state.data.recharge_lvl = action.payload.recharge_lvl;
+                state.data.bot_lvl = action.payload.bot_lvl;
                 state.data.last_energy_left = action.payload.last_energy_left;
                 state.data.balance_updated_at = action.payload.balance_updated_at;
                 state.data.last_energy_left = action.payload.last_energy_left;

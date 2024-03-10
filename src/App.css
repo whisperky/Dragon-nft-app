@@ -254,7 +254,7 @@
 .energy-label {
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-end;
 }
 .energy-label > span:first-child {
     font-size: 14px;
@@ -424,7 +424,7 @@
 .b-item-title {
     font-family: 'Noto Sans', sans-serif;
     font-size: 15px;
-    font-weight: 600;
+    /*font-weight: 600;*/
     height: 14px;
     line-height: 16px;
     letter-spacing: 0em;
@@ -435,7 +435,7 @@
     display: flex;
     align-items: center;
     font-size: 13px;
-    font-weight: 400;
+    font-weight: 600;
     line-height: 13px;
     letter-spacing: 0em;
     text-align: left;
@@ -480,7 +480,7 @@
     flex-direction: column;
     justify-content: start;
     align-items: center;
-    padding-bottom: 1em;
+    padding-bottom: 2em;
 }
 .bs-img {
     width: 40%;
@@ -488,6 +488,31 @@
 .bs-title {
     font-size: 30px;
     font-weight: bold;
+}
+.bot-bs-title {
+    font-size: 30px;
+    font-weight: bold;
+    display: flex;
+    gap: 5px;
+    align-items: flex-end;
+    justify-content: center;
+}
+.bot-bs-title > p {
+    height: 45px;
+    display: table-cell;
+    vertical-align: bottom;
+    font-variant: none;
+}
+.bot-bs-title > img {
+    width: 25px;
+    height: 45px;
+}
+.bot-bs-subtitle {
+    margin-top: 6px;
+    color: #b0b0b0;
+    font-size: 13px;
+    width: 70%;
+    text-align: center;
 }
 .bs-subtitle {
     margin-top: 6px;
@@ -502,6 +527,44 @@
     margin-top: 15px;
     color: #b0b0b0;
     font-size: 14px;
+}
+.bs-inner-box {
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    width: 90%;
+    height: 6rem;
+    border-radius: 10px;
+    margin-top: 20px;
+    gap: 25px;
+}
+.bs-inner-box > div {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 15px;
+    width: 100%;
+}
+.bs-inner-box > div:first-child {
+    width: 80%;
+}
+.bs-inner-box > div > div > p:first-child {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5rem;
+}
+.bs-inner-box > div > div > p:last-child {
+    opacity: .5;
+}
+.bs-inner-box > div > p {
+    font-size: 2.5rem;
+}
+.bs-inner-desc {
+    font-size: 12px;
+    width: 100%;
+}
+.bs-inner-box > div:nth-child(2) {
+    width: 80%;
 }
 .bs-pricing {
     margin-top: 15px;
@@ -528,8 +591,8 @@
 }
 .bs-button {
     margin-top: 30px;
-    color: var(--tg-theme-button-text-color);
-    background-color: var(--tg-theme-button-color);
+    color: white;
+    background-color: #007AFF;
     padding: .7em;
     border-radius: 10px;
     width: 90%;

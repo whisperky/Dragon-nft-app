@@ -1,4 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
+import {PurchaseSliceType} from "../types/store.ts";
 
 const purchaseSlice = createSlice({
     name: 'purchase',
@@ -7,12 +8,7 @@ const purchaseSlice = createSlice({
         toast: 'DragonDaoPurchaseToast',
         item: null,
         status: null
-    } as {
-        isPurchasing: boolean,
-        toast: string,
-        item: string | null,
-        status: 'success' | 'error' | null
-    },
+    } as PurchaseSliceType,
     reducers: {
         setPurchaseItem: (state, action) => {
             state.item = action.payload;

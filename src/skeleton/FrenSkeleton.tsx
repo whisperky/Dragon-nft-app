@@ -18,7 +18,7 @@ const FrenSkeleton = () => {
                     </div>
                 </div>
                 <p className='fren-list-title'><Skeleton width={60} height={15} /></p>
-                <div className='fren-list'>
+                <div id='fren-list' className='fren-list'>
                     <div className='friend-container'>
                         <div className='flex items-center'>
                             <div className=''><Skeleton circle={true} width={50} height={50}/></div>

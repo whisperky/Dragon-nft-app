@@ -98,7 +98,13 @@ const CoinImage = () => {
             </div>
             <div></div>
         </div>
-    ) : (<div className='coin-image-holder flex items-center justify-center' style={{height: '350px'}}>No Energy</div>);
+    ) : (<div className='coin-image-holder flex justify-around relative'>
+        <div id='coin-mother glitch-container' ref={imgH}>
+            <div id='coin-ex' className='coin-itself'></div>
+            <img ref={img} id='coinIcon' className='coin-image grayscale-image glitch-animation' src={coin} alt='DragonCoin'/>
+        </div>
+        <div></div>
+    </div>);
 };
 
 export default CoinImage;

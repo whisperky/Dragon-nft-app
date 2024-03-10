@@ -2,15 +2,25 @@ import {useDispatch, useSelector} from "react-redux";
 import {dailyBoosterData, userDailyBoost} from "../../types/data.ts";
 import getImage from "../../helpers/image.helper.ts";
 import {showBottomSheet} from "../../store/game.ts";
+import toast from "react-hot-toast";
+import {PurchaseSliceType} from "../../types/store.ts";
 
 const DailyBoosters = () => {
     const boost = useSelector((state: any) => state.boost);
+    const purchase: PurchaseSliceType = useSelector((state: any) => state.purchase);
     const dispatch = useDispatch();
     const dailyBoosts: dailyBoosterData[] = boost.dailyBoosts;
     const leftDailyBoosts: userDailyBoost[] = boost.leftDailyBoosts;
     const buyBooster = async (id: string) => {
         const item = dailyBoosts.filter((b: any) => id === b.id)[0];
-        dispatch(showBottomSheet({item: item, type: 'daily_booster'}))
+        const leftB = item.limit - ((leftDailyBoosts.filter((b: any) => b.id === item.id)[0]).used);
+        if (leftB > 0) {
+            dispatch(showBottomSheet({item: item, type: 'daily_booster'}))
+        } else {
+            toast.error('You have used all your daily booster', {
+                id: purchase.toast,
+            });
+        }
     };
     return (
         <div className=''>

@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import {BoostSliceType} from "../types/store.ts";
 const skinSlice = createSlice({
     name: 'boost',
     initialState: {
@@ -6,7 +7,7 @@ const skinSlice = createSlice({
         dailyBoosts: [],
         boosts: [],
         leftDailyBoosts: [],
-    },
+    } as BoostSliceType,
     reducers: {
         setBoost: (state, action) => {
             state.dailyBoosts = action.payload.dailyBoosts;

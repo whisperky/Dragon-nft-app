@@ -5,6 +5,7 @@ import BoostItem from "./BoostItem.tsx";
 import {useSelector} from "react-redux";
 import {skinData} from "../../types/data.ts";
 import {numify} from "../../helpers/score.helper.ts";
+import {ScoreSliceType} from "../../types/store.ts";
 
 const SkinList = () => {
     // const score  = useSelector((state: any) => state.score);
@@ -15,6 +16,7 @@ const SkinList = () => {
     //     pageDots: false,
     // };
     const skins = useSelector((state:any) => state.skin);
+    const score: ScoreSliceType = useSelector((state: any) => state.score);
 
     return (
         <div className=''>
@@ -31,7 +33,7 @@ const SkinList = () => {
                     <div className='boosters-list glass'>
                         {
                             skins.list.map((skin: skinData) => {
-                                return <BoostItem item={skin} key={skin.id} title={skin.name} subtitle={numify(skin.price)} image={skin.image} coin={true} subtitleColor={"gold"}  trailing='opener'/>
+                                return <BoostItem haveEnough={score.value >= skin.price} item={skin} key={skin.id} title={skin.name} subtitle={numify(skin.price)} image={skin.image} coin={true} subtitleColor={"gold"}  trailing='opener'/>
                             })
                         }
                         {/*<BoostItem title='Basic' image={defaualtCoin} trailing='enabled'/>*/}
