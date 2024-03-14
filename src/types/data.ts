@@ -26,6 +26,7 @@ export type UserData = {
     balance_updated_at: number | null;
     status: userStatusData | null;
     botEarn: number;
+    skin: SkinImageTypes;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -61,7 +62,7 @@ export type dailyBoosterData = {
     name: string;
     price: number;
     limit: number;
-    image: 'RECHARGING_SPEED' | 'MULTI_TAP' | 'AUTO_TAP_BOT' | 'ENERGY_LIMIT';
+    image: any;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -73,7 +74,7 @@ export type boosterData = {
     short_description: string | null;
     max_lvl: number | null;
     lvl_diff: number | null;
-    image: string;
+    image: any
     createdAt: Date;
     updatedAt: Date;
 }
@@ -82,7 +83,7 @@ export type skinData = {
     name: string;
     price: number;
     description: string | null;
-    image: string;
+    image: any
     task_id: string | null;
     createdAt: Date;
     updatedAt: Date;
@@ -155,6 +156,7 @@ export type UserWebhookData = {
     invited_users: number;
     status: userStatusData | null;
     botEarn: number;
+    skin: SkinImageTypes;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -194,7 +196,16 @@ export type purchaseReturnData = {
         last_energy_left: number | null;
         createdAt: Date;
         updatedAt: Date;
+        skin: any;
         skins: userSkinData[];
         boosts: userDailyBoost;
-    }
+    };
+    itemType: 'mine' | 'daily_booster' | 'skin' | 'booster' | 'change_skin';
 }
+
+// universal
+
+export type BoosterImageTypes = 'RECHARGING_SPEED' | 'MULTI_TAP' | 'AUTO_TAP_BOT' | 'ENERGY_LIMIT';
+export type DailyBoosterImageTypes = 'ENERGY' | 'TURBO';
+export type SkinImageTypes = 'BASIC' | 'BITCOIN' | 'VOTE_PEDRO' | 'JADE_COIN';
+export type ImageTypes = BoosterImageTypes | DailyBoosterImageTypes | SkinImageTypes | string;

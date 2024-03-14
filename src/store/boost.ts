@@ -7,6 +7,7 @@ const skinSlice = createSlice({
         dailyBoosts: [],
         boosts: [],
         leftDailyBoosts: [],
+        images: []
     } as BoostSliceType,
     reducers: {
         setBoost: (state, action) => {
@@ -17,9 +18,12 @@ const skinSlice = createSlice({
         },
         setLeftDailyBoosts: (state, action) => {
             state.leftDailyBoosts = action.payload;
+        },
+        addBoosterImage: (state, action) => {
+            state.images.push(action.payload);
         }
     }
 })
 
-export const { setBoost, setLeftDailyBoosts} = skinSlice.actions
+export const { setBoost, setLeftDailyBoosts, addBoosterImage} = skinSlice.actions
 export default skinSlice.reducer;

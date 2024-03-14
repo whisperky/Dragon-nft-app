@@ -1,16 +1,19 @@
 import WebApp from "@twa-dev/sdk";
 import {useDispatch, useSelector} from "react-redux";
 import {dump_increment, increment, setTapTimeout} from "../../store/score.ts";
-import coin from '../../../public/skin/coin.svg';
 import React from "react";
 import {loadCoin} from "../../store/loading.ts";
 import {tapValue} from "../../helpers/score.helper.ts";
+import {ImageSliceType} from "../../types/store.ts";
 
 const CoinImage = () => {
     const imgH = React.useRef<HTMLDivElement>(null)
     const img = React.useRef<HTMLImageElement>(null)
     const user  = useSelector((state: any) => state.user);
     const score  = useSelector((state: any) => state.score);
+    const image: ImageSliceType  = useSelector((state: any) => state.image);
+    const normal_image = image.activeSkins.img == undefined ? '' : image.activeSkins.img.normal.src;
+    const turbo_image = image.activeSkins.img == undefined ? '' : image.activeSkins.img.turbo.src;
     const dispatch = useDispatch();
     const TapTap = () => {
         clearTimeout(score.tapTimeout);
@@ -93,15 +96,14 @@ const CoinImage = () => {
         <div className='coin-image-holder flex justify-around relative'>
             <div id='coin-mother' ref={imgH} onTouchStart={onTapBegin} onTouchEnd={onTapEnds}>
                 <div id='coin-ex' className='coin-itself'></div>
-                <img onSelect={() => false} ref={img} id='coinIcon' className='coin-image' src={coin} onLoad={() => dispatch(loadCoin())}
-                     alt='DragonCoin'/>
+                <img onSelect={() => false} ref={img} id='coinIcon' className='coin-image' src={normal_image} alt='DragonCoin'/>
             </div>
             <div></div>
         </div>
     ) : (<div className='coin-image-holder flex justify-around relative'>
         <div id='coin-mother glitch-container' ref={imgH}>
             <div id='coin-ex' className='coin-itself'></div>
-            <img ref={img} id='coinIcon' className='coin-image grayscale-image glitch-animation' src={coin} alt='DragonCoin'/>
+            <img ref={img} id='coinIcon' className='coin-image grayscale-image glitch-animation' src={normal_image} alt='DragonCoin'/>
         </div>
         <div></div>
     </div>);
