@@ -12,8 +12,7 @@ import {
     FocusScope,
     useDialog,
 } from 'react-aria';
-import {boosterData, skinData, userDailyBoost, UserData} from "../types/data.ts";
-import getImage from "../helpers/image.helper.ts";
+import {UserData} from "../types/data.ts";
 import {numify} from "../helpers/score.helper.ts";
 import toast from "react-hot-toast";
 import {GameSliceType} from "../types/store.ts";

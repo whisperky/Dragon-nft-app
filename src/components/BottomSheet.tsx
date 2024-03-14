@@ -13,11 +13,10 @@ import {
     useDialog,
 } from 'react-aria';
 import {boosterData, skinData, userDailyBoost, UserData} from "../types/data.ts";
-import getImage from "../helpers/image.helper.ts";
 import {numify} from "../helpers/score.helper.ts";
 import toast from "react-hot-toast";
 import {setPurchaseItem} from "../store/purchase.ts";
-import {GameSliceType, ScoreSliceType, UserSliceType} from "../types/store.ts";
+import {GameSliceType, ImageSliceType, ScoreSliceType, SkinSliceType, UserSliceType} from "../types/store.ts";
 import {calculateBoostPrice, getLevels} from "../helpers/helper.ts";
 
 const BottomSheet = () => {
@@ -26,15 +25,15 @@ const BottomSheet = () => {
 
     return (
         <div>
-            <Sheet  rootId='bottom-sheet'
-                    isOpen={game.bottomSheet}
-                    onClose={() => dispatch(hideBottomSheet())}
-                    disableDrag={true}
-                    detent={'content-height'}
+            <Sheet rootId='bottom-sheet'
+                   isOpen={game.bottomSheet}
+                   onClose={() => dispatch(hideBottomSheet())}
+                   disableDrag={true}
+                   detent={'content-height'}
             >
                 <OverlayProvider>
                     <FocusScope contain autoFocus restoreFocus>
-                        <SheetComp />
+                        <SheetComp/>
                     </FocusScope>
                 </OverlayProvider>
             </Sheet>
@@ -43,9 +42,11 @@ const BottomSheet = () => {
 };
 
 const SheetComp = () => {
+    const image: ImageSliceType = useSelector((state: any) => state.image);
     const score: ScoreSliceType = useSelector((state: any) => state.score);
     const websocket = useSelector((state: any) => state.user.websocket);
     const game: GameSliceType = useSelector((state: any) => state.game);
+    const skins: SkinSliceType = useSelector((state: any) => state.skin);
     const purchase = useSelector((state: any) => state.purchase);
     const boost = useSelector((state: any) => state.boost);
     const dispatch = useDispatch();
@@ -60,33 +61,39 @@ const SheetComp = () => {
         price: item.price,
         level: item_lvl,
         diff: (item as boosterData).lvl_diff,
-    }) : item.price;    const containerRef = useRef(null);
+    }) : item.price;
+    const containerRef = useRef(null);
     const dialog = useDialog({}, containerRef);
     const overlay = useOverlay(
-        { onClose: () => dispatch(hideBottomSheet()), isOpen: game.bottomSheet, isDismissable: true },
+        {onClose: () => dispatch(hideBottomSheet()), isOpen: game.bottomSheet, isDismissable: true},
         containerRef
     );
     useModal();
     const onPurchaseHandler = () => {
         dispatch(hideBottomSheet())
-        toast.loading( `Buying ${item.name}`, {
-            id: purchase.toast,
-        });
         if (game.itemType == 'daily_booster') {
+            toast.loading(`Buying ${item.name}`, {
+                id: purchase.toast,
+            });
             const leftDailyBoosts: userDailyBoost[] = boost.leftDailyBoosts;
             const leftBoost = game.item.limit - ((leftDailyBoosts.filter((b: any) => game.item.id === b.id)[0]).used);
             if (leftBoost <= 0) {
                 toast.error('You have reached your limit', {
                     id: purchase.toast,
                 });
-            } else {
+            }
+            else {
                 websocket.emit('purchase', {
                     type: game.itemType,
                     item: game.item.id,
                 });
                 dispatch(setPurchaseItem(game.item.id))
             }
-        } else {
+        }
+        else if (game.itemType == 'booster') {
+            toast.loading(`Buying ${item.name}`, {
+                id: purchase.toast,
+            });
             if (itemPrice > score.value) {
                 toast.error('You do not have enough coins', {
                     id: purchase.toast,
@@ -100,8 +107,7 @@ const SheetComp = () => {
                 toast.error('You have reached the maximum level', {
                     id: purchase.toast,
                 });
-            }
-            else {
+            } else {
                 websocket.emit('purchase', {
                     type: game.itemType,
                     item: game.item.id,
@@ -110,41 +116,106 @@ const SheetComp = () => {
                 // toast(`${game.item.price} > ${user.balance} Coming soon ${game.itemType} + ${game.item.id} + ${game.item.name} `, {id: purchase.toast})
             }
         }
+        else if (game.itemType == 'skin') {
+            const uSkin = skins.userSkins.find((x) => x.skin_id == game.item.id);
+            const ownSkin = uSkin != undefined;
+            // const isEnabled = ownSkin ? uSkin.status == true : false;
+
+            if (!ownSkin) {
+                toast.loading(`Buying ${item.name}`, {
+                    id: purchase.toast,
+                });
+                websocket.emit('purchase', {
+                    type: game.itemType,
+                    item: game.item.id,
+                });
+                dispatch(setPurchaseItem(game.item.id))
+            } else {
+                toast.loading(`Changing skin to ${item.name}`, {
+                    id: purchase.toast,
+                });
+                websocket.emit('changeSkin', {
+                    uSkinId: uSkin.id
+                })
+            }
+        }
     }
     // In real world usage this would be a separate React component
     const customHeader = (
         <div>
-            <button className='bottom-sheet-close-btn' onClick={() => dispatch(hideBottomSheet())}><img src={close} alt='X'/></button>
+            <button className='bottom-sheet-close-btn' onClick={() => dispatch(hideBottomSheet())}><img src={close}
+                                                                                                        alt='X'/>
+            </button>
         </div>
     );
+    const daily_img = image.dailyBooster.find((x) => x.name == item.image);
+    const boost_img = image.booster.find((x) => x.name == item.image);
+    const skin_img = image.skin.find((x) => x.name == item.image)
 
-    return game.item == null ? <></> : (
-        <>
-            <Sheet.Container
-                className='sheet-body'
-                ref={containerRef}
-                {...overlay.overlayProps as any}
-                {...dialog.dialogProps as any}
-            >
-                <Sheet.Header>{customHeader}</Sheet.Header>
-                <Sheet.Content>
-                    <div className="bs-container">
-                        <img className='bs-img' src={getImage(item.image)}/>
-                        <div className='bs-title'>{item.name}</div>
-                        <span className='bs-subtitle'>{item.description}</span>
-                        {/*<span className='bs-over-subtitle'>{item.}</span>*/}
-                        <div className='bs-pricing'>
-                            <div className='bs-price'>
-                                <img src={coin} alt='coin'/> <span>{item.price == 0 ? 'Free' : numify(itemPrice)}</span>
-                            </div>
-                            { game.itemType == 'booster' && <span>/ Level {item_lvl}</span>}
+    const img = game.itemType == "daily_booster" && daily_img != undefined ? daily_img.img : game.itemType == 'booster' && boost_img != undefined ? boost_img.img : game.itemType == 'skin' && skin_img != undefined ? skin_img.img.normal : null;
+    if (game.itemType == 'skin') {
+        const uSkin = skins.userSkins.find((x) => x.skin_id == game.item.id);
+        const ownSkin = uSkin != undefined;
+        const isEnabled = ownSkin ? uSkin.status == true : false;
+
+        return game.item == null ? <></> : (
+            <>
+                <Sheet.Container
+                    className='sheet-body'
+                    ref={containerRef}
+                    {...overlay.overlayProps as any}
+                    {...dialog.dialogProps as any}
+                >
+                    <Sheet.Header>{customHeader}</Sheet.Header>
+                    <Sheet.Content>
+                        <div className="bs-container">
+                            {img !== null ? <img className='bs-img' src={img.src}/> : <div className='bs-img'></div>}
+                            <div className='bs-title'>{item.name}</div>
+                            <span className='bs-subtitle'>{item.description}</span>
+                            {!ownSkin ? <div className='bs-pricing'>
+                                <div className='bs-price'>
+                                    <img src={coin} alt='coin'/>
+                                    <span>{item.price == 0 ? 'Free' : numify(itemPrice)}</span>
+                                </div>
+                            </div> : <></>}
+                            <button className='bs-button'
+                                    onClick={onPurchaseHandler}>{ownSkin ? 'Apply Skin' : 'Get'}</button>
                         </div>
-                        <button className='bs-button' onClick={onPurchaseHandler}>Get</button>
-                    </div>
-                </Sheet.Content>
-            </Sheet.Container>
-            <Sheet.Backdrop/>
-        </>
-    );
+                    </Sheet.Content>
+                </Sheet.Container>
+                <Sheet.Backdrop/>
+            </>
+        );
+    } else {
+        return game.item == null ? <></> : (
+            <>
+                <Sheet.Container
+                    className='sheet-body'
+                    ref={containerRef}
+                    {...overlay.overlayProps as any}
+                    {...dialog.dialogProps as any}
+                >
+                    <Sheet.Header>{customHeader}</Sheet.Header>
+                    <Sheet.Content>
+                        <div className="bs-container">
+                            {img !== null ? <img className='bs-img' src={img.src}/> : <div className='bs-img'></div>}
+                            <div className='bs-title'>{item.name}</div>
+                            <span className='bs-subtitle'>{item.description}</span>
+                            {/*<span className='bs-over-subtitle'>{item.}</span>*/}
+                            <div className='bs-pricing'>
+                                <div className='bs-price'>
+                                    <img src={coin} alt='coin'/>
+                                    <span>{item.price == 0 ? 'Free' : numify(itemPrice)}</span>
+                                </div>
+                                {game.itemType == 'booster' && <span>/ Level {item_lvl}</span>}
+                            </div>
+                            <button className='bs-button' onClick={onPurchaseHandler}>Get</button>
+                        </div>
+                    </Sheet.Content>
+                </Sheet.Container>
+                <Sheet.Backdrop/>
+            </>
+        );
+    }
 };
 export default BottomSheet;

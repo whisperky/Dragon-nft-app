@@ -24,12 +24,12 @@ const userSlice = createSlice({
                 state.data.balance = action.payload.balance;
                 state.data.recharge_lvl = action.payload.recharge_lvl;
                 state.data.bot_lvl = action.payload.bot_lvl;
+                state.data.skin = action.payload.skin;
                 state.data.last_energy_left = action.payload.last_energy_left;
                 state.data.balance_updated_at = action.payload.balance_updated_at;
                 state.data.last_energy_left = action.payload.last_energy_left;
                 state.data.createdAt = action.payload.createdAt;
                 state.data.updatedAt = action.payload.updatedAt;
-
             }
         }
     }

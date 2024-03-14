@@ -5,7 +5,7 @@ import BoostItem from "./BoostItem.tsx";
 import {useSelector} from "react-redux";
 import {skinData} from "../../types/data.ts";
 import {numify} from "../../helpers/score.helper.ts";
-import {ScoreSliceType} from "../../types/store.ts";
+import {ScoreSliceType, SkinSliceType} from "../../types/store.ts";
 
 const SkinList = () => {
     // const score  = useSelector((state: any) => state.score);
@@ -15,7 +15,7 @@ const SkinList = () => {
     //     prevNextButtons: false,
     //     pageDots: false,
     // };
-    const skins = useSelector((state:any) => state.skin);
+    const skins: SkinSliceType = useSelector((state:any) => state.skin);
     const score: ScoreSliceType = useSelector((state: any) => state.score);
 
     return (
@@ -33,7 +33,10 @@ const SkinList = () => {
                     <div className='boosters-list glass'>
                         {
                             skins.list.map((skin: skinData) => {
-                                return <BoostItem haveEnough={score.value >= skin.price} item={skin} key={skin.id} title={skin.name} subtitle={numify(skin.price)} image={skin.image} coin={true} subtitleColor={"gold"}  trailing='opener'/>
+                                const uSkin = skins.userSkins.find((x) => x.skin_id == skin.id);
+                                const ownSkin = uSkin != undefined;
+                                const isEnabled = ownSkin ? uSkin.status == true : false;
+                                return <BoostItem haveEnough={score.value >= skin.price} item={skin} key={skin.id} title={skin.name} subtitle={ownSkin ? isEnabled ? '' : 'You own it' : numify(skin.price)} image={skin.image} coin={!ownSkin} subtitleColor={ownSkin ? 'grey' : "gold"}  trailing={ownSkin ? isEnabled ? 'enabled' :'disabled' : 'opener'} />
                             })
                         }
                         {/*<BoostItem title='Basic' image={defaualtCoin} trailing='enabled'/>*/}

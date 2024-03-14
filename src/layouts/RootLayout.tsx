@@ -1,4 +1,4 @@
-import {Outlet} from "react-router-dom";
+import {Outlet, useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 import WebApp from "@twa-dev/sdk";
 import {useDispatch, useSelector} from "react-redux";
@@ -12,14 +12,20 @@ import {setBoost, setLeftDailyBoosts} from "../store/boost.ts";
 import {completeItemPurchase} from "../store/purchase.ts";
 import toast from "react-hot-toast";
 import {setFrens} from "../store/fren.ts";
-import coin from "../../public/skin/coin.svg";
 import {setAutoTapEarn} from "../store/game.ts";
+import {loadBoostImages, loadCoinSkinImages, loadCoreImages} from "../helpers/image.helper.ts";
+import {ImageSliceType, MyImageTypes, SkinSliceType, UserSliceType} from "../types/store.ts";
+import {alterActiveSkinsImages, setActiveSkinsDone, setCoreDone} from "../store/image.ts";
 
 const RootLayout = () => {
-    const user = useSelector((state: any) => state.user);
+    const user: UserSliceType = useSelector((state: any) => state.user);
+    let skin: SkinSliceType = useSelector((state: any) => state.skin);
     const load = useSelector((state: any) => state.loading);
     const purchase = useSelector((state: any) => state.purchase);
+    const image: ImageSliceType = useSelector((state: any) => state.image);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     useEffect(() => {
         if (!user.dataRequested) {
             user.websocket.on('AUTH', (adata: {
@@ -53,6 +59,7 @@ const RootLayout = () => {
                         invited_by: udata.invited_by,
                         invited_users: udata.invited_users,
                         botEarn: udata.botEarn,
+                        skin: udata.skin,
                         status: udata.status,
                         createdAt: udata.createdAt,
                         updatedAt: udata.updatedAt,
@@ -68,6 +75,10 @@ const RootLayout = () => {
                     }))
                     dispatch(loadUser());
                     dispatch(setAutoTapEarn(udata.botEarn));
+                    if (!image.isActiveSkinsDone) {
+                        loadCoinSkinImages();
+                        loadCoreImages();
+                    }
                 }
             });
             user.websocket.on('boostData', (bdata: boostWebHookData) => {
@@ -105,6 +116,7 @@ const RootLayout = () => {
         WebApp.setHeaderColor('#000000');
     }, [1]);
     useEffect(() => {
+        console.log("Skin too", skin)
         console.log('Purchase updated');
         user.websocket.on('purchaseSuccess', (data: purchaseReturnData) => {
             if (purchase.isPurchasing) {
@@ -121,16 +133,41 @@ const RootLayout = () => {
                         last_tap_time: data.user.balance_updated_at,
                         last_energy_left: data.user.last_energy_left,
                     }))
-                    dispatch(setUserPurchaseReturn(data.user));
                     dispatch(completeItemPurchase('success'));
                     dispatch(setUserSkins(data.user.skins))
                     dispatch(setLeftDailyBoosts(data.user.boosts))
+                    dispatch(setUserPurchaseReturn(data.user));
+                    if (data.user.skin != null) {
+                        dispatch(alterActiveSkinsImages(data.user.skin));
+                        navigate('/')
+                    }
                 } else {
                     toast.error(data.message, {
                         id: purchase.toast,
                     })
                     dispatch(completeItemPurchase('error'));
                 }
+            } else {
+                toast.success(data.message, {
+                    id: purchase.toast,
+                });
+                dispatch(setScore({
+                    tap_lvl: data.user.tap_lvl,
+                    energy_lvl: data.user.energy_lvl,
+                    recharge_lvl: data.user.recharge_lvl,
+                    bot_lvl: data.user.bot_lvl,
+                    value: data.user.balance,
+                    last_tap_time: data.user.balance_updated_at,
+                    last_energy_left: data.user.last_energy_left,
+                }))
+                dispatch(completeItemPurchase('success'));
+                dispatch(setUserSkins(data.user.skins))
+                dispatch(setLeftDailyBoosts(data.user.boosts))
+                if (data.user.skin != null) {
+                    dispatch(alterActiveSkinsImages(data.user.skin));
+                    navigate('/')
+                }
+                dispatch(setUserPurchaseReturn(data.user));
             }
         });
         user.websocket.on('purchaseError', (data: purchaseReturnData) => {
@@ -139,10 +176,21 @@ const RootLayout = () => {
                     id: purchase.toast,
                 })
                 dispatch(completeItemPurchase('error'));
+            } else {
+                toast.error(data.message, {
+                    id: purchase.toast,
+                })
             }
         });
-    }, [purchase.isPurchasing]);
-    return !load.allLoaded ? (<div>
+    }, [purchase.isPurchasing, skin]);
+    useEffect(() => {
+        if (image.isActiveSkinsDone && image.isCoreDone) {
+            loadBoostImages();
+        }
+    }, [image.isActiveSkinsDone, image.isCoreDone]);
+
+    return image.isActiveSkinsDone && image.isCoreDone ? (
+        <div className="w-full"><Outlet/><BottomSheet/></div>) : (<div>
         <div className='preloader flex items-center justify-around'>
             <div className="loader">
                 <div className="loader-inner ball-grid-pulse">
@@ -158,11 +206,8 @@ const RootLayout = () => {
                 </div>
             </div>
         </div>
-        <img style={{display: 'none'}} onSelect={() => false} id='coinIcon' className='coin-image' src={coin}
-             onLoad={() => dispatch(loadCoin())}
-             alt='DragonCoin'/>
         <div className="w-full hidden"><Outlet/></div>
-    </div>) : (<div className="w-full"><Outlet/><BottomSheet/></div>)
+    </div>)
 }
 
 export default RootLayout;

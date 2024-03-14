@@ -1,4 +1,13 @@
-import {boosterData, dailyBoosterData, skinData, UserData} from "./data.ts";
+import {
+    boosterData,
+    BoosterImageTypes,
+    dailyBoosterData,
+    DailyBoosterImageTypes, ImageTypes,
+    skinData,
+    SkinImageTypes,
+    UserData
+} from "./data.ts";
+import {ReactElement} from "react";
 
 export type GameSliceType = {
     item: dailyBoosterData & skinData & boosterData | null;
@@ -21,8 +30,11 @@ export type ScoreSliceType = {
     coolDown: boolean;
 }
 export type LoadingSliceType = {
+    coreLoaded: boolean;
     allLoaded: boolean;
+    allLoadedImg: string[];
     coinLoaded: boolean;
+    coinLoadedImg: string[];
     userLoaded: boolean;
 }
 export type UserSliceType = {
@@ -32,13 +44,25 @@ export type UserSliceType = {
 }
 export type SkinSliceType = {
     list: any[],
-    userSkins: any[]
+    userSkins: {
+        id: string;
+        user_id: string;
+        skin_id: string;
+        price: number;
+        status: boolean;
+        createdAt: Date;
+        updatedAt: Date;
+    }[]
 }
 export type BoostSliceType = {
     haveData: boolean;
     dailyBoosts: any[];
     boosts: any[];
     leftDailyBoosts: any[];
+    images: {
+        name: ImageTypes
+        img: HTMLImageElement
+    }[];
 }
 export type PurchaseSliceType = {
     isPurchasing: boolean;
@@ -46,8 +70,33 @@ export type PurchaseSliceType = {
     item: string | null;
     status: 'success' | 'error' | null;
 }
-
 export type FrenSliceType = {
     haveData: boolean;
     list: any[];
+}
+export type MyImageTypes = {
+    name: ImageTypes;
+    img: HTMLImageElement;
+}
+export type MySkinImageTypes = {
+    name: SkinImageTypes;
+    img: {
+        normal: HTMLImageElement;
+        turbo: HTMLImageElement;
+    }
+}
+export type ImageSliceType = {
+    core: MyImageTypes[];
+    activeSkins: MySkinImageTypes;
+    booster: MyImageTypes[];
+    dailyBooster: MyImageTypes[];
+    skin: MySkinImageTypes[];
+    others: MyImageTypes[];
+
+    isCoreDone: boolean;
+    isActiveSkinsDone: boolean;
+    isBoosterDone: boolean;
+    isDailyBoosterDone: boolean;
+    isSkinDone: boolean;
+    isOthersDone: boolean;
 }
