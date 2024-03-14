@@ -16,6 +16,7 @@ import {setAutoTapEarn} from "../store/game.ts";
 import {loadBoostImages, loadCoinSkinImages, loadCoreImages} from "../helpers/image.helper.ts";
 import {ImageSliceType, MyImageTypes, SkinSliceType, UserSliceType} from "../types/store.ts";
 import {alterActiveSkinsImages, setActiveSkinsDone, setCoreDone} from "../store/image.ts";
+import BotBottomSheet from "../components/BotBottomSheet.tsx";
 
 const RootLayout = () => {
     const user: UserSliceType = useSelector((state: any) => state.user);
@@ -190,7 +191,7 @@ const RootLayout = () => {
     }, [image.isActiveSkinsDone, image.isCoreDone]);
 
     return image.isActiveSkinsDone && image.isCoreDone ? (
-        <div className="w-full"><Outlet/><BottomSheet/></div>) : (<div>
+        <div className="w-full"><Outlet/><BottomSheet/><BotBottomSheet /></div>) : (<div>
         <div className='preloader flex items-center justify-around'>
             <div className="loader">
                 <div className="loader-inner ball-grid-pulse">
