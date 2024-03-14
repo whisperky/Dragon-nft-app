@@ -138,9 +138,9 @@ const RootLayout = () => {
                     dispatch(setUserSkins(data.user.skins))
                     dispatch(setLeftDailyBoosts(data.user.boosts))
                     dispatch(setUserPurchaseReturn(data.user));
-                    if (data.user.skin != null) {
+                    if (data.itemType == 'skin' || data.itemType == 'change_skin') {
                         dispatch(alterActiveSkinsImages(data.user.skin));
-                        navigate('/')
+                        navigate('/');
                     }
                 } else {
                     toast.error(data.message, {
@@ -164,7 +164,7 @@ const RootLayout = () => {
                 dispatch(completeItemPurchase('success'));
                 dispatch(setUserSkins(data.user.skins))
                 dispatch(setLeftDailyBoosts(data.user.boosts))
-                if (data.user.skin != null) {
+                if (data.itemType == 'skin' || data.itemType == 'change_skin') {
                     dispatch(alterActiveSkinsImages(data.user.skin));
                     navigate('/')
                 }

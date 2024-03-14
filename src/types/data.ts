@@ -199,7 +199,8 @@ export type purchaseReturnData = {
         skin: any;
         skins: userSkinData[];
         boosts: userDailyBoost;
-    }
+    };
+    itemType: 'mine' | 'daily_booster' | 'skin' | 'booster' | 'change_skin';
 }
 
 // universal
