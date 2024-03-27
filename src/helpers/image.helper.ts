@@ -245,7 +245,6 @@ export const loadCoinSkinImages = () => {
             }
             break;
         default:
-            alert(store.getState().user.data.skin)
             const normal_image4 = new Image();
             normal_image4.src = DRAGON_ICON_IMAGE;
             const turbo_image4 = new Image();

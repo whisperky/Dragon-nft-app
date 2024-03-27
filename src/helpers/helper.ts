@@ -37,27 +37,27 @@ export const randomTurboLevel = (level: number) => {
         switch (level) {
             case 1:
                 if (random < 90) {
-                    return 30;
+                    return 25;
                 } else {
-                    return 15;
+                    return 18;
                 }
             case 2:
                 if (random < 70) {
-                    return 24;
+                    return 20;
                 } else {
-                    return 17;
+                    return 13;
                 }
             case 3:
                 if (random < 50) {
-                    return 18;
+                    return 15;
                 } else {
-                    return 12;
+                    return 8;
                 }
             case 4:
                 if (random < 30) {
-                    return 13;
+                    return 10;
                 } else {
-                    return 8;
+                    return 4;
                 }
         }
     }

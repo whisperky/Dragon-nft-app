@@ -9,7 +9,7 @@ const DragonHead = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (score.temp_value == 0 && turbo.availableTurbos.length > 0) {
+        if ((score.temp_value % 5 == 0 || score.temp_value == 0) && turbo.availableTurbos.length > 0) {
             dispatch(activateTurbo());
         }
     }, [score.temp_value]);
