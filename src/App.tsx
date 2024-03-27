@@ -8,8 +8,12 @@ import {Toaster} from "react-hot-toast";
 import WebApp from "@twa-dev/sdk";
 import Fren from "./pages/Fren.tsx";
 import 'react-loading-skeleton/dist/skeleton.css';
+import {useSelector} from "react-redux";
+import {TurboSliceType} from "./types/store.ts";
+import TurboDashboard from "./pages/TurboDashboard.tsx";
 
 function App() {
+    const turbo: TurboSliceType = useSelector((state: any) => state.turbo);
     const router = createBrowserRouter(
         [
             {
@@ -19,7 +23,7 @@ function App() {
                 children: [
                     {
                         index: true,
-                        element: <Dashboard/>,
+                        element: turbo.turboMode ? <TurboDashboard /> : <Dashboard/>,
                     },
                     {
                         path: 'boosts',

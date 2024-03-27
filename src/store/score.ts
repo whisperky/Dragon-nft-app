@@ -1,6 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit'
+import {createSlice} from '@reduxjs/toolkit'
 import {currentEnergy, energyValue, rechargeValue, tapValue} from "../helpers/score.helper.ts";
-import {ScoreSliceType} from "../types/store.ts";
+import {ScoreSliceType, TurboSliceType} from "../types/store.ts";
+import {store} from "./store.ts";
+import {turboModeOff} from "./turbo.ts";
 
 const scoreSlice = createSlice({
     name: 'score',
@@ -43,7 +45,7 @@ const scoreSlice = createSlice({
                     });
                     state.temp_value = 0;
                 }
-            }else {
+            } else {
                 state.value += tapValue(state.tap_lvl);
                 state.temp_value += tapValue(state.tap_lvl);
                 state.energy -= tapValue(state.tap_lvl);
@@ -83,9 +85,29 @@ const scoreSlice = createSlice({
         },
         resetCoolDown: (state) => {
             state.coolDown = false;
+        },
+        addToTempValue: (state, action) => {
+            state.temp_value += action.payload;
+        },
+        addToValue: (state, action) => {
+            state.value += action.payload;
+        },
+        resetTempValue: (state) => {
+            state.temp_value = 0;
         }
     }
 })
 
-export const {setScore, setTapTimeout, setEnergyTimeout, resetCoolDown, increment,dump_increment,increaseEnergy } = scoreSlice.actions
+export const {
+    setScore,
+    setTapTimeout,
+    setEnergyTimeout,
+    resetCoolDown,
+    increment,
+    dump_increment,
+    increaseEnergy,
+    addToTempValue,
+    addToValue,
+    resetTempValue
+} = scoreSlice.actions
 export default scoreSlice.reducer

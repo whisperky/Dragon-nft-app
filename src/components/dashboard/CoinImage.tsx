@@ -1,27 +1,50 @@
 import WebApp from "@twa-dev/sdk";
 import {useDispatch, useSelector} from "react-redux";
-import {dump_increment, increment, setTapTimeout} from "../../store/score.ts";
+import {
+    addToTempValue,
+    addToValue,
+    dump_increment,
+    increment,
+    resetTempValue,
+    setTapTimeout
+} from "../../store/score.ts";
 import React from "react";
 import {loadCoin} from "../../store/loading.ts";
 import {tapValue} from "../../helpers/score.helper.ts";
-import {ImageSliceType} from "../../types/store.ts";
+import {ImageSliceType, ScoreSliceType, TurboSliceType, UserSliceType} from "../../types/store.ts";
+import {incrementTurboTaps, resetTurboTaps, turboModeOff} from "../../store/turbo.ts";
 
 const CoinImage = () => {
     const imgH = React.useRef<HTMLDivElement>(null)
     const img = React.useRef<HTMLImageElement>(null)
-    const user  = useSelector((state: any) => state.user);
-    const score  = useSelector((state: any) => state.score);
-    const image: ImageSliceType  = useSelector((state: any) => state.image);
+    const user: UserSliceType = useSelector((state: any) => state.user);
+    const score: ScoreSliceType = useSelector((state: any) => state.score);
+    const turbo: TurboSliceType = useSelector((state: any) => state.turbo);
+    const image: ImageSliceType = useSelector((state: any) => state.image);
     const normal_image = image.activeSkins.img == undefined ? '' : image.activeSkins.img.normal.src;
     const turbo_image = image.activeSkins.img == undefined ? '' : image.activeSkins.img.turbo.src;
     const dispatch = useDispatch();
     const TapTap = () => {
-        clearTimeout(score.tapTimeout);
-        setTimeout(() => {
-            dispatch(increment(user.websocket))
-        }, 500);
-        WebApp.HapticFeedback.impactOccurred('medium')
-        return true;
+        if (turbo.turboMode) {
+            const val = tapValue(score.tap_lvl) * turbo.turbo.multiply;
+            dispatch(addToValue(val));
+            dispatch(incrementTurboTaps());
+            if (turbo.turbo.maxTaps <= turbo.taps && turbo.turboMode) {
+                user.websocket.emit('mineTurbo', {
+                    token: turbo.turbo.token,
+                    taps: turbo.taps,
+                })
+                dispatch(resetTurboTaps())
+                dispatch(turboModeOff())
+            }
+        } else {
+            clearTimeout(score.tapTimeout);
+            setTimeout(() => {
+                dispatch(increment(user.websocket))
+            }, 500);
+            WebApp.HapticFeedback.impactOccurred('medium')
+            return true;
+        }
     }
     const onTapBegin = (e: any) => {
         if (['coin-step-mother', 'coin-mother', 'coin-ex'].includes(e.target.parentNode.id) && score.energy > 0) {
@@ -33,7 +56,7 @@ const CoinImage = () => {
 
             let touch = document.createElement('div');
             let one = document.createElement('span');
-            one.innerHTML = tapValue(score.tap_lvl).toString();
+            one.innerHTML = turbo.turboMode ? (tapValue(score.tap_lvl) * turbo.turbo.multiply).toString() : (tapValue(score.tap_lvl)).toString();
             one.style.position = 'absolute';
             touch.id = 'coin-step-mother'
             touch.className = 'floating-score';
@@ -85,10 +108,12 @@ const CoinImage = () => {
             clearTimeout(score.tapTimeout);
             dispatch(setTapTimeout(null));
         }
-        dispatch(setTapTimeout(setTimeout(() => {
-            console.log('Mine dis Coin')
-            dispatch(dump_increment(user.websocket))
-        }, 2000)))
+        if (!turbo.turboMode) {
+            dispatch(setTapTimeout(setTimeout(() => {
+                console.log('Mine dis Coin')
+                dispatch(dump_increment(user.websocket))
+            }, 2000)))
+        }
         const item = img.current!;
         item.style.transform = `rotateY(0deg) rotateX(0deg)`
     }
@@ -96,14 +121,16 @@ const CoinImage = () => {
         <div className='coin-image-holder flex justify-around relative'>
             <div id='coin-mother' ref={imgH} onTouchStart={onTapBegin} onTouchEnd={onTapEnds}>
                 <div id='coin-ex' className='coin-itself'></div>
-                <img onSelect={() => false} ref={img} id='coinIcon' className='coin-image' src={normal_image} alt='DragonCoin'/>
+                <img onSelect={() => false} ref={img} id='coinIcon' className='coin-image'
+                     src={turbo.turboMode ? turbo_image : normal_image} alt='DragonCoin'/>
             </div>
             <div></div>
         </div>
     ) : (<div className='coin-image-holder flex justify-around relative'>
         <div id='coin-mother glitch-container' ref={imgH}>
             <div id='coin-ex' className='coin-itself'></div>
-            <img ref={img} id='coinIcon' className='coin-image grayscale-image glitch-animation' src={normal_image} alt='DragonCoin'/>
+            <img ref={img} id='coinIcon' className='coin-image grayscale-image glitch-animation' src={normal_image}
+                 alt='DragonCoin'/>
         </div>
         <div></div>
     </div>);

@@ -21,6 +21,7 @@ import PIN_OPEN_IMAGE from "../../public/skin/Pin_open.png";
 
 import TOY_TOOL_IMG from '../../public/icon/main/toy.svg';
 import COIN_TOOL_IMG from '../../public/icon/main/small-coin.svg';
+import COIN_SPACE_IMG from '../../public/icon/main/coin-space.svg';
 import DRAGON_TOOL_IMG from '../../public/icon/main/dragon.svg';
 
 import {addCoinLoadedImg} from "../store/loading.ts";
@@ -119,6 +120,8 @@ export const loadBoostImages = () => {
             src: [{type: 'normal', img: JADE_IMAGE}, {type: 'turbo', img: JADE_OPEN_IMAGE}],
             type: 'skin'
         },
+        {name: 'COIN_SPACE', src: [{type: 'normal', img: COIN_SPACE_IMG}], type: 'others'},
+
     ];
     return loadImages.forEach((img) => {
         img.src.forEach((image: { type: 'normal' | 'turbo', img: any }) => {
@@ -130,7 +133,8 @@ export const loadBoostImages = () => {
                         name: img.name,
                         img: im
                     }))
-                } else if (img.type == 'dailyBooster') {
+                }
+                else if (img.type == 'dailyBooster') {
                     store.dispatch(addDailyBoosterImages({
                         name: img.name,
                         img: im
@@ -138,11 +142,18 @@ export const loadBoostImages = () => {
                     if (store.getState().image.dailyBooster.filter((x) => x.name === 'TURBO' || x.name === 'ENERGY').length >= 2) {
                         store.dispatch(setDailyBoosterDone(true))
                     }
-                } else if (img.type == 'skin') {
+                }
+                else if (img.type == 'skin') {
                     store.dispatch(addSkinImages({
                         name: img.name as SkinImageTypes,
                         img: im,
                         type: image.type
+                    }))
+                }
+                else if (img.type == 'booster') {
+                    store.dispatch(addOthersImages({
+                        name: img.name,
+                        img: im
                     }))
                 }
             }
@@ -234,6 +245,7 @@ export const loadCoinSkinImages = () => {
             }
             break;
         default:
+            alert(store.getState().user.data.skin)
             const normal_image4 = new Image();
             normal_image4.src = DRAGON_ICON_IMAGE;
             const turbo_image4 = new Image();
@@ -253,7 +265,6 @@ export const loadCoinSkinImages = () => {
             break;
     }
 }
-
 export const loadCoreImages = () => {
     const loadImages = [
         {name: 'TOY_TOOL', src: TOY_TOOL_IMG},
