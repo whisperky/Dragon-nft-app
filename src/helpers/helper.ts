@@ -55,9 +55,9 @@ export const randomTurboLevel = (level: number) => {
                 }
             case 4:
                 if (random < 30) {
-                    return 12;
+                    return 10;
                 } else {
-                    return 6;
+                    return 5;
                 }
         }
     }

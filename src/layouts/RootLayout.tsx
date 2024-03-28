@@ -148,6 +148,8 @@ const RootLayout = () => {
                     }
                     if (data.user.turbo != undefined && data.user.turbo.length > 0) {
                         dispatch(setAvailableTurbos(data.user.turbo))
+                    }
+                    if (data.itemType == 'daily_booster') {
                         navigate('/')
                     }
                 } else {
