@@ -6,6 +6,7 @@ import DSTools from "../components/dashboard/DSTools.tsx";
 import '../App.css'
 import WebApp from "@twa-dev/sdk";
 import {useEffect} from "react";
+import DragonHead from "../components/dashboard/DragonHead.tsx";
 const Dashboard = () => {
     WebApp.BackButton.hide()
     useEffect(()  => {
@@ -22,6 +23,7 @@ const Dashboard = () => {
                 <CoinImage />
                 <League />
                 <Energy />
+                <DragonHead />
             </div>
             <DSTools />
         </div>

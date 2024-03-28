@@ -18,7 +18,7 @@ const DSTools = () => {
     }
     const checker = images.core.filter((img) => img.name === 'TOY_TOOL' || img.name === 'COIN_TOOL' || img.name == 'DRAGON_TOOL')
     if (checker.length >= 3) {
-        console.log(images.core)
+        // console.log(images.core)
         const TOY_TOOL = images.core.find((img) => img.name === 'TOY_TOOL').img;
         const COIN_TOOL = images.core.find((img) => img.name === 'COIN_TOOL').img;
         const DRAGON_TOOL = images.core.find((img) => img.name === 'DRAGON_TOOL').img;

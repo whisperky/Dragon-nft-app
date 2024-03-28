@@ -4,10 +4,10 @@ import {
     dailyBoosterData,
     DailyBoosterImageTypes, ImageTypes,
     skinData,
-    SkinImageTypes,
+    SkinImageTypes, TurboData,
     UserData
 } from "./data.ts";
-import {ReactElement} from "react";
+import React, {ReactElement} from "react";
 
 export type GameSliceType = {
     item: dailyBoosterData & skinData & boosterData | null;
@@ -73,6 +73,16 @@ export type PurchaseSliceType = {
 export type FrenSliceType = {
     haveData: boolean;
     list: any[];
+}
+export type TurboSliceType = {
+    taps: number;
+    power: 'on' | 'off';
+    turbo: TurboData;
+    turboMode: boolean;
+    ready: boolean;
+    style: React.CSSProperties;
+    availableTurbos: TurboData[];
+    mineTurbo: boolean;
 }
 export type MyImageTypes = {
     name: ImageTypes;

@@ -14,15 +14,17 @@ import toast from "react-hot-toast";
 import {setFrens} from "../store/fren.ts";
 import {setAutoTapEarn} from "../store/game.ts";
 import {loadBoostImages, loadCoinSkinImages, loadCoreImages} from "../helpers/image.helper.ts";
-import {ImageSliceType, MyImageTypes, SkinSliceType, UserSliceType} from "../types/store.ts";
+import {ImageSliceType, MyImageTypes, SkinSliceType, TurboSliceType, UserSliceType} from "../types/store.ts";
 import {alterActiveSkinsImages, setActiveSkinsDone, setCoreDone} from "../store/image.ts";
 import BotBottomSheet from "../components/BotBottomSheet.tsx";
+import {setAvailableTurbos} from "../store/turbo.ts";
 
 const RootLayout = () => {
     const user: UserSliceType = useSelector((state: any) => state.user);
     let skin: SkinSliceType = useSelector((state: any) => state.skin);
     const load = useSelector((state: any) => state.loading);
     const purchase = useSelector((state: any) => state.purchase);
+    const turbo: TurboSliceType = useSelector((state: any) => state.turbo);
     const image: ImageSliceType = useSelector((state: any) => state.image);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -76,6 +78,8 @@ const RootLayout = () => {
                     }))
                     dispatch(loadUser());
                     dispatch(setAutoTapEarn(udata.botEarn));
+                    if (udata.turbo != undefined && udata.turbo.length > 0)
+                        dispatch(setAvailableTurbos(udata.turbo))
                     if (!image.isActiveSkinsDone) {
                         loadCoinSkinImages();
                         loadCoreImages();
@@ -142,6 +146,12 @@ const RootLayout = () => {
                         dispatch(alterActiveSkinsImages(data.user.skin));
                         navigate('/');
                     }
+                    if (data.user.turbo != undefined && data.user.turbo.length > 0) {
+                        dispatch(setAvailableTurbos(data.user.turbo))
+                    }
+                    if (data.itemType == 'daily_booster') {
+                        navigate('/')
+                    }
                 } else {
                     toast.error(data.message, {
                         id: purchase.toast,
@@ -189,9 +199,10 @@ const RootLayout = () => {
             loadBoostImages();
         }
     }, [image.isActiveSkinsDone, image.isCoreDone]);
-
+    useEffect(() => {
+    }, [turbo.turboMode]);
     return image.isActiveSkinsDone && image.isCoreDone ? (
-        <div className="w-full"><Outlet/><BottomSheet/><BotBottomSheet /></div>) : (<div>
+        <div className="w-full"><Outlet/><BottomSheet/><BotBottomSheet/></div>) : (<div>
         <div className='preloader flex items-center justify-around'>
             <div className="loader">
                 <div className="loader-inner ball-grid-pulse">

@@ -8,6 +8,47 @@
     width: 100%;
     overflow: hidden;
     background: linear-gradient(180deg, rgba(252, 32, 32, 0) 0%, #FC2020 100%) no-repeat;
+    transition: all 1s ease-in-out;
+}
+.turbo-dashboard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    transition: all 1s ease-in-out;
+}
+.turbo-dashboard > .add-pad {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 2rem;
+    height: 80%;
+}
+.turbo-background ~ .ds-tools {
+    background: none !important;
+}
+.turbo-background {
+    background-image: url("../public/icon/main/coin-space.svg");
+    background-size: 10%;
+    background-repeat: repeat;
+    position: absolute;
+    opacity: .3;
+    height: 100vh;
+    width: 100%;
+    animation: scroll 6s linear infinite; /* Adjust duration and timing function as needed */
+}
+.turbo-background ~ .add-pad > .coin-image-holder > div:last-child {
+    background: none;
+}
+@keyframes scroll {
+    from {
+        background-position: 0 0; /* Start position */
+    }
+    to {
+        background-position: 0 calc(100% + 20px); /* End position with a 20px gap */
+    }
 }
 
 .dashboard > .add-pad {
@@ -62,11 +103,11 @@
 .coin-image {
     position: relative;
     margin-top: 20px;
-    clip-path: polygon(15% 47%, 15% 56%, 9% 64%, 6% 74%, 9% 87%, 18% 92%, 28% 94%, 37% 95%, 47% 94%, 58% 93%, 71% 89%, 83% 82%, 86% 76%, 91% 71%, 95% 66%, 93% 56%, 88% 53%, 89% 51%, 93% 46%, 94% 33%, 89% 27%, 80% 23%, 77% 12%, 65% 9%, 55% 14%, 49% 5%, 37% 2%, 27% 10%, 23% 17%, 22% 25%, 23% 33%);
-    -webkit-clip-path: polygon(15% 47%, 15% 56%, 9% 64%, 6% 74%, 9% 87%, 18% 92%, 28% 94%, 37% 95%, 47% 94%, 58% 93%, 71% 89%, 83% 82%, 86% 76%, 91% 71%, 95% 66%, 93% 56%, 88% 53%, 89% 51%, 93% 46%, 94% 33%, 89% 27%, 80% 23%, 77% 12%, 65% 9%, 55% 14%, 49% 5%, 37% 2%, 27% 10%, 23% 17%, 22% 25%, 23% 33%); /* chrome */
-    -moz-clip-path: polygon(15% 47%, 15% 56%, 9% 64%, 6% 74%, 9% 87%, 18% 92%, 28% 94%, 37% 95%, 47% 94%, 58% 93%, 71% 89%, 83% 82%, 86% 76%, 91% 71%, 95% 66%, 93% 56%, 88% 53%, 89% 51%, 93% 46%, 94% 33%, 89% 27%, 80% 23%, 77% 12%, 65% 9%, 55% 14%, 49% 5%, 37% 2%, 27% 10%, 23% 17%, 22% 25%, 23% 33%); /* firefox */
-    -ms-clip-path: polygon(15% 47%, 15% 56%, 9% 64%, 6% 74%, 9% 87%, 18% 92%, 28% 94%, 37% 95%, 47% 94%, 58% 93%, 71% 89%, 83% 82%, 86% 76%, 91% 71%, 95% 66%, 93% 56%, 88% 53%, 89% 51%, 93% 46%, 94% 33%, 89% 27%, 80% 23%, 77% 12%, 65% 9%, 55% 14%, 49% 5%, 37% 2%, 27% 10%, 23% 17%, 22% 25%, 23% 33%); /* IE */
-    -o-clip-path: polygon(15% 47%, 15% 56%, 9% 64%, 6% 74%, 9% 87%, 18% 92%, 28% 94%, 37% 95%, 47% 94%, 58% 93%, 71% 89%, 83% 82%, 86% 76%, 91% 71%, 95% 66%, 93% 56%, 88% 53%, 89% 51%, 93% 46%, 94% 33%, 89% 27%, 80% 23%, 77% 12%, 65% 9%, 55% 14%, 49% 5%, 37% 2%, 27% 10%, 23% 17%, 22% 25%, 23% 33%); /* opera */
+    clip-path: polygon(12% 47%, 12% 56%, 9% 64%, 6% 74%, 9% 87%, 18% 92%, 28% 94%, 37% 95%, 47% 94%, 58% 93%, 71% 89%, 83% 82%, 86% 76%, 91% 71%, 95% 66%, 93% 56%, 88% 53%, 89% 51%, 93% 46%, 94% 33%, 89% 27%, 80% 23%, 77% 12%, 65% 9%, 55% 14%, 49% 5%, 37% 2%, 27% 10%, 23% 17%, 20% 25%, 17% 33%);
+    -webkit-clip-path: polygon(12% 47%, 12% 56%, 9% 64%, 6% 74%, 9% 87%, 18% 92%, 28% 94%, 37% 95%, 47% 94%, 58% 93%, 71% 89%, 83% 82%, 86% 76%, 91% 71%, 95% 66%, 93% 56%, 88% 53%, 89% 51%, 93% 46%, 94% 33%, 89% 27%, 80% 23%, 77% 12%, 65% 9%, 55% 14%, 49% 5%, 37% 2%, 27% 10%, 23% 17%, 20% 25%, 17% 33%); /* chrome */
+    -moz-clip-path: polygon(12% 47%, 12% 56%, 9% 64%, 6% 74%, 9% 87%, 18% 92%, 28% 94%, 37% 95%, 47% 94%, 58% 93%, 71% 89%, 83% 82%, 86% 76%, 91% 71%, 95% 66%, 93% 56%, 88% 53%, 89% 51%, 93% 46%, 94% 33%, 89% 27%, 80% 23%, 77% 12%, 65% 9%, 55% 14%, 49% 5%, 37% 2%, 27% 10%, 23% 17%, 20% 25%, 17% 33%); /* firefox */
+    -ms-clip-path: polygon(12% 47%, 12% 56%, 9% 64%, 6% 74%, 9% 87%, 18% 92%, 28% 94%, 37% 95%, 47% 94%, 58% 93%, 71% 89%, 83% 82%, 86% 76%, 91% 71%, 95% 66%, 93% 56%, 88% 53%, 89% 51%, 93% 46%, 94% 33%, 89% 27%, 80% 23%, 77% 12%, 65% 9%, 55% 14%, 49% 5%, 37% 2%, 27% 10%, 23% 17%, 20% 25%, 17% 33%); /* IE */
+    -o-clip-path: polygon(12% 47%, 12% 56%, 9% 64%, 6% 74%, 9% 87%, 18% 92%, 28% 94%, 37% 95%, 47% 94%, 58% 93%, 71% 89%, 83% 82%, 86% 76%, 91% 71%, 95% 66%, 93% 56%, 88% 53%, 89% 51%, 93% 46%, 94% 33%, 89% 27%, 80% 23%, 77% 12%, 65% 9%, 55% 14%, 49% 5%, 37% 2%, 27% 10%, 23% 17%, 20% 25%, 17% 33%); /* opera */
     transition:all .5s linear(0 0%, 0.22 2.1%, 0.86 6.5%, 1.11 8.6%, 1.3 10.7%, 1.35 11.8%, 1.37 12.9%, 1.37 13.7%, 1.36 14.5%, 1.32 16.2%, 1.03 21.8%, 0.94 24%, 0.89 25.9%, 0.88 26.85%, 0.87 27.8%, 0.87 29.25%, 0.88 30.7%, 0.91 32.4%, 0.98 36.4%, 1.01 38.3%, 1.04 40.5%, 1.05 42.7%, 1.05 44.1%, 1.04 45.7%, 1 53.3%, 0.99 55.4%, 0.98 57.5%, 0.99 60.7%, 1 68.1%, 1.01 72.2%, 1 86.7%, 1 100%);
 }
 
@@ -643,4 +684,34 @@
         display: none;
         visibility: hidden;
     }
+}
+
+
+.dragon-head-con {
+    position: absolute;
+}
+
+.dragon-head {
+    position: relative;
+    display: none;
+    z-index: 100000;
+    width: 60px; /* Adjust size as needed */
+    height: 60px;
+    animation: shake 0.5s infinite; /* Shake animation */
+}
+
+@keyframes shake {
+    0% { transform: translateY(0) rotateZ(0); }
+    20% { transform: translateY(-10px) rotateZ(-5deg); }
+    40% { transform: translateY(0) rotateZ(0); }
+    60% { transform: translateY(-5px) rotateZ(5deg); }
+    80% { transform: translateY(0) rotateZ(0); }
+    100% { transform: translateY(-2px) rotateZ(0); }
+}
+
+@keyframes head-appear {
+    0% { opacity: 0; display: none;}
+    20% { opacity: 1; display: block;}
+    80% { opacity: 1; display: block;}
+    100% { opacity: 0; display: none;}
 }

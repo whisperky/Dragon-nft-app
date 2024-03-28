@@ -156,6 +156,7 @@ export type UserWebhookData = {
     invited_users: number;
     status: userStatusData | null;
     botEarn: number;
+    turbo?: TurboData[]
     skin: SkinImageTypes;
     createdAt: Date;
     updatedAt: Date;
@@ -199,10 +200,17 @@ export type purchaseReturnData = {
         skin: any;
         skins: userSkinData[];
         boosts: userDailyBoost;
+        turbo?: TurboData[]
     };
     itemType: 'mine' | 'daily_booster' | 'skin' | 'booster' | 'change_skin';
 }
-
+export type TurboData = {
+    id: string;
+    multiply: number;
+    maxTaps: number;
+    token: string;
+    duration: number;
+}
 // universal
 
 export type BoosterImageTypes = 'RECHARGING_SPEED' | 'MULTI_TAP' | 'AUTO_TAP_BOT' | 'ENERGY_LIMIT';

@@ -8,6 +8,7 @@ import boost from './boost.ts';
 import purchase from './purchase.ts';
 import fren from './fren.ts';
 import image from "./image.ts";
+import turbo from "./turbo.ts";
 
 export const store = configureStore({
     reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
         purchase: purchase,
         fren: fren,
         image: image,
+        turbo: turbo,
     },
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware({
