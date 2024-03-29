@@ -17,14 +17,14 @@ const DailyBoosters = () => {
         if (leftB > 0) {
             dispatch(showBottomSheet({item: item, type: 'daily_booster'}))
         } else {
-            toast.error('You have used all your daily booster', {
+            toast.error('You have used all your free booster', {
                 id: purchase.toast,
             });
         }
     };
     return (
         <div className=''>
-            <p className='boost-title'>Free daily boosters</p>
+            <p className='boost-title'>Free Boosts</p>
             <div className='daily-boosters glass'>
                 {
                     dailyBoosts.map((boost) => {

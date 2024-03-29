@@ -86,7 +86,7 @@ const BoostItem = ({
                             </div>
                             {level == null || maxLevel == 1 ? <></> : <span className='text-muted'>•</span>}
                             {level == null || maxLevel == 1 ? <></> :
-                                <div className='b-item-level text-muted'>{level} lvl</div>}
+                                <div className='b-item-level text-muted'>Level {level}</div>}
                         </div>}
                 </div>
             </div>
