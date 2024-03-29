@@ -20,7 +20,7 @@ const SkinList = () => {
 
     return (
         <div className=''>
-            <p className='boost-title'>Buy Skins</p>
+            <p className='boost-title'>Skins</p>
             {/*<Flickity*/}
             {/*    className={"skin-container"} // default ''*/}
             {/*    elementType={"div"} // default 'div'*/}
