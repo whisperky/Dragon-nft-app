@@ -81,14 +81,14 @@
     display: flex;
     align-items: center;
     position: relative;
-    width: 40px;
+    width: 55px;
     height: 18px;
 }
 
 .dc-img {
     position: absolute;
-    width: 18px;
-    height: 18px;
+    width: 23px;
+    height: 23px;
     border: 2px solid #FFFFFF;
     border-radius: 50%;
 }
@@ -98,11 +98,11 @@
 }
 
 .dc-img:nth-child(2) {
-    left: 9px;
+    left: 13px;
 }
 
 .dc-img:nth-child(3) {
-    left: 18px;
+    left: 27px;
 }
 
 .league-bar {
