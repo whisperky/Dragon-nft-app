@@ -106,9 +106,9 @@ const LeagueHeader = () => {
                                             dispatch(setUserTop(i))
                                         }
                                         return <DragonUser id={u.tg_id} key={i} fName={u.fName} lName={u.lName} rank={i}
-                                                           coin={u.balance}/>;
+                                                           coin={u?.balance}/>;
                                     }) : (
-                                        (BigInt(league.leagueData.score) > BigInt(user.data.balance)) ?
+                                        (BigInt(league.leagueData.score) > BigInt(user.data?.balance ?? 0)) ?
                                             <div className='flex flex-col items-center '>
                                                 <span style={{fontSize: '150px', height: '27vh'}}>🫵</span>
                                                 <p style={{
@@ -128,7 +128,7 @@ const LeagueHeader = () => {
                                                     width: '70vw',
                                                     textAlign: 'center',
                                                     marginTop: '1rem'
-                                                }}> {BigInt(league.leagueData.score).toLocaleString()} /\ {BigInt(user.data.balance).toLocaleString()} No one on these league, I guess everyone learn to mine after all.</p>
+                                                }}>No one on these league, I guess everyone learn to mine after all.</p>
                                             </div>
                                     ) :
                                 <div className='flex flex-col items-center '>
@@ -147,7 +147,7 @@ const LeagueHeader = () => {
             {league.userTop > 0 ?
                 <DragonUser isFixed={true} id={user.data.tg_id} key={user.data.id} fName={user.data.fName}
                             lName={user.data.lName} rank={league.userTop}
-                            coin={user.data.balance.toString()}/> : <></>}
+                            coin={user.data?.balance.toString()}/> : <></>}
         </div>
     )
         ;
