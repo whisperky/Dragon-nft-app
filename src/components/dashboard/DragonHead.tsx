@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {ImageSliceType, ScoreSliceType, TurboSliceType} from "../../types/store.ts";
 import {activateTurbo, hideTurbo, turnOnTurbo, useTurbo} from "../../store/turbo.ts";
+import WebApp from "@twa-dev/sdk";
 
 const DragonHead = () => {
     const turbo: TurboSliceType = useSelector((state: any) => state.turbo);
@@ -11,6 +12,13 @@ const DragonHead = () => {
     useEffect(() => {
         if ((score.temp_value % 150 == 0 || score.temp_value == 0) && turbo.availableTurbos.length > 0) {
             dispatch(activateTurbo());
+        }
+        if (score.temp_value === 0) {
+            if (WebApp.isClosingConfirmationEnabled)
+                WebApp.disableClosingConfirmation();
+        } else {
+            if (!WebApp.isClosingConfirmationEnabled)
+                WebApp.enableClosingConfirmation();
         }
     }, [score.temp_value]);
     const image: ImageSliceType = useSelector((state: any) => state.image);
