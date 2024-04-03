@@ -12,12 +12,26 @@ import {setBoost, setLeftDailyBoosts} from "../store/boost.ts";
 import {completeItemPurchase} from "../store/purchase.ts";
 import toast from "react-hot-toast";
 import {setFrens} from "../store/fren.ts";
-import {setAutoTapEarn} from "../store/game.ts";
-import {loadBoostImages, loadCoinSkinImages, loadCoreImages} from "../helpers/image.helper.ts";
-import {ImageSliceType, MyImageTypes, SkinSliceType, TurboSliceType, UserSliceType} from "../types/store.ts";
+import {setAutoTapEarn, setTotals} from "../store/game.ts";
+import {
+    loadBoostImages,
+    loadCoinersImages,
+    loadCoinSkinImages,
+    loadCoreImages,
+    loadLeagueImages
+} from "../helpers/image.helper.ts";
+import {
+    ImageSliceType,
+    LeagueSliceType,
+    MyImageTypes,
+    SkinSliceType,
+    TurboSliceType,
+    UserSliceType
+} from "../types/store.ts";
 import {alterActiveSkinsImages, setActiveSkinsDone, setCoreDone} from "../store/image.ts";
 import BotBottomSheet from "../components/BotBottomSheet.tsx";
 import {setAvailableTurbos} from "../store/turbo.ts";
+import {setLeague, setUserLeague} from "../store/league.ts";
 
 const RootLayout = () => {
     const user: UserSliceType = useSelector((state: any) => state.user);
@@ -26,10 +40,14 @@ const RootLayout = () => {
     const purchase = useSelector((state: any) => state.purchase);
     const turbo: TurboSliceType = useSelector((state: any) => state.turbo);
     const image: ImageSliceType = useSelector((state: any) => state.image);
+    const league: LeagueSliceType = useSelector((state: any) => state.league);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     useEffect(() => {
+        user.websocket.on('connect', () => {
+            console.log('Connected');
+        });
         if (!user.dataRequested) {
             user.websocket.on('AUTH', (adata: {
                 success: boolean,
@@ -78,6 +96,8 @@ const RootLayout = () => {
                     }))
                     dispatch(loadUser());
                     dispatch(setAutoTapEarn(udata.botEarn));
+                    dispatch(setUserLeague(udata.league));
+                    dispatch(setTotals(udata.game));
                     if (udata.turbo != undefined && udata.turbo.length > 0)
                         dispatch(setAvailableTurbos(udata.turbo))
                     if (!image.isActiveSkinsDone) {
@@ -113,6 +133,10 @@ const RootLayout = () => {
                 toast.error(data.message, {
                     id: 'claiming',
                 });
+            })
+            user.websocket.on('leagueData', (ldata: any) => {
+                console.log('League data', ldata.data)
+                dispatch(setLeague(ldata.data));
             })
             dispatch(requestUserData());
         }
@@ -195,11 +219,18 @@ const RootLayout = () => {
         });
     }, [purchase.isPurchasing, skin]);
     useEffect(() => {
-        if (image.isActiveSkinsDone && image.isCoreDone) {
+        if (image.isActiveSkinsDone && image.isCoreDone && !image.isBoosterDone && !image.isSkinDone && !image.isLeagueDone) {
             loadBoostImages();
         }
-    }, [image.isActiveSkinsDone, image.isCoreDone]);
+        if (image.isActiveSkinsDone && image.isCoreDone && image.isBoosterDone && image.isSkinDone && !image.isLeagueDone) {
+            loadLeagueImages();
+        }
+        if (image.isActiveSkinsDone && image.isCoreDone && image.isBoosterDone && image.isSkinDone && image.isLeagueDone && !image.isCoinersDone) {
+           loadCoinersImages();
+        }
+    }, [image.isActiveSkinsDone, image.isCoreDone, image.isBoosterDone, image.isSkinDone, image.isLeagueDone]);
     useEffect(() => {
+
     }, [turbo.turboMode]);
     return image.isActiveSkinsDone && image.isCoreDone ? (
         <div className="w-full"><Outlet/><BottomSheet/><BotBottomSheet/></div>) : (<div>

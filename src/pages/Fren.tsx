@@ -8,14 +8,17 @@ import {numShort} from "../helpers/score.helper.ts";
 import Friend from "../components/fren/Friend.tsx";
 import {frenData} from "../types/data.ts";
 import FrenSkeleton from "../skeleton/FrenSkeleton.tsx";
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import {ImageSliceType} from "../types/store.ts";
+import premium from "../../public/icon/tg_premium.svg";
 
 
 const Fren = () => {
     const navigate = useNavigate();
     const user = useSelector((state: any) => state.user);
     const image: ImageSliceType = useSelector((state: any) => state.image);
+    const MAIN_COIN_IMAGE = image.skin.find((img) => img.name === 'BASIC');
+    const COIN_IMAGE = image.core.find((img) => img.name === 'COIN_TOOL');
     const TOY_IMAGE = image.core.find((img) => img.name === 'TOY_TOOL');
     WebApp.BackButton.onClick(() => navigate(-1))
     WebApp.BackButton.show();
@@ -23,19 +26,18 @@ const Fren = () => {
     const earned = fren.list.reduce((acc: number, fren: any) => acc + fren.earned, 0);
     if (fren.haveData === false) user.websocket.emit('getFrenData');
     useEffect(() => {
-        document.body.classList.add('noMovement');
         setTimeout(() => {
             document.getElementById('fren-list').scrollTop = 100;
         }, 500);
         setTimeout(() => {
             document.getElementById('fren-list').scrollTop = 0;
         }, 1000);
-        return () => {
-            document.body.classList.remove('noMovement');
-        };
     }, []);
     return TOY_IMAGE && fren.haveData ? (
         <div className='fren-zone-container'>
+            <div id='stars'></div>
+            <div id='stars2'></div>
+            <div id='stars3'></div>
             <p className='fren-title'>Fren Zone</p>
             <div className='fren-info'>
                 <div className='flex items-center'>
@@ -45,10 +47,40 @@ const Fren = () => {
                     </div>
                     <div className='fren-divider'></div>
                     <div className='fren-earn-info'>
-                        <span className='fren-emoji'>📣</span> Top 30 <span className='text-glass'>leaders</span>
+                        <span className='fren-emoji'>📣</span>
+                        <span className='fren-top-30'>Top 30</span>
+                        <span className='fren-top-leaders text-glass'>leaders</span>
                     </div>
                 </div>
                 {/*<img className='fren-opener-arrow opacity-less mr-1' src={arrow} alt='opener'/>*/}
+            </div>
+            <p className='fren-bonues-title'>Invite frens to get bonuses</p>
+            <div className='fren-bonues'>
+                <div className='fren-box'>
+                    {/*<img src={MAIN_COIN_IMAGE?.img.normal.src} alt='coin'/>*/}
+                    <img src={COIN_IMAGE?.img.src} alt='coin'/>
+                    <div>
+                        <p className='fren-bonus-title'>Invite Fren</p>
+                        <div className='fren-bonus-amount'>
+                            <img src={COIN_IMAGE?.img.src} alt='coin'/>
+                            <span>2,500</span>
+                            <span>for you and fren</span>
+                        </div>
+                    </div>
+                </div>
+                <div className='fren-box'>
+                    <img src={premium} alt='coin'/>
+                    <div>
+                        <p className='fren-bonus-title'>Fren with <span onClick={() =>{
+                            WebApp.openTelegramLink(`https://t.me/PremiumBot`);
+                        }}>Telegram Premium</span></p>
+                        <div className='fren-bonus-amount'>
+                            <img src={COIN_IMAGE?.img.src} alt='coin'/>
+                            <span>50,000</span>
+                            <span>for you and fren</span>
+                        </div>
+                    </div>
+                </div>
             </div>
             <p className='fren-list-title'>Frens List</p>
             <div id='fren-list' className='fren-list'>
@@ -56,8 +88,9 @@ const Fren = () => {
                     fren.list.length > 0 ?
                         fren.list.map((fren: frenData) => {
                             return (
-                                <Friend key={fren.iuser.id} fName={fren.iuser?.fName} lName={fren.iuser?.lName}
-                                        username={fren.iuser?.username ?? null} balance={fren.iuser?.balance ?? 0}
+                                <Friend key={fren.iuser.id} id={fren.iuser.tg_id} fName={fren.iuser?.fName}
+                                        lName={fren.iuser?.lName}
+                                        username={fren.iuser?.username ?? null} balance={fren.iuser?.balance ?? '0'}
                                         earned={fren.earned} is_premium={fren.is_premium}/>
                             )
                         }) : (<div className='no-fren-con'>

@@ -15,7 +15,7 @@ export const randomRange = (min: number, max: number) => { // min and max includ
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-export const numify = (x: number) => {
+export const numify = (x: bigint | number) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 

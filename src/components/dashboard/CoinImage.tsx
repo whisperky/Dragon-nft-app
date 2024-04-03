@@ -36,6 +36,7 @@ const CoinImage = () => {
                 })
                 dispatch(resetTurboTaps())
                 dispatch(turboModeOff())
+                clearTimeout(turbo.timeout);
             }
         } else {
             clearTimeout(score.tapTimeout);

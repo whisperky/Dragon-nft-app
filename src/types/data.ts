@@ -1,3 +1,5 @@
+import {LeaguePresets} from "./types.ts";
+
 export type adminData = {
     id: string;
     name: string | null;
@@ -12,7 +14,7 @@ export type UserData = {
     fName: string | null;
     lName: string | null;
     username: string | null;
-    balance: number;
+    balance: string;
     squad_id: string | null;
     league_id: string | null;
     tap_lvl: number;
@@ -142,7 +144,7 @@ export type UserWebhookData = {
     fName: string;
     lName: string;
     username: string;
-    balance: number;
+    balance: string;
     squad_id: string;
     league_id: string;
     recharge_lvl: number;
@@ -158,6 +160,8 @@ export type UserWebhookData = {
     botEarn: number;
     turbo?: TurboData[]
     skin: SkinImageTypes;
+    league: LeagueData;
+    game: GameData;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -188,7 +192,7 @@ export type purchaseReturnData = {
     user: {
         id: string;
         tg_id: string;
-        balance: number;
+        balance: string;
         energy_lvl: number;
         recharge_lvl: number;
         tap_lvl: number;
@@ -211,9 +215,35 @@ export type TurboData = {
     token: string;
     duration: number;
 }
+export type LeagueData = {
+    id: string,
+    name: string,
+    score: string,
+    type: 'miner' | 'squad',
+    description: string,
+    preset: LeaguePresets,
+};
+export type GameData = {
+    id: number;
+    name: string;
+    totalPlayers: string;
+    totalEarned: string;
+    totalSpent: string;
+    dailyUser: string;
+    onlineUsers: string;
+}
 // universal
 
 export type BoosterImageTypes = 'RECHARGING_SPEED' | 'MULTI_TAP' | 'AUTO_TAP_BOT' | 'ENERGY_LIMIT';
 export type DailyBoosterImageTypes = 'ENERGY' | 'TURBO';
 export type SkinImageTypes = 'BASIC' | 'BITCOIN' | 'VOTE_PEDRO' | 'JADE_COIN';
 export type ImageTypes = BoosterImageTypes | DailyBoosterImageTypes | SkinImageTypes | string;
+export type LeagueImageTypes =
+    'BRONZE_LEAGUE'
+    | 'SILVER_LEAGUE'
+    | 'GOLD_LEAGUE'
+    | 'PLATINUM_LEAGUE'
+    | 'EMERALD_LEAGUE'
+    | 'RUBY_LEAGUE'
+    | 'DIAMOND_LEAGUE'
+    | 'LOONG_LEAGUE';

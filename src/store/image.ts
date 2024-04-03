@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {ImageSliceType} from "../types/store.ts";
-import {SkinImageTypes} from "../types/data.ts";
+import {ImageSliceType, MyLeagueImageTypes} from "../types/store.ts";
+import {LeagueImageTypes, SkinImageTypes} from "../types/data.ts";
 
 const imageSlice = createSlice({
     name: 'image',
@@ -11,6 +11,8 @@ const imageSlice = createSlice({
         dailyBooster: [],
         skin: [],
         others: [],
+        league: [],
+        coiners: [],
 
         isCoreDone: false,
         isActiveSkinsDone: false,
@@ -18,6 +20,8 @@ const imageSlice = createSlice({
         isDailyBoosterDone: false,
         isSkinDone: false,
         isOthersDone: false,
+        isLeagueDone: false,
+        isCoinersDone: false,
     } as ImageSliceType,
     reducers: {
         addCoreImages: (state, action) => {
@@ -61,6 +65,12 @@ const imageSlice = createSlice({
         addOthersImages: (state, action) => {
             state.others.push(action.payload);
         },
+        addLeagueImages: (state, action: {payload: MyLeagueImageTypes}) => {
+            state.league.push(action.payload as any);
+        },
+        addCoinersImages: (state, action) => {
+            state.coiners.push(action.payload);
+        },
 
         setCoreDone: (state, action) => {
             state.isCoreDone = action.payload;
@@ -80,6 +90,12 @@ const imageSlice = createSlice({
         setOthersDone: (state, action) => {
             state.isOthersDone = action.payload;
         },
+        setLeagueDone: (state, action) => {
+            state.isLeagueDone = action.payload;
+        },
+        setCoinersDone: (state, action) => {
+            state.isCoinersDone = action.payload;
+        },
     }
 });
 
@@ -91,6 +107,8 @@ export const {
     addDailyBoosterImages,
     addSkinImages,
     addOthersImages,
+    addLeagueImages,
+    addCoinersImages,
 
     setCoreDone,
     setActiveSkinsDone,
@@ -98,6 +116,8 @@ export const {
     setDailyBoosterDone,
     setSkinDone,
     setOthersDone,
+    setLeagueDone,
+    setCoinersDone,
 } = imageSlice.actions;
 
 export default imageSlice.reducer;

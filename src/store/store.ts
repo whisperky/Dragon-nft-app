@@ -9,6 +9,7 @@ import purchase from './purchase.ts';
 import fren from './fren.ts';
 import image from "./image.ts";
 import turbo from "./turbo.ts";
+import league from "./league.ts";
 
 export const store = configureStore({
     reducer: {
@@ -22,6 +23,7 @@ export const store = configureStore({
         fren: fren,
         image: image,
         turbo: turbo,
+        league: league,
     },
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware({

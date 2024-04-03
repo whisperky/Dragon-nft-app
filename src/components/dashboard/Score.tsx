@@ -5,12 +5,12 @@ import {AnimatedCounter} from "react-animated-counter";
 const Score = () => {
     const score = useSelector((state: any) => state.score.value);
     return (
-        <div className="flex justify-around items-center">
+        <div className="flex justify-around items-center animate__animated animate__pulse">
             <div className='score-holder flex justify-between items-center'>
                 <img className='mr-2' src={logo} alt='DragonCoin'/>
                 <div className='font-extrabold'>
                     <AnimatedCounter
-                        value={score}
+                        value={parseInt(score)}
                         color="white"
                         fontSize="40px"
                         incrementColor='white'

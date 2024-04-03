@@ -15,6 +15,7 @@ const turboSlice = createSlice({
         availableTurbos: [],
         turboMode: false,
         mineTurbo: false,
+        timeout: null,
     } as TurboSliceType,
     reducers: {
         useTurbo: (state, action) => {
@@ -65,6 +66,7 @@ const turboSlice = createSlice({
         turboModeOff: (state) => {
             state.turboMode = false;
             state.turbo = null;
+            state.timeout = null;
         },
         incrementTurboTaps: (state) => {
             state.taps += 1;
@@ -77,6 +79,9 @@ const turboSlice = createSlice({
         },
         deactivateMineTurbo: (state) => {
             state.mineTurbo = false;
+        },
+        setTurboTimeout: (state, action) => {
+            state.timeout = action.payload;
         }
     }
 })
@@ -92,6 +97,7 @@ export const {
     incrementTurboTaps,
     resetTurboTaps,
     activateMineTurbo,
-    deactivateMineTurbo
+    deactivateMineTurbo,
+    setTurboTimeout
 } = turboSlice.actions
 export default turboSlice.reducer;

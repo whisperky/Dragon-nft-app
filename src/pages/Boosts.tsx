@@ -5,12 +5,18 @@ import BoosterList from "../components/boosts/BoosterList.tsx";
 import WebApp from "@twa-dev/sdk";
 import {useNavigate} from "react-router-dom";
 import SkinList from "../components/boosts/SkinList.tsx";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import BoostSkeleton from "../skeleton/BoostSkeleton.tsx";
+import React from "react";
+import {hideBottomSheet} from "../store/game.ts";
 
 const Boosts = () => {
     const navigate = useNavigate();
-    WebApp.BackButton.onClick(() => navigate(-1))
+    const dispatch = useDispatch();
+    WebApp.BackButton.onClick(() => {
+        dispatch(hideBottomSheet())
+        navigate(-1)
+    })
     WebApp.BackButton.show();
 
     const user = useSelector((state: any) => state.user);
@@ -18,15 +24,18 @@ const Boosts = () => {
     if (boost.haveData === false) user.websocket.emit('getBoostData');
     return boost.haveData ? (
         <div className='boosts'>
+            <div id='stars'></div>
+            <div id='stars2'></div>
+            <div id='stars3'></div>
             <div className='add-pad flex flex-col items-center'>
-                <Score />
+                <Score/>
                 <p className='text-muted py-2'>Your balance</p>
             </div>
-            <DailyBoosters />
-            <BoosterList />
-            <SkinList />
+            <DailyBoosters/>
+            <BoosterList/>
+            <SkinList/>
         </div>
-    ) : (<BoostSkeleton />)
+    ) : (<BoostSkeleton/>)
 };
 
 

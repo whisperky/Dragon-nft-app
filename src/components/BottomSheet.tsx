@@ -94,7 +94,7 @@ const SheetComp = () => {
             toast.loading(`Buying ${item.name}`, {
                 id: purchase.toast,
             });
-            if (itemPrice > score.value) {
+            if (BigInt(itemPrice) > BigInt(score.value)) {
                 toast.error('You do not have enough coins', {
                     id: purchase.toast,
                 });
@@ -143,8 +143,7 @@ const SheetComp = () => {
     // In real world usage this would be a separate React component
     const customHeader = (
         <div>
-            <button className='bottom-sheet-close-btn' onClick={() => dispatch(hideBottomSheet())}><img src={close}
-                                                                                                        alt='X'/>
+            <button className='bottom-sheet-close-btn' onClick={() => dispatch(hideBottomSheet())}><img src={close} alt='X'/>
             </button>
         </div>
     );

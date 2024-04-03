@@ -2,12 +2,13 @@ import {
     boosterData,
     BoosterImageTypes,
     dailyBoosterData,
-    DailyBoosterImageTypes, ImageTypes,
+    DailyBoosterImageTypes, ImageTypes, LeagueData, LeagueImageTypes,
     skinData,
     SkinImageTypes, TurboData,
     UserData
 } from "./data.ts";
 import React, {ReactElement} from "react";
+import {LeagueNameType, LeaguePresets} from "./types.ts";
 
 export type GameSliceType = {
     item: dailyBoosterData & skinData & boosterData | null;
@@ -15,10 +16,15 @@ export type GameSliceType = {
     bottomSheet: boolean;
     botBottomSheet: boolean;
     botEarn: number;
+    totalEarned: string;
+    totalSpent: string;
+    totalPlayers: string;
+    dailyUser: string;
+    onlineUsers: string;
 }
 export type ScoreSliceType = {
     temp_value: number;
-    value: number;
+    value: string;
     tap_lvl: number;
     energy: number;
     energy_lvl: number;
@@ -83,6 +89,7 @@ export type TurboSliceType = {
     style: React.CSSProperties;
     availableTurbos: TurboData[];
     mineTurbo: boolean;
+    timeout: any;
 }
 export type MyImageTypes = {
     name: ImageTypes;
@@ -95,6 +102,14 @@ export type MySkinImageTypes = {
         turbo: HTMLImageElement;
     }
 }
+export type MyLeagueImageTypes = {
+    name: LeagueImageTypes;
+    img: {
+        main: HTMLImageElement;
+        bg: HTMLImageElement;
+        small: HTMLImageElement;
+    }
+}
 export type ImageSliceType = {
     core: MyImageTypes[];
     activeSkins: MySkinImageTypes;
@@ -102,6 +117,8 @@ export type ImageSliceType = {
     dailyBooster: MyImageTypes[];
     skin: MySkinImageTypes[];
     others: MyImageTypes[];
+    league: MyLeagueImageTypes[];
+    coiners: MyImageTypes[];
 
     isCoreDone: boolean;
     isActiveSkinsDone: boolean;
@@ -109,4 +126,17 @@ export type ImageSliceType = {
     isDailyBoosterDone: boolean;
     isSkinDone: boolean;
     isOthersDone: boolean;
+    isLeagueDone: boolean;
+    isCoinersDone: boolean;
+}
+export type LeagueSliceType = {
+    userLeague: LeagueData;
+    league: LeagueNameType;
+    type: 'miner' | 'squad';
+    userTop: number,
+    no: number;
+    time: 'day' | 'week';
+    leagueData: LeagueData;
+    topUsers: any[];
+    leagueList: any[];
 }

@@ -40,7 +40,7 @@ const Energy = () => {
         }
     }, [score.coolDown])
     return (
-        <div className='flex items-center justify-between' style={{gap: '10px'}}>
+        <div className='flex items-center justify-between animate__animated animate__fadeIn' style={{gap: '10px'}}>
             <div className="w-4/5">
                 <div className='energy-bar'>
                 <span className='energy-bar-slider' style={{width: percentage + '%'}}>

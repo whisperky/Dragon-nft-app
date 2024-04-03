@@ -46,7 +46,7 @@ const BoosterList = () => {
                                 image: item.image,
                                 coin: true,
                                 trailing: trailing, //  "opener" | "enabled" | "disabled" | "completed"
-                                haveEnough: score.value >= itemPrice,
+                                haveEnough: BigInt(score.value) >= BigInt(itemPrice),
                             };
                         })
                         .sort((a, b) => (a.isMax && !b.isMax ? 1 : b.isMax && !a.isMax ? -1 : 0))

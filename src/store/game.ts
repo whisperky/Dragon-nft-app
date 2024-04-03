@@ -9,6 +9,11 @@ const gameSlice = createSlice({
         bottomSheet: false,
         botBottomSheet: false,
         botEarn: 0,
+        totalEarned: '0',
+        totalSpent: '0',
+        totalPlayers: '0',
+        dailyUser: '0',
+        onlineUsers: '0'
     } as GameSliceType,
     reducers: {
         showBottomSheet: (state, action) => {
@@ -27,9 +32,16 @@ const gameSlice = createSlice({
         },
         hideBotBottomSheet: (state) => {
             state.botBottomSheet = false;
+        },
+        setTotals: (state, action) => {
+            state.totalEarned = action.payload.totalEarned;
+            state.totalSpent = action.payload.totalSpent;
+            state.totalPlayers = action.payload.totalPlayers;
+            state.dailyUser = action.payload.dailyUser;
+            state.onlineUsers = action.payload.onlineUsers;
         }
     }
 })
 
-export const { showBottomSheet, hideBottomSheet, setAutoTapEarn, hideBotBottomSheet } = gameSlice.actions
+export const { showBottomSheet, hideBottomSheet, setAutoTapEarn, hideBotBottomSheet, setTotals } = gameSlice.actions
 export default gameSlice.reducer

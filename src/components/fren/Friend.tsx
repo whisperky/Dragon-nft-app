@@ -5,12 +5,14 @@ import openerImg from "../../../public/icon/defaults/open-arrow.svg";
 import {numify, numShort} from "../../helpers/score.helper.ts";
 import WebApp from "@twa-dev/sdk";
 import {getFullName} from "../../helpers/format.helper.ts";
+import {getColorWithId} from "../../helpers/helper.ts";
 
-const Friend = ({fName,lName,username, is_premium, balance, earned}: {
+const Friend = ({id, fName,lName,username, is_premium, balance, earned}: {
+    id: string,
     fName: string,
     lName: string,
     is_premium: boolean,
-    balance: number,
+    balance: string,
     earned: number,
     username: string | null
 }) => {
@@ -20,13 +22,13 @@ const Friend = ({fName,lName,username, is_premium, balance, earned}: {
     return (
         <div className='friend-container' onClick={() => username != null ? WebApp.openTelegramLink(`https://t.me/${username}`) : {}}>
             <div className='flex items-center'>
-                <div className='friend-image'>{shortName}</div>
+                <div className='friend-image' style={{backgroundColor: getColorWithId(id)}}>{shortName}</div>
                 <div className='friend-info'>
-                    <div className='friend-name'>{name} {is_premium ? <img src={premium} alt='premium'/> : <></>}</div>
+                    <div className='friend-name'><span>{name.length > 25 ? name.slice(0,8) + " ..." : name}</span> {is_premium ? <img src={premium} alt='premium'/> : <></>}</div>
                     <div className='friend-subtitle'>
                         <div className='friend-league'><img src={bronze} alt='bronze'/> <span>Bronze</span></div>
                         <span>•</span>
-                        <div className='friend-coin'><img src={coin} alt='coin'/> <span>{numify(balance)}</span></div>
+                        <div className='friend-coin'><img src={coin} alt='coin'/> <span>{BigInt(balance).toLocaleString()}</span></div>
                     </div>
                 </div>
             </div>

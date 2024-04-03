@@ -9,7 +9,7 @@ import {useEffect} from "react";
 import DragonHead from "../components/dashboard/DragonHead.tsx";
 import {useDispatch, useSelector} from "react-redux";
 import {ScoreSliceType, TurboSliceType, UserSliceType} from "../types/store.ts";
-import {activateMineTurbo, deactivateMineTurbo, resetTurboTaps, turboModeOff} from "../store/turbo.ts";
+import {activateMineTurbo, deactivateMineTurbo, resetTurboTaps, setTurboTimeout, turboModeOff} from "../store/turbo.ts";
 import {tapValue} from "../helpers/score.helper.ts";
 import {resetTempValue} from "../store/score.ts";
 
@@ -35,9 +35,9 @@ const TurboDashboard = () => {
         };
     }, []);
     useEffect(() => {
-        setTimeout(async () => {
+        dispatch(setTurboTimeout(setTimeout(() => {
             dispatch(activateMineTurbo())
-        }, turbo.turbo.duration * 1000);
+        }, turbo.turbo.duration * 1000)));
     }, []);
 
     useEffect(() => {

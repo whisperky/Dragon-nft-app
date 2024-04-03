@@ -139,9 +139,11 @@
     padding: 1rem 3rem;
     height: 80%;
     width: 50%;
+    font-size: 14px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
+    gap: 8px;
 }
 
 .col-divider {
@@ -156,11 +158,11 @@
     width: 50%;
     display: flex;
     justify-content: center;
-    align-items: start;
+    align-items: center;
 }
 
 .db-squad > div:first-child {
-    font-size: 15px;
+    font-size: 14px;
     font-family: 'Arial', serif;
     font-weight: 500;
     margin-right: .5rem;
@@ -171,11 +173,7 @@
     position: relative;
     font-size: 20px;
     font-weight: 600;
-    height: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+    height: 2.4rem;
 }
 
 .energy-value {
@@ -322,7 +320,8 @@
     /*background: linear-gradient(180deg, rgba(252, 32, 32, 0) 0%, #FC2020 100%) no-repeat;*/
     min-height: 100vh;
     padding: 2em 1em;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     max-height: 100% !important;;
 }
 .daily-boosters {

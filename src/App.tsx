@@ -11,6 +11,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import {useSelector} from "react-redux";
 import {TurboSliceType} from "./types/store.ts";
 import TurboDashboard from "./pages/TurboDashboard.tsx";
+import CoinStats from "./pages/CoinStats.tsx";
 
 function App() {
     const turbo: TurboSliceType = useSelector((state: any) => state.turbo);
@@ -36,6 +37,10 @@ function App() {
                     {
                         path: 'fren',
                         element: <Fren/>
+                    },
+                    {
+                        path: 'stats',
+                        element: <CoinStats />
                     }
                 ]
             }

@@ -8,7 +8,7 @@ const scoreSlice = createSlice({
     name: 'score',
     initialState: {
         temp_value: 0,
-        value: 0,
+        value: '0',
         tap_lvl: 0,
         energy: 1000,
         energy_lvl: 0,
@@ -25,7 +25,7 @@ const scoreSlice = createSlice({
             state.energy_lvl = action.payload.energy_lvl;
             state.recharge_lvl = action.payload.recharge_lvl;
             state.bot_lvl = action.payload.bot_lvl;
-            state.value = action.payload.value;
+            state.value = action.payload.value.toString();
             state.last_tap_time = action.payload.last_tap_time == null ? Math.floor(Date.now() / 1000) : action.payload.last_tap_time;
             state.energy = action.payload.last_tap_time == null ? energyValue(state.energy_lvl) : currentEnergy(state.last_tap_time, action.payload.last_energy_left, state.energy_lvl, state.recharge_lvl);
         },
@@ -33,7 +33,7 @@ const scoreSlice = createSlice({
             if ((state.energy - tapValue(state.tap_lvl)) <= 0) {
                 console.log('Down bad')
                 state.coolDown = true;
-                state.value += state.energy;
+                state.value = (BigInt(state.value) + BigInt(state.energy)).toString();
                 state.temp_value += state.energy;
                 state.energy = 0;
                 state.last_tap_time = Math.floor(Date.now() / 1000);
@@ -46,7 +46,7 @@ const scoreSlice = createSlice({
                     state.temp_value = 0;
                 }
             } else {
-                state.value += tapValue(state.tap_lvl);
+                state.value = (BigInt(state.value) + BigInt(tapValue(state.tap_lvl))).toString();
                 state.temp_value += tapValue(state.tap_lvl);
                 state.energy -= tapValue(state.tap_lvl);
                 state.last_tap_time = Math.floor(Date.now() / 1000);
@@ -54,7 +54,6 @@ const scoreSlice = createSlice({
                     action.payload.emit('mine', {
                         value: state.temp_value,
                         energy: state.energy,
-                        time: state.last_tap_time,
                     });
                     state.temp_value = 0;
                 }
@@ -66,7 +65,6 @@ const scoreSlice = createSlice({
                 action.payload.emit('mine', {
                     value: state.temp_value,
                     energy: state.energy,
-                    time: state.last_tap_time,
                 });
                 state.temp_value = 0;
             }
@@ -90,7 +88,7 @@ const scoreSlice = createSlice({
             state.temp_value += action.payload;
         },
         addToValue: (state, action) => {
-            state.value += action.payload;
+            state.value += action.payload.toString();
         },
         resetTempValue: (state) => {
             state.temp_value = 0;

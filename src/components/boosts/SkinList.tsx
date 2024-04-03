@@ -36,7 +36,7 @@ const SkinList = () => {
                                 const uSkin = skins.userSkins.find((x) => x.skin_id == skin.id);
                                 const ownSkin = uSkin != undefined;
                                 const isEnabled = ownSkin ? uSkin.status == true : false;
-                                return <BoostItem haveEnough={score.value >= skin.price} item={skin} key={skin.id} title={skin.name} subtitle={ownSkin ? isEnabled ? '' : 'You own it' : numify(skin.price)} image={skin.image} coin={!ownSkin} subtitleColor={ownSkin ? 'grey' : "gold"}  trailing={ownSkin ? isEnabled ? 'enabled' :'disabled' : 'opener'} />
+                                return <BoostItem haveEnough={BigInt(score.value) >= BigInt(skin.price)} item={skin} key={skin.id} title={skin.name} subtitle={ownSkin ? isEnabled ? '' : 'You own it' : numify(skin.price)} image={skin.image} coin={!ownSkin} subtitleColor={ownSkin ? 'grey' : "gold"}  trailing={ownSkin ? isEnabled ? 'enabled' :'disabled' : 'opener'} />
                             })
                         }
                         {/*<BoostItem title='Basic' image={defaualtCoin} trailing='enabled'/>*/}
