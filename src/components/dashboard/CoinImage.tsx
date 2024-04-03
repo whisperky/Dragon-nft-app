@@ -2,7 +2,7 @@ import WebApp from "@twa-dev/sdk";
 import {useDispatch, useSelector} from "react-redux";
 import {
     addToTempValue,
-    addToValue,
+    addToValue, decreaseValue,
     dump_increment,
     increment,
     resetTempValue,
@@ -26,8 +26,6 @@ const CoinImage = () => {
     const dispatch = useDispatch();
     const TapTap = () => {
         if (turbo.turboMode) {
-            const val = tapValue(score.tap_lvl) * turbo.turbo.multiply;
-            dispatch(addToValue(val));
             dispatch(incrementTurboTaps());
             if (turbo.turbo.maxTaps <= turbo.taps && turbo.turboMode) {
                 user.websocket.emit('mineTurbo', {
@@ -37,6 +35,9 @@ const CoinImage = () => {
                 dispatch(resetTurboTaps())
                 dispatch(turboModeOff())
                 clearTimeout(turbo.timeout);
+            } else {
+                const val = tapValue(score.tap_lvl) * turbo.turbo.multiply;
+                dispatch(addToValue(val));
             }
         } else {
             clearTimeout(score.tapTimeout);

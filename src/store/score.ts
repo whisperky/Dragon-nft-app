@@ -90,6 +90,9 @@ const scoreSlice = createSlice({
         addToValue: (state, action) => {
             state.value = (BigInt(state.value) + BigInt(action.payload)).toString();
         },
+        decreaseValue: (state, action) => {
+            state.value = (BigInt(state.value) - BigInt(action.payload)).toString();
+        },
         resetTempValue: (state) => {
             state.temp_value = 0;
         }
@@ -106,6 +109,7 @@ export const {
     increaseEnergy,
     addToTempValue,
     addToValue,
+    decreaseValue,
     resetTempValue
 } = scoreSlice.actions
 export default scoreSlice.reducer
