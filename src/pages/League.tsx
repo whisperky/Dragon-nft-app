@@ -3,12 +3,14 @@ import '../league.css';
 import {useNavigate} from "react-router-dom";
 import WebApp from "@twa-dev/sdk";
 import {useEffect} from "react";
-import {LeagueSliceType, UserSliceType} from "../types/store.ts";
+import {ImageSliceType, LeagueSliceType, UserSliceType} from "../types/store.ts";
 import {useDispatch, useSelector} from "react-redux";
 import {loadLeague} from "../store/league.ts";
+import LeagueSkeleton from "../skeleton/LeagueSkeleton.tsx";
 
 const League = () => {
     const user: UserSliceType = useSelector((state: any) => state.user);
+    const image: ImageSliceType = useSelector((state: any) => state.image);
     const league: LeagueSliceType = useSelector((state: any) => state.league);
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -21,11 +23,11 @@ const League = () => {
             type: 'miner',
         })
     }, [0]);
-    return (
+    return image.isLeagueDone ? (
         <div>
             <LeagueHeader />
         </div>
-    );
+    ) : <LeagueSkeleton />;
 };
 
 export default League;

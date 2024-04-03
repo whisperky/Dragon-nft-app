@@ -90,6 +90,17 @@ const leagueSlice = createSlice({
         },
         setUserTop: (state, action) => {
             state.userTop = action.payload;
+            if (state.leagueTempData.find((x) => x.no === state.no) === undefined) {
+                state.leagueTempData.push({
+                    no: state.no,
+                    type: state.type,
+                    leagueData: state.leagueData,
+                    topUsers: state.topUsers,
+                    userTop: state.userTop,
+                });
+            } else {
+                state.leagueTempData.find((x) => x.no === state.no).userTop = action.payload;
+            }
         },
         useTemp: (state, action) => {
             const temp = state.leagueTempData.find((x) => x.no === action.payload);

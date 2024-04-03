@@ -1,12 +1,13 @@
 import Skeleton, {SkeletonTheme} from 'react-loading-skeleton';
 import {getColorWithId} from "../helpers/helper.ts";
 import React from "react";
+import BoostSkeleton from "./BoostSkeleton.tsx";
 
-const LeagueList = () => {
+const LeagueListSkeleton = () => {
     const n = 8;
     return (
         <SkeletonTheme baseColor="#202020" highlightColor="#444">
-            {[...Array(n)].map((e, i) => <div className={'du-container'}>
+            {[...Array(n)].map((e, i) => <div key={i} className={'du-container'}>
                 <div className='flex items-center'>
                     {/*<img className='du-user-image' src={userOne} alt='user one'/>*/}
                     <Skeleton circle={true} width={50} height={50}/>
@@ -23,4 +24,4 @@ const LeagueList = () => {
 );
 };
 
-export default LeagueList
+export default LeagueListSkeleton;

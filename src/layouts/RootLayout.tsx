@@ -3,7 +3,7 @@ import {useEffect} from "react";
 import WebApp from "@twa-dev/sdk";
 import {useDispatch, useSelector} from "react-redux";
 import {requestUserData, setUser, setUserPurchaseReturn} from "../store/user.ts";
-import {loadCoin, loadUser} from "../store/loading.ts";
+import {loadUser} from "../store/loading.ts";
 import {setScore} from "../store/score.ts";
 import BottomSheet from "../components/BottomSheet.tsx";
 import {boostWebHookData, frenWebHookData, purchaseReturnData, UserWebhookData} from "../types/data.ts";
@@ -23,24 +23,21 @@ import {
 import {
     ImageSliceType,
     LeagueSliceType,
-    MyImageTypes,
     SkinSliceType,
     TurboSliceType,
     UserSliceType
 } from "../types/store.ts";
-import {alterActiveSkinsImages, setActiveSkinsDone, setCoreDone} from "../store/image.ts";
+import {alterActiveSkinsImages} from "../store/image.ts";
 import BotBottomSheet from "../components/BotBottomSheet.tsx";
 import {setAvailableTurbos} from "../store/turbo.ts";
-import {setLeague, setUserLeague} from "../store/league.ts";
+import {setLeague, setUserLeague, setUserTop} from "../store/league.ts";
 
 const RootLayout = () => {
     const user: UserSliceType = useSelector((state: any) => state.user);
     let skin: SkinSliceType = useSelector((state: any) => state.skin);
-    const load = useSelector((state: any) => state.loading);
     const purchase = useSelector((state: any) => state.purchase);
     const turbo: TurboSliceType = useSelector((state: any) => state.turbo);
     const image: ImageSliceType = useSelector((state: any) => state.image);
-    const league: LeagueSliceType = useSelector((state: any) => state.league);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -134,16 +131,24 @@ const RootLayout = () => {
                     id: 'claiming',
                 });
             })
-            user.websocket.on('leagueData', (ldata: any) => {
-                console.log('League data', ldata.data)
-                dispatch(setLeague(ldata.data));
-            })
             dispatch(requestUserData());
         }
         WebApp.expand();
         WebApp.setBackgroundColor('#000000');
         WebApp.setHeaderColor('#000000');
     }, [1]);
+    useEffect(() => {
+        user.websocket.on('leagueData', (ldata: any) => {
+            console.log('League data', ldata.data)
+            dispatch(setLeague(ldata.data));
+            ldata.data?.users?.forEach((x: any, i: number) => {
+                console.log('User', x.id, user)
+                if (x.id == user.data?.id) {
+                    dispatch(setUserTop(i + 1));
+                }
+            })
+        })
+    }, [user.data]);
     useEffect(() => {
         console.log("Skin too", skin)
         console.log('Purchase updated');

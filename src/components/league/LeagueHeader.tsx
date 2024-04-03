@@ -7,8 +7,9 @@ import {ImageSliceType, LeagueSliceType, UserSliceType} from "../../types/store.
 import {capitalizeFirstLetter, highLowScore, leagueName} from "../../helpers/helper.ts";
 import {changeLeagueType, changeTime, nextLeague, prevLeague, setUserTop, useTemp} from "../../store/league.ts";
 import React, {useEffect} from "react";
-import LeagueList from "../../skeleton/LeagueList.tsx";
+import LeagueListSkeleton from "../../skeleton/LeagueListSkeleton.tsx";
 import Skeleton, {SkeletonTheme} from "react-loading-skeleton";
+import BoostSkeleton from "../../skeleton/BoostSkeleton.tsx";
 
 const LeagueHeader = () => {
     const user: UserSliceType = useSelector((state: any) => state.user);
@@ -97,14 +98,11 @@ const LeagueHeader = () => {
                 <div className='topUserList animate__animated animate__fadeIn animate__slow'
                      onAnimationEnd={() => topUsersElement?.classList.remove('animate__animated', 'animate__fadeIn')}>
                     {
-                        league.isLoading ? <LeagueList/> :
+                        league.isLoading ? <LeagueListSkeleton /> :
                             league.type == 'miner' ?
                                 league.topUsers?.length > 0 ?
                                     league.topUsers?.map((u: any, i: number) => {
                                         i++;
-                                        if (user.data.id == u.id) {
-                                            dispatch(setUserTop(i))
-                                        }
                                         return <DragonUser id={u.tg_id} key={i} fName={u.fName} lName={u.lName} rank={i}
                                                            coin={u?.balance}/>;
                                     }) : (
