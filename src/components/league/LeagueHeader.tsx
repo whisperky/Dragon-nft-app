@@ -5,33 +5,39 @@ import DragonUser from "../DragonUser.tsx";
 import {useDispatch, useSelector} from "react-redux";
 import {ImageSliceType, LeagueSliceType, UserSliceType} from "../../types/store.ts";
 import {capitalizeFirstLetter, highLowScore, leagueName} from "../../helpers/helper.ts";
-import {changeLeagueType, changeTime, nextLeague, prevLeague, setUserTop} from "../../store/league.ts";
-import {useEffect} from "react";
+import {changeLeagueType, changeTime, nextLeague, prevLeague, setUserTop, useTemp} from "../../store/league.ts";
+import React, {useEffect} from "react";
+import LeagueList from "../../skeleton/LeagueList.tsx";
+import Skeleton, {SkeletonTheme} from "react-loading-skeleton";
 
 const LeagueHeader = () => {
     const user: UserSliceType = useSelector((state: any) => state.user);
     const league: LeagueSliceType = useSelector((state: any) => state.league);
     const image: ImageSliceType = useSelector((state: any) => state.image);
     const dispatch = useDispatch();
-    const leagueLogo = image.league.find((x) => leagueName(x.name) == league.league ?? '')?.img.main.src;
-    const leagueBg = image.league.find((x) => leagueName(x.name) == league.league ?? '')?.img.bg.src;
+    const leagueLogo = image.league.find((x) => leagueName(x.name) == league.league)?.img.main.src;
+    const leagueBg = image.league.find((x) => leagueName(x.name) == league.league)?.img.bg.src;
     const element = document.querySelector('.lh-rank-img');
     const leagueTextElement = document.querySelector('.lh-text-value');
     const leagueScoreElement = document.querySelector('.lh-score-value');
     const topUsersElement = document.querySelector('.topUserList');
     let percentage = ((BigInt(user.data?.balance ?? BigInt(0)) * BigInt(100)) / highLowScore(league.no).high);
     percentage = percentage > BigInt(100) ? BigInt(100) : percentage;
-    percentage = highLowScore(league.no).low < BigInt(user.data?.balance) ? percentage : BigInt(0);
+    percentage = highLowScore(league.no).low < BigInt(user.data?.balance ?? 0) ? percentage : BigInt(0);
     console.log(percentage);
 
     useEffect(() => {
-        leagueTextElement?.classList.add('animate__animated', 'animate__fadeInUp');
-        leagueScoreElement?.classList.add('animate__animated', 'animate__headShake');
-        topUsersElement?.classList.add('animate__animated', 'animate__fadeIn');
-        user.websocket.emit('getLeague', {
-            no: league.no,
-            type: league.type,
-        })
+            leagueTextElement?.classList.add('animate__animated', 'animate__fadeInUp');
+            leagueScoreElement?.classList.add('animate__animated', 'animate__headShake');
+            topUsersElement?.classList.add('animate__animated', 'animate__fadeIn');
+            if (league.leagueTempData.find((x) => x.no === league.no) == undefined) {
+                user.websocket.emit('getLeague', {
+                    no: league.no,
+                    type: league.type,
+                })
+            } else {
+                dispatch(useTemp(league.no));
+            }
     }, [league.no]);
     return (
         <div>
@@ -54,8 +60,10 @@ const LeagueHeader = () => {
                         <p className='lh-text-value animate__animated animate__fadeInUp'
                            onAnimationEnd={() => leagueTextElement?.classList.remove('animate__animated', 'animate__fadeInUp')}>{capitalizeFirstLetter(league.league)} League</p>
                         {/*<p>2,862,981 / 10M</p>*/}
-                        <p className='lh-score-value animate__animated animate__headShake animate__slow'
-                           onAnimationEnd={() => leagueScoreElement?.classList.remove('animate__animated', 'animate__headShake')}>From {BigInt(league.leagueData.score).toLocaleString()} Dragoncoin</p>
+                        <p className='flex items-center justify-center lh-score-value animate__animated animate__headShake animate__slow'
+                           onAnimationEnd={() => leagueScoreElement?.classList.remove('animate__animated', 'animate__headShake')}>From { league.isLoading ? <SkeletonTheme  baseColor="#2f2f2f" highlightColor="#444">
+                            <Skeleton className='mx-2' width={30} height={10}/>
+                        </SkeletonTheme> : BigInt(league.leagueData.score).toLocaleString() } Dragoncoin</p>
                     </div>
                 </div>
                 <div className='league-bar mt-5'>
@@ -88,6 +96,7 @@ const LeagueHeader = () => {
                 <div className='topUserList animate__animated animate__fadeIn animate__slow'
                      onAnimationEnd={() => topUsersElement?.classList.remove('animate__animated', 'animate__fadeIn')}>
                     {
+                        league.isLoading ? <LeagueList /> :
                         league.type == 'miner' ?
                             league.topUsers?.length > 0 ?
                                 league.topUsers?.map((u: any, i: number) => {

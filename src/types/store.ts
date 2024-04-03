@@ -139,4 +139,12 @@ export type LeagueSliceType = {
     leagueData: LeagueData;
     topUsers: any[];
     leagueList: any[];
+    leagueTempData: {
+        no: number;
+        type: 'miner' | 'squad';
+        leagueData: LeagueData,
+        topUsers: any[],
+        userTop: number;
+    }[];
+    isLoading: boolean;
 }

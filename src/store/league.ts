@@ -28,6 +28,8 @@ const leagueSlice = createSlice({
         },
         topUsers: [],
         leagueList: [],
+        leagueTempData: [],
+        isLoading: false,
     } as LeagueSliceType,
     reducers: {
         setLeague: (state, action) => {
@@ -37,6 +39,16 @@ const leagueSlice = createSlice({
             state.leagueData = action.payload.league;
             state.topUsers = action.payload.users;
             state.userTop = 0;
+            state.isLoading = false;
+            if (state.leagueTempData.find((x) => x.no === state.no) === undefined) {
+                state.leagueTempData.push({
+                    no: state.no,
+                    type: state.type,
+                    leagueData: action.payload.league,
+                    topUsers: action.payload.users,
+                    userTop: 0,
+                });
+            }
         },
         setUserLeague: (state, action) => {
             state.userLeague = action.payload;
@@ -57,28 +69,39 @@ const leagueSlice = createSlice({
             }
         },
         nextLeague: (state) => {
-            if (state.no < 8) {
+            if (state.no < 8 && !state.isLoading) {
                 state.no = leagueToNumber(state.league) + 1;
                 state.league = numberToLeague(state.no);
                 state.type = 'miner';
                 state.time = 'day';
                 state.userTop = 0;
+                state.isLoading = true;
             }
         },
         prevLeague: (state) => {
-            if (state.no > 1) {
+            if (state.no > 1 && !state.isLoading) {
                 state.no = leagueToNumber(state.league) - 1;
                 state.league = numberToLeague(state.no);
                 state.type = 'miner';
                 state.time = 'day';
                 state.userTop = 0;
+                state.isLoading = true;
             }
         },
         setUserTop: (state, action) => {
             state.userTop = action.payload;
+        },
+        useTemp: (state, action) => {
+            const temp = state.leagueTempData.find((x) => x.no === action.payload);
+            if (temp !== undefined) {
+                state.leagueData = temp.leagueData;
+                state.topUsers = temp.topUsers;
+                state.userTop = temp.userTop;
+                state.isLoading = false;
+            }
         }
     }
 })
 
-export const {setLeague,changeLeagueType, changeTime, nextLeague, prevLeague, setUserTop, setUserLeague, setLeagueNo} = leagueSlice.actions
+export const {setLeague,changeLeagueType, changeTime, nextLeague, prevLeague, setUserTop, setUserLeague, setLeagueNo, useTemp} = leagueSlice.actions
 export default leagueSlice.reducer;
