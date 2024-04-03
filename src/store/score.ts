@@ -88,7 +88,7 @@ const scoreSlice = createSlice({
             state.temp_value += action.payload;
         },
         addToValue: (state, action) => {
-            state.value += action.payload.toString();
+            state.value = (BigInt(state.value) + BigInt(action.payload)).toString();
         },
         resetTempValue: (state) => {
             state.temp_value = 0;
