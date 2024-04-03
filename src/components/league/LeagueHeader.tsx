@@ -27,17 +27,17 @@ const LeagueHeader = () => {
     console.log(percentage);
 
     useEffect(() => {
-            leagueTextElement?.classList.add('animate__animated', 'animate__fadeInUp');
-            leagueScoreElement?.classList.add('animate__animated', 'animate__headShake');
-            topUsersElement?.classList.add('animate__animated', 'animate__fadeIn');
-            if (league.leagueTempData.find((x) => x.no === league.no) == undefined) {
-                user.websocket.emit('getLeague', {
-                    no: league.no,
-                    type: league.type,
-                })
-            } else {
-                dispatch(useTemp(league.no));
-            }
+        leagueTextElement?.classList.add('animate__animated', 'animate__fadeInUp');
+        leagueScoreElement?.classList.add('animate__animated', 'animate__headShake');
+        topUsersElement?.classList.add('animate__animated', 'animate__fadeIn');
+        if (league.leagueTempData.find((x) => x.no === league.no) == undefined) {
+            user.websocket.emit('getLeague', {
+                no: league.no,
+                type: league.type,
+            })
+        } else {
+            dispatch(useTemp(league.no));
+        }
     }, [league.no]);
     return (
         <div>
@@ -61,9 +61,10 @@ const LeagueHeader = () => {
                            onAnimationEnd={() => leagueTextElement?.classList.remove('animate__animated', 'animate__fadeInUp')}>{capitalizeFirstLetter(league.league)} League</p>
                         {/*<p>2,862,981 / 10M</p>*/}
                         <p className='flex items-center justify-center lh-score-value animate__animated animate__headShake animate__slow'
-                           onAnimationEnd={() => leagueScoreElement?.classList.remove('animate__animated', 'animate__headShake')}>From { league.isLoading ? <SkeletonTheme  baseColor="#2f2f2f" highlightColor="#444">
-                            <Skeleton className='mx-2' width={30} height={10}/>
-                        </SkeletonTheme> : BigInt(league.leagueData.score).toLocaleString() } Dragoncoin</p>
+                           onAnimationEnd={() => leagueScoreElement?.classList.remove('animate__animated', 'animate__headShake')}>From {league.isLoading ?
+                            <SkeletonTheme baseColor="#2f2f2f" highlightColor="#444">
+                                <Skeleton className='mx-2' width={30} height={10}/>
+                            </SkeletonTheme> : BigInt(league.leagueData.score).toLocaleString()} Dragoncoin</p>
                     </div>
                 </div>
                 <div className='league-bar mt-5'>
@@ -96,36 +97,50 @@ const LeagueHeader = () => {
                 <div className='topUserList animate__animated animate__fadeIn animate__slow'
                      onAnimationEnd={() => topUsersElement?.classList.remove('animate__animated', 'animate__fadeIn')}>
                     {
-                        league.isLoading ? <LeagueList /> :
-                        league.type == 'miner' ?
-                            league.topUsers?.length > 0 ?
-                                league.topUsers?.map((u: any, i: number) => {
-                                    i++;
-                                    if (user.data.id == u.id) {
-                                        dispatch(setUserTop(i))
-                                    }
-                                    return <DragonUser id={u.tg_id} key={i} fName={u.fName} lName={u.lName} rank={i}
-                                                       coin={u.balance}/>;
-                                }) : <div className='flex flex-col items-center '>
-                                    <span style={{fontSize: '150px', height: '27vh'}}>🫵</span>
+                        league.isLoading ? <LeagueList/> :
+                            league.type == 'miner' ?
+                                league.topUsers?.length > 0 ?
+                                    league.topUsers?.map((u: any, i: number) => {
+                                        i++;
+                                        if (user.data.id == u.id) {
+                                            dispatch(setUserTop(i))
+                                        }
+                                        return <DragonUser id={u.tg_id} key={i} fName={u.fName} lName={u.lName} rank={i}
+                                                           coin={u.balance}/>;
+                                    }) : (
+                                        (BigInt(league.leagueData.score) > BigInt(user.data.balance)) ?
+                                            <div className='flex flex-col items-center '>
+                                                <span style={{fontSize: '150px', height: '27vh'}}>🫵</span>
+                                                <p style={{
+                                                    color: '#ffffff',
+                                                    opacity: '.4',
+                                                    fontSize: '14px',
+                                                    width: '70vw',
+                                                    textAlign: 'center'
+                                                }}>No one has been here before, be the first to reach here.</p>
+                                            </div> :
+                                            <div className='flex flex-col items-center '>
+                                                <span style={{fontSize: '100px', height: '20vh'}}>🐲️</span>
+                                                <p style={{
+                                                    color: '#ffffff',
+                                                    opacity: '.4',
+                                                    fontSize: '14px',
+                                                    width: '70vw',
+                                                    textAlign: 'center',
+                                                    marginTop: '1rem'
+                                                }}> {BigInt(league.leagueData.score).toLocaleString()} /\ {BigInt(user.data.balance).toLocaleString()} No one on these league, I guess everyone learn to mine after all.</p>
+                                            </div>
+                                    ) :
+                                <div className='flex flex-col items-center '>
+                                    <span style={{marginTop: '2rem', fontSize: '100px'}}>🚧</span>
                                     <p style={{
                                         color: '#ffffff',
                                         opacity: '.4',
-                                        fontSize: '14px',
+                                        fontSize: '15px',
                                         width: '70vw',
                                         textAlign: 'center'
-                                    }}>No one has been here before, be the first to reach here.</p>
-                                </div> :
-                            <div className='flex flex-col items-center '>
-                                <span style={{marginTop: '2rem',fontSize: '100px'}}>🚧</span>
-                                <p style={{
-                                    color: '#ffffff',
-                                    opacity: '.4',
-                                    fontSize: '15px',
-                                    width: '70vw',
-                                    textAlign: 'center'
-                                }}>Under construction.</p>
-                            </div>
+                                    }}>Under construction.</p>
+                                </div>
                     }
                 </div>
             </div>
