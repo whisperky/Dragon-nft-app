@@ -11,7 +11,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {ScoreSliceType, TurboSliceType, UserSliceType} from "../types/store.ts";
 import {activateMineTurbo, deactivateMineTurbo, resetTurboTaps, setTurboTimeout, turboModeOff} from "../store/turbo.ts";
 import {tapValue} from "../helpers/score.helper.ts";
-import {resetTempValue} from "../store/score.ts";
+import {resetCoolDown, resetTempValue} from "../store/score.ts";
 
 const TurboDashboard = () => {
     const user: UserSliceType = useSelector((state: any) => state.user);
@@ -29,17 +29,15 @@ const TurboDashboard = () => {
         dispatch(deactivateMineTurbo())
     }
     useEffect(() => {
+        dispatch(resetCoolDown());
+        dispatch(setTurboTimeout(setTimeout(() => {
+            dispatch(activateMineTurbo())
+        }, turbo.turbo.duration * 1000)));
         document.body.classList.add('noMovement');
         return () => {
             document.body.classList.remove('noMovement');
         };
     }, []);
-    useEffect(() => {
-        dispatch(setTurboTimeout(setTimeout(() => {
-            dispatch(activateMineTurbo())
-        }, turbo.turbo.duration * 1000)));
-    }, []);
-
     useEffect(() => {
         if (turbo.mineTurbo) {
             mineTurbo();
