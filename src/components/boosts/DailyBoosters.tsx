@@ -24,8 +24,8 @@ const DailyBoosters = () => {
     };
     return (
         <div className=''>
-            <p className='boost-title'>Free Boosts</p>
-            <div className='daily-boosters glass'>
+            <p className='boost-title animate__animated animate__fadeIn animate__slow'>Free Boosts</p>
+            <div className='daily-boosters glass  animate__animated animate__fadeIn animate__slow'>
                 {
                     dailyBoosts.map((boost) => {
                         const leftB = boost.limit - ((leftDailyBoosts.filter((b: any) => b.id === boost.id)[0]).used);

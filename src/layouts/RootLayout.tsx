@@ -139,10 +139,8 @@ const RootLayout = () => {
     }, [1]);
     useEffect(() => {
         user.websocket.on('leagueData', (ldata: any) => {
-            console.log('League data', ldata.data)
             dispatch(setLeague(ldata.data));
             ldata.data?.users?.forEach((x: any, i: number) => {
-                console.log('User', x.id, user)
                 if (x.id == user.data?.id) {
                     dispatch(setUserTop(i + 1));
                 }

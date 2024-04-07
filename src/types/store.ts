@@ -147,4 +147,5 @@ export type LeagueSliceType = {
         userTop: number;
     }[];
     isLoading: boolean;
+    haveLoadAtLeastOnce: boolean;
 }

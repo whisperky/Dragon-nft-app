@@ -34,12 +34,12 @@ const Fren = () => {
         }, 1000);
     }, []);
     return TOY_IMAGE && fren.haveData ? (
-        <div className='fren-zone-container'>
+        <div className='fren-zone-container '>
             <div id='stars'></div>
             <div id='stars2'></div>
             <div id='stars3'></div>
-            <p className='fren-title'>Fren Zone</p>
-            <div className='fren-info'>
+            <p className='fren-title animate__animated animate__fadeIn animate__slow'>Fren Zone</p>
+            <div className='fren-info animate__animated animate__fadeIn'>
                 <div className='flex items-center'>
                     <div className='fren-earned'>
                         <div>+{numShort(earned)}</div>
@@ -54,8 +54,8 @@ const Fren = () => {
                 </div>
                 {/*<img className='fren-opener-arrow opacity-less mr-1' src={arrow} alt='opener'/>*/}
             </div>
-            <p className='fren-bonues-title'>Invite frens to get bonuses</p>
-            <div className='fren-bonues'>
+            <p className='fren-bonues-title animate__animated animate__fadeIn animate__slow'>Invite frens to get bonuses</p>
+            <div className='fren-bonues animate__animated animate__fadeIn animate__slow'>
                 <div className='fren-box'>
                     {/*<img src={MAIN_COIN_IMAGE?.img.normal.src} alt='coin'/>*/}
                     <img src={COIN_IMAGE?.img.src} alt='coin'/>
@@ -82,8 +82,8 @@ const Fren = () => {
                     </div>
                 </div>
             </div>
-            <p className='fren-list-title'>Frens List</p>
-            <div id='fren-list' className='fren-list'>
+            <p className='fren-list-title animate__animated animate__fadeIn animate__slower'>Frens List</p>
+            <div id='fren-list' className='fren-list  animate__animated animate__fadeIn animate__slower'>
                 {
                     fren.list.length > 0 ?
                         fren.list.map((fren: frenData) => {
@@ -99,7 +99,7 @@ const Fren = () => {
                         </div>)
                 }
             </div>
-            <div className='invite-fren-btn-con'>
+            <div className='invite-fren-btn-con animate__animated animate__fadeIn animate__slower'>
                 <button className='invite-fren-btn' onClick={() => {
                     WebApp.openTelegramLink(`https://t.me/${import.meta.env.VITE_REACT_APP_BOT_USERNAME}?start=fren`);
                     WebApp.close();

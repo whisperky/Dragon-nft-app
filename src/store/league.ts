@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit'
 import {FrenSliceType, LeagueSliceType} from "../types/store.ts";
-import {leagueToNumber, numberToLeague, showToast} from "../helpers/helper.ts";
+import {leagueName, leagueToNumber, numberToLeague, showToast} from "../helpers/helper.ts";
 
 const leagueSlice = createSlice({
     name: 'league',
@@ -30,6 +30,7 @@ const leagueSlice = createSlice({
         leagueList: [],
         leagueTempData: [],
         isLoading: false,
+        haveLoadAtLeastOnce: false,
     } as LeagueSliceType,
     reducers: {
         setLeague: (state, action) => {
@@ -40,6 +41,8 @@ const leagueSlice = createSlice({
             state.topUsers = action.payload.users;
             state.userTop = 0;
             state.isLoading = false;
+            if (state.haveLoadAtLeastOnce == false)
+                state.haveLoadAtLeastOnce = true;
             if (state.leagueTempData.find((x) => x.no === state.no) === undefined) {
                 state.leagueTempData.push({
                     no: state.no,
@@ -61,6 +64,10 @@ const leagueSlice = createSlice({
                 state.type = action.payload;
                 state.time = 'day';
                 state.userTop = 0;
+                const tempData = state.leagueTempData.find((x) => x.type == action.payload && x.no == state.no);
+                if (tempData !== undefined) {
+                    state.userTop = tempData.userTop;
+                }
             }
         },
         changeTime: (state, action) => {
@@ -105,6 +112,8 @@ const leagueSlice = createSlice({
         useTemp: (state, action) => {
             const temp = state.leagueTempData.find((x) => x.no === action.payload);
             if (temp !== undefined) {
+                state.league = numberToLeague(action.payload);
+                state.no = action.payload;
                 state.leagueData = temp.leagueData;
                 state.topUsers = temp.topUsers;
                 state.userTop = temp.userTop;
@@ -113,9 +122,20 @@ const leagueSlice = createSlice({
         },
         loadLeague: (state) => {
             state.isLoading = true;
-        }
+        },
     }
 })
 
-export const {setLeague,changeLeagueType, changeTime, nextLeague, prevLeague, setUserTop, setUserLeague, setLeagueNo, useTemp, loadLeague} = leagueSlice.actions
+export const {
+    setLeague,
+    changeLeagueType,
+    changeTime,
+    nextLeague,
+    prevLeague,
+    setUserTop,
+    setUserLeague,
+    setLeagueNo,
+    useTemp,
+    loadLeague,
+} = leagueSlice.actions
 export default leagueSlice.reducer;

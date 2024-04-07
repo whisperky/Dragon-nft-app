@@ -5,8 +5,9 @@ import WebApp from "@twa-dev/sdk";
 import {useEffect} from "react";
 import {ImageSliceType, LeagueSliceType, UserSliceType} from "../types/store.ts";
 import {useDispatch, useSelector} from "react-redux";
-import {loadLeague} from "../store/league.ts";
+import {loadLeague, useTemp} from "../store/league.ts";
 import LeagueSkeleton from "../skeleton/LeagueSkeleton.tsx";
+import {leagueName, leagueToNumber} from "../helpers/helper.ts";
 
 const League = () => {
     const user: UserSliceType = useSelector((state: any) => state.user);
@@ -17,17 +18,22 @@ const League = () => {
     WebApp.BackButton.onClick(() => navigate(-1))
     WebApp.BackButton.show();
     useEffect(() => {
-        dispatch(loadLeague());
-        user.websocket.emit('getLeague', {
-            no: league.no > 0 ? league.no : 1,
-            type: 'miner',
-        })
+        const no = leagueToNumber(leagueName(league.userLeague.preset))
+        if (league.leagueTempData.find((x) => x.no === no) == undefined) {
+            dispatch(loadLeague());
+            user.websocket.emit('getLeague', {
+                no: no,
+                type: 'miner',
+            })
+        } else {
+            dispatch(useTemp(no));
+        }
     }, [0]);
-    return image.isLeagueDone ? (
+    return image.isLeagueDone && league.haveLoadAtLeastOnce ? (
         <div>
-            <LeagueHeader />
+            <LeagueHeader/>
         </div>
-    ) : <LeagueSkeleton />;
+    ) : <LeagueSkeleton/>;
 };
 
 export default League;

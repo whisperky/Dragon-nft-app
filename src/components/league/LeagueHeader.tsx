@@ -25,7 +25,6 @@ const LeagueHeader = () => {
     let percentage = ((BigInt(user.data?.balance ?? BigInt(0)) * BigInt(100)) / highLowScore(league.no).high);
     percentage = percentage > BigInt(100) ? BigInt(100) : percentage;
     percentage = highLowScore(league.no).low < BigInt(user.data?.balance ?? 0) ? percentage : BigInt(0);
-    console.log(percentage);
 
     useEffect(() => {
         leagueTextElement?.classList.add('animate__animated', 'animate__fadeInUp');
@@ -62,10 +61,11 @@ const LeagueHeader = () => {
                            onAnimationEnd={() => leagueTextElement?.classList.remove('animate__animated', 'animate__fadeInUp')}>{capitalizeFirstLetter(league.league)} League</p>
                         {/*<p>2,862,981 / 10M</p>*/}
                         <p className='flex items-center justify-center lh-score-value animate__animated animate__headShake animate__slow'
-                           onAnimationEnd={() => leagueScoreElement?.classList.remove('animate__animated', 'animate__headShake')}>From {league.isLoading ?
+                           onAnimationEnd={() => leagueScoreElement?.classList.remove('animate__animated', 'animate__headShake')}>
+                            <span className='mr-1'>From</span> {league.isLoading ?
                             <SkeletonTheme baseColor="#2f2f2f" highlightColor="#444">
                                 <Skeleton className='mx-2' width={30} height={10}/>
-                            </SkeletonTheme> : BigInt(league.leagueData.score).toLocaleString()} Dragoncoin</p>
+                            </SkeletonTheme> : BigInt(league.leagueData.score).toLocaleString()} <span className='ml-1'>Dragoncoin</span></p>
                     </div>
                 </div>
                 <div className='league-bar mt-5'>

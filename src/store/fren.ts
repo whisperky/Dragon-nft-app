@@ -8,7 +8,6 @@ const frenSlice = createSlice({
     } as FrenSliceType,
     reducers: {
         setFrens: (state, action) => {
-            console.log(action.payload);
             state.list = action.payload;
             state.haveData = true;
         },

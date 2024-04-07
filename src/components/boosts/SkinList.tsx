@@ -20,7 +20,7 @@ const SkinList = () => {
 
     return (
         <div className=''>
-            <p className='boost-title'>Skins</p>
+            <p className='boost-title animate__animated animate__fadeIn animate__slow'>Skins</p>
             {/*<Flickity*/}
             {/*    className={"skin-container"} // default ''*/}
             {/*    elementType={"div"} // default 'div'*/}
@@ -29,7 +29,7 @@ const SkinList = () => {
             {/*    reloadOnUpdate*/}
             {/*    static*/}
             {/*>*/}
-                <div className={'skin-item'}>
+                <div className={'skin-item animate__animated animate__fadeIn animate__slow'}>
                     <div className='boosters-list glass'>
                         {
                             skins.list.map((skin: skinData) => {

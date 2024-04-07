@@ -12,11 +12,10 @@ const BoosterList = () => {
     // const user: UserData = useSelector((state: any) => state.user.data);
     const score: ScoreSliceType = useSelector((state: any) => state.score);
     const boost: BoostSliceType = useSelector((state: any) => state.boost);
-    console.log(boost.boosts)
     return (
         <div className=''>
-            <p className='boost-title'>Boosters</p>
-            <div className='boosters-list glass'>
+            <p className='boost-title animate__animated animate__fadeIn animate__slow'>Boosters</p>
+            <div className='boosters-list glass animate__animated animate__fadeIn animate__slow'>
                 {
 
                     boost.boosts
