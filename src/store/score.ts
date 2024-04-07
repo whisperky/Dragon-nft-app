@@ -50,7 +50,7 @@ const scoreSlice = createSlice({
                 state.temp_value += tapValue(state.tap_lvl);
                 state.energy -= tapValue(state.tap_lvl);
                 state.last_tap_time = Math.floor(Date.now() / 1000);
-                if (state.temp_value >= 300) {
+                if ((state.temp_value / tapValue(state.tap_lvl)) >= 100) {
                     action.payload.emit('mine', {
                         value: state.temp_value,
                         energy: state.energy,
