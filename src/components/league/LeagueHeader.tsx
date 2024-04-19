@@ -3,16 +3,28 @@ import rightArrow from '../../../public/icon/defaults/right-arrow.svg';
 import DragonCoiners from "./DragonCoiners.tsx";
 import DragonUser from "../DragonUser.tsx";
 import {useDispatch, useSelector} from "react-redux";
-import {ImageSliceType, LeagueSliceType, UserSliceType} from "../../types/store.ts";
+import {ImageSliceType, LeagueSliceType, SquadSliceType, UserSliceType} from "../../types/store.ts";
 import {capitalizeFirstLetter, highLowScore, leagueName} from "../../helpers/helper.ts";
-import {changeLeagueType, changeTime, nextLeague, prevLeague, setUserTop, useTemp} from "../../store/league.ts";
+import {
+    changeLeagueType,
+    changeTime,
+    nextLeague,
+    prevLeague,
+    increasePageLCount,
+    setSquadTop,
+    setUserTop,
+    useTemp, loadLeague
+} from "../../store/league.ts";
 import React, {useEffect} from "react";
 import LeagueListSkeleton from "../../skeleton/LeagueListSkeleton.tsx";
 import Skeleton, {SkeletonTheme} from "react-loading-skeleton";
-import BoostSkeleton from "../../skeleton/BoostSkeleton.tsx";
+import {selectSquad, setTopSquad} from "../../store/squad.ts";
+import {useNavigate} from "react-router-dom";
 
 const LeagueHeader = () => {
+    const navigate = useNavigate();
     const user: UserSliceType = useSelector((state: any) => state.user);
+    const squad: SquadSliceType = useSelector((state: any) => state.squad);
     const league: LeagueSliceType = useSelector((state: any) => state.league);
     const image: ImageSliceType = useSelector((state: any) => state.image);
     const dispatch = useDispatch();
@@ -22,23 +34,60 @@ const LeagueHeader = () => {
     const leagueTextElement = document.querySelector('.lh-text-value');
     const leagueScoreElement = document.querySelector('.lh-score-value');
     const topUsersElement = document.querySelector('.topUserList');
-    let percentage = ((BigInt(user.data?.balance ?? BigInt(0)) * BigInt(100)) / highLowScore(league.no).high);
+    let percentage = league.type == 'miner' ? ((BigInt(user.data?.balance ?? BigInt(0)) * BigInt(100)) / highLowScore(league.no, league.type).high) : ((BigInt(squad.userSquad?.score ?? BigInt(0)) * BigInt(100)) / highLowScore(league.no, league.type).high);
     percentage = percentage > BigInt(100) ? BigInt(100) : percentage;
-    percentage = highLowScore(league.no).low < BigInt(user.data?.balance ?? 0) ? percentage : BigInt(0);
+    percentage = highLowScore(league.no, league.type).low < (league.type == 'miner' ? BigInt(user.data?.balance ?? 0) : BigInt(squad.userSquad?.score ?? 0)) ? percentage : BigInt(0);
 
     useEffect(() => {
-        leagueTextElement?.classList.add('animate__animated', 'animate__fadeInUp');
-        leagueScoreElement?.classList.add('animate__animated', 'animate__headShake');
-        topUsersElement?.classList.add('animate__animated', 'animate__fadeIn');
-        if (league.leagueTempData.find((x) => x.no === league.no) == undefined) {
-            user.websocket.emit('getLeague', {
-                no: league.no,
-                type: league.type,
-            })
+        console.log("0000 1")
+        if (league.pageLCount > 1) {
+            leagueTextElement?.classList.add('animate__animated', 'animate__fadeInUp');
+            leagueScoreElement?.classList.add('animate__animated', 'animate__headShake');
+            topUsersElement?.classList.add('animate__animated', 'animate__fadeIn');
+            if (league.leagueTempData.find((x) => x.no === league.no && x.type === league.type) == undefined) {
+                dispatch(loadLeague())
+                user.websocket.emit('getLeague', {
+                    no: league.no,
+                    type: league.type,
+                })
+            } else {
+                dispatch(useTemp());
+            }
         } else {
-            dispatch(useTemp(league.no));
+            dispatch(increasePageLCount())
         }
     }, [league.no]);
+    useEffect(() => {
+        console.log("0000 2")
+        if (league.pageLCount > 1) {
+            console.log("Type change")
+            if (league.leagueTempData.find((x) => x.no === league.no && x.type === league.type) == undefined) {
+                dispatch(loadLeague())
+                user.websocket.emit('getLeague', {
+                    no: league.no,
+                    type: league.type,
+                })
+            } else {
+                dispatch(useTemp());
+            }
+        } else {
+            dispatch(increasePageLCount())
+        }
+    }, [league.type]);
+    useEffect(() => {
+        league.topUsers?.forEach((x: any, i: number) => {
+            if (x.id == user.data?.id) {
+                dispatch(setUserTop(i + 1));
+            }
+        })
+        league.topSquads?.forEach((s: any, i: number) => {
+            console.log(`${s.name} is rank ${i + 1}`)
+            if (s.id == squad.userSquad?.id) {
+                console.log(`${s.name} added.`)
+                dispatch(setSquadTop(i + 1));
+            }
+        })
+    }, [league.topUsers, league.topSquads, squad.userSquad, league.topUsers, setTopSquad]);
     return (
         <div>
             <div className='league-header'>
@@ -65,7 +114,8 @@ const LeagueHeader = () => {
                             <span className='mr-1'>From</span> {league.isLoading ?
                             <SkeletonTheme baseColor="#2f2f2f" highlightColor="#444">
                                 <Skeleton className='mx-2' width={30} height={10}/>
-                            </SkeletonTheme> : BigInt(league.leagueData.score).toLocaleString()} <span className='ml-1'>Dragoncoin</span></p>
+                            </SkeletonTheme> : BigInt(league.leagueData.score).toLocaleString()} <span
+                            className='ml-1'>Dragoncoin</span></p>
                     </div>
                 </div>
                 <div className='league-bar mt-5'>
@@ -98,7 +148,7 @@ const LeagueHeader = () => {
                 <div className='topUserList animate__animated animate__fadeIn animate__slow'
                      onAnimationEnd={() => topUsersElement?.classList.remove('animate__animated', 'animate__fadeIn')}>
                     {
-                        league.isLoading ? <LeagueListSkeleton /> :
+                        league.isLoading ? <LeagueListSkeleton/> :
                             league.type == 'miner' ?
                                 league.topUsers?.length > 0 ?
                                     league.topUsers?.map((u: any, i: number) => {
@@ -129,23 +179,55 @@ const LeagueHeader = () => {
                                                 }}>No one on these league, I guess everyone learn to mine after all.</p>
                                             </div>
                                     ) :
-                                <div className='flex flex-col items-center '>
-                                    <span style={{marginTop: '2rem', fontSize: '100px'}}>🚧</span>
-                                    <p style={{
-                                        color: '#ffffff',
-                                        opacity: '.4',
-                                        fontSize: '15px',
-                                        width: '70vw',
-                                        textAlign: 'center'
-                                    }}>Under construction.</p>
-                                </div>
+                                league.topSquads?.length > 0 ?
+                                    league.topSquads?.map((s: any, i: number) => {
+                                        i++;
+                                        return <DragonUser onClick={() => {
+                                            dispatch(selectSquad(null));
+                                            navigate(`/squad-detail/${s.id}`);
+                                        }} id={s.chat_id.toString().slice(3)} key={i} fName={s.name} lName={null} rank={i}
+                                                           coin={s.score}
+                                                           img={s.image == null ? undefined : import.meta.env.VITE_REACT_APP_BACKEND_URL + '/pimg/squad-profile/' + s.image + '.jpg'}/>;
+                                    }) : (BigInt(league.leagueData.score) > BigInt(squad.userSquad?.score ?? 0)) ?
+                                        <div className='flex flex-col items-center '>
+                                            <span style={{fontSize: '150px', height: '27vh'}}>🫵</span>
+                                            <p style={{
+                                                color: '#ffffff',
+                                                opacity: '.4',
+                                                fontSize: '14px',
+                                                width: '70vw',
+                                                textAlign: 'center'
+                                            }}>No one has been here before, be the first to reach here.</p>
+                                        </div> :
+                                        <div className='flex flex-col items-center '>
+                                            <span style={{fontSize: '100px', height: '20vh'}}>🐲️</span>
+                                            <p style={{
+                                                color: '#ffffff',
+                                                opacity: '.4',
+                                                fontSize: '14px',
+                                                width: '70vw',
+                                                textAlign: 'center',
+                                                marginTop: '1rem'
+                                            }}>No one on these league, I guess everyone learn to mine after all.</p>
+                                        </div>
                     }
                 </div>
             </div>
-            {league.userTop > 0 ?
+            {league.userTop > 0 && league.type == 'miner' && user.data ?
                 <DragonUser isFixed={true} id={user.data.tg_id} key={user.data.id} fName={user.data.fName}
                             lName={user.data.lName} rank={league.userTop}
                             coin={user.data?.balance.toString()}/> : <></>}
+            {league.squadTop > 0 && league.type == 'squad' && squad.userSquad ?
+                <DragonUser isFixed={true} id={squad.userSquad?.chat_id.slice(3) ?? '93283982'}
+                            key={squad.userSquad?.id} fName={squad.userSquad?.name}
+                            lName={null} rank={league.squadTop}
+                            coin={squad.userSquad?.score.toString()}
+                            onClick={() => {
+                                dispatch(selectSquad(null));
+                                navigate(`/squad-detail/${squad.userSquad?.id}`);
+                            }}
+                            img={squad.userSquad?.image == null ? undefined : import.meta.env.VITE_REACT_APP_BACKEND_URL + '/pimg/squad-profile/' + squad.userSquad?.image + '.jpg'}
+                /> : <></>}
         </div>
     )
         ;

@@ -1,21 +1,21 @@
 import React from "react";
-import oneImg from '../../public/icon/rank/top/one.svg';
-import twoImg from '../../public/icon/rank/top/two.svg';
-import threeImg from '../../public/icon/rank/top/three.svg';
-import {getFullName} from "../helpers/format.helper.ts";
-import {getColorWithId, getRandomColor, profileAvatarName} from "../helpers/helper.ts";
-import {ImageSliceType} from "../types/store.ts";
+import oneImg from '../../../public/icon/rank/top/one.svg';
+import twoImg from '../../../public/icon/rank/top/two.svg';
+import threeImg from '../../../public/icon/rank/top/three.svg';
+import {getFullName} from "../../helpers/format.helper.ts";
+import {getColorWithId, getRandomColor, profileAvatarName} from "../../helpers/helper.ts";
+import {ImageSliceType} from "../../types/store.ts";
 import {useSelector} from "react-redux";
+import {numShort} from "../../helpers/score.helper.ts";
 
-
-const DragonUser = ({id, fName, lName, rank, coin, subtitle, img, onClick, isFixed = false}: {
+const TopFrenUsers = ({id, fName, lName, rank, coin, subtitle, img, onClick, isFixed = false}: {
     id: string,
     fName: string | null,
     lName: string | null,
     rank: number,
-    coin?: string,
+    coin?: number,
     img?: string,
-    subtitle?: React.ReactElement,
+    subtitle?: string,
     onClick?: () => void,
     isFixed?: boolean
 }) => {
@@ -40,9 +40,14 @@ const DragonUser = ({id, fName, lName, rank, coin, subtitle, img, onClick, isFix
                     <img className='friend-image' src={img} alt='pp-image'/>}
                 <div className='du-user-info'>
                     <p className='du-user-name'>{name.length > 25 ? name.slice(0, 8) + " ..." : name}</p>
-                    {coin ? <p className='du-user-coin'><img
-                        src={image.core.find((img) => img.name === 'COIN_TOOL')?.img.src}/> {BigInt(coin).toLocaleString()}
-                    </p> : subtitle}
+                    <div className='flex items-center gap-2'>
+                        <p className='text-glass text-xs'>{subtitle}</p>
+                        <span className="text-glass text-xs">•</span>
+                        <div className='du-user-coin2'>
+                            + {numShort(coin)}
+                            <img src={image.core.find((img) => img.name === 'COIN_TOOL')?.img.src} />
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className='du-trailer-container'>
@@ -51,8 +56,7 @@ const DragonUser = ({id, fName, lName, rank, coin, subtitle, img, onClick, isFix
                         <span className='du-trailer'>{rank}</span>
                 }
             </div>
-        </div>
-    );
+        </div>);
 };
 
-export default DragonUser;
+export default TopFrenUsers;

@@ -14,10 +14,9 @@ import {
 } from 'react-aria';
 import {boosterData, skinData, userDailyBoost, UserData} from "../types/data.ts";
 import {numify} from "../helpers/score.helper.ts";
-import toast from "react-hot-toast";
 import {setPurchaseItem} from "../store/purchase.ts";
 import {GameSliceType, ImageSliceType, ScoreSliceType, SkinSliceType, UserSliceType} from "../types/store.ts";
-import {calculateBoostPrice, getLevels} from "../helpers/helper.ts";
+import {calculateBoostPrice, getLevels, showToast} from "../helpers/helper.ts";
 
 const BottomSheet = () => {
     const game: GameSliceType = useSelector((state: any) => state.game);
@@ -72,15 +71,11 @@ const SheetComp = () => {
     const onPurchaseHandler = () => {
         dispatch(hideBottomSheet())
         if (game.itemType == 'daily_booster') {
-            toast.loading(`Buying ${item.name}`, {
-                id: purchase.toast,
-            });
+            showToast(purchase.toast, `Buying ${item.name}`, 'loading');
             const leftDailyBoosts: userDailyBoost[] = boost.leftDailyBoosts;
             const leftBoost = game.item.limit - ((leftDailyBoosts.filter((b: any) => game.item.id === b.id)[0]).used);
             if (leftBoost <= 0) {
-                toast.error('You have reached your limit', {
-                    id: purchase.toast,
-                });
+                showToast(purchase.toast, 'You have reached your limit', 'error')
             }
             else {
                 websocket.emit('purchase', {
@@ -91,22 +86,16 @@ const SheetComp = () => {
             }
         }
         else if (game.itemType == 'booster') {
-            toast.loading(`Buying ${item.name}`, {
-                id: purchase.toast,
-            });
+            showToast(purchase.toast, `Buying ${item.name}`, 'loading')
             if (BigInt(itemPrice) > BigInt(score.value)) {
-                toast.error('You do not have enough coins', {
-                    id: purchase.toast,
-                });
+                showToast(purchase.toast,'You do not have enough coins', 'error')
             } else if (
                 (game.itemType == 'booster' && game.item.image == 'ENERGY_LIMIT' && game.item.max_lvl !== 0 && game.item.max_lvl <= score.energy_lvl) ||
                 (game.itemType == 'booster' && game.item.image == 'AUTO_TAP_BOT' && game.item.max_lvl !== 0 && game.item.max_lvl <= score.bot_lvl) ||
                 (game.itemType == 'booster' && game.item.image == 'MULTI_TAP' && game.item.max_lvl !== 0 && game.item.max_lvl <= score.tap_lvl) ||
                 (game.itemType == 'booster' && game.item.image == 'RECHARGING_SPEED' && game.item.max_lvl !== 0 && game.item.max_lvl <= score.recharge_lvl)
             ) {
-                toast.error('You have reached the maximum level', {
-                    id: purchase.toast,
-                });
+                showToast(purchase.toast,'You have reached the maximum level', 'error')
             } else {
                 websocket.emit('purchase', {
                     type: game.itemType,
@@ -122,18 +111,14 @@ const SheetComp = () => {
             // const isEnabled = ownSkin ? uSkin.status == true : false;
 
             if (!ownSkin) {
-                toast.loading(`Buying ${item.name}`, {
-                    id: purchase.toast,
-                });
+                showToast(purchase.toast,`Buying ${item.name}`, 'loading')
                 websocket.emit('purchase', {
                     type: game.itemType,
                     item: game.item.id,
                 });
                 dispatch(setPurchaseItem(game.item.id))
             } else {
-                toast.loading(`Changing skin to ${item.name}`, {
-                    id: purchase.toast,
-                });
+                showToast(purchase.toast,`Changing skin to ${item.name}`, 'loading')
                 websocket.emit('changeSkin', {
                     uSkinId: uSkin.id
                 })

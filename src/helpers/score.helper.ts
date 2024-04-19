@@ -20,9 +20,19 @@ export const numify = (x: bigint | number) => {
 }
 
 export const numShort = (num: number): string => {
+    if (num == undefined || num == null) return '0';
     if (num < 1000) return num.toString(); // less than 1000
     if (num < 1000000) return (num / 1000).toFixed(1) + 'k'; // less than 1 million
     if (num < 1000000000) return (num / 1000000).toFixed(1) + 'M'; // less than 1 billion
     if (num < 1000000000000) return (num / 1000000000).toFixed(1) + 'B'; // less than 1 trillion
     return (num / 1000000000000).toFixed(1) + 'Tr'; // 1 trillion or more
+}
+
+export const bigNumShort = (num: bigint | number): string => {
+    if (num == undefined || num == null) return '0';
+    if (num < 1000) return num.toString(); // less than 1000
+    if (num < 1000000) return parseInt((BigInt(num) / BigInt(1000)).toString()).toFixed(1) + 'k'; // less than 1 million
+    if (num < 1000000000) return parseInt((BigInt(num) / BigInt(1000000)).toString()).toFixed(1) + 'M'; // less than 1 billion
+    if (num < 1000000000000) return parseInt((BigInt(num) / BigInt(1000000000)).toString()).toFixed(1) + 'B'; // less than 1 trillion
+    return parseInt((BigInt(num) / BigInt(1000000000000)).toString()).toFixed(1) + 'Tr'; // 1 trillion or more
 }

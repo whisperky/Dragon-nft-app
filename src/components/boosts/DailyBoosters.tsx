@@ -1,8 +1,8 @@
 import {useDispatch, useSelector} from "react-redux";
 import {dailyBoosterData, userDailyBoost} from "../../types/data.ts";
 import {showBottomSheet} from "../../store/game.ts";
-import toast from "react-hot-toast";
 import {ImageSliceType, PurchaseSliceType} from "../../types/store.ts";
+import {showToast} from "../../helpers/helper.ts";
 
 const DailyBoosters = () => {
     const boosts = useSelector((state: any) => state.boost);
@@ -17,9 +17,7 @@ const DailyBoosters = () => {
         if (leftB > 0) {
             dispatch(showBottomSheet({item: item, type: 'daily_booster'}))
         } else {
-            toast.error('You have used all your free booster', {
-                id: purchase.toast,
-            });
+            showToast(purchase.toast,'You have used all your free booster', 'error')
         }
     };
     return (

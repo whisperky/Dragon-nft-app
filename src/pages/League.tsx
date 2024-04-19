@@ -5,7 +5,7 @@ import WebApp from "@twa-dev/sdk";
 import {useEffect} from "react";
 import {ImageSliceType, LeagueSliceType, UserSliceType} from "../types/store.ts";
 import {useDispatch, useSelector} from "react-redux";
-import {loadLeague, useTemp} from "../store/league.ts";
+import {loadLeague, resetPageLCount, setLoadLeaguePage, setSquadTop, setUserTop, useTemp} from "../store/league.ts";
 import LeagueSkeleton from "../skeleton/LeagueSkeleton.tsx";
 import {leagueName, leagueToNumber} from "../helpers/helper.ts";
 
@@ -18,18 +18,19 @@ const League = () => {
     WebApp.BackButton.onClick(() => navigate(-1))
     WebApp.BackButton.show();
     useEffect(() => {
-        const no = leagueToNumber(leagueName(league.userLeague.preset))
-        if (league.leagueTempData.find((x) => x.no === no) == undefined) {
+        if (league.leagueTempData.find((x) => x.no === league.no && x.type === league.type) == undefined) {
             dispatch(loadLeague());
             user.websocket.emit('getLeague', {
-                no: no,
-                type: 'miner',
+                no: league.no,
+                type: league.type,
             })
+            dispatch(resetPageLCount());
         } else {
-            dispatch(useTemp(no));
+            dispatch(useTemp());
         }
+        dispatch(setLoadLeaguePage(true));
     }, [0]);
-    return image.isLeagueDone && league.haveLoadAtLeastOnce ? (
+    return league.loadLeaguePage && image.isLeagueDone && league.haveLoadAtLeastOnce ? (
         <div>
             <LeagueHeader/>
         </div>

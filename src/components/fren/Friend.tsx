@@ -5,12 +5,16 @@ import openerImg from "../../../public/icon/defaults/open-arrow.svg";
 import {numify, numShort} from "../../helpers/score.helper.ts";
 import WebApp from "@twa-dev/sdk";
 import {getFullName} from "../../helpers/format.helper.ts";
-import {getColorWithId} from "../../helpers/helper.ts";
+import {getColorWithId, leagueName, leagueToNumber, profileAvatarName} from "../../helpers/helper.ts";
+import {LeaguePresets} from "../../types/types.ts";
+import {ImageSliceType} from "../../types/store.ts";
+import {useSelector} from "react-redux";
 
-const Friend = ({id, fName,lName,username, is_premium, balance, earned}: {
+const Friend = ({id, fName,lName,username,league, is_premium, balance, earned}: {
     id: string,
     fName: string,
     lName: string,
+    league: LeaguePresets,
     is_premium: boolean,
     balance: string,
     earned: number,
@@ -18,7 +22,9 @@ const Friend = ({id, fName,lName,username, is_premium, balance, earned}: {
 }) => {
     // only 2 letters
     const name = getFullName(fName, lName);
-    const shortName = ((fName ? fName.charAt(0) : '') + (lName ? lName.charAt(0) : '')).toUpperCase();
+    const shortName = profileAvatarName(fName, lName);
+    const images: ImageSliceType = useSelector((state: any) => state.image);
+    const LEAGUE_IMAGE = images.league.find((img) => leagueName(img.name) === leagueName(league));
     return (
         <div className='friend-container' onClick={() => username != null ? WebApp.openTelegramLink(`https://t.me/${username}`) : {}}>
             <div className='flex items-center'>
@@ -26,7 +32,7 @@ const Friend = ({id, fName,lName,username, is_premium, balance, earned}: {
                 <div className='friend-info'>
                     <div className='friend-name'><span>{name.length > 25 ? name.slice(0,8) + " ..." : name}</span> {is_premium ? <img src={premium} alt='premium'/> : <></>}</div>
                     <div className='friend-subtitle'>
-                        <div className='friend-league'><img src={bronze} alt='bronze'/> <span>Bronze</span></div>
+                        <div className='friend-league'><img src={LEAGUE_IMAGE?.img.small.src} alt={leagueName(league)}/> <span>{leagueName(league)}</span></div>
                         <span>•</span>
                         <div className='friend-coin'><img src={coin} alt='coin'/> <span>{BigInt(balance).toLocaleString()}</span></div>
                     </div>

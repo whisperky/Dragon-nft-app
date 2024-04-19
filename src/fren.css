@@ -174,7 +174,7 @@
     display: block;
     position: fixed;
     bottom: 0;
-    z-index: 9999;
+    z-index: 800;
 }
 
 .invite-fren-btn {
@@ -296,4 +296,90 @@
     font-size: 13px;
     color: #FFD041;
     margin-right: 10px;
+}
+
+.fren-con {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fren-header {
+    height: auto;
+    width: 100%;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 2rem;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 100;
+    padding-bottom: 2rem;
+}
+.fren-con:after {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    content: "";
+    z-index: 0;
+    background: linear-gradient(to top,
+    rgb(84, 43, 186) 20%,
+    rgba(255,255,255, 0) 80%
+    );
+    rotate: 180deg;
+    pointer-events: none; /* so the text is still selectable */
+}
+
+.fren-header-bg-effect {
+    background: linear-gradient(180deg, #FFD74B 0%, rgba(255, 215, 75, 0) 87.63%);
+    height: 200px;
+    z-index: 100;
+}
+
+.fren-header-bg {
+    position: absolute;
+    z-index: 100;
+}
+
+.fren-header-img {
+    position: absolute;
+    top: 19%;
+    left: 38%;
+    width: 130px;
+    z-index: 100;
+
+}
+
+.fren-text-title {
+    z-index: 100;
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: .4rem;
+    /*margin-top: 1rem;*/
+}
+
+.fren-text-sm {
+    z-index: 100;
+    font-size: 14px;
+}
+
+.fren-invite-btn {
+    margin-top: 2em;
+    background: linear-gradient(88.09deg, #E3452D 0%, #FAAF5E 96.78%);
+    border-radius: 32px;
+    padding: 0.7em 0em;
+    cursor: pointer;
+    overflow: hidden;
+    width: 80%;
+    display: block;
+    z-index: 100;
+}
+.fren-list-con {
+    z-index: 100;
+    width: 100%;
+    padding: 1rem 1.5rem;
 }

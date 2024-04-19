@@ -45,8 +45,32 @@ export type squadData = {
     name: string;
     chat_id: string;
     chat_type: chatTypeData;
+    username: string;
+    description: string;
     score: number;
+    members: number;
+    image: string;
     league_id: string;
+    status: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+}
+export type squadDataLeague = {
+    id: string;
+    name: string;
+    chat_id: string;
+    chat_type: chatTypeData;
+    username: string;
+    description: string;
+    score: number;
+    members: number;
+    image: string;
+    league_id: string;
+    league: {
+        name: string,
+        preset: LeaguePresets
+    }
+    status: boolean;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -55,6 +79,7 @@ export type leagueData = {
     name: string;
     score: number;
     type: leagueTypeData;
+    preset: LeaguePresets;
     description: string | null;
     createdAt: Date;
     updatedAt: Date;
@@ -123,8 +148,41 @@ export type frenData = {
     iuser_id: string;
     is_premium: boolean;
     earned: number;
-    iuser?: UserData;
+    iuser?: UserDataFren;
     user?: UserData;
+    createdAt: Date;
+    updatedAt: Date;
+}
+export type topFrenData = {
+    id: string;
+    tg_id: string;
+    fName: string;
+    lName: string;
+    frens: number;
+    earned: number;
+}
+export type UserDataFren = {
+    id: string;
+    tg_id: string;
+    fName: string | null;
+    lName: string | null;
+    username: string | null;
+    balance: string;
+    squad_id: string | null;
+    league_id: string | null;
+    tap_lvl: number;
+    energy_lvl: number;
+    recharge_lvl: number;
+    bot_lvl: number;
+    fren_token: string | null;
+    invited_by: string | null;
+    invited_users: number;
+    last_energy_left: number | null;
+    balance_updated_at: number | null;
+    status: userStatusData | null;
+    botEarn: number;
+    skin: SkinImageTypes;
+    league: leagueData;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -162,6 +220,7 @@ export type UserWebhookData = {
     skin: SkinImageTypes;
     league: LeagueData;
     game: GameData;
+    squad: squadDataLeague;
     createdAt: Date;
     updatedAt: Date;
 }

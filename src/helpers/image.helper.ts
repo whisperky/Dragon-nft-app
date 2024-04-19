@@ -42,14 +42,14 @@ import RUBY_LEAGUE_SMALL from '../../public/icon/rank/small/ruby.svg';
 import DIAMOND_LEAGUE_SMALL from '../../public/icon/rank/small/diamond.svg';
 import LOONG_LEAGUE_SMALL from '../../public/icon/rank/small/loong.svg';
 
-import BRONZE_LEAGUE_BG from '../../public/background/bronze.svg';
-import SILVER_LEAGUE_BG from '../../public/background/silver.svg';
-import GOLD_LEAGUE_BG from '../../public/background/gold.svg';
-import PLATINUM_LEAGUE_BG from '../../public/background/platinum.svg';
-import EMERALD_LEAGUE_BG from '../../public/background/emerald.svg';
-import RUBY_LEAGUE_BG from '../../public/background/ruby.svg';
-import DIAMOND_LEAGUE_BG from '../../public/background/diamond.svg';
-import LOONG_LEAGUE_BG from '../../public/background/loong.svg';
+import BRONZE_LEAGUE_BG from '../../public/background/skin/bronze.svg';
+import SILVER_LEAGUE_BG from '../../public/background/skin/silver.svg';
+import GOLD_LEAGUE_BG from '../../public/background/skin/gold.svg';
+import PLATINUM_LEAGUE_BG from '../../public/background/skin/platinum.svg';
+import EMERALD_LEAGUE_BG from '../../public/background/skin/emerald.svg';
+import RUBY_LEAGUE_BG from '../../public/background/skin/ruby.svg';
+import DIAMOND_LEAGUE_BG from '../../public/background/skin/diamond.svg';
+import LOONG_LEAGUE_BG from '../../public/background/skin/loong.svg';
 
 import A from '../../public/users-img/1.jpg';
 import B from '../../public/users-img/2.jpg';

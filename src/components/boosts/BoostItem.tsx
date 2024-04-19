@@ -4,9 +4,9 @@ import check from "../../../public/icon/defaults/check.svg";
 import lockedImg from "../../../public/icon/boosts/locked.svg";
 import {showBottomSheet} from "../../store/game.ts";
 import {useDispatch, useSelector} from "react-redux";
-import {BoostSliceType, ImageSliceType, MyImageTypes, MySkinImageTypes, PurchaseSliceType} from "../../types/store.ts";
-import toast from "react-hot-toast";
+import {ImageSliceType, MyImageTypes, MySkinImageTypes, PurchaseSliceType} from "../../types/store.ts";
 import {MouseEventHandler} from "react";
+import {showToast} from "../../helpers/helper.ts";
 
 const BoostItem = ({
                        image,
@@ -58,9 +58,7 @@ const BoostItem = ({
             if (haveEnough || (trailing == 'disabled' && itemType == 'skin')) {
                 dispatch(showBottomSheet({item: item, type: itemType}))
             } else {
-                toast.error('You do not have enough coins', {
-                    id: purchase.toast,
-                });
+                showToast(purchase.toast,'You do not have enough coins', 'error')
             }
         }
 

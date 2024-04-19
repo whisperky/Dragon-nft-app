@@ -14,8 +14,8 @@ import {
 } from 'react-aria';
 import {UserData} from "../types/data.ts";
 import {numify} from "../helpers/score.helper.ts";
-import toast from "react-hot-toast";
 import {GameSliceType} from "../types/store.ts";
+import {showToast} from "../helpers/helper.ts";
 
 const BotBottomSheet = () => {
     const game: GameSliceType = useSelector((state: any) => state.game);
@@ -54,9 +54,7 @@ const SheetComp = () => {
     useModal();
     const onPurchaseHandler = () => {
         dispatch(hideBotBottomSheet())
-        toast.loading(`Claiming`, {
-            id: 'claiming',
-        });
+        showToast('claiming', 'Claiming', 'loading' )
         websocket.emit('claimBotEarn');
     }
     // In real world usage this would be a separate React component

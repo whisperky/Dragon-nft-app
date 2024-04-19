@@ -1,6 +1,6 @@
 import {boosterData, dailyBoosterData, LeagueImageTypes, skinData, UserData} from "../types/data.ts";
-import toast from "react-hot-toast";
 import {LeagueNameType, LeaguePresets} from "../types/types.ts";
+import {toast} from "sonner";
 
 export const getLevels = (user: {
     energy_lvl: number,
@@ -97,6 +97,8 @@ export const leagueName = (league: LeaguePresets | LeagueImageTypes): LeagueName
         case 'WISH_SQUAD':
         case 'LOONG_LEAGUE':
             return 'WISH';
+        default:
+            return 'BRONZE';
     }
 }
 export const leagueToNumber = (league: LeagueNameType): number => {
@@ -183,22 +185,22 @@ export const numberToLeagueSquadPreset = (league: number): LeaguePresets => {
 
 
 }
-export const showToast = (id: string, message: string, type: 'success' | 'error' = 'error') => {
+export const showToast = (id: string, message: string, type: 'success' | 'error' | 'loading' | 'default' = 'default') => {
     if (type === 'success')
-        toast.success(message, {
-            id: id,
-        });
+        toast.success(message, {id: id});
+    else if (type === 'loading')
+        toast.loading(message, {id: id});
+    else if (type === 'error')
+        toast.error(message, {id: id});
     else
-        toast.error(message, {
-            id: id,
-        });
+        toast(message, {id: id});
 }
 export const capitalizeFirstLetter = (string: string) => {
     if (string)
         return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
     return string
 }
-export const getRandomColor= () => {
+export const getRandomColor = () => {
     var letters = '0123456789ABCDEF';
     var color = '#';
     for (var i = 0; i < 6; i++) {
@@ -206,40 +208,124 @@ export const getRandomColor= () => {
     }
     return color;
 }
-export const getColorWithId= (id: string) => {
+export const getColorWithId = (id: string) => {
     id = id.split('').map((char) => {
         if (char === '0') {
             return 'A';
         } else if (char === '1') {
             return 'D';
-        }
-        else if (char == '7') {
+        } else if (char == '7') {
             return 'E';
-        }
-        else {
+        } else {
             return char;
         }
     }).join('')
     var color = '#' + id.slice(0, 6);
     return color;
 }
-export const highLowScore = (league: number): {high: bigint, low: bigint} => {
-    switch (league) {
-        case 1:
-            return {high: BigInt(4999), low: BigInt(0)};
-        case 2:
-            return {high: BigInt(49999), low: BigInt(5000)};
-        case 3:
-            return {high: BigInt(99999), low: BigInt(50000)};
-        case 4:
-            return {high: BigInt(999999), low: BigInt(100000)};
-        case 5:
-            return {high: BigInt(9999999), low: BigInt(1000000)};
-        case 6:
-            return {high: BigInt(19999999), low: BigInt(10000000)};
-        case 7:
-            return {high: BigInt(99999999), low: BigInt(20000000)};
-        case 8:
-            return {high: BigInt(999999999), low: BigInt(100000000)};
+export const highLowScore = (league: number, type: 'miner' | 'squad'): { high: bigint, low: bigint } => {
+    if (type == 'miner') {
+        switch (league) {
+            case 1:
+                return {high: BigInt(4999), low: BigInt(0)};
+            case 2:
+                return {high: BigInt(49999), low: BigInt(5000)};
+            case 3:
+                return {high: BigInt(99999), low: BigInt(50000)};
+            case 4:
+                return {high: BigInt(999999), low: BigInt(100000)};
+            case 5:
+                return {high: BigInt(9999999), low: BigInt(1000000)};
+            case 6:
+                return {high: BigInt(19999999), low: BigInt(10000000)};
+            case 7:
+                return {high: BigInt(99999999), low: BigInt(20000000)};
+            case 8:
+                return {high: BigInt(999999999), low: BigInt(100000000)};
+        }
+    } else {
+        switch (league) {
+            case 1:
+                return {high: BigInt(499999), low: BigInt(0)};
+            case 2:
+                return {high: BigInt(4999999), low: BigInt(500000)};
+            case 3:
+                return {high: BigInt(9999999), low: BigInt(5000000)};
+            case 4:
+                return {high: BigInt(99999999), low: BigInt(10000000)};
+            case 5:
+                return {high: BigInt(999999999), low: BigInt(100000000)};
+            case 6:
+                return {high: BigInt(1999999999), low: BigInt(1000000000)};
+            case 7:
+                return {high: BigInt(9999999999), low: BigInt(2000000000)};
+            case 8:
+                return {high: BigInt(99999999999), low: BigInt(10000000000)};
+        }
+    }
+}
+
+export const startsWithEmoji = (text: any) => {
+    const emojiRegex = /^[\uD800-\uDFFF][\uDC00-\uDFFF]/;
+    return emojiRegex.test(text);
+}
+export const getFirstEmoji = (text: any) => {
+    const emojiRegex = /^[\uD800-\uDFFF][\uDC00-\uDFFF]/;
+    const match = text.match(emojiRegex);
+    return match ? match[0] : null;
+}
+export const profileAvatarName = (fName: string | null, lName?: string | null) => {
+    if (lName == undefined) {
+        if (fName == null || fName.trim() == "") {
+            return "";
+        }
+        fName = fName.trim();
+        const names = fName.split(" ");
+        if (names.length > 0) {
+            if (names.length == 1) {
+                if (startsWithEmoji(names[0])) {
+                    return getFirstEmoji(names[0]);
+                } else {
+                    return names[0][0].toUpperCase();
+                }
+            } else {
+                const first = names[0];
+                const last = names[names.length - 1];
+                let shortName = "";
+                if (startsWithEmoji(first)) {
+                    shortName = getFirstEmoji(first);
+                } else {
+                    shortName = first[0].toUpperCase();
+                }
+                if (startsWithEmoji(last)) {
+                    shortName += getFirstEmoji(last);
+                } else {
+                    shortName += last[0].toUpperCase();
+                }
+                return shortName;
+            }
+        }
+    } else {
+        if (fName == null || fName.trim() == "") {
+            return "";
+        }
+        if (lName == null || lName.trim() == "") {
+            return "";
+        }
+        fName = fName.trim();
+        lName = lName.trim();
+        let shortName = "";
+        if (startsWithEmoji(fName)) {
+            shortName = getFirstEmoji(fName);
+        } else {
+            shortName = fName[0].toUpperCase();
+        }
+        if (startsWithEmoji(lName)) {
+            shortName += getFirstEmoji(lName);
+        } else {
+            shortName += lName[0].toUpperCase();
+        }
+
+        return shortName;
     }
 }

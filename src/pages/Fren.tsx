@@ -2,7 +2,7 @@ import {useNavigate} from "react-router-dom";
 import coin from '../../public/icon/main/small-coin.svg';
 import WebApp from "@twa-dev/sdk";
 import '../fren.css';
-// import arrow from "../../public/icon/defaults/open-arrow.svg";
+import arrow from "../../public/icon/defaults/open-arrow.svg";
 import {useSelector} from "react-redux";
 import {numShort} from "../helpers/score.helper.ts";
 import Friend from "../components/fren/Friend.tsx";
@@ -39,7 +39,7 @@ const Fren = () => {
             <div id='stars2'></div>
             <div id='stars3'></div>
             <p className='fren-title animate__animated animate__fadeIn animate__slow'>Fren Zone</p>
-            <div className='fren-info animate__animated animate__fadeIn'>
+            <div className='fren-info animate__animated animate__fadeIn' onClick={() => navigate('/top-fren')}>
                 <div className='flex items-center'>
                     <div className='fren-earned'>
                         <div>+{numShort(earned)}</div>
@@ -52,7 +52,7 @@ const Fren = () => {
                         <span className='fren-top-leaders text-glass'>leaders</span>
                     </div>
                 </div>
-                {/*<img className='fren-opener-arrow opacity-less mr-1' src={arrow} alt='opener'/>*/}
+                <img className='fren-opener-arrow opacity-less mr-1' src={arrow} alt='opener'/>
             </div>
             <p className='fren-bonues-title animate__animated animate__fadeIn animate__slow'>Invite frens to get bonuses</p>
             <div className='fren-bonues animate__animated animate__fadeIn animate__slow'>
@@ -90,6 +90,7 @@ const Fren = () => {
                             return (
                                 <Friend key={fren.iuser.id} id={fren.iuser.tg_id} fName={fren.iuser?.fName}
                                         lName={fren.iuser?.lName}
+                                        league={fren.iuser?.league?.preset}
                                         username={fren.iuser?.username ?? null} balance={fren.iuser?.balance ?? '0'}
                                         earned={fren.earned} is_premium={fren.is_premium}/>
                             )

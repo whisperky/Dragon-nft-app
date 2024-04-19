@@ -10,6 +10,7 @@ import fren from './fren.ts';
 import image from "./image.ts";
 import turbo from "./turbo.ts";
 import league from "./league.ts";
+import squad from "./squad.ts";
 
 export const store = configureStore({
     reducer: {
@@ -24,6 +25,7 @@ export const store = configureStore({
         image: image,
         turbo: turbo,
         league: league,
+        squad: squad
     },
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware({

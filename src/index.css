@@ -18,9 +18,11 @@ body {
 :root {
 
 }
+
 :focus-visible {
     outline: none !important;
 }
+
 #noDesktop {
     background: #000000 !important;
     color: #fff;
@@ -87,6 +89,19 @@ body {
     animation: smoke 2s infinite linear;
 }
 
+.dragon-toast {
+    pointer-events: none;
+}
+.dragon-toast > li {
+    padding: 12px 15px;
+    background: #323232e8;
+    border: none;
+}
+@media (max-width: 600px) {
+    [data-sonner-toaster][data-y-position=bottom] {
+        bottom: 10px;
+    }
+}
 @keyframes glitch {
     0%, 20%, 40%, 60%, 80%, 100% {
         transform: translate(0, 0);
@@ -113,4 +128,20 @@ body {
     100% {
         transform: translateX(100%);
     }
+}
+
+.banned-con {
+    background: #000000 !important;
+    color: #fff;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 2rem;
+    letter-spacing: .4rem;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: 'Rubik Burned', system-ui;
+    text-align: center;
 }

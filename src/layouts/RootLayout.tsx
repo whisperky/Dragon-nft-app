@@ -2,16 +2,22 @@ import {Outlet, useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 import WebApp from "@twa-dev/sdk";
 import {useDispatch, useSelector} from "react-redux";
-import {requestUserData, setUser, setUserPurchaseReturn} from "../store/user.ts";
+import {changeUserSquad, requestUserData, setUser, setUserPurchaseReturn} from "../store/user.ts";
 import {loadUser} from "../store/loading.ts";
 import {setScore} from "../store/score.ts";
 import BottomSheet from "../components/BottomSheet.tsx";
-import {boostWebHookData, frenWebHookData, purchaseReturnData, UserWebhookData} from "../types/data.ts";
+import {
+    boostWebHookData,
+    frenWebHookData,
+    purchaseReturnData,
+    squadData,
+    squadDataLeague, topFrenData,
+    UserWebhookData
+} from "../types/data.ts";
 import {setSkins, setUserSkins} from "../store/skin.ts";
 import {setBoost, setLeftDailyBoosts} from "../store/boost.ts";
 import {completeItemPurchase} from "../store/purchase.ts";
-import toast from "react-hot-toast";
-import {setFrens} from "../store/fren.ts";
+import {setFrens, setTopFrens, topFrenLoad} from "../store/fren.ts";
 import {setAutoTapEarn, setTotals} from "../store/game.ts";
 import {
     loadBoostImages,
@@ -30,7 +36,9 @@ import {
 import {alterActiveSkinsImages} from "../store/image.ts";
 import BotBottomSheet from "../components/BotBottomSheet.tsx";
 import {setAvailableTurbos} from "../store/turbo.ts";
-import {setLeague, setUserLeague, setUserTop} from "../store/league.ts";
+import {setLeague, setSquadTop, setUserLeague, setUserTop} from "../store/league.ts";
+import {selectSquad, setTopSquad, setTopSquadUsers, setUserSquad} from "../store/squad.ts";
+import {showToast} from "../helpers/helper.ts";
 
 const RootLayout = () => {
     const user: UserSliceType = useSelector((state: any) => state.user);
@@ -101,6 +109,9 @@ const RootLayout = () => {
                         loadCoinSkinImages();
                         loadCoreImages();
                     }
+                    if (udata.squad) {
+                        dispatch(setUserSquad(udata.squad));
+                    }
                 }
             });
             user.websocket.on('boostData', (bdata: boostWebHookData) => {
@@ -121,16 +132,56 @@ const RootLayout = () => {
                     dispatch(setFrens(fdata.data.frens));
                 }
             });
+            user.websocket.on('topFrenData', (topFData: { success: boolean; frens: topFrenData }) => {
+                if (topFData.success) {
+                    dispatch(topFrenLoad());
+                    dispatch(setTopFrens(topFData.frens));
+                }
+            })
             user.websocket.on('claimBotEarnSuccess', (data: { success: boolean, message: string }) => {
-                toast.success(data.message, {
-                    id: 'claiming',
-                });
+                showToast('claiming', data.message, 'success');
             })
             user.websocket.on('claimBotEarnError', (data: { success: boolean, message: string }) => {
-                toast.error(data.message, {
-                    id: 'claiming',
-                });
+                showToast('claiming', data.message, 'error');
             })
+            user.websocket.on('topSquads', (data: { success: boolean, squads: any }) => {
+                if (data.success)
+                    dispatch(setTopSquad(data.squads));
+            })
+            user.websocket.on('squadData', (data: { success: boolean, squad: squadDataLeague }) => {
+                if (data.success)
+                    dispatch(selectSquad(data.squad));
+            })
+            user.websocket.on('squadTopUsers', (data: { success: boolean, users: any }) => {
+                if (data.success)
+                    dispatch(setTopSquadUsers(data.users));
+            })
+            user.websocket.on('squadSuccess', (data: {
+                success: boolean,
+                message: string,
+                type: 'joined' | 'left',
+                squad: squadDataLeague
+            }) => {
+                if (data.success) {
+                    if (data.type == 'joined') {
+                        navigate(-1)
+                        dispatch(setUserSquad(data.squad));
+                        dispatch(changeUserSquad(data.squad.id));
+                        WebApp.MainButton.hideProgress();
+                    }
+                    if (data.type == 'left') {
+                        dispatch(setUserSquad(null));
+                        dispatch(changeUserSquad(null));
+                    }
+                    dispatch(selectSquad(data.squad));
+                    showToast('squad', data.message, 'success');
+                } else {
+                    showToast('squad', data.message, 'error');
+                }
+            });
+            user.websocket.on('squadError', (data: { success: boolean, message: string, type: 'joined' | 'left' }) => {
+                showToast('squad', data.message, 'error');
+            });
             dispatch(requestUserData());
         }
         WebApp.expand();
@@ -140,22 +191,15 @@ const RootLayout = () => {
     useEffect(() => {
         user.websocket.on('leagueData', (ldata: any) => {
             dispatch(setLeague(ldata.data));
-            ldata.data?.users?.forEach((x: any, i: number) => {
-                if (x.id == user.data?.id) {
-                    dispatch(setUserTop(i + 1));
-                }
-            })
         })
-    }, [user.data]);
+    }, [0]);
     useEffect(() => {
         console.log("Skin too", skin)
         console.log('Purchase updated');
         user.websocket.on('purchaseSuccess', (data: purchaseReturnData) => {
             if (purchase.isPurchasing) {
                 if (data.success) {
-                    toast.success(data.message, {
-                        id: purchase.toast,
-                    });
+                    showToast(purchase.toast, data.message, 'success')
                     dispatch(setScore({
                         tap_lvl: data.user.tap_lvl,
                         energy_lvl: data.user.energy_lvl,
@@ -180,15 +224,11 @@ const RootLayout = () => {
                         navigate('/')
                     }
                 } else {
-                    toast.error(data.message, {
-                        id: purchase.toast,
-                    })
+                    showToast(purchase.toast, data.message, 'error')
                     dispatch(completeItemPurchase('error'));
                 }
             } else {
-                toast.success(data.message, {
-                    id: purchase.toast,
-                });
+                showToast(purchase.toast, data.message, 'success');
                 dispatch(setScore({
                     tap_lvl: data.user.tap_lvl,
                     energy_lvl: data.user.energy_lvl,
@@ -210,14 +250,10 @@ const RootLayout = () => {
         });
         user.websocket.on('purchaseError', (data: purchaseReturnData) => {
             if (purchase.isPurchasing) {
-                toast.error(data.message, {
-                    id: purchase.toast,
-                })
+                showToast(purchase.toast, data.message, 'error')
                 dispatch(completeItemPurchase('error'));
             } else {
-                toast.error(data.message, {
-                    id: purchase.toast,
-                })
+                showToast(purchase.toast, data.message, 'error');
             }
         });
     }, [purchase.isPurchasing, skin]);
@@ -229,12 +265,16 @@ const RootLayout = () => {
             loadLeagueImages();
         }
         if (image.isActiveSkinsDone && image.isCoreDone && image.isBoosterDone && image.isSkinDone && image.isLeagueDone && !image.isCoinersDone) {
-           loadCoinersImages();
+            loadCoinersImages();
         }
     }, [image.isActiveSkinsDone, image.isCoreDone, image.isBoosterDone, image.isSkinDone, image.isLeagueDone]);
     useEffect(() => {
 
     }, [turbo.turboMode]);
+    useEffect(() => {
+        if (user.data != null && user.data?.status == 'suspended')
+            navigate('/banned')
+    }, [user.data?.status]);
     return image.isActiveSkinsDone && image.isCoreDone ? (
         <div className="w-full"><Outlet/><BottomSheet/><BotBottomSheet/></div>) : (<div>
         <div className='preloader flex items-center justify-around'>

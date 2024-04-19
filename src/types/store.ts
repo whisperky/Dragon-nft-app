@@ -4,7 +4,7 @@ import {
     dailyBoosterData,
     DailyBoosterImageTypes, ImageTypes, LeagueData, LeagueImageTypes,
     skinData,
-    SkinImageTypes, TurboData,
+    SkinImageTypes, squadData, squadDataLeague, TurboData,
     UserData
 } from "./data.ts";
 import React, {ReactElement} from "react";
@@ -79,6 +79,8 @@ export type PurchaseSliceType = {
 export type FrenSliceType = {
     haveData: boolean;
     list: any[];
+    topFrens: any[];
+    isTopFrenLoading: boolean;
 }
 export type TurboSliceType = {
     taps: number;
@@ -91,6 +93,14 @@ export type TurboSliceType = {
     mineTurbo: boolean;
     timeout: any;
 }
+export type SquadSliceType = {
+    squad: squadDataLeague | null;
+    topSquad: squadDataLeague[];
+    topSquadUsers: UserData[];
+    userSquad: squadDataLeague;
+    isLoading: boolean;
+}
+
 export type MyImageTypes = {
     name: ImageTypes;
     img: HTMLImageElement;
@@ -134,18 +144,24 @@ export type LeagueSliceType = {
     league: LeagueNameType;
     type: 'miner' | 'squad';
     userTop: number,
+    squadTop: number,
     no: number;
     time: 'day' | 'week';
     leagueData: LeagueData;
     topUsers: any[];
+    topSquads: any[];
     leagueList: any[];
     leagueTempData: {
         no: number;
         type: 'miner' | 'squad';
         leagueData: LeagueData,
         topUsers: any[],
+        topSquads: any[],
         userTop: number;
+        squadTop: number;
     }[];
     isLoading: boolean;
     haveLoadAtLeastOnce: boolean;
+    pageLCount: number;
+    loadLeaguePage: boolean;
 }
