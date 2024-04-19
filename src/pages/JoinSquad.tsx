@@ -13,20 +13,6 @@ const JoinSquad = () => {
     const COIN_IMAGE = image.coiners.find((img) => img.name === 'A');
     const dispatch = useDispatch();
     let {id} = useParams();
-
-    useEffect(() => {
-        const mainButton = WebApp.MainButton;
-        mainButton.text = "Save Preferences";
-        mainButton.enable();
-        mainButton.show();
-        // and make it send the "foods" object (as JSON string) back to the backend
-        mainButton.onClick(function () {
-            mainButton.showProgress();
-            user.websocket.emit('joinSquad', {
-                id: squad.squad.id
-            });
-        })
-    }, []);
     useEffect(() => {
         if (squad.squad == null) {
             dispatch(squadLoading());
