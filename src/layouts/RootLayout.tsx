@@ -167,7 +167,6 @@ const RootLayout = () => {
                         navigate(-1)
                         dispatch(setUserSquad(data.squad));
                         dispatch(changeUserSquad(data.squad.id));
-                        WebApp.MainButton.hideProgress();
                     }
                     if (data.type == 'left') {
                         dispatch(setUserSquad(null));
