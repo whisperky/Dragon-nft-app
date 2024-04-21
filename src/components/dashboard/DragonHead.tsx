@@ -15,10 +15,15 @@ const DragonHead = () => {
         }
     }, [score.temp_value]);
     useEffect(() => {
-        if (score.temp_value === 0 || turbo.taps === 0) {
+        if (score.temp_value === 0 && turbo.taps === 0) {
             if (WebApp.isClosingConfirmationEnabled)
                 WebApp.disableClosingConfirmation();
-        } else {
+        }
+        if (score.temp_value > 0) {
+            if (!WebApp.isClosingConfirmationEnabled)
+                WebApp.enableClosingConfirmation();
+        }
+        if (turbo.taps > 0) {
             if (!WebApp.isClosingConfirmationEnabled)
                 WebApp.enableClosingConfirmation();
         }
