@@ -1,3 +1,5 @@
+import {LeaguePresets} from "./types.ts";
+
 export type adminData = {
     id: string;
     name: string | null;
@@ -12,7 +14,7 @@ export type UserData = {
     fName: string | null;
     lName: string | null;
     username: string | null;
-    balance: number;
+    balance: string;
     squad_id: string | null;
     league_id: string | null;
     tap_lvl: number;
@@ -43,8 +45,32 @@ export type squadData = {
     name: string;
     chat_id: string;
     chat_type: chatTypeData;
+    username: string;
+    description: string;
     score: number;
+    members: number;
+    image: string;
     league_id: string;
+    status: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+}
+export type squadDataLeague = {
+    id: string;
+    name: string;
+    chat_id: string;
+    chat_type: chatTypeData;
+    username: string;
+    description: string;
+    score: number;
+    members: number;
+    image: string;
+    league_id: string;
+    league: {
+        name: string,
+        preset: LeaguePresets
+    }
+    status: boolean;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -53,6 +79,7 @@ export type leagueData = {
     name: string;
     score: number;
     type: leagueTypeData;
+    preset: LeaguePresets;
     description: string | null;
     createdAt: Date;
     updatedAt: Date;
@@ -121,8 +148,41 @@ export type frenData = {
     iuser_id: string;
     is_premium: boolean;
     earned: number;
-    iuser?: UserData;
+    iuser?: UserDataFren;
     user?: UserData;
+    createdAt: Date;
+    updatedAt: Date;
+}
+export type topFrenData = {
+    id: string;
+    tg_id: string;
+    fName: string;
+    lName: string;
+    frens: number;
+    earned: number;
+}
+export type UserDataFren = {
+    id: string;
+    tg_id: string;
+    fName: string | null;
+    lName: string | null;
+    username: string | null;
+    balance: string;
+    squad_id: string | null;
+    league_id: string | null;
+    tap_lvl: number;
+    energy_lvl: number;
+    recharge_lvl: number;
+    bot_lvl: number;
+    fren_token: string | null;
+    invited_by: string | null;
+    invited_users: number;
+    last_energy_left: number | null;
+    balance_updated_at: number | null;
+    status: userStatusData | null;
+    botEarn: number;
+    skin: SkinImageTypes;
+    league: leagueData;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -142,7 +202,7 @@ export type UserWebhookData = {
     fName: string;
     lName: string;
     username: string;
-    balance: number;
+    balance: string;
     squad_id: string;
     league_id: string;
     recharge_lvl: number;
@@ -158,6 +218,9 @@ export type UserWebhookData = {
     botEarn: number;
     turbo?: TurboData[]
     skin: SkinImageTypes;
+    league: LeagueData;
+    game: GameData;
+    squad: squadDataLeague;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -188,7 +251,7 @@ export type purchaseReturnData = {
     user: {
         id: string;
         tg_id: string;
-        balance: number;
+        balance: string;
         energy_lvl: number;
         recharge_lvl: number;
         tap_lvl: number;
@@ -211,9 +274,35 @@ export type TurboData = {
     token: string;
     duration: number;
 }
+export type LeagueData = {
+    id: string,
+    name: string,
+    score: string,
+    type: 'miner' | 'squad',
+    description: string,
+    preset: LeaguePresets,
+};
+export type GameData = {
+    id: number;
+    name: string;
+    totalPlayers: string;
+    totalEarned: string;
+    totalSpent: string;
+    dailyUser: string;
+    onlineUsers: string;
+}
 // universal
 
 export type BoosterImageTypes = 'RECHARGING_SPEED' | 'MULTI_TAP' | 'AUTO_TAP_BOT' | 'ENERGY_LIMIT';
 export type DailyBoosterImageTypes = 'ENERGY' | 'TURBO';
 export type SkinImageTypes = 'BASIC' | 'BITCOIN' | 'VOTE_PEDRO' | 'JADE_COIN';
 export type ImageTypes = BoosterImageTypes | DailyBoosterImageTypes | SkinImageTypes | string;
+export type LeagueImageTypes =
+    'BRONZE_LEAGUE'
+    | 'SILVER_LEAGUE'
+    | 'GOLD_LEAGUE'
+    | 'PLATINUM_LEAGUE'
+    | 'EMERALD_LEAGUE'
+    | 'RUBY_LEAGUE'
+    | 'DIAMOND_LEAGUE'
+    | 'LOONG_LEAGUE';

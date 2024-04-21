@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import {createSlice} from '@reduxjs/toolkit'
 import Service from "../service/Service.ts";
 import {UserData} from "../types/data.ts";
 import {UserSliceType} from "../types/store.ts";
@@ -14,7 +14,7 @@ const userSlice = createSlice({
         requestUserData: (state) => {
             state.dataRequested = true;
         },
-        setUser: (state, action: {payload: UserData}) => {
+        setUser: (state, action: { payload: UserData }) => {
             state.data = action.payload;
         },
         setUserPurchaseReturn: (state, action) => {
@@ -31,9 +31,13 @@ const userSlice = createSlice({
                 state.data.createdAt = action.payload.createdAt;
                 state.data.updatedAt = action.payload.updatedAt;
             }
+        },
+        changeUserSquad: (state, action) => {
+            if (state.data != null)
+                state.data.squad_id = action.payload;
         }
     }
 })
 
-export const {requestUserData, setUser, setUserPurchaseReturn} = userSlice.actions
+export const {requestUserData, setUser, setUserPurchaseReturn, changeUserSquad} = userSlice.actions
 export default userSlice.reducer

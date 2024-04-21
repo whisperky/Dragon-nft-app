@@ -1,12 +1,8 @@
-import coinImg from "../../../public/icon/main/small-coin.svg";
-import arrow from "../../../public/icon/defaults/open-arrow.svg";
-import check from "../../../public/icon/defaults/check.svg";
-import lockedImg from "../../../public/icon/boosts/locked.svg";
 import {showBottomSheet} from "../../store/game.ts";
 import {useDispatch, useSelector} from "react-redux";
-import {BoostSliceType, ImageSliceType, MyImageTypes, MySkinImageTypes, PurchaseSliceType} from "../../types/store.ts";
-import toast from "react-hot-toast";
+import {ImageSliceType, MyImageTypes, MySkinImageTypes, PurchaseSliceType} from "../../types/store.ts";
 import {MouseEventHandler} from "react";
+import {showToast} from "../../helpers/helper.ts";
 
 const BoostItem = ({
                        image,
@@ -50,17 +46,19 @@ const BoostItem = ({
     //     locked = false;
     // }
     const images: ImageSliceType = useSelector((state: any) => state.image);
+    const COIN_IMG = images.core.find((img: any) => img.name == 'COIN_TOOL');
+    const LOCKED_IMG = images.optional.find((img: any) => img.name == 'LOCKED_ICON');
+    const OPEN_IMG = images.optional.find((img: any) => img.name == 'OPEN_ARROW');
+    const CHECK_IMG = images.optional.find((img: any) => img.name == 'CHECK_ICON');
     let imgHelp: MyImageTypes & MySkinImageTypes = [...images.booster, ...images.skin].find((img: any) => img.name == item.image) as any;
-    let img = imgHelp !== undefined ? itemType == 'skin' ? imgHelp.img.normal : imgHelp.img : null;
+    let img = imgHelp !== undefined ? itemType == 'skin' ? imgHelp?.img.normal : imgHelp?.img : null;
     const clickHandler = () => {
-        if (disabled || trailing == 'enabled') {}
-        else {
+        if (disabled || trailing == 'enabled') {
+        } else {
             if (haveEnough || (trailing == 'disabled' && itemType == 'skin')) {
                 dispatch(showBottomSheet({item: item, type: itemType}))
             } else {
-                toast.error('You do not have enough coins', {
-                    id: purchase.toast,
-                });
+                showToast(purchase.toast, 'You do not have enough coins', 'error')
             }
         }
 
@@ -77,8 +75,8 @@ const BoostItem = ({
                     {isMax ? <p className='mt-2'>{isBot ? 'Taps when you\'re asleep' : 'Max level reached'}</p> :
                         <div className='b-item-pricing'>
                             <div className='b-item-price'>
-                                {coin && <img src={coinImg} alt='coin'/>}
-                                {locked && <img src={lockedImg} alt='locked'/>}
+                                {coin && COIN_IMG ? <img src={COIN_IMG?.img.src} alt='coin'/> : null}
+                                {locked && LOCKED_IMG ? <img src={LOCKED_IMG?.img.src} alt='locked'/> : null}
                                 <span style={{
                                     color: subtitleColor == 'gold' ? '#FFD041' : 'white',
                                     opacity: subtitleColor == 'grey' ? .5 : 1
@@ -91,14 +89,15 @@ const BoostItem = ({
                 </div>
             </div>
             {(trailing == 'opener' ?
-                    <img onClick={onTrailing} className='b-item-arrow opacity-less' src={arrow} alt='opener'/>
-                    : trailing == 'enabled' ?
-                        <span onClick={onTrailing} className='b-item-badge glass b-item-badge-enabled mr-4'>enabled</span> :
-                        trailing == 'disabled' ?
-                            <span onClick={onTrailing} className='b-item-badge glass mr-4'>turn on</span> :
-                            trailing == 'completed' ?
-                                <img onClick={onTrailing} className='b-item-arrow' src={check}
-                                     alt='completed'/> : <></>)}
+                OPEN_IMG ? <img onClick={onTrailing} className='b-item-arrow opacity-less' src={OPEN_IMG?.img.src}
+                                alt='opener'/> : null
+                : trailing == 'enabled' ?
+                    <span onClick={onTrailing} className='b-item-badge glass b-item-badge-enabled mr-4'>enabled</span> :
+                    trailing == 'disabled' ?
+                        <span onClick={onTrailing} className='b-item-badge glass mr-4'>turn on</span> :
+                        trailing == 'completed' ?
+                            CHECK_IMG ? <img onClick={onTrailing} className='b-item-arrow' src={CHECK_IMG?.img.src}
+                                             alt='completed'/> : null : <></>)}
         </div>
     );
 };

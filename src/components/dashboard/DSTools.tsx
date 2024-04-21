@@ -1,7 +1,7 @@
 import {useNavigate} from "react-router-dom";
-import toast from "react-hot-toast";
 import {useSelector} from "react-redux";
 import {ImageSliceType} from "../../types/store.ts";
+import {showToast} from "../../helpers/helper.ts";
 
 const DSTools = () => {
     const purchase = useSelector((state: any) => state.purchase);
@@ -11,7 +11,7 @@ const DSTools = () => {
         navigate('fren')
     }
     const toEarn = () => {
-        toast('Coming soon', {id: purchase.toast})
+        showToast(purchase.toast, 'Coming soon')
     }
     const toBoosts = () => {
         navigate(`boosts`);
@@ -23,7 +23,7 @@ const DSTools = () => {
         const COIN_TOOL = images.core.find((img) => img.name === 'COIN_TOOL').img;
         const DRAGON_TOOL = images.core.find((img) => img.name === 'DRAGON_TOOL').img;
         return (
-            <div className='ds-tools'>
+            <div className='ds-tools animate__animated animate__fadeIn'>
                 <div className='ds-tool-box' onClick={toFrens}>
                     <img src={TOY_TOOL.src} alt='toy'/>
                     <p>Frens</p>

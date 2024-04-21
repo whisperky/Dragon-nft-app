@@ -1,8 +1,8 @@
 import {useDispatch, useSelector} from "react-redux";
 import {dailyBoosterData, userDailyBoost} from "../../types/data.ts";
 import {showBottomSheet} from "../../store/game.ts";
-import toast from "react-hot-toast";
 import {ImageSliceType, PurchaseSliceType} from "../../types/store.ts";
+import {showToast} from "../../helpers/helper.ts";
 
 const DailyBoosters = () => {
     const boosts = useSelector((state: any) => state.boost);
@@ -17,20 +17,18 @@ const DailyBoosters = () => {
         if (leftB > 0) {
             dispatch(showBottomSheet({item: item, type: 'daily_booster'}))
         } else {
-            toast.error('You have used all your free booster', {
-                id: purchase.toast,
-            });
+            showToast(purchase.toast,'You have used all your free booster', 'error')
         }
     };
     return (
         <div className=''>
-            <p className='boost-title'>Free Boosts</p>
-            <div className='daily-boosters glass'>
+            <p className='boost-title animate__animated animate__fadeIn animate__slow'>Free Boosts</p>
+            <div className='daily-boosters glass  animate__animated animate__fadeIn animate__slow'>
                 {
                     dailyBoosts.map((boost) => {
                         const leftB = boost.limit - ((leftDailyBoosts.filter((b: any) => b.id === boost.id)[0]).used);
                         const dailyImg = images.dailyBooster.find((img: any) => img.name == boost.image);
-                        const img = dailyImg ? dailyImg.img : null;
+                        const img = dailyImg ? dailyImg?.img : null;
                         return (
                             <div className='single-booster glass-hover' key={boost.id}
                                  onClick={() => buyBooster(boost.id)}>

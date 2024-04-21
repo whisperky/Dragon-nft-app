@@ -5,15 +5,25 @@ const frenSlice = createSlice({
     initialState: {
         haveData: false,
         list: [],
+        topFrens: [],
+        isTopFrenLoading: false,
     } as FrenSliceType,
     reducers: {
         setFrens: (state, action) => {
-            console.log(action.payload);
             state.list = action.payload;
             state.haveData = true;
         },
+        topFrenLoading: (state) => {
+            state.isTopFrenLoading = true;
+        },
+        topFrenLoad: (state) => {
+            state.isTopFrenLoading = false;
+        },
+        setTopFrens: (state, action) => {
+            state.topFrens = action.payload;
+        }
     }
 })
 
-export const { setFrens } = frenSlice.actions
+export const { setFrens, setTopFrens, topFrenLoading, topFrenLoad } = frenSlice.actions
 export default frenSlice.reducer;

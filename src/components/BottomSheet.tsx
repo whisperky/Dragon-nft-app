@@ -1,9 +1,7 @@
 import Sheet from 'react-modal-sheet';
 import {useDispatch, useSelector} from "react-redux";
 import {hideBottomSheet} from "../store/game.ts";
-import {useEffect, useRef} from 'react';
-import coin from '../../public/icon/main/small-coin.svg';
-import close from '../../public/icon/defaults/close.svg';
+import {useRef} from 'react';
 
 import {
     useOverlay,
@@ -14,10 +12,9 @@ import {
 } from 'react-aria';
 import {boosterData, skinData, userDailyBoost, UserData} from "../types/data.ts";
 import {numify} from "../helpers/score.helper.ts";
-import toast from "react-hot-toast";
 import {setPurchaseItem} from "../store/purchase.ts";
 import {GameSliceType, ImageSliceType, ScoreSliceType, SkinSliceType, UserSliceType} from "../types/store.ts";
-import {calculateBoostPrice, getLevels} from "../helpers/helper.ts";
+import {calculateBoostPrice, getLevels, showToast} from "../helpers/helper.ts";
 
 const BottomSheet = () => {
     const game: GameSliceType = useSelector((state: any) => state.game);
@@ -68,45 +65,37 @@ const SheetComp = () => {
         {onClose: () => dispatch(hideBottomSheet()), isOpen: game.bottomSheet, isDismissable: true},
         containerRef
     );
+
+    const COIN_IMG = image.core.find((i) => i.name === 'COIN_TOOL');
+    const CLOSE_IMG = image.optional.find((i) => i.name === 'CLOSE_ICON');
+
     useModal();
     const onPurchaseHandler = () => {
         dispatch(hideBottomSheet())
         if (game.itemType == 'daily_booster') {
-            toast.loading(`Buying ${item.name}`, {
-                id: purchase.toast,
-            });
+            showToast(purchase.toast, `Buying ${item.name}`, 'loading');
             const leftDailyBoosts: userDailyBoost[] = boost.leftDailyBoosts;
             const leftBoost = game.item.limit - ((leftDailyBoosts.filter((b: any) => game.item.id === b.id)[0]).used);
             if (leftBoost <= 0) {
-                toast.error('You have reached your limit', {
-                    id: purchase.toast,
-                });
-            }
-            else {
+                showToast(purchase.toast, 'You have reached your limit', 'error')
+            } else {
                 websocket.emit('purchase', {
                     type: game.itemType,
                     item: game.item.id,
                 });
                 dispatch(setPurchaseItem(game.item.id))
             }
-        }
-        else if (game.itemType == 'booster') {
-            toast.loading(`Buying ${item.name}`, {
-                id: purchase.toast,
-            });
-            if (itemPrice > score.value) {
-                toast.error('You do not have enough coins', {
-                    id: purchase.toast,
-                });
+        } else if (game.itemType == 'booster') {
+            showToast(purchase.toast, `Buying ${item.name}`, 'loading')
+            if (BigInt(itemPrice) > BigInt(score.value)) {
+                showToast(purchase.toast, 'You do not have enough coins', 'error')
             } else if (
                 (game.itemType == 'booster' && game.item.image == 'ENERGY_LIMIT' && game.item.max_lvl !== 0 && game.item.max_lvl <= score.energy_lvl) ||
                 (game.itemType == 'booster' && game.item.image == 'AUTO_TAP_BOT' && game.item.max_lvl !== 0 && game.item.max_lvl <= score.bot_lvl) ||
                 (game.itemType == 'booster' && game.item.image == 'MULTI_TAP' && game.item.max_lvl !== 0 && game.item.max_lvl <= score.tap_lvl) ||
                 (game.itemType == 'booster' && game.item.image == 'RECHARGING_SPEED' && game.item.max_lvl !== 0 && game.item.max_lvl <= score.recharge_lvl)
             ) {
-                toast.error('You have reached the maximum level', {
-                    id: purchase.toast,
-                });
+                showToast(purchase.toast, 'You have reached the maximum level', 'error')
             } else {
                 websocket.emit('purchase', {
                     type: game.itemType,
@@ -115,25 +104,20 @@ const SheetComp = () => {
                 dispatch(setPurchaseItem(game.item.id))
                 // toast(`${game.item.price} > ${user.balance} Coming soon ${game.itemType} + ${game.item.id} + ${game.item.name} `, {id: purchase.toast})
             }
-        }
-        else if (game.itemType == 'skin') {
+        } else if (game.itemType == 'skin') {
             const uSkin = skins.userSkins.find((x) => x.skin_id == game.item.id);
             const ownSkin = uSkin != undefined;
             // const isEnabled = ownSkin ? uSkin.status == true : false;
 
             if (!ownSkin) {
-                toast.loading(`Buying ${item.name}`, {
-                    id: purchase.toast,
-                });
+                showToast(purchase.toast, `Buying ${item.name}`, 'loading')
                 websocket.emit('purchase', {
                     type: game.itemType,
                     item: game.item.id,
                 });
                 dispatch(setPurchaseItem(game.item.id))
             } else {
-                toast.loading(`Changing skin to ${item.name}`, {
-                    id: purchase.toast,
-                });
+                showToast(purchase.toast, `Changing skin to ${item.name}`, 'loading')
                 websocket.emit('changeSkin', {
                     uSkinId: uSkin.id
                 })
@@ -143,8 +127,8 @@ const SheetComp = () => {
     // In real world usage this would be a separate React component
     const customHeader = (
         <div>
-            <button className='bottom-sheet-close-btn' onClick={() => dispatch(hideBottomSheet())}><img src={close}
-                                                                                                        alt='X'/>
+            <button className='bottom-sheet-close-btn' onClick={() => dispatch(hideBottomSheet())}>
+                {CLOSE_IMG ? <img src={CLOSE_IMG?.img.src} alt='X'/> : null}
             </button>
         </div>
     );
@@ -152,7 +136,8 @@ const SheetComp = () => {
     const boost_img = image.booster.find((x) => x.name == item.image);
     const skin_img = image.skin.find((x) => x.name == item.image)
 
-    const img = game.itemType == "daily_booster" && daily_img != undefined ? daily_img.img : game.itemType == 'booster' && boost_img != undefined ? boost_img.img : game.itemType == 'skin' && skin_img != undefined ? skin_img.img.normal : null;
+
+    const img = game.itemType == "daily_booster" && daily_img != undefined ? daily_img?.img : game.itemType == 'booster' && boost_img != undefined ? boost_img?.img : game.itemType == 'skin' && skin_img != undefined ? skin_img?.img.normal : null;
     if (game.itemType == 'skin') {
         const uSkin = skins.userSkins.find((x) => x.skin_id == game.item.id);
         const ownSkin = uSkin != undefined;
@@ -174,7 +159,7 @@ const SheetComp = () => {
                             <span className='bs-subtitle'>{item.description}</span>
                             {!ownSkin ? <div className='bs-pricing'>
                                 <div className='bs-price'>
-                                    <img src={coin} alt='coin'/>
+                                    {COIN_IMG ? <img src={COIN_IMG?.img.src} alt='coin'/> : null}
                                     <span>{item.price == 0 ? 'Free' : numify(itemPrice)}</span>
                                 </div>
                             </div> : <></>}
@@ -204,7 +189,7 @@ const SheetComp = () => {
                             {/*<span className='bs-over-subtitle'>{item.}</span>*/}
                             <div className='bs-pricing'>
                                 <div className='bs-price'>
-                                    <img src={coin} alt='coin'/>
+                                    {COIN_IMG ? <img src={COIN_IMG?.img.src} alt='coin'/> : null}
                                     <span>{item.price == 0 ? 'Free' : numify(itemPrice)}</span>
                                 </div>
                                 {game.itemType == 'booster' && <span>/ Level {item_lvl}</span>}

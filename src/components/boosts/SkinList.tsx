@@ -20,7 +20,7 @@ const SkinList = () => {
 
     return (
         <div className=''>
-            <p className='boost-title'>Skins</p>
+            <p className='boost-title animate__animated animate__fadeIn animate__slow'>Skins</p>
             {/*<Flickity*/}
             {/*    className={"skin-container"} // default ''*/}
             {/*    elementType={"div"} // default 'div'*/}
@@ -29,14 +29,14 @@ const SkinList = () => {
             {/*    reloadOnUpdate*/}
             {/*    static*/}
             {/*>*/}
-                <div className={'skin-item'}>
+                <div className={'skin-item animate__animated animate__fadeIn animate__slow'}>
                     <div className='boosters-list glass'>
                         {
                             skins.list.map((skin: skinData) => {
                                 const uSkin = skins.userSkins.find((x) => x.skin_id == skin.id);
                                 const ownSkin = uSkin != undefined;
                                 const isEnabled = ownSkin ? uSkin.status == true : false;
-                                return <BoostItem haveEnough={score.value >= skin.price} item={skin} key={skin.id} title={skin.name} subtitle={ownSkin ? isEnabled ? '' : 'You own it' : numify(skin.price)} image={skin.image} coin={!ownSkin} subtitleColor={ownSkin ? 'grey' : "gold"}  trailing={ownSkin ? isEnabled ? 'enabled' :'disabled' : 'opener'} />
+                                return <BoostItem haveEnough={BigInt(score.value) >= BigInt(skin.price)} item={skin} key={skin.id} title={skin.name} subtitle={ownSkin ? isEnabled ? '' : 'You own it' : numify(skin.price)} image={skin.image} coin={!ownSkin} subtitleColor={ownSkin ? 'grey' : "gold"}  trailing={ownSkin ? isEnabled ? 'enabled' :'disabled' : 'opener'} />
                             })
                         }
                         {/*<BoostItem title='Basic' image={defaualtCoin} trailing='enabled'/>*/}

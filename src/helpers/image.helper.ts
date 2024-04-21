@@ -24,16 +24,82 @@ import COIN_TOOL_IMG from '../../public/icon/main/small-coin.svg';
 import COIN_SPACE_IMG from '../../public/icon/main/coin-space.svg';
 import DRAGON_TOOL_IMG from '../../public/icon/main/dragon.svg';
 
+import BRONZE_LEAGUE from '../../public/icon/rank/bronze.svg';
+import SILVER_LEAGUE from '../../public/icon/rank/silver.svg';
+import GOLD_LEAGUE from '../../public/icon/rank/gold.svg';
+import PLATINUM_LEAGUE from '../../public/icon/rank/platinum.svg';
+import EMERALD_LEAGUE from '../../public/icon/rank/emerald.svg';
+import RUBY_LEAGUE from '../../public/icon/rank/ruby.svg';
+import DIAMOND_LEAGUE from '../../public/icon/rank/diamond.svg';
+import LOONG_LEAGUE from '../../public/icon/rank/loong.svg';
+
+import BRONZE_LEAGUE_SMALL from '../../public/icon/rank/small/bronze.svg';
+import SILVER_LEAGUE_SMALL from '../../public/icon/rank/small/silver.svg';
+import GOLD_LEAGUE_SMALL from '../../public/icon/rank/small/gold.svg';
+import PLATINUM_LEAGUE_SMALL from '../../public/icon/rank/small/platinum.svg';
+import EMERALD_LEAGUE_SMALL from '../../public/icon/rank/small/emerald.svg';
+import RUBY_LEAGUE_SMALL from '../../public/icon/rank/small/ruby.svg';
+import DIAMOND_LEAGUE_SMALL from '../../public/icon/rank/small/diamond.svg';
+import LOONG_LEAGUE_SMALL from '../../public/icon/rank/small/loong.svg';
+
+import BRONZE_LEAGUE_BG from '../../public/background/skin/bronze.svg';
+import SILVER_LEAGUE_BG from '../../public/background/skin/silver.svg';
+import GOLD_LEAGUE_BG from '../../public/background/skin/gold.svg';
+import PLATINUM_LEAGUE_BG from '../../public/background/skin/platinum.svg';
+import EMERALD_LEAGUE_BG from '../../public/background/skin/emerald.svg';
+import RUBY_LEAGUE_BG from '../../public/background/skin/ruby.svg';
+import DIAMOND_LEAGUE_BG from '../../public/background/skin/diamond.svg';
+import LOONG_LEAGUE_BG from '../../public/background/skin/loong.svg';
+
+import A from '../../public/users-img/1.jpg';
+import B from '../../public/users-img/2.jpg';
+import C from '../../public/users-img/3.jpg';
+import D from '../../public/users-img/4.jpg';
+import E from '../../public/users-img/5.jpg';
+import F from '../../public/users-img/6.jpg';
+import G from '../../public/users-img/7.jpg';
+import H from '../../public/users-img/8.jpg';
+import I from '../../public/users-img/9.jpg';
+import J from '../../public/users-img/10.jpg';
+import K from '../../public/users-img/11.jpg';
+import L from '../../public/users-img/12.jpg';
+import M from '../../public/users-img/13.jpg';
+import N from '../../public/users-img/14.jpg';
+import O from '../../public/users-img/15.jpg';
+
+import JOIN_SQUAD_BG from '../../public/background/squad/Squad_BG.svg';
+import TOP_FRENS_BG from '../../public/background/fren/topfren_BG.svg';
+import SQUAD_DETAIL_BG from '../../public/background/squad/Squad_Detail_BG.svg'
+import OPEN_ARROW from "../../public/icon/defaults/open-arrow.svg";
+import LEFT_ARROW from "../../public/icon/defaults/left-arrow.svg";
+import RIGHT_ARROW from "../../public/icon/defaults/right-arrow.svg";
+import TG_PREMIUM from '../../public/icon/tg_premium.svg';
+import FIRST_BADGE from '../../public/icon/rank/top/one.svg';
+import SECOND_BADGE from '../../public/icon/rank/top/two.svg';
+import THIRD_BADGE from '../../public/icon/rank/top/three.svg';
+import CHECK_ICON from "../../public/icon/defaults/right-arrow.svg";
+import CLOSE_ICON from "../../public/icon/defaults/close.svg";
+import LOCKED_ICON from "../../public/icon/boosts/locked.svg";
+import CELEBRATION_ICON from "../../public/icon/squad/celebration.svg";
+
 import {addCoinLoadedImg} from "../store/loading.ts";
 import {store} from "../store/store.ts";
-import {SkinImageTypes} from "../types/data.ts";
+import {LeagueImageTypes, SkinImageTypes} from "../types/data.ts";
 import {
     addActiveSkinsImages,
-    addBoosterImages,
+    addBoosterImages, addCoinersImages,
     addCoreImages,
     addDailyBoosterImages,
+    addLeagueImages, addOptionalImages,
     addOthersImages,
-    addSkinImages, setActiveSkinsDone, setCoreDone, setDailyBoosterDone
+    addSkinImages,
+    setActiveSkinsDone,
+    setBoosterDone, setCoinersDone,
+    setCoreDone,
+    setDailyBoosterDone,
+    setLeagueDone, setOptionalDone,
+    setOthersDone,
+    setSkinDone
 } from "../store/image.ts";
 
 // const getImage = (handler: string) => {
@@ -133,8 +199,10 @@ export const loadBoostImages = () => {
                         name: img.name,
                         img: im
                     }))
-                }
-                else if (img.type == 'dailyBooster') {
+                    if (store.getState().image.booster.filter((x) => x.name === 'RECHARGING_SPEED' || x.name === 'MULTI_TAP' || x.name == 'AUTO_TAP_BOT' || x.name == 'ENERGY_LIMIT').length >= 4) {
+                        store.dispatch(setBoosterDone(true))
+                    }
+                } else if (img.type == 'dailyBooster') {
                     store.dispatch(addDailyBoosterImages({
                         name: img.name,
                         img: im
@@ -142,19 +210,23 @@ export const loadBoostImages = () => {
                     if (store.getState().image.dailyBooster.filter((x) => x.name === 'TURBO' || x.name === 'ENERGY').length >= 2) {
                         store.dispatch(setDailyBoosterDone(true))
                     }
-                }
-                else if (img.type == 'skin') {
+                } else if (img.type == 'skin') {
                     store.dispatch(addSkinImages({
                         name: img.name as SkinImageTypes,
                         img: im,
                         type: image.type
                     }))
-                }
-                else if (img.type == 'booster') {
+                    if (store.getState().image.skin.filter((x) => x.name === 'BASIC' || x.name === 'BITCOIN' || x.name == 'VOTE_PEDRO' || x.name == 'JADE_COIN').length >= 4) {
+                        store.dispatch(setSkinDone(true))
+                    }
+                } else {
                     store.dispatch(addOthersImages({
                         name: img.name,
                         img: im
                     }))
+                    if (store.getState().image.others.filter((x) => 'COIN_SPACE').length >= 1) {
+                        store.dispatch(setOthersDone(true))
+                    }
                 }
             }
         });
@@ -280,6 +352,108 @@ export const loadCoreImages = () => {
             }))
             if (store.getState().image.core.filter((x) => x.name === 'TOY_TOOL' || x.name === 'COIN_TOOL' || x.name === 'DRAGON_TOOL').length >= 3) {
                 store.dispatch(setCoreDone(true))
+            }
+        }
+    })
+}
+export const loadLeagueImages = () => {
+    const leagueImages: { name: LeagueImageTypes, src: { img: any, bg: any, small: any } }[] = [
+        {name: 'BRONZE_LEAGUE', src: {img: BRONZE_LEAGUE, bg: BRONZE_LEAGUE_BG, small: BRONZE_LEAGUE_SMALL}},
+        {name: 'SILVER_LEAGUE', src: {img: SILVER_LEAGUE, bg: SILVER_LEAGUE_BG, small: SILVER_LEAGUE_SMALL}},
+        {name: 'GOLD_LEAGUE', src: {img: GOLD_LEAGUE, bg: GOLD_LEAGUE_BG, small: GOLD_LEAGUE_SMALL}},
+        {name: 'PLATINUM_LEAGUE', src: {img: PLATINUM_LEAGUE, bg: PLATINUM_LEAGUE_BG, small: PLATINUM_LEAGUE_SMALL}},
+        {name: 'EMERALD_LEAGUE', src: {img: EMERALD_LEAGUE, bg: EMERALD_LEAGUE_BG, small: EMERALD_LEAGUE_SMALL}},
+        {name: 'RUBY_LEAGUE', src: {img: RUBY_LEAGUE, bg: RUBY_LEAGUE_BG, small: RUBY_LEAGUE_SMALL}},
+        {name: 'DIAMOND_LEAGUE', src: {img: DIAMOND_LEAGUE, bg: DIAMOND_LEAGUE_BG, small: DIAMOND_LEAGUE_SMALL}},
+        {name: 'LOONG_LEAGUE', src: {img: LOONG_LEAGUE, bg: LOONG_LEAGUE_BG, small: LOONG_LEAGUE_SMALL}},
+    ];
+    return leagueImages.forEach((img) => {
+        const image = new Image()
+        image.src = img.src.img;
+        const bg_image = new Image();
+        bg_image.src = img.src.bg;
+        const small_image = new Image();
+        image.onload = () => {
+            bg_image.src = img.src.bg;
+        }
+        bg_image.onload = () => {
+            small_image.src = img.src.small;
+        }
+        small_image.onload = () => {
+            store.dispatch(addLeagueImages({
+                name: img.name,
+                img: {
+                    main: image,
+                    bg: bg_image,
+                    small: small_image
+                }
+            }))
+            if (store.getState().image.league.filter((x) => x.name === 'BRONZE_LEAGUE' || x.name === 'SILVER_LEAGUE' || x.name === 'GOLD_LEAGUE' || x.name === 'PLATINUM_LEAGUE' || x.name === 'EMERALD_LEAGUE' || x.name === 'RUBY_LEAGUE' || x.name === 'DIAMOND_LEAGUE' || x.name === 'LOONG_LEAGUE').length >= 8) {
+                store.dispatch(setLeagueDone(true))
+            }
+        }
+    })
+}
+export const loadCoinersImages = () => {
+    const loadImages = [
+        {name: 'A', src: A},
+        {name: 'B', src: B},
+        {name: 'C', src: C},
+        {name: 'D', src: D},
+        {name: 'E', src: E},
+        {name: 'F', src: F},
+        {name: 'G', src: G},
+        {name: 'H', src: H},
+        {name: 'I', src: I},
+        {name: 'J', src: J},
+        {name: 'K', src: K},
+        {name: 'L', src: L},
+        {name: 'M', src: M},
+        {name: 'N', src: N},
+        {name: 'O', src: O}
+    ];
+    return loadImages.forEach((img) => {
+        const im = new Image()
+        im.src = img.src
+        im.onload = () => {
+            store.dispatch(addCoinersImages({
+                name: img.name,
+                img: im
+            }))
+            if (store.getState().image.coiners.filter((x) => x.name == 'A' || x.name == 'B' || x.name == 'C' || x.name == 'D' || x.name == 'E' || x.name == 'F' || x.name == 'G' || x.name == 'H' || x.name == 'I' || x.name == 'J' || x.name == 'K' || x.name == 'L' || x.name == 'M' || x.name == 'N' || x.name == 'O').length >= 15) {
+                store.dispatch(setCoinersDone(true))
+            }
+        }
+    })
+}
+
+export const loadOptionalImages = () => {
+    const loadImages = [
+        {name: 'JOIN_SQUAD_BG', src: JOIN_SQUAD_BG},
+        {name: 'TOP_FRENS_BG', src: TOP_FRENS_BG},
+        {name: 'SQUAD_DETAIL_BG', src: SQUAD_DETAIL_BG},
+        {name: 'OPEN_ARROW', src: OPEN_ARROW},
+        {name: 'LEFT_ARROW', src: LEFT_ARROW},
+        {name: 'RIGHT_ARROW', src: RIGHT_ARROW},
+        {name: 'TG_PREMIUM', src: TG_PREMIUM},
+        {name: 'FIRST_BADGE', src: FIRST_BADGE},
+        {name: 'SECOND_BADGE', src: SECOND_BADGE},
+        {name: 'THIRD_BADGE', src: THIRD_BADGE},
+        {name: 'CHECK_ICON', src: CHECK_ICON},
+        {name: 'CLOSE_ICON', src: CLOSE_ICON},
+        {name: 'LOCKED_ICON', src: LOCKED_ICON},
+        {name: 'CELEBRATION_ICON', src: CELEBRATION_ICON}
+    ];
+    return loadImages.forEach((img) => {
+        const im = new Image()
+        im.src = img.src
+        im.onload = () => {
+            store.dispatch(addOptionalImages({
+                name: img.name,
+                img: im
+            }))
+            if (store.getState().image.optional.filter((x) => x.name == 'JOIN_SQUAD_BG' || x.name == 'TOP_FRENS_BG' || x.name == 'SQUAD_DETAIL_BG' || x.name == 'OPEN_ARROW' || x.name == 'LEFT_ARROW' || x.name == 'RIGHT_ARROW' || x.name == 'TG_PREMIUM' || x.name == 'FIRST_BADGE' || x.name == 'SECOND_BADGE' || x.name == 'THIRD_BADGE' || x.name == 'CHECK_ICON' || x.name == 'CLOSE_ICON' || x.name == 'LOCKED_ICON' || x.name == 'CELEBRATION_ICON').length >= 14) {
+                store.dispatch(setOptionalDone(true))
             }
         }
     })

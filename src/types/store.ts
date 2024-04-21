@@ -2,12 +2,13 @@ import {
     boosterData,
     BoosterImageTypes,
     dailyBoosterData,
-    DailyBoosterImageTypes, ImageTypes,
+    DailyBoosterImageTypes, ImageTypes, LeagueData, LeagueImageTypes,
     skinData,
-    SkinImageTypes, TurboData,
+    SkinImageTypes, squadData, squadDataLeague, TurboData,
     UserData
 } from "./data.ts";
 import React, {ReactElement} from "react";
+import {LeagueNameType, LeaguePresets} from "./types.ts";
 
 export type GameSliceType = {
     item: dailyBoosterData & skinData & boosterData | null;
@@ -15,10 +16,15 @@ export type GameSliceType = {
     bottomSheet: boolean;
     botBottomSheet: boolean;
     botEarn: number;
+    totalEarned: string;
+    totalSpent: string;
+    totalPlayers: string;
+    dailyUser: string;
+    onlineUsers: string;
 }
 export type ScoreSliceType = {
     temp_value: number;
-    value: number;
+    value: string;
     tap_lvl: number;
     energy: number;
     energy_lvl: number;
@@ -73,6 +79,8 @@ export type PurchaseSliceType = {
 export type FrenSliceType = {
     haveData: boolean;
     list: any[];
+    topFrens: any[];
+    isTopFrenLoading: boolean;
 }
 export type TurboSliceType = {
     taps: number;
@@ -83,7 +91,18 @@ export type TurboSliceType = {
     style: React.CSSProperties;
     availableTurbos: TurboData[];
     mineTurbo: boolean;
+    timeout: any;
 }
+export type SquadSliceType = {
+    squad: squadDataLeague | null;
+    topSquad: squadDataLeague[];
+    topSquadUsers: UserData[];
+    userSquad: squadDataLeague;
+    isPageLoop: boolean;
+    isLoading: boolean;
+    isTopLoading: boolean;
+}
+
 export type MyImageTypes = {
     name: ImageTypes;
     img: HTMLImageElement;
@@ -95,6 +114,14 @@ export type MySkinImageTypes = {
         turbo: HTMLImageElement;
     }
 }
+export type MyLeagueImageTypes = {
+    name: LeagueImageTypes;
+    img: {
+        main: HTMLImageElement;
+        bg: HTMLImageElement;
+        small: HTMLImageElement;
+    }
+}
 export type ImageSliceType = {
     core: MyImageTypes[];
     activeSkins: MySkinImageTypes;
@@ -102,6 +129,9 @@ export type ImageSliceType = {
     dailyBooster: MyImageTypes[];
     skin: MySkinImageTypes[];
     others: MyImageTypes[];
+    league: MyLeagueImageTypes[];
+    coiners: MyImageTypes[];
+    optional: MyImageTypes[];
 
     isCoreDone: boolean;
     isActiveSkinsDone: boolean;
@@ -109,4 +139,33 @@ export type ImageSliceType = {
     isDailyBoosterDone: boolean;
     isSkinDone: boolean;
     isOthersDone: boolean;
+    isLeagueDone: boolean;
+    isCoinersDone: boolean;
+    isOptionalDone: boolean;
+}
+export type LeagueSliceType = {
+    userLeague: LeagueData;
+    league: LeagueNameType;
+    type: 'miner' | 'squad';
+    userTop: number,
+    squadTop: number,
+    no: number;
+    time: 'day' | 'week';
+    leagueData: LeagueData;
+    topUsers: any[];
+    topSquads: any[];
+    leagueList: any[];
+    leagueTempData: {
+        no: number;
+        type: 'miner' | 'squad';
+        leagueData: LeagueData,
+        topUsers: any[],
+        topSquads: any[],
+        userTop: number;
+        squadTop: number;
+    }[];
+    isLoading: boolean;
+    haveLoadAtLeastOnce: boolean;
+    pageLCount: number;
+    loadLeaguePage: boolean;
 }
