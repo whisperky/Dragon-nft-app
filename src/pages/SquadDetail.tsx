@@ -8,6 +8,7 @@ import {getColorWithId, leagueName, leagueToNumber, profileAvatarName} from "../
 import {numShort} from "../helpers/score.helper.ts";
 import {squadLoading} from "../store/squad.ts";
 import {changeLeagueType, setLeagueNo, setLoadLeaguePage} from "../store/league.ts";
+import SquadSkeleton from "../skeleton/SquadSkeleton.tsx";
 
 const SquadDetail = () => {
     const squad: SquadSliceType = useSelector((state: any) => state.squad);
@@ -37,7 +38,7 @@ const SquadDetail = () => {
         }
     }, [squad.squad]);
     const shortName = profileAvatarName(squad.squad?.name);
-    return squad.isLoading ? <>Loading ...</> : (
+    return squad.isLoading ? <SquadSkeleton /> : (
         <div className='squad-detail-con'>
             <div className='squad-detail-header'>
                 {SQUAD_DETAIL_BG ? <img className='squad-detail-header-bg' src={SQUAD_DETAIL_BG?.img.src} alt='background'/> : null}
