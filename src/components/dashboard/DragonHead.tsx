@@ -13,14 +13,16 @@ const DragonHead = () => {
         if ((score.temp_value % 150 == 0 || score.temp_value == 0) && turbo.availableTurbos.length > 0) {
             dispatch(activateTurbo());
         }
-        if (score.temp_value === 0) {
+    }, [score.temp_value]);
+    useEffect(() => {
+        if (score.temp_value === 0 || turbo.taps === 0) {
             if (WebApp.isClosingConfirmationEnabled)
                 WebApp.disableClosingConfirmation();
         } else {
             if (!WebApp.isClosingConfirmationEnabled)
                 WebApp.enableClosingConfirmation();
         }
-    }, [score.temp_value]);
+    }, [score.temp_value, turbo.taps]);
     const image: ImageSliceType = useSelector((state: any) => state.image);
     return image.isCoreDone ? (
         <div className='dragon-head-con'>
