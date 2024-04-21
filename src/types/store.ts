@@ -129,6 +129,7 @@ export type ImageSliceType = {
     others: MyImageTypes[];
     league: MyLeagueImageTypes[];
     coiners: MyImageTypes[];
+    optional: MyImageTypes[];
 
     isCoreDone: boolean;
     isActiveSkinsDone: boolean;
@@ -138,6 +139,7 @@ export type ImageSliceType = {
     isOthersDone: boolean;
     isLeagueDone: boolean;
     isCoinersDone: boolean;
+    isOptionalDone: boolean;
 }
 export type LeagueSliceType = {
     userLeague: LeagueData;

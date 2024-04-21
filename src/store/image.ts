@@ -13,6 +13,7 @@ const imageSlice = createSlice({
         others: [],
         league: [],
         coiners: [],
+        optional: [],
 
         isCoreDone: false,
         isActiveSkinsDone: false,
@@ -22,6 +23,7 @@ const imageSlice = createSlice({
         isOthersDone: false,
         isLeagueDone: false,
         isCoinersDone: false,
+        isOptionalDone: false,
     } as ImageSliceType,
     reducers: {
         addCoreImages: (state, action) => {
@@ -71,6 +73,9 @@ const imageSlice = createSlice({
         addCoinersImages: (state, action) => {
             state.coiners.push(action.payload);
         },
+        addOptionalImages: (state, action) => {
+            state.optional.push(action.payload);
+        },
 
         setCoreDone: (state, action) => {
             state.isCoreDone = action.payload;
@@ -96,6 +101,9 @@ const imageSlice = createSlice({
         setCoinersDone: (state, action) => {
             state.isCoinersDone = action.payload;
         },
+        setOptionalDone: (state, action) => {
+            state.isOptionalDone = action.payload;
+        },
     }
 });
 
@@ -109,6 +117,7 @@ export const {
     addOthersImages,
     addLeagueImages,
     addCoinersImages,
+    addOptionalImages,
 
     setCoreDone,
     setActiveSkinsDone,
@@ -118,6 +127,7 @@ export const {
     setOthersDone,
     setLeagueDone,
     setCoinersDone,
+    setOptionalDone,
 } = imageSlice.actions;
 
 export default imageSlice.reducer;

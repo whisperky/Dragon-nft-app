@@ -1,4 +1,3 @@
-import openerImg from "../../../public/icon/defaults/open-arrow.svg";
 import {getColorWithId, leagueName, profileAvatarName} from "../../helpers/helper.ts";
 import {LeagueNameType, LeaguePresets} from "../../types/types.ts";
 import React from "react";
@@ -19,6 +18,7 @@ const SquadTile = ({id, name, league, image, squad, isFixed = false}: {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const im: ImageSliceType = useSelector((state: any) => state.image);
+    const OPEN_IMG = im.optional.find((img) => img.name === 'OPEN_ARROW');
     const LEAGUE_IMG = im.league.find((img) => leagueName(img.name) === league);
     const shortName = profileAvatarName(name);
     return (
@@ -47,7 +47,7 @@ const SquadTile = ({id, name, league, image, squad, isFixed = false}: {
                 </div>
             </div>
             <div className='du-trailer-container'>
-                <img className='friend-trailer-img' src={openerImg} alt='opener'/>
+                {OPEN_IMG ? <img className='friend-trailer-img' src={OPEN_IMG?.img.src} alt='opener'/> : null}
             </div>
         </div>
     );

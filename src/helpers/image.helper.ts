@@ -67,6 +67,21 @@ import M from '../../public/users-img/13.jpg';
 import N from '../../public/users-img/14.jpg';
 import O from '../../public/users-img/15.jpg';
 
+import JOIN_SQUAD_BG from '../../public/background/squad/Squad_BG.svg';
+import TOP_FRENS_BG from '../../public/background/fren/topfren_BG.svg';
+import SQUAD_DETAIL_BG from '../../public/background/squad/Squad_Detail_BG.svg'
+import OPEN_ARROW from "../../public/icon/defaults/open-arrow.svg";
+import LEFT_ARROW from "../../public/icon/defaults/left-arrow.svg";
+import RIGHT_ARROW from "../../public/icon/defaults/right-arrow.svg";
+import TG_PREMIUM from '../../public/icon/tg_premium.svg';
+import FIRST_BADGE from '../../public/icon/rank/top/one.svg';
+import SECOND_BADGE from '../../public/icon/rank/top/two.svg';
+import THIRD_BADGE from '../../public/icon/rank/top/three.svg';
+import CHECK_ICON from "../../public/icon/defaults/right-arrow.svg";
+import CLOSE_ICON from "../../public/icon/defaults/close.svg";
+import LOCKED_ICON from "../../public/icon/boosts/locked.svg";
+import CELEBRATION_ICON from "../../public/icon/squad/celebration.svg";
+
 import {addCoinLoadedImg} from "../store/loading.ts";
 import {store} from "../store/store.ts";
 import {LeagueImageTypes, SkinImageTypes} from "../types/data.ts";
@@ -75,14 +90,14 @@ import {
     addBoosterImages, addCoinersImages,
     addCoreImages,
     addDailyBoosterImages,
-    addLeagueImages,
+    addLeagueImages, addOptionalImages,
     addOthersImages,
     addSkinImages,
     setActiveSkinsDone,
     setBoosterDone, setCoinersDone,
     setCoreDone,
     setDailyBoosterDone,
-    setLeagueDone,
+    setLeagueDone, setOptionalDone,
     setOthersDone,
     setSkinDone
 } from "../store/image.ts";
@@ -412,5 +427,36 @@ export const loadCoinersImages = () => {
     })
 }
 
+export const loadOptionalImages = () => {
+    const loadImages = [
+        {name: 'JOIN_SQUAD_BG', src: JOIN_SQUAD_BG},
+        {name: 'TOP_FRENS_BG', src: TOP_FRENS_BG},
+        {name: 'SQUAD_DETAIL_BG', src: SQUAD_DETAIL_BG},
+        {name: 'OPEN_ARROW', src: OPEN_ARROW},
+        {name: 'LEFT_ARROW', src: LEFT_ARROW},
+        {name: 'RIGHT_ARROW', src: RIGHT_ARROW},
+        {name: 'TG_PREMIUM', src: TG_PREMIUM},
+        {name: 'FIRST_BADGE', src: FIRST_BADGE},
+        {name: 'SECOND_BADGE', src: SECOND_BADGE},
+        {name: 'THIRD_BADGE', src: THIRD_BADGE},
+        {name: 'CHECK_ICON', src: CHECK_ICON},
+        {name: 'CLOSE_ICON', src: CLOSE_ICON},
+        {name: 'LOCKED_ICON', src: LOCKED_ICON},
+        {name: 'CELEBRATION_ICON', src: CELEBRATION_ICON}
+    ];
+    return loadImages.forEach((img) => {
+        const im = new Image()
+        im.src = img.src
+        im.onload = () => {
+            store.dispatch(addOptionalImages({
+                name: img.name,
+                img: im
+            }))
+            if (store.getState().image.optional.filter((x) => x.name == 'JOIN_SQUAD_BG' || x.name == 'TOP_FRENS_BG' || x.name == 'SQUAD_DETAIL_BG' || x.name == 'OPEN_ARROW' || x.name == 'LEFT_ARROW' || x.name == 'RIGHT_ARROW' || x.name == 'TG_PREMIUM' || x.name == 'FIRST_BADGE' || x.name == 'SECOND_BADGE' || x.name == 'THIRD_BADGE' || x.name == 'CHECK_ICON' || x.name == 'CLOSE_ICON' || x.name == 'LOCKED_ICON' || x.name == 'CELEBRATION_ICON').length >= 14) {
+                store.dispatch(setOptionalDone(true))
+            }
+        }
+    })
+}
 
 // export default getImage;

@@ -1,8 +1,6 @@
 import {useNavigate} from "react-router-dom";
-import coin from '../../public/icon/main/small-coin.svg';
 import WebApp from "@twa-dev/sdk";
 import '../fren.css';
-import arrow from "../../public/icon/defaults/open-arrow.svg";
 import {useSelector} from "react-redux";
 import {numShort} from "../helpers/score.helper.ts";
 import Friend from "../components/fren/Friend.tsx";
@@ -10,16 +8,17 @@ import {frenData} from "../types/data.ts";
 import FrenSkeleton from "../skeleton/FrenSkeleton.tsx";
 import React, {useEffect} from "react";
 import {ImageSliceType} from "../types/store.ts";
-import premium from "../../public/icon/tg_premium.svg";
 
 
 const Fren = () => {
     const navigate = useNavigate();
     const user = useSelector((state: any) => state.user);
     const image: ImageSliceType = useSelector((state: any) => state.image);
+    const PREMIUM_IMG = image.optional.find((img) => img.name === 'TG_PREMIUM');
     const MAIN_COIN_IMAGE = image.skin.find((img) => img.name === 'BASIC');
     const COIN_IMAGE = image.core.find((img) => img.name === 'COIN_TOOL');
     const TOY_IMAGE = image.core.find((img) => img.name === 'TOY_TOOL');
+    const OPEN_IMG = image.optional.find((img) => img.name === 'OPEN_ARROW');
     WebApp.BackButton.onClick(() => navigate(-1))
     WebApp.BackButton.show();
     const fren = useSelector((state: any) => state.fren);
@@ -43,7 +42,7 @@ const Fren = () => {
                 <div className='flex items-center'>
                     <div className='fren-earned'>
                         <div>+{numShort(earned)}</div>
-                        <img src={coin} alt='coin'/>
+                        {COIN_IMAGE ? <img src={COIN_IMAGE?.img.src} alt='coin'/> : null}
                     </div>
                     <div className='fren-divider'></div>
                     <div className='fren-earn-info'>
@@ -52,9 +51,11 @@ const Fren = () => {
                         <span className='fren-top-leaders text-glass'>leaders</span>
                     </div>
                 </div>
-                <img className='fren-opener-arrow opacity-less mr-1' src={arrow} alt='opener'/>
+                {OPEN_IMG ?
+                    <img className='fren-opener-arrow opacity-less mr-1' src={OPEN_IMG?.img.src} alt='opener'/> : null}
             </div>
-            <p className='fren-bonues-title animate__animated animate__fadeIn animate__slow'>Invite frens to get bonuses</p>
+            <p className='fren-bonues-title animate__animated animate__fadeIn animate__slow'>Invite frens to get
+                bonuses</p>
             <div className='fren-bonues animate__animated animate__fadeIn animate__slow'>
                 <div className='fren-box'>
                     {/*<img src={MAIN_COIN_IMAGE?.img.normal.src} alt='coin'/>*/}
@@ -69,9 +70,9 @@ const Fren = () => {
                     </div>
                 </div>
                 <div className='fren-box'>
-                    <img src={premium} alt='coin'/>
+                    {PREMIUM_IMG ? <img src={PREMIUM_IMG?.img.src} alt='premium'/> : null}
                     <div>
-                        <p className='fren-bonus-title'>Fren with <span onClick={() =>{
+                        <p className='fren-bonus-title'>Fren with <span onClick={() => {
                             WebApp.openTelegramLink(`https://t.me/PremiumBot`);
                         }}>Telegram Premium</span></p>
                         <div className='fren-bonus-amount'>
@@ -83,7 +84,7 @@ const Fren = () => {
                 </div>
             </div>
             <p className='fren-list-title animate__animated animate__fadeIn animate__slower'>Frens List</p>
-            <div id='fren-list' className='fren-list  animate__animated animate__fadeIn animate__slower'>
+            <div id='fren-list' className='fren-list animate__animated animate__fadeIn animate__slower'>
                 {
                     fren.list.length > 0 ?
                         fren.list.map((fren: frenData) => {
@@ -95,7 +96,7 @@ const Fren = () => {
                                         earned={fren.earned} is_premium={fren.is_premium}/>
                             )
                         }) : (<div className='no-fren-con'>
-                            <img src={TOY_IMAGE.img.src} alt='toy'/>
+                            <img src={TOY_IMAGE?.img.src} alt='toy'/>
                             <p className='fren-text-muted'>No Frens yet</p>
                         </div>)
                 }

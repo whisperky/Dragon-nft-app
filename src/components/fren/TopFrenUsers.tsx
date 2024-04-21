@@ -1,7 +1,4 @@
 import React from "react";
-import oneImg from '../../../public/icon/rank/top/one.svg';
-import twoImg from '../../../public/icon/rank/top/two.svg';
-import threeImg from '../../../public/icon/rank/top/three.svg';
 import {getFullName} from "../../helpers/format.helper.ts";
 import {getColorWithId, getRandomColor, profileAvatarName} from "../../helpers/helper.ts";
 import {ImageSliceType} from "../../types/store.ts";
@@ -21,9 +18,11 @@ const TopFrenUsers = ({id, fName, lName, rank, coin, subtitle, img, onClick, isF
 }) => {
     const name = getFullName(fName, lName);
     const shortName = profileAvatarName(fName, lName);
-    const rankImg = rank === 1 ? oneImg : rank === 2 ? twoImg : threeImg;
     const image: ImageSliceType = useSelector((state: any) => state.image);
-
+    const FIRST_BADGE_IMG = image.optional.find((img) => img.name === 'FIRST_BADGE');
+    const SECOND_BADGE_IMG = image.optional.find((img) => img.name === 'SECOND_BADGE');
+    const THIRD_BADGE_IMG = image.optional.find((img) => img.name === 'THIRD_BADGE');
+    const rankImg = rank === 1 ? FIRST_BADGE_IMG : rank === 2 ? SECOND_BADGE_IMG : THIRD_BADGE_IMG;
     return (
         <div onClick={onClick} className={'du-container'} style={isFixed ? {
             position: 'fixed',
@@ -52,7 +51,7 @@ const TopFrenUsers = ({id, fName, lName, rank, coin, subtitle, img, onClick, isF
             </div>
             <div className='du-trailer-container'>
                 {
-                    rank >= 1 && rank <= 3 ? <img className='du-trailer-img' src={rankImg} alt='bronze'/> :
+                    rank >= 1 && rank <= 3 ? <img className='du-trailer-img' src={rankImg?.img.src} alt='rank'/> :
                         <span className='du-trailer'>{rank}</span>
                 }
             </div>

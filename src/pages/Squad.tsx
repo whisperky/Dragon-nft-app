@@ -1,13 +1,12 @@
 import React, {useEffect} from 'react';
-import celebration from '../../public/icon/squad/celebration.svg';
 import WebApp from "@twa-dev/sdk";
 import SquadTile from '../components/squad/SquadTile';
 import '../squad.css';
 import {useNavigate} from "react-router-dom";
-import {SquadSliceType, UserSliceType} from "../types/store.ts";
+import {ImageSliceType, SquadSliceType, UserSliceType} from "../types/store.ts";
 import {useDispatch, useSelector} from "react-redux";
 import SquadSkeleton from "../skeleton/SquadSkeleton.tsx";
-import {squadData, squadDataLeague} from "../types/data.ts";
+import {squadDataLeague} from "../types/data.ts";
 import {leagueName} from "../helpers/helper.ts";
 import {squadLoading} from "../store/squad.ts";
 
@@ -17,6 +16,9 @@ const Squad = () => {
     WebApp.BackButton.show();
     const user: UserSliceType = useSelector((state: any) => state.user);
     const squad: SquadSliceType = useSelector((state: any) => state.squad);
+    const image: ImageSliceType = useSelector((state: any) => state.image);
+    const CELEBRATION_IMG = image.optional.find((img) => img.name == 'CELEBRATION_ICON');
+    const squadBGImage = image.optional.find((img) => img.name === 'JOIN_SQUAD_BG');
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(squadLoading())
@@ -25,9 +27,10 @@ const Squad = () => {
     return !squad.isLoading ? (
         <div className='squad-con'>
             <div className='squad-header'>
-                <img className='squad-header-bg' src='../../public/background/squad/Squad_BG.svg' />
+                {squadBGImage ? <img className='squad-header-bg' src={squadBGImage?.img.src}/> : null}
                 <div className='squad-header-bg-effect'></div>
-                <img className='squad-header-img' src={celebration} alt='celebration'/>
+                {CELEBRATION_IMG ?
+                    <img className='squad-header-img' src={CELEBRATION_IMG?.img.src} alt='celebration'/> : null}
                 <p className='squad-text-join-title'>Join Squad!</p>
                 <p className='squad-text-sm text-glass'>These squards recruiting now.</p>
                 <p className='squad-text-sm text-glass'>Do you wanna join?</p>

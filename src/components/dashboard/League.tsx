@@ -1,4 +1,3 @@
-import logo from '../../../public/icon/rank/small/bronze.svg';
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {ImageSliceType, LeagueSliceType, SquadSliceType} from "../../types/store.ts";

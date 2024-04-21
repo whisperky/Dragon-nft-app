@@ -23,6 +23,7 @@
 .squad-header-bg {
     position: absolute;
     object-fit: cover;
+    pointer-events: none;
 }
 
 .squad-header-img {
@@ -103,6 +104,7 @@
 }
 .squad-detail-header-bg {
     position: absolute;
+    pointer-events: none;
 }
 .squad-detail-header-box {
     display: flex;

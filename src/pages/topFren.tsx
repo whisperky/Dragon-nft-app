@@ -2,11 +2,9 @@ import React, {useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
 import WebApp from "@twa-dev/sdk";
 import {useDispatch, useSelector} from "react-redux";
-import {FrenSliceType, UserSliceType} from "../types/store.ts";
+import {FrenSliceType, ImageSliceType, UserSliceType} from "../types/store.ts";
 import {topFrenLoading} from "../store/fren.ts";
-import celebration from '../../public/icon/squad/celebration.svg';
 import {topFrenData} from "../types/data.ts";
-import DragonUser from "../components/DragonUser.tsx";
 import SquadSkeleton from "../skeleton/SquadSkeleton.tsx";
 import TopFrenUsers from "../components/fren/TopFrenUsers.tsx";
 
@@ -16,6 +14,8 @@ const TopFren = () => {
     WebApp.BackButton.show();
     const user: UserSliceType = useSelector((state: any) => state.user);
     const fren: FrenSliceType = useSelector((state: any) => state.fren);
+    const image: ImageSliceType = useSelector((state: any) => state.image);
+    const topImageBG = image.optional.find((img) => img.name === 'TOP_FRENS_BG');
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(topFrenLoading())
@@ -24,7 +24,7 @@ const TopFren = () => {
     return !fren.isTopFrenLoading ? (
         <div className='fren-con'>
             <div className='fren-header'>
-                <img className='fren-header-bg' src='../../public/background/fren/topfren_BG.svg' />
+                {topImageBG ? <img className='fren-header-bg' src={topImageBG?.img.src} />: null}
                 <div className='fren-header-bg-effect'></div>
                 <p className='fren-header-img' style={{fontSize: '6rem'}}>📣</p>
                 <p className='fren-text-title'>Party kings</p>

@@ -24,7 +24,7 @@ import {
     loadCoinersImages,
     loadCoinSkinImages,
     loadCoreImages,
-    loadLeagueImages
+    loadLeagueImages, loadOptionalImages
 } from "../helpers/image.helper.ts";
 import {
     ImageSliceType,
@@ -266,7 +266,10 @@ const RootLayout = () => {
         if (image.isActiveSkinsDone && image.isCoreDone && image.isBoosterDone && image.isSkinDone && image.isLeagueDone && !image.isCoinersDone) {
             loadCoinersImages();
         }
-    }, [image.isActiveSkinsDone, image.isCoreDone, image.isBoosterDone, image.isSkinDone, image.isLeagueDone]);
+        if (image.isActiveSkinsDone && image.isCoreDone && image.isBoosterDone && image.isSkinDone && image.isLeagueDone && image.isCoinersDone && !image.isOptionalDone) {
+            loadOptionalImages();
+        }
+    }, [image.isActiveSkinsDone, image.isCoreDone, image.isBoosterDone, image.isSkinDone, image.isLeagueDone, !image.isCoinersDone]);
     useEffect(() => {
 
     }, [turbo.turboMode]);

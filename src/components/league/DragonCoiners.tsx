@@ -1,4 +1,3 @@
-import openerImg from '../../../public/icon/defaults/open-arrow.svg';
 import {GameSliceType, ImageSliceType} from "../../types/store.ts";
 import {useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
@@ -8,7 +7,7 @@ const DragonCoiners = () => {
     const navigate = useNavigate();
     const game: GameSliceType = useSelector((state: any) => state.game);
     const image: ImageSliceType = useSelector((state: any) => state.image);
-
+    const OPEN_IMG = image.optional.find((img: any) => img.name === 'OPEN_ARROW');
     const day = (new Date()).getDay();
     let sun = [1, 0, 3]
     let mon = [6, 10, 8]
@@ -40,7 +39,7 @@ const DragonCoiners = () => {
             </div>
             {isAdmin ?
                 <div className='dc-opener'>
-                    <span>Stats</span><img src={openerImg} alt='opener'/>
+                    <span>Stats</span>{OPEN_IMG ? <img src={OPEN_IMG?.img.src} alt='opener'/> : null}
                 </div> : <></>}
         </div>
     );

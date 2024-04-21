@@ -1,7 +1,4 @@
 import React, {useEffect} from 'react';
-import BG from '../../public/background/squad/Squad_Detail_BG.svg';
-import logo from "../../public/icon/squad/crystal.png";
-import openerImg from "../../public/icon/defaults/open-arrow.svg";
 import {ImageSliceType, SquadSliceType, UserSliceType} from "../types/store.ts";
 import {useDispatch, useSelector} from "react-redux";
 import WebApp from "@twa-dev/sdk";
@@ -10,13 +7,14 @@ import {useNavigate, useParams} from "react-router-dom";
 import {getColorWithId, leagueName, leagueToNumber, profileAvatarName} from "../helpers/helper.ts";
 import {numShort} from "../helpers/score.helper.ts";
 import {squadLoading} from "../store/squad.ts";
-import {LeaguePresets} from "../types/types.ts";
-import {changeLeagueType, setLeague, setLeagueNo, setLoadLeaguePage} from "../store/league.ts";
+import {changeLeagueType, setLeagueNo, setLoadLeaguePage} from "../store/league.ts";
 
 const SquadDetail = () => {
     const squad: SquadSliceType = useSelector((state: any) => state.squad);
     const image: ImageSliceType = useSelector((state: any) => state.image);
     const COIN_IMAGE = image.core.find((img) => img.name === 'COIN_TOOL');
+    const OPEN_ARROW = image.optional.find((img) => img.name === 'OPEN_ARROW');
+    const SQUAD_DETAIL_BG = image.optional.find((img) => img.name === 'SQUAD_DETAIL_BG');
     let LEAGUE_IMAGE = null;
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -42,7 +40,7 @@ const SquadDetail = () => {
     return squad.isLoading ? <>Loading ...</> : (
         <div className='squad-detail-con'>
             <div className='squad-detail-header'>
-                <img className='squad-detail-header-bg' src={BG} alt='background'/>
+                {SQUAD_DETAIL_BG ? <img className='squad-detail-header-bg' src={SQUAD_DETAIL_BG?.img.src} alt='background'/> : null}
                 <div className='squad-detail-header-box'>
                     {squad.squad?.image == null ? <div className='squad-detail-profile'
                                                        style={{
@@ -71,7 +69,7 @@ const SquadDetail = () => {
                             <div className='squad-tile-league'><img src={LEAGUE_IMG?.img.small.src}
                                                                     alt='bronze'/><span>{leagueName(squad.squad?.league.preset)}</span>
                             </div>
-                            <img className='friend-trailer-img' src={openerImg} alt='opener'/>
+                            {OPEN_ARROW ? <img className='friend-trailer-img' src={OPEN_ARROW?.img.src} alt='opener'/> : null}
                         </div> : null}
                     <p className='squad-detail-description'>
                         {squad.squad?.description}

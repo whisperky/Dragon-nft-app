@@ -1,5 +1,3 @@
-import leftArrow from '../../../public/icon/defaults/left-arrow.svg';
-import rightArrow from '../../../public/icon/defaults/right-arrow.svg';
 import DragonCoiners from "./DragonCoiners.tsx";
 import DragonUser from "../DragonUser.tsx";
 import {useDispatch, useSelector} from "react-redux";
@@ -27,6 +25,8 @@ const LeagueHeader = () => {
     const squad: SquadSliceType = useSelector((state: any) => state.squad);
     const league: LeagueSliceType = useSelector((state: any) => state.league);
     const image: ImageSliceType = useSelector((state: any) => state.image);
+    const LEFT_ARROW_IMG = image.optional.find((img: any) => img.name === 'LEFT_ARROW');
+    const RIGHT_ARROW_IMG = image.optional.find((img: any) => img.name === 'RIGHT_ARROW');
     const dispatch = useDispatch();
     const leagueLogo = image.league.find((x) => leagueName(x.name) == league.league)?.img.main.src;
     const leagueBg = image.league.find((x) => leagueName(x.name) == league.league)?.img.bg.src;
@@ -94,15 +94,17 @@ const LeagueHeader = () => {
                 <img className='league-header-bg' src={leagueBg}/>
                 <DragonCoiners/>
                 <div className='flex justify-between items-center'>
-                    <img className={'lh-img ' + (league.no == 1 ? 'opacity-less' : '')} src={leftArrow}
-                         onClick={() => dispatch(prevLeague())}/>
+                    {LEFT_ARROW_IMG ? <img className={'lh-img ' + (league.no == 1 ? 'opacity-less' : '')}
+                                           src={LEFT_ARROW_IMG?.img.src}
+                                           onClick={() => dispatch(prevLeague())}/> : null}
                     {leagueLogo ?
                         <img className='lh-rank-img animate__animated animate__zoomIn'
                              onLoad={() => element?.classList.add('animate__animated', 'animate__zoomIn')}
                              onAnimationEnd={() => element?.classList.remove('animate__animated', 'animate__zoomIn')}
                              src={leagueLogo}/> : <></>}
-                    <img className={'lh-img ' + (league.no == 8 ? 'opacity-less' : '')} src={rightArrow}
-                         onClick={() => dispatch(nextLeague())}/>
+                    {RIGHT_ARROW_IMG ? <img className={'lh-img ' + (league.no == 8 ? 'opacity-less' : '')}
+                                            src={RIGHT_ARROW_IMG?.img.src}
+                                            onClick={() => dispatch(nextLeague())}/> : null}
                 </div>
                 <div className='flex justify-center items-center mt-5'>
                     <div className='lh-text text-center'>
@@ -185,7 +187,8 @@ const LeagueHeader = () => {
                                         return <DragonUser onClick={() => {
                                             dispatch(selectSquad(null));
                                             navigate(`/squad-detail/${s.id}`);
-                                        }} id={s.chat_id.toString().slice(3)} key={i} fName={s.name} lName={null} rank={i}
+                                        }} id={s.chat_id.toString().slice(3)} key={i} fName={s.name} lName={null}
+                                                           rank={i}
                                                            coin={s.score}
                                                            img={s.image == null ? undefined : import.meta.env.VITE_REACT_APP_BACKEND_URL + '/pimg/squad-profile/' + s.image + '.jpg'}/>;
                                     }) : (BigInt(league.leagueData.score) > BigInt(squad.userSquad?.score ?? 0)) ?

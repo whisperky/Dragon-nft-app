@@ -731,6 +731,7 @@
 }
 
 .react-modal-sheet-backdrop {
+    pointer-events: all !important;
 }
 
 .react-modal-sheet-container {

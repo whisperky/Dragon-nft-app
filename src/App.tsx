@@ -29,7 +29,7 @@ function App() {
                 children: [
                     {
                         index: true,
-                        element: turbo.turboMode ? <TurboDashboard/> : <Dashboard/>,
+                        element:  turbo.turboMode ? <TurboDashboard/> : <Dashboard/>,
                     },
                     {
                         path: 'boosts',
@@ -61,7 +61,7 @@ function App() {
                     },
                     {
                         path: '/top-fren',
-                        element: <TopFren/>
+                        element: <TopFren />
                     },
                     {
                         path: 'banned',
@@ -69,7 +69,7 @@ function App() {
                     },
                     {
                         path: '*',
-                        element: turbo.turboMode ? <TurboDashboard/> : <Dashboard/>,
+                        element:  turbo.turboMode ? <TurboDashboard/> : <Dashboard/>,
                     },
                 ]
             }
@@ -83,21 +83,21 @@ function App() {
             </div>
         )
     else
-        return (
-            <div className="App">
-                <div>
-                    <Toaster
-                        theme='dark'
-                        position='bottom-center'
-                        expand={false}
-                        visibleToasts={1}
-                        duration={2500}
-                        className='dragon-toast'
-                    />
-                </div>
-                <RouterProvider router={router}/>
+    return (
+        <div className="App">
+            <div>
+                <Toaster
+                    theme='dark'
+                    position='bottom-center'
+                    expand={false}
+                    visibleToasts={1}
+                    duration={2500}
+                    className='dragon-toast'
+                />
             </div>
-        );
+            <RouterProvider router={router}/>
+        </div>
+    );
 }
 
 export default App

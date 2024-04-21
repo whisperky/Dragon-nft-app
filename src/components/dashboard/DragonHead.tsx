@@ -27,7 +27,7 @@ const DragonHead = () => {
             <img onLoad={() => dispatch(turnOnTurbo())}
                  onClick={() => turbo.availableTurbos.length > 0 ? dispatch(useTurbo(turbo.availableTurbos[0])) : null}
                  onAnimationEnd={() => dispatch(hideTurbo())} style={turbo.style} className='dragon-head'
-                 src={image.core.find((x) => x.name === 'DRAGON_TOOL').img.src} alt='dragon-head'/>
+                 src={image.core.find((x) => x.name === 'DRAGON_TOOL')?.img.src} alt='dragon-head'/>
         </div>
     ) : <></>;
 };
