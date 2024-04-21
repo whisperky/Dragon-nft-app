@@ -23,9 +23,8 @@ const TopFren = () => {
     }, [0]);
     return !fren.isTopFrenLoading ? (
         <div className='fren-con'>
-            <div className='fren-header' style={{
-                backgroundImage: 'url(../../public/background/fren/topfren_BG.svg)',
-            }}>
+            <div className='fren-header'>
+                <img className='fren-header-bg' src='../../public/background/fren/topfren_BG.svg' />
                 <div className='fren-header-bg-effect'></div>
                 <p className='fren-header-img' style={{fontSize: '6rem'}}>📣</p>
                 <p className='fren-text-title'>Party kings</p>

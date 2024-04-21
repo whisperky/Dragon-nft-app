@@ -342,6 +342,7 @@
 
 .fren-header-bg {
     position: absolute;
+    object-fit: cover;
     z-index: 100;
 }
 

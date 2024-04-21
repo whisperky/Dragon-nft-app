@@ -13,9 +13,6 @@
     justify-content: center;
     flex-direction: column;
     padding-top: 2rem;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
 }
 
 .squad-header-bg-effect {
@@ -25,6 +22,7 @@
 
 .squad-header-bg {
     position: absolute;
+    object-fit: cover;
 }
 
 .squad-header-img {

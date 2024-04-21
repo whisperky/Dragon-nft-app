@@ -24,9 +24,8 @@ const Squad = () => {
     }, []);
     return !squad.isLoading ? (
         <div className='squad-con'>
-            <div className='squad-header' style={{
-                backgroundImage: 'url(../../public/background/squad/Squad_BG.svg)',
-            }}>
+            <div className='squad-header'>
+                <img className='squad-header-bg' src='../../public/background/squad/Squad_BG.svg' />
                 <div className='squad-header-bg-effect'></div>
                 <img className='squad-header-img' src={celebration} alt='celebration'/>
                 <p className='squad-text-join-title'>Join Squad!</p>
