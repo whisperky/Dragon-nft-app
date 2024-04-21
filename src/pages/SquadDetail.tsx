@@ -6,9 +6,10 @@ import DragonUser from "../components/DragonUser.tsx";
 import {useNavigate, useParams} from "react-router-dom";
 import {getColorWithId, leagueName, leagueToNumber, profileAvatarName} from "../helpers/helper.ts";
 import {numShort} from "../helpers/score.helper.ts";
-import {enablePageLoop, squadLoading} from "../store/squad.ts";
+import {enablePageLoop, squadLoading, topSquadLoading} from "../store/squad.ts";
 import {changeLeagueType, setLeagueNo, setLoadLeaguePage} from "../store/league.ts";
 import SquadSkeleton from "../skeleton/SquadSkeleton.tsx";
+import LeagueListSkeleton from "../skeleton/LeagueListSkeleton.tsx";
 
 const SquadDetail = () => {
     const squad: SquadSliceType = useSelector((state: any) => state.squad);
@@ -32,6 +33,7 @@ const SquadDetail = () => {
                 id: id
             });
         } else {
+            dispatch(topSquadLoading())
             user.websocket.emit('getSquadTopUsers', {
                 id: squad.squad.id
             });
@@ -130,16 +132,13 @@ const SquadDetail = () => {
                     <div id='stars2'></div>
                     <div id='stars3'></div>
                 </div> : null}
-                {
-                    squad.topSquadUsers.length === 0 ?
-                        <div className='no-squad-members'>
-                            <p>No members yet</p>
-                        </div> : null
-                }
-                {squad.topSquadUsers.map((user, index) =>
-                    <DragonUser key={user.tg_id} id={user.id} fName={user.fName} lName={user.lName} rank={index + 1}
-                                coin={user.balance}/>)
-                }
+                {squad.isTopLoading ? <LeagueListSkeleton /> : (squad.topSquadUsers.length === 0 ?
+                    <div className='no-squad-members'>
+                        <p>No members yet</p>
+                    </div> :
+                    squad.topSquadUsers.map((user, index) =>
+                        <DragonUser key={user.tg_id} id={user.id} fName={user.fName} lName={user.lName} rank={index + 1}
+                                    coin={user.balance}/>))}
             </div>
         </div>
     );

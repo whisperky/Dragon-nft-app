@@ -100,6 +100,7 @@ export type SquadSliceType = {
     userSquad: squadDataLeague;
     isPageLoop: boolean;
     isLoading: boolean;
+    isTopLoading: boolean;
 }
 
 export type MyImageTypes = {

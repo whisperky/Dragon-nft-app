@@ -37,7 +37,7 @@ import {alterActiveSkinsImages} from "../store/image.ts";
 import BotBottomSheet from "../components/BotBottomSheet.tsx";
 import {setAvailableTurbos} from "../store/turbo.ts";
 import {setLeague, setSquadTop, setUserLeague, setUserTop} from "../store/league.ts";
-import {selectSquad, setTopSquad, setTopSquadUsers, setUserSquad} from "../store/squad.ts";
+import {selectSquad, setTopSquad, setTopSquadUsers, setUserSquad, topSquadLoaded} from "../store/squad.ts";
 import {showToast} from "../helpers/helper.ts";
 
 const RootLayout = () => {
@@ -153,8 +153,10 @@ const RootLayout = () => {
                     dispatch(selectSquad(data.squad));
             })
             user.websocket.on('squadTopUsers', (data: { success: boolean, users: any }) => {
-                if (data.success)
+                if (data.success) {
                     dispatch(setTopSquadUsers(data.users));
+                    dispatch(topSquadLoaded())
+                }
             })
             user.websocket.on('squadSuccess', (data: {
                 success: boolean,

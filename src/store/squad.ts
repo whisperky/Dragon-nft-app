@@ -10,6 +10,7 @@ const squadSlice = createSlice({
         topSquadUsers: [],
         isPageLoop: false,
         isLoading: false,
+        isTopLoading: false
     } as SquadSliceType,
     reducers: {
         setUserSquad: (state, action) => {
@@ -32,6 +33,12 @@ const squadSlice = createSlice({
         squadLoaded: (state) => {
             state.isLoading = false;
         },
+        topSquadLoading: (state) => {
+            state.isTopLoading = true;
+        },
+        topSquadLoaded: (state) => {
+            state.isTopLoading = false;
+        },
         setSquadLoading: (state, action) => {
             state.isLoading = action.payload;
         },
@@ -53,6 +60,8 @@ export const {
     squadLoading,
     squadLoaded,
     enablePageLoop,
-    disablePageLoop
+    disablePageLoop,
+    topSquadLoading,
+    topSquadLoaded
 } = squadSlice.actions
 export default squadSlice.reducer;
