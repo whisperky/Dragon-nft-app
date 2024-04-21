@@ -167,7 +167,8 @@ const LeagueHeader = () => {
                                                     fontSize: '14px',
                                                     width: '70vw',
                                                     textAlign: 'center'
-                                                }}>Ohhh!!! no one is here, but you can do it tap that thing and let them know.</p>
+                                                }}>Ohhh!!! no one is here, but you can do it tap that thing and let them
+                                                    know.</p>
                                             </div> :
                                             <div className='flex flex-col items-center '>
                                                 <span style={{fontSize: '100px', height: '20vh'}}>🐲️</span>
@@ -186,7 +187,11 @@ const LeagueHeader = () => {
                                         i++;
                                         return <DragonUser onClick={() => {
                                             dispatch(selectSquad(null));
-                                            navigate(`/squad-detail/${s.id}`);
+                                            if (squad.isPageLoop) {
+                                                navigate(`/squad-detail/${s.id}`, {replace: true});
+                                            } else {
+                                                navigate(`/squad-detail/${s.id}`);
+                                            }
                                         }} id={s.chat_id.toString().slice(3)} key={i} fName={s.name} lName={null}
                                                            rank={i}
                                                            coin={s.score}
@@ -200,7 +205,8 @@ const LeagueHeader = () => {
                                                 fontSize: '14px',
                                                 width: '70vw',
                                                 textAlign: 'center'
-                                            }}>Ohhh!!! no one is here, but you can do it tap that thing and let them know.</p>
+                                            }}>Ohhh!!! no one is here, but you can do it tap that thing and let them
+                                                know.</p>
                                         </div> :
                                         <div className='flex flex-col items-center '>
                                             <span style={{fontSize: '100px', height: '20vh'}}>🐲️</span>
@@ -227,7 +233,11 @@ const LeagueHeader = () => {
                             coin={squad.userSquad?.score.toString()}
                             onClick={() => {
                                 dispatch(selectSquad(null));
-                                navigate(`/squad-detail/${squad.userSquad?.id}`);
+                                if (squad.isPageLoop) {
+                                    navigate(`/squad-detail/${squad.userSquad?.id}`, {replace: true});
+                                } else {
+                                    navigate(`/squad-detail/${squad.userSquad?.id}`);
+                                }
                             }}
                             img={squad.userSquad?.image == null ? undefined : import.meta.env.VITE_REACT_APP_BACKEND_URL + '/pimg/squad-profile/' + squad.userSquad?.image + '.jpg'}
                 /> : <></>}

@@ -98,6 +98,7 @@ export type SquadSliceType = {
     topSquad: squadDataLeague[];
     topSquadUsers: UserData[];
     userSquad: squadDataLeague;
+    isPageLoop: boolean;
     isLoading: boolean;
 }
 

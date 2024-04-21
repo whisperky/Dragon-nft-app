@@ -18,7 +18,6 @@ const Boosts = () => {
         navigate(-1)
     })
     WebApp.BackButton.show();
-
     const user = useSelector((state: any) => state.user);
     const boost = useSelector((state: any) => state.boost);
     if (boost.haveData === false) user.websocket.emit('getBoostData');

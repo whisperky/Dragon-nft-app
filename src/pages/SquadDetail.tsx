@@ -6,7 +6,7 @@ import DragonUser from "../components/DragonUser.tsx";
 import {useNavigate, useParams} from "react-router-dom";
 import {getColorWithId, leagueName, leagueToNumber, profileAvatarName} from "../helpers/helper.ts";
 import {numShort} from "../helpers/score.helper.ts";
-import {squadLoading} from "../store/squad.ts";
+import {enablePageLoop, squadLoading} from "../store/squad.ts";
 import {changeLeagueType, setLeagueNo, setLoadLeaguePage} from "../store/league.ts";
 import SquadSkeleton from "../skeleton/SquadSkeleton.tsx";
 
@@ -38,10 +38,11 @@ const SquadDetail = () => {
         }
     }, [squad.squad]);
     const shortName = profileAvatarName(squad.squad?.name);
-    return squad.isLoading ? <SquadSkeleton /> : (
+    return squad.isLoading ? <SquadSkeleton/> : (
         <div className='squad-detail-con'>
             <div className='squad-detail-header'>
-                {SQUAD_DETAIL_BG ? <img className='squad-detail-header-bg' src={SQUAD_DETAIL_BG?.img.src} alt='background'/> : null}
+                {SQUAD_DETAIL_BG ?
+                    <img className='squad-detail-header-bg' src={SQUAD_DETAIL_BG?.img.src} alt='background'/> : null}
                 <div className='squad-detail-header-box'>
                     {squad.squad?.image == null ? <div className='squad-detail-profile'
                                                        style={{
@@ -65,12 +66,18 @@ const SquadDetail = () => {
                             dispatch(setLoadLeaguePage(false))
                             dispatch(changeLeagueType('squad'))
                             dispatch(setLeagueNo(leagueToNumber(leagueName(squad.squad.league.preset))));
-                            navigate('/league')
+                            if (squad.isPageLoop) {
+                                navigate('/league', {replace: true})
+                            } else {
+                                navigate('/league')
+                                dispatch(enablePageLoop())
+                            }
                         }}>
                             <div className='squad-tile-league'><img src={LEAGUE_IMG?.img.small.src}
                                                                     alt='bronze'/><span>{leagueName(squad.squad?.league.preset)}</span>
                             </div>
-                            {OPEN_ARROW ? <img className='friend-trailer-img' src={OPEN_ARROW?.img.src} alt='opener'/> : null}
+                            {OPEN_ARROW ?
+                                <img className='friend-trailer-img' src={OPEN_ARROW?.img.src} alt='opener'/> : null}
                         </div> : null}
                     <p className='squad-detail-description'>
                         {squad.squad?.description}
