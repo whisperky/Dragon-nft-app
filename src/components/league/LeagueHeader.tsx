@@ -167,7 +167,7 @@ const LeagueHeader = () => {
                                                     fontSize: '14px',
                                                     width: '70vw',
                                                     textAlign: 'center'
-                                                }}>No one has been here before, be the first to reach here.</p>
+                                                }}>Ohhh!!! no one is here, but you can do it tap that thing and let them know.</p>
                                             </div> :
                                             <div className='flex flex-col items-center '>
                                                 <span style={{fontSize: '100px', height: '20vh'}}>🐲️</span>
@@ -200,7 +200,7 @@ const LeagueHeader = () => {
                                                 fontSize: '14px',
                                                 width: '70vw',
                                                 textAlign: 'center'
-                                            }}>No one has been here before, be the first to reach here.</p>
+                                            }}>Ohhh!!! no one is here, but you can do it tap that thing and let them know.</p>
                                         </div> :
                                         <div className='flex flex-col items-center '>
                                             <span style={{fontSize: '100px', height: '20vh'}}>🐲️</span>
