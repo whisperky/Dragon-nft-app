@@ -1,9 +1,9 @@
-import BOOST_DRAGON from "../../public/icon/boosts/dragon.svg";
-import BOOST_BATTREY from "../../public/icon/boosts/battery.svg";
-import BOOST_ENERGY from "../../public/icon/boosts/energy.svg";
-import BOOST_MULTITAP from "../../public/icon/boosts/multi-tap.svg";
-import BOOST_RECHARGE from "../../public/icon/boosts/recharge-speed.svg";
-import BOOST_TAPBOT from "../../public/icon/boosts/tap-bot.svg";
+import BOOST_DRAGON from "../../public/icon/boosts/dragon.png";
+import BOOST_BATTREY from "../../public/icon/boosts/battery.png";
+import BOOST_ENERGY from "../../public/icon/boosts/battery.png";
+import BOOST_MULTITAP from "../../public/icon/boosts/multi-tap.png";
+import BOOST_RECHARGE from "../../public/icon/boosts/recharge-speed.png";
+import BOOST_TAPBOT from "../../public/icon/boosts/tap-bot.png";
 
 import BASIC from "../../public/icon/boosts/skin/defualt.svg";
 import BITCOIN from "../../public/icon/boosts/skin/bitcoin.svg";
@@ -19,21 +19,22 @@ import JADE_OPEN_IMAGE from "../../public/skin/Jade_open.png";
 import PIN_IMAGE from "../../public/skin/Pin.png";
 import PIN_OPEN_IMAGE from "../../public/skin/Pin_open.png";
 
-import TOY_TOOL_IMG from '../../public/icon/main/toy.svg';
-import COIN_TOOL_IMG from '../../public/icon/main/small-coin.svg';
+import TOY_TOOL_IMG from '../../public/icon/menu/frens.png';
+import COIN_TOOL_IMG from '../../public/icon/menu/earn.png';
 import COIN_SPACE_IMG from '../../public/icon/main/coin-space.svg';
-import DRAGON_TOOL_IMG from '../../public/icon/main/dragon.svg';
+import APPS_TOOL_IMG from '../../public/icon/menu/apps.png';
+import DRAGON_TOOL_IMG from '../../public/icon/menu/boost.png';
 
-import BRONZE_LEAGUE from '../../public/icon/rank/bronze.svg';
-import SILVER_LEAGUE from '../../public/icon/rank/silver.svg';
-import GOLD_LEAGUE from '../../public/icon/rank/gold.svg';
-import PLATINUM_LEAGUE from '../../public/icon/rank/platinum.svg';
-import EMERALD_LEAGUE from '../../public/icon/rank/emerald.svg';
-import RUBY_LEAGUE from '../../public/icon/rank/ruby.svg';
-import DIAMOND_LEAGUE from '../../public/icon/rank/diamond.svg';
-import LOONG_LEAGUE from '../../public/icon/rank/loong.svg';
+import BRONZE_LEAGUE from '../../public/icon/rank/bronze.png';
+import SILVER_LEAGUE from '../../public/icon/rank/silver.png';
+import GOLD_LEAGUE from '../../public/icon/rank/gold.png';
+import PLATINUM_LEAGUE from '../../public/icon/rank/platinum.png';
+import EMERALD_LEAGUE from '../../public/icon/rank/emerald.png';
+import RUBY_LEAGUE from '../../public/icon/rank/ruby.png';
+import DIAMOND_LEAGUE from '../../public/icon/rank/diamond.png';
+import LOONG_LEAGUE from '../../public/icon/rank/loong.png';
 
-import BRONZE_LEAGUE_SMALL from '../../public/icon/rank/small/bronze.svg';
+import BRONZE_LEAGUE_SMALL from '../../public/icon/rank/small/bronze.png';
 import SILVER_LEAGUE_SMALL from '../../public/icon/rank/small/silver.svg';
 import GOLD_LEAGUE_SMALL from '../../public/icon/rank/small/gold.svg';
 import PLATINUM_LEAGUE_SMALL from '../../public/icon/rank/small/platinum.svg';
@@ -340,6 +341,7 @@ export const loadCoreImages = () => {
     const loadImages = [
         {name: 'TOY_TOOL', src: TOY_TOOL_IMG},
         {name: 'COIN_TOOL', src: COIN_TOOL_IMG},
+        {name: 'APPS_TOOL', src: APPS_TOOL_IMG},
         {name: 'DRAGON_TOOL', src: DRAGON_TOOL_IMG},
     ];
     return loadImages.forEach((img) => {
@@ -350,7 +352,7 @@ export const loadCoreImages = () => {
                 name: img.name,
                 img: im
             }))
-            if (store.getState().image.core.filter((x) => x.name === 'TOY_TOOL' || x.name === 'COIN_TOOL' || x.name === 'DRAGON_TOOL').length >= 3) {
+            if (store.getState().image.core.filter((x) => x.name === 'TOY_TOOL' || x.name === 'COIN_TOOL' || x.name === 'DRAGON_TOOL' || x.name == 'APPS_TOOL').length >= 4) {
                 store.dispatch(setCoreDone(true))
             }
         }

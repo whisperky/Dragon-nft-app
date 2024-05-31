@@ -15,11 +15,6 @@
     width: 20px;
     height: 20px;
 }
-
-.lh-rank-img {
-    height: 120px;
-}
-
 .lh-text > p:first-child {
     font-size: 36px;
     line-height: 36px;
@@ -211,8 +206,6 @@
     align-items: center;
     margin-bottom: 1em;
     padding: .5em 1.2em .5em .7em;
-    background: #45444966;
-    border-radius: 24px;
     margin-top: 1em;
 }
 

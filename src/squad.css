@@ -24,24 +24,17 @@
     position: absolute;
     object-fit: cover;
     pointer-events: none;
-}
-
-.squad-header-img {
-    position: absolute;
-    top: 19%;
-    left: 38%;
-    width: 130px;
+    top: 0;
 }
 
 .squad-text-join-title {
-    font-size: 26px;
-    font-weight: 500;
+    font-size: 36px;
+    font-weight: 700;
     margin-bottom: .4rem;
-    /*margin-top: 1rem;*/
 }
 
 .squad-text-sm {
-    font-size: 14px;
+    font-size: 18px;
 }
 
 .join-squad-btn {
@@ -77,14 +70,16 @@
     font-size: 18px;
     border-radius: 50%;
     overflow: hidden;
-    /*background-color: #4fffcb;*/
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .squad-tile-league {
     display: flex;
+    align-items: center;
 }
 .squad-tile-league > img {
-    width: 15px;
+    width: 28px;
+    object-fit: cover;
 }
 .squad-tile-league > span {
     font-size: 13px;
@@ -115,10 +110,7 @@
     position: relative;
     margin-top: 5rem;
     width: 85%;
-    height: 300px;
-    border-radius: 24px;
-    background: #49484F80;
-    border: 1px solid #FFFFFF80;
+    min-height: 200px;
     padding-top: 4rem;
 }
 .squad-detail-profile {
@@ -127,23 +119,20 @@
     width: 30vw;
     height: 30vw;
     top: -60px;
-    border: 1px solid #FFFFFF;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: slategray;
 }
 .squad-detail-name {
-    font-size: 25px;
+    font-size: 32px;
+    font-weight: 600;
     text-align: center;
-    width: 100%;
-    overflow-y: auto;
-    height: 40px;
 }
 .squad-detail-description {
-    padding: 0 1.3rem 1rem 1.3rem;
+    margin: 0 1.3rem 1.5rem 1.3rem;
     font-size: 13px;
     font-weight: 300;
     line-height: 20px;
     text-align: center;
-    height: 10vh;
-    overflow-y: auto;
 }
 .squad-score-box {
     display: flex;
@@ -178,10 +167,12 @@
     width: 100%;
     height: 45px;
     display: block;
+    font-size: 14px;
 }
 .squad-detail-btn-con {
     width: 100%;
     margin-top: 1rem;
+    margin-bottom: 1rem;
     padding: 0 1.5rem;
     display: flex;
     gap: 1rem;
@@ -191,9 +182,8 @@
     /*width: 175px;*/
     width: 100%;
     height: 45px;
-    border-radius: 32px;
-    background: #FFFFFF1A;
-    border: 1px solid #FFFFFF80;
+    border-radius: 32px!important;
+    font-size: 14px;
 }
 .squad-members {
     width: 100%;
@@ -278,6 +268,34 @@
     animation: blinker 3s linear infinite;
     opacity: .8;
 }
+.squad-members-filter {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 0 1.5rem;
+    color:white;
+    width: 100%;
+    font-size: 18px;
+    font-weight: 900;
+}
+.squad-members-filter .filter {
+    opacity: 0.2;
+    position:relative;
+}
+.squad-members-filter .active {
+    opacity: 1;
+}
+.squad-members-filter .active:after {
+    content: '';
+    position: absolute;
+    bottom: -0.2rem;
+    left: 1.5rem;
+    right: 1.5rem;
+    height: 4px;
+    border-radius: 45px;
+    background: linear-gradient(88deg, #E3452D 0%, #FAAF5E 96.78%);
+}
+
 @keyframes blinker {
     50% {
         opacity: .3;

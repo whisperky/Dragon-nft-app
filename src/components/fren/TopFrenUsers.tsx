@@ -24,13 +24,11 @@ const TopFrenUsers = ({id, fName, lName, rank, coin, subtitle, img, onClick, isF
     const THIRD_BADGE_IMG = image.optional.find((img) => img.name === 'THIRD_BADGE');
     const rankImg = rank === 1 ? FIRST_BADGE_IMG : rank === 2 ? SECOND_BADGE_IMG : THIRD_BADGE_IMG;
     return (
-        <div onClick={onClick} className={'du-container'} style={isFixed ? {
+        <div onClick={onClick} className={'du-container blur-round-border-bg'} style={isFixed ? {
             position: 'fixed',
             bottom: '0',
             width: '100%',
-            background: '#282828',
-            margin: '0',
-            borderRadius: '0'
+            margin: '0'
         } : {}}>
             <div className='flex items-center'>
                 {/*<img className='du-user-image' src={userOne} alt='user one'/>*/}

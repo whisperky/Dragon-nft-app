@@ -26,15 +26,17 @@ const Dashboard = () => {
         dispatch(hideBottomSheet());
     }, [location]);
     return (
-        <div className='dashboard'>
-            <div className='add-pad'>
+        <div className='page-bg flex flex-col justify-center align-center'>
+            <div className='header-gradient'></div>
+            <div className='add-pad mb-10 z-[10]'>
                 <Score />
                 <CoinImage />
-                <League />
                 <Energy />
+                <League />
                 <DragonHead />
             </div>
             <DSTools />
+            <div className='footer-gradient'></div>
         </div>
     );
 };

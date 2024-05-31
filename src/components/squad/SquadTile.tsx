@@ -22,7 +22,7 @@ const SquadTile = ({id, name, league, image, squad, isFixed = false}: {
     const LEAGUE_IMG = im.league.find((img) => leagueName(img.name) === league);
     const shortName = profileAvatarName(name);
     return (
-        <div className={'squad-tile-con'} style={isFixed ? {
+        <div className={'squad-tile-con blur-round-border-bg'} style={isFixed ? {
             position: 'fixed',
             bottom: '0',
             width: '100%',
@@ -41,7 +41,7 @@ const SquadTile = ({id, name, league, image, squad, isFixed = false}: {
                 <div className='du-user-info'>
                     <p className='du-user-name'>{name.length > 25 ? name.slice(0, 8) + " ..." : name}</p>
                     {LEAGUE_IMG !== null && im.isLeagueDone ?
-                        <div className='squad-tile-league'><img src={LEAGUE_IMG?.img.small.src} alt='bronze'/>
+                        <div className='squad-tile-league'><img src={LEAGUE_IMG?.img.small.src} className="max-w-[16px]" alt='bronze'/>
                             <span>{league}</span></div> : null
                     }
                 </div>

@@ -146,15 +146,18 @@ const SheetComp = () => {
         return game.item == null ? <></> : (
             <>
                 <Sheet.Container
-                    className='sheet-body'
+                    className='sheet-body bs-modal-container blur-round-border-bg'
+                    style={{
+                        '--angle': '125deg',
+                    } as React.CSSProperties}
                     ref={containerRef}
                     {...overlay.overlayProps as any}
                     {...dialog.dialogProps as any}
                 >
                     <Sheet.Header>{customHeader}</Sheet.Header>
                     <Sheet.Content>
-                        <div className="bs-container">
-                            {img !== null ? <img className='bs-img' src={img.src}/> : <div className='bs-img'></div>}
+                        <div className="bs-container items-stretch px-6">
+                            {img !== null ? <img className='bs-img mx-auto' src={img.src}/> : <div className='bs-img mx-auto'></div>}
                             <div className='bs-title'>{item.name}</div>
                             <span className='bs-subtitle'>{item.description}</span>
                             {!ownSkin ? <div className='bs-pricing'>
@@ -175,15 +178,18 @@ const SheetComp = () => {
         return game.item == null ? <></> : (
             <>
                 <Sheet.Container
-                    className='sheet-body'
+                    className='sheet-body bs-modal-container blur-round-border-bg'
+                    style={{
+                        '--angle': '125deg',
+                    } as React.CSSProperties}
                     ref={containerRef}
                     {...overlay.overlayProps as any}
                     {...dialog.dialogProps as any}
                 >
                     <Sheet.Header>{customHeader}</Sheet.Header>
                     <Sheet.Content>
-                        <div className="bs-container">
-                            {img !== null ? <img className='bs-img' src={img.src}/> : <div className='bs-img'></div>}
+                        <div className="bs-container items-stretch px-6">
+                            {img !== null ? <img className='bs-img mx-auto' src={img.src.replace('.png', '-logo.png')}/> : <div className='bs-img mx-auto'></div>}
                             <div className='bs-title'>{item.name}</div>
                             <span className='bs-subtitle'>{item.description}</span>
                             {/*<span className='bs-over-subtitle'>{item.}</span>*/}

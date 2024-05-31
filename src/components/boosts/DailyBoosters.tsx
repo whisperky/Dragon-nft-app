@@ -22,8 +22,8 @@ const DailyBoosters = () => {
     };
     return (
         <div className=''>
-            <p className='boost-title animate__animated animate__fadeIn animate__slow'>Free Boosts</p>
-            <div className='daily-boosters glass  animate__animated animate__fadeIn animate__slow'>
+            <p className='boost-title animate__animated animate__fadeIn animate__slow'>Free daily boosters</p>
+            <div className='daily-boosters glass blur-round-border-bg animate__animated animate__fadeIn animate__slow'>
                 {
                     dailyBoosts.map((boost) => {
                         const leftB = boost.limit - ((leftDailyBoosts.filter((b: any) => b.id === boost.id)[0]).used);
@@ -36,7 +36,7 @@ const DailyBoosters = () => {
                                     {img != undefined ? <img src={img.src}/> : null}
                                 </div>
                                 <div>
-                                    <p>{leftB}<span className='daily-boost-limit'>/{boost.limit}</span></p>
+                                    <p>{leftB}-<span className='daily-boost-limit'>{boost.limit}</span></p>
                                     <p>{boost.name}</p>
                                 </div>
                             </div>

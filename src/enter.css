@@ -1,0 +1,40 @@
+.enter-con {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.enter-btn {
+    width: 154px;
+    height: 154px;
+    background-image: url("../public/icon/enter/enter.svg");
+    background-size: contain;
+    background-position: center center;
+    z-index: 100;
+    font-size: 29px;
+    font-weight: 800;
+    padding-bottom: 16px;
+}
+
+.enter-button:active {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+}
+
+.enter-header-img {
+    width: 90%;
+    height: 313px;
+    background-image: url("../public/icon/enter/header.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    text-align: center;
+    z-index: 100;
+}
+
+.enter-text-title {
+    z-index: 100;
+    font-size: 48px;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}

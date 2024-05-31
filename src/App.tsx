@@ -1,3 +1,5 @@
+import Enter from "./pages/Enter.tsx";
+import Apps from "./pages/Apps.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import RootLayout from "./layouts/RootLayout.tsx";
@@ -29,7 +31,15 @@ function App() {
                 children: [
                     {
                         index: true,
-                        element:  turbo.turboMode ? <TurboDashboard/> : <Dashboard/>,
+                        element: <Enter/>,
+                    },
+                    {
+                        path: 'apps',
+                        element: <Apps/>,
+                    },
+                    {
+                        path: 'dashboard',
+                        element: turbo.turboMode ? <TurboDashboard/> : <Dashboard/>,
                     },
                     {
                         path: 'boosts',
@@ -75,14 +85,14 @@ function App() {
             }
         ]
     );
-    if (WebApp.platform !== 'ios' && WebApp.platform !== 'android')
-        return (
-            <div id='noDesktop'>
-                <span>Desktop is Boring</span>
-                <span>open on phone</span>
-            </div>
-        )
-    else
+    // if (WebApp.platform !== 'ios' && WebApp.platform !== 'android')
+    //     return (
+    //         <div id='noDesktop'>
+    //             <span>Desktop is Boring</span>
+    //             <span>open on phone</span>
+    //         </div>
+    //     )
+    // else
     return (
         <div className="App">
             <div>

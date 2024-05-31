@@ -20,7 +20,7 @@ const SkinList = () => {
 
     return (
         <div className=''>
-            <p className='boost-title animate__animated animate__fadeIn animate__slow'>Skins</p>
+            <p className='boost-title animate__animated animate__fadeIn animate__slow'>Buy Skins</p>
             {/*<Flickity*/}
             {/*    className={"skin-container"} // default ''*/}
             {/*    elementType={"div"} // default 'div'*/}
@@ -30,7 +30,9 @@ const SkinList = () => {
             {/*    static*/}
             {/*>*/}
                 <div className={'skin-item animate__animated animate__fadeIn animate__slow'}>
-                    <div className='boosters-list glass'>
+                    <div className='boosters-list glass blur-round-border-bg' style={{
+                        '--angle': '135deg',
+                    } as React.CSSProperties}>
                         {
                             skins.list.map((skin: skinData) => {
                                 const uSkin = skins.userSkins.find((x) => x.skin_id == skin.id);

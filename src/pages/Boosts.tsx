@@ -22,17 +22,20 @@ const Boosts = () => {
     const boost = useSelector((state: any) => state.boost);
     if (boost.haveData === false) user.websocket.emit('getBoostData');
     return boost.haveData ? (
-        <div className='boosts'>
-            <div id='stars'></div>
-            <div id='stars2'></div>
-            <div id='stars3'></div>
-            <div className='add-pad flex flex-col items-center'>
-                <Score/>
-                <p className='text-muted py-2 animate__animated animate__fadeIn animate__slow'>Your balance</p>
+        <div className='boosts relative'>
+            <div className='header-gradient'></div>
+            <div className="relative z-[10]">
+                <button className='help-btn float-right' onClick={() => navigate(-1)}></button>
+                <div className='add-pad flex flex-col items-center mt-20 clear-both'>
+                    <Score/>
+                    <p className='text-muted py-2 animate__animated animate__fadeIn animate__slow'>Your balance</p>
+                </div>
+                <DailyBoosters/>
+                <BoosterList/>
+                <SkinList/>
+                <p className='boost-builder my-5'>Build with by <span>Open Builders</span></p>
             </div>
-            <DailyBoosters/>
-            <BoosterList/>
-            <SkinList/>
+            <div className='footer-square-gradient'></div>
         </div>
     ) : (<BoostSkeleton/>)
 };

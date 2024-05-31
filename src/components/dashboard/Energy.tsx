@@ -40,13 +40,13 @@ const Energy = () => {
         }
     }, [score.coolDown])
     return (
-        <div className='flex items-center justify-between animate__animated animate__fadeIn' style={{gap: '10px'}}>
+        <div className='flex items-center justify-between animate__animated animate__fadeIn mx-8' style={{gap: '10px'}}>
             <div className="w-4/5">
                 <div className='energy-bar'>
                 <span className='energy-bar-slider' style={{width: percentage + '%'}}>
                     <span>
                         <svg width="10" height="14" viewBox="0 0 10 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0 8L5 0V6H9.5L4 13.5V8H0Z" fill="#FFD041"/>
+                            <path d="M0 8L5 0V6H9.5L4 13.5V8H0Z" fill="#FFF"/>
                         </svg>
                     </span>
                 </span>

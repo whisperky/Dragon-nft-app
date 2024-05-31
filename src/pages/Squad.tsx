@@ -28,9 +28,8 @@ const Squad = () => {
         <div className='squad-con'>
             <div className='squad-header'>
                 {squadBGImage ? <img className='squad-header-bg' src={squadBGImage?.img.src}/> : null}
-                <div className='squad-header-bg-effect'></div>
                 {CELEBRATION_IMG ?
-                    <img className='squad-header-img' src={CELEBRATION_IMG?.img.src} alt='celebration'/> : null}
+                    <img className='squad-header-img h-[320px]' src={CELEBRATION_IMG?.img.src} alt='celebration'/> : null}
                 <p className='squad-text-join-title'>Join Squad!</p>
                 <p className='squad-text-sm text-glass'>These squards recruiting now.</p>
                 <p className='squad-text-sm text-glass'>Do you wanna join?</p>

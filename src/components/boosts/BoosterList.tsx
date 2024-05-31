@@ -15,7 +15,9 @@ const BoosterList = () => {
     return (
         <div className=''>
             <p className='boost-title animate__animated animate__fadeIn animate__slow'>Boosters</p>
-            <div className='boosters-list glass animate__animated animate__fadeIn animate__slow'>
+            <div className='boosters-list glass blur-round-border-bg animate__animated animate__fadeIn animate__slow' style={{
+                '--angle': '135deg',
+            } as React.CSSProperties}>
                 {
 
                     boost.boosts

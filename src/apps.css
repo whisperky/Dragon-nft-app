@@ -1,0 +1,11 @@
+.apps-container {
+    position: relative;
+    z-index: 100;
+}
+
+.apps-container .slide {
+    width: 330px;
+    height: 480px;
+    border-radius: 30px;
+    overflow: hidden;
+}

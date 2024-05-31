@@ -25,7 +25,7 @@ const SquadDetail = () => {
     WebApp.BackButton.show();
     const user: UserSliceType = useSelector((state: any) => state.user);
     const LEAGUE_IMG = image.league.find((img) => leagueName(img.name) === leagueName(squad.squad?.league.preset));
-    let isMySquad = false;
+    const [filter, setFilter] = React.useState('day');
     useEffect(() => {
         if (squad.squad == null) {
             dispatch(squadLoading());
@@ -45,10 +45,12 @@ const SquadDetail = () => {
             <div className='squad-detail-header'>
                 {SQUAD_DETAIL_BG ?
                     <img className='squad-detail-header-bg' src={SQUAD_DETAIL_BG?.img.src} alt='background'/> : null}
-                <div className='squad-detail-header-box'>
+                <div className='squad-detail-header-box blur-round-border-bg' style={{
+                    '--angle': '135deg',
+                } as React.CSSProperties}>
                     {squad.squad?.image == null ? <div className='squad-detail-profile'
                                                        style={{
-                                                           background: getColorWithId(squad.squad?.chat_id.slice(1) ?? '0'),
+                                                            backgroundColor: getColorWithId(squad.squad?.chat_id.slice(1) ?? '1'),
                                                            display: 'flex',
                                                            justifyContent: 'center',
                                                            alignItems: 'center',
@@ -75,7 +77,7 @@ const SquadDetail = () => {
                                 dispatch(enablePageLoop())
                             }
                         }}>
-                            <div className='squad-tile-league'><img src={LEAGUE_IMG?.img.small.src}
+                            <div className='squad-tile-league my-3'><img src={LEAGUE_IMG?.img.small.src}
                                                                     alt='bronze'/><span>{leagueName(squad.squad?.league.preset)}</span>
                             </div>
                             {OPEN_ARROW ?
@@ -107,7 +109,7 @@ const SquadDetail = () => {
                 <button className='squad-detail-invite-btn' onClick={() => {
                     WebApp.openTelegramLink(`https://t.me/${import.meta.env.VITE_REACT_APP_BOT_USERNAME}?start=fren`);
                     WebApp.close();
-                }}>Invite a Fren
+                }}>Invite a fren
                 </button>
             </div>
             <div className='squad-detail-btn-con'>
@@ -120,10 +122,15 @@ const SquadDetail = () => {
                                 });
                             }
                         });
-                    }} className={'squad-detail-btn'}>Leave Squad</button> :
+                    }} className={'squad-detail-btn blur-round-border-bg'}>Leave Squad</button> :
                     <button onClick={() => navigate(`/join-squad/${squad.squad.id}`)}
-                            className='squad-detail-btn'>Join Squad</button>}
-                {/*<button className='squad-detail-btn'>Boost</button>*/}
+                            className='squad-detail-btn blur-round-border-bg'>Join Squad</button>}
+                <button className='squad-detail-btn blur-round-border-bg'>Boost</button>
+            </div>
+
+            <div className='squad-members-filter'>
+                {filter === 'day' ? <div className='filter px-4 py-1 active'>Day</div> : <div className='filter px-4 py-1' onClick={() => setFilter('day')}>Day</div>}
+                {filter === 'week' ? <div className='filter px-4 py-1 active'>Week</div> : <div className='filter px-4 py-1' onClick={() => setFilter('week')}>Week</div>}
             </div>
 
             <div className='squad-members'>
