@@ -722,10 +722,6 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduce shadow on click */
 }
 
-.react-modal-sheet-backdrop {
-    pointer-events: all !important;
-}
-
 .react-modal-sheet-container {
     bottom: -18px!important;
 }
