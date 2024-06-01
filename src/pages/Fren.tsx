@@ -57,9 +57,10 @@ const Fren = () => {
                 </div>
                 <p className='fren-bonues-title animate__animated animate__fadeIn animate__slow'>Invite frens to get
                     bonuses</p>
-                <div className='fren-bonues animate__animated animate__fadeIn animate__slow blur-round-border-bg' style={{
-                    '--angle': '160deg',
-                } as React.CSSProperties}>
+                <div className='fren-bonues animate__animated animate__fadeIn animate__slow blur-round-border-bg' 
+                    style={{
+                        '--angle': '160deg',
+                    } as React.CSSProperties}>
                     <div className='fren-box'>
                         {/*<img src={MAIN_COIN_IMAGE?.img.normal.src} alt='coin'/>*/}
                         <img src={COIN_IMAGE?.img.src} alt='coin'/>
@@ -87,25 +88,27 @@ const Fren = () => {
                     </div>
                 </div>
                 <p className='fren-list-title animate__animated animate__fadeIn animate__slower'>Frens List</p>
-                <div id='fren-list' className='fren-list animate__animated animate__fadeIn animate__slower blur-round-border-bg'
-                style={{
-                    '--angle': '125deg',
-                } as React.CSSProperties}>
-                    {
-                        fren.list.length > 0 ?
-                            fren.list.map((fren: frenData) => {
-                                return (
-                                    <Friend key={fren.iuser.id} id={fren.iuser.tg_id} fName={fren.iuser?.fName}
-                                            lName={fren.iuser?.lName}
-                                            league={fren.iuser?.league?.preset}
-                                            username={fren.iuser?.username ?? null} balance={fren.iuser?.balance ?? '0'}
-                                            earned={fren.earned} is_premium={fren.is_premium}/>
-                                )
-                            }) : (<div className='no-fren-con'>
-                                <img src={TOY_IMAGE?.img.src} alt='toy'/>
-                                <p className='fren-text-muted'>No Frens yet</p>
-                            </div>)
-                    }
+                <div className="blur-round-border-bg"
+                    style={{
+                        '--angle': '125deg',
+                    } as React.CSSProperties}>
+                    <div id='fren-list' className='fren-list animate__animated animate__fadeIn animate__slower'>
+                        {
+                            fren.list.length > 0 ?
+                                fren.list.map((fren: frenData) => {
+                                    return (
+                                        <Friend key={fren.iuser.id} id={fren.iuser.tg_id} fName={fren.iuser?.fName}
+                                                lName={fren.iuser?.lName}
+                                                league={fren.iuser?.league?.preset}
+                                                username={fren.iuser?.username ?? null} balance={fren.iuser?.balance ?? '0'}
+                                                earned={fren.earned} is_premium={fren.is_premium}/>
+                                    )
+                                }) : (<div className='no-fren-con'>
+                                    <img src={TOY_IMAGE?.img.src} alt='toy'/>
+                                    <p className='fren-text-muted'>No Frens yet</p>
+                                </div>)
+                        }
+                    </div>
                 </div>
                 <div className='invite-fren-btn-con animate__animated animate__fadeIn animate__slower'>
                     <button className='invite-fren-btn' onClick={() => {

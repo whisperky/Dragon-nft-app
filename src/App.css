@@ -995,3 +995,12 @@
     background-position: center;
     background-repeat: no-repeat;
 }
+.slider-container {
+    width: 100%;
+}
+.use-spring-carousel-item {
+    width: 100%;
+}
+.slide img {
+    border-radius: 32px;
+}
