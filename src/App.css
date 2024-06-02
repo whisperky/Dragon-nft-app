@@ -12,43 +12,6 @@
     transition: all 1s ease-in-out;
 }
 
-.turbo-dashboard {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    transition: all 1s ease-in-out;
-}
-
-.turbo-dashboard > .add-pad {
-    padding-left: 2rem;
-    padding-right: 2rem;
-    padding-top: 2rem;
-    height: 80%;
-}
-
-.turbo-background ~ .ds-tools {
-    background: none !important;
-}
-
-.turbo-background {
-    background-image: url("../public/icon/main/coin-space.svg");
-    background-size: 10%;
-    background-repeat: repeat;
-    position: absolute;
-    opacity: .3;
-    height: 100vh;
-    width: 100%;
-    animation: scroll 6s linear infinite; /* Adjust duration and timing function as needed */
-}
-
-.turbo-background ~ .add-pad > .coin-image-holder > div:last-child {
-    background: none;
-}
-
 @keyframes scroll {
     from {
         background-position: 0 0; /* Start position */
@@ -546,8 +509,9 @@
 }
 
 .b-item-price > img {
-    width: 12px;
+    width: 15px;
     margin-right: 5px;
+    object-fit: contain;
 }
 
 .b-item-arrow {

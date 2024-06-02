@@ -51,8 +51,9 @@
     font-size: 13px;
 }
 .fren-bonus-amount > img {
-    width: 13px;
+    width: 15px;
     margin-right: 5px;
+    object-fit: contain;
 }
 .fren-bonus-amount > span:first-of-type {
     color: #FFD041;
@@ -253,6 +254,7 @@
 }
 .friend-league > img {
     width: 15px;
+    object-fit: contain;
 }
 .friend-league > span {
     font-size: 13px;
@@ -270,7 +272,8 @@
     opacity: .5;
 }
 .friend-coin > img {
-    width: 12px;
+    width: 15px;
+    object-fit: contain;
 }
 .friend-trailer-img {
     width: 7px;
