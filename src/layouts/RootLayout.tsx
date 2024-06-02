@@ -222,7 +222,7 @@ const RootLayout = () => {
                         dispatch(setAvailableTurbos(data.user.turbo))
                     }
                     if (data.itemType == 'daily_booster') {
-                        navigate('/')
+                        navigate('/dashboard')
                     }
                 } else {
                     showToast(purchase.toast, data.message, 'error')
@@ -244,7 +244,7 @@ const RootLayout = () => {
                 dispatch(setLeftDailyBoosts(data.user.boosts))
                 if (data.itemType == 'skin' || data.itemType == 'change_skin') {
                     dispatch(alterActiveSkinsImages(data.user.skin));
-                    navigate('/')
+                    navigate('/dashboard')
                 }
                 dispatch(setUserPurchaseReturn(data.user));
             }
