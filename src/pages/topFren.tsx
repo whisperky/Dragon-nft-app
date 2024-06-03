@@ -23,7 +23,7 @@ const TopFren = () => {
     }, [0]);
     return !fren.isTopFrenLoading ? (
         <div className='fren-con relative'>
-            <div className='header-gradient'></div>
+            {/*<div className='header-gradient'></div>*/}
             <div className='fren-header'>
                 <div className='fren-header-bg-effect'></div>
                 <p className='fren-header-img' style={{fontSize: '6rem'}}>📣</p>
@@ -47,7 +47,7 @@ const TopFren = () => {
                     />)
                 }
             </div>
-            <div className='footer-square-gradient'></div>
+            {/*<div className='footer-square-gradient'></div>*/}
         </div>
     ) : <SquadSkeleton/>;
 };

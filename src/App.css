@@ -64,7 +64,8 @@
 
 .coin-image {
     position: relative;
-    margin: 13% 0;
+    /*margin: 13% 0;*/
+    margin: 11% 0 3% 0;
 }
 
 .score-holder > img {
@@ -102,6 +103,11 @@
     gap: 8px;
 }
 
+.league-image {
+    width: 1.1rem;
+    height: 1.1rem;
+}
+
 .col-divider {
     width: 1px;
     height: 60%;
@@ -120,7 +126,7 @@
 .db-squad > p {
     width: 140px;
     overflow-y: auto;
-    font-size: 12px;
+    font-size: 11px;
     font-family: 'Arial', serif;
     font-weight: 500;
     text-align: center;
@@ -195,10 +201,10 @@
 
 .energy-bar > span > span {
     position: absolute;
-    top: -10px;
+    top: -7px;
     right: -5px;
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     background: linear-gradient(88.09deg, #F3553D 0%, #FAAF5E 96.78%);
     border-radius: 50%;
     display: flex;
@@ -208,16 +214,16 @@
 }
 
 .ds-tools {
-    position: absolute!important;
+    position: absolute !important;
     bottom: -2px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     margin-top: 10px;
-    border-radius: 18.4px 18.4px 0 0!important;
+    border-radius: 18.4px 18.4px 0 0 !important;
     width: 100%;
-    padding: 6% 1.8rem;
+    padding: 6% 2.5rem;
     z-index: 800;
 }
 
@@ -235,8 +241,8 @@
 }
 
 .ds-tool-box > img {
-    width: 52px !important;
-    height: 52px !important;
+    width: 50px !important;
+    height: 50px !important;
     margin-bottom: 5px;
     object-fit: cover;
 }
@@ -549,9 +555,11 @@
     justify-content: start;
     padding-bottom: 3em;
 }
+
 .bs-img {
     max-height: 215px;
 }
+
 .bs-title {
     font-size: 30px;
     font-weight: bold;
@@ -570,12 +578,12 @@
 
 .bot-bs-title > p {
     line-height: 3rem;
-    margin-right: 10px;
+    margin-right: 5px;
 }
 
 .bot-bs-title > img {
-    width: 36px;
-    height: 45px;
+    width: 30px;
+    height: 30px;
     object-fit: contain;
 }
 
@@ -605,7 +613,7 @@
     display: flex;
     align-items: center;
     padding: 1rem 1.5rem;
-    height: 6rem;
+    height: 5.3rem;
     gap: 15px;
 }
 
@@ -677,13 +685,13 @@
     flex: 1;
     display: block;
     padding: 13px 20px;
-    font-size: 18px; 
-    color: white; 
+    font-size: 18px;
+    color: white;
     text-align: center;
     text-decoration: none;
     border-radius: 24px;
     background: var(--Linear, linear-gradient(88deg, #E3452D 0%, #FAAF5E 96.78%));
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     transition: background 0.3s ease;
 }
@@ -693,7 +701,7 @@
 }
 
 .react-modal-sheet-container {
-    bottom: -18px!important;
+    bottom: -18px !important;
 }
 
 .react-modal-sheet-header {
@@ -855,7 +863,7 @@
 
 /* new version */
 .page-bg {
-    position:relative;
+    position: relative;
     height: 100vh;
     z-index: 0;
     overflow: hidden;
@@ -912,11 +920,11 @@
 }
 
 .blur-round-border-bg {
-    position:relative;
+    position: relative;
     border-radius: var(--radius, 24px);
     box-shadow: 9.9px 4.9px 14.8px 0px rgba(20, 20, 20, 0.3);
     backdrop-filter: blur(var(--blur, 6px));
-    background-color: rgba(255, 255, 255, var(--opacity, 0.05))!important;
+    background-color: rgba(255, 255, 255, var(--opacity, 0.05)) !important;
 }
 
 .blur-round-border-bg:before {
@@ -934,9 +942,6 @@
 .earn-user {
     width: 200px;
     height: 200px;
-    background-image: url("/icon/earn/earn.png");
-    background-size: contain;
-    background-position: center;
 }
 
 .icon-autotap {
@@ -965,9 +970,11 @@
     background-position: center;
     background-repeat: no-repeat;
 }
+
 .slide img {
     border-radius: 32px;
 }
+
 .slide > div > div {
     width: 85%;
 }

@@ -27,7 +27,6 @@ const Dashboard = () => {
     }, [location]);
     return (
         <div className='page-bg flex flex-col justify-center align-center'>
-            <div className='header-gradient'></div>
             <div className='add-pad mb-16 z-[10]'>
                 <Score />
                 <CoinImage />
@@ -36,7 +35,6 @@ const Dashboard = () => {
                 <DragonHead />
             </div>
             <DSTools />
-            <div className='footer-gradient'></div>
         </div>
     );
 };

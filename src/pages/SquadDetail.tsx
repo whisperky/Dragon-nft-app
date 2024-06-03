@@ -125,12 +125,11 @@ const SquadDetail = () => {
                     }} className={'squad-detail-btn blur-round-border-bg'}>Leave Squad</button> :
                     <button onClick={() => navigate(`/join-squad/${squad.squad.id}`)}
                             className='squad-detail-btn blur-round-border-bg'>Join Squad</button>}
-                <button className='squad-detail-btn blur-round-border-bg'>Boost</button>
             </div>
 
             <div className='squad-members-filter'>
-                {filter === 'day' ? <div className='filter px-4 py-1 active'>Day</div> : <div className='filter px-4 py-1' onClick={() => setFilter('day')}>Day</div>}
-                {filter === 'week' ? <div className='filter px-4 py-1 active'>Week</div> : <div className='filter px-4 py-1' onClick={() => setFilter('week')}>Week</div>}
+                {/*{filter === 'day' ? <div className='filter px-4 py-1 active'>Day</div> : <div className='filter px-4 py-1' onClick={() => setFilter('day')}>Day</div>}*/}
+                {/*{filter === 'week' ? <div className='filter px-4 py-1 active'>Week</div> : <div className='filter px-4 py-1' onClick={() => setFilter('week')}>Week</div>}*/}
             </div>
 
             <div className='squad-members'>

@@ -67,7 +67,7 @@ const SheetComp = () => {
     );
 
     const COIN_IMG = image.core.find((i) => i.name === 'COIN_TOOL');
-    const CLOSE_IMG = image.optional.find((i) => i.name === 'CLOSE_ICON');
+    const CLOSE_IMG = image.core.find((i) => i.name === 'CLOSE_ICON');
 
     useModal();
     const onPurchaseHandler = () => {

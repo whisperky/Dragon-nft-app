@@ -1,5 +1,5 @@
 import Enter from "./pages/Enter.tsx";
-// import Apps from "./pages/Apps.tsx";
+import Apps from "./pages/Apps.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import RootLayout from "./layouts/RootLayout.tsx";
@@ -33,10 +33,10 @@ function App() {
                         index: true,
                         element: <Enter/>,
                     },
-                    // {
-                    //     path: 'apps',
-                    //     element: <Apps/>,
-                    // },
+                    {
+                        path: 'apps',
+                        element: <Apps/>,
+                    },
                     {
                         path: 'dashboard',
                         element: turbo.turboMode ? <TurboDashboard/> : <Dashboard/>,

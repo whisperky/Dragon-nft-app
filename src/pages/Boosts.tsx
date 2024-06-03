@@ -23,7 +23,7 @@ const Boosts = () => {
     if (boost.haveData === false) user.websocket.emit('getBoostData');
     return boost.haveData ? (
         <div className='boosts relative'>
-            <div className='header-gradient'></div>
+            {/*<div className='header-gradient'></div>*/}
             <div className="relative z-[10]">
                 <button className='help-btn float-right' onClick={() => navigate(-1)}></button>
                 <div className='add-pad flex flex-col items-center mt-20 clear-both'>
@@ -35,7 +35,7 @@ const Boosts = () => {
                 <SkinList/>
                 <p className='boost-builder mt-5'>Build with ❤ by <span>Dragon Team</span></p>
             </div>
-            <div className='footer-square-gradient'></div>
+            {/*<div className='footer-square-gradient'></div>*/}
         </div>
     ) : (<BoostSkeleton/>)
 };

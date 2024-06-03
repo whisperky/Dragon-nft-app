@@ -92,8 +92,6 @@ const imageSlice = createSlice({
                     if (skin.name == action.payload.name) {
                         if (action.payload.type == 'normal') {
                             skin.img.normal = action.payload.img;
-                        } else {
-                            skin.img.turbo = action.payload.img;
                         }
                     }
                     return skin;
@@ -103,7 +101,6 @@ const imageSlice = createSlice({
                     name: action.payload.name,
                     img: {
                         normal: action.payload.type == 'normal' ? action.payload.img : null,
-                        turbo: action.payload.type == 'turbo' ? action.payload.img : null
                     }
                 });
             }

@@ -118,7 +118,6 @@ export type MySkinImageTypes = {
     name: SkinImageTypes;
     img: {
         normal: HTMLImageElement;
-        turbo: HTMLImageElement;
     }
 }
 export type MyLeagueImageTypes = {

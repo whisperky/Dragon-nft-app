@@ -34,7 +34,7 @@ const Fren = () => {
     }, []);
     return TOY_IMAGE && fren.haveData ? (
         <div className='fren-zone-container  relative'>
-            <div className='header-gradient'></div>
+            {/*<div className='header-gradient'></div>*/}
             <div className="relative z-[10]">
                 <button className='help-btn float-right' onClick={() => navigate(-1)}></button>
                 <p className='fren-title animate__animated animate__fadeIn animate__slow mt-20 clear-both'>Fren Zone</p>
@@ -118,7 +118,7 @@ const Fren = () => {
                     </button>
                 </div>
             </div>
-            <div className='footer-square-gradient'></div>
+            {/*<div className='footer-square-gradient'></div>*/}
         </div>
     ) : (<FrenSkeleton/>);
 };

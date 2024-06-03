@@ -22,7 +22,7 @@ const CoinImage = () => {
     const turbo: TurboSliceType = useSelector((state: any) => state.turbo);
     const image: ImageSliceType = useSelector((state: any) => state.image);
     const normal_image = image.activeSkins.img == undefined ? '' : image.activeSkins.img.normal.src;
-    const turbo_image = image.activeSkins.img == undefined ? '' : image.activeSkins.img.turbo.src;
+    // const turbo_image = image.activeSkins.img == undefined ? '' : image.activeSkins.img.turbo.src;
     const dispatch = useDispatch();
     const TapTap = () => {
         if (turbo.turboMode) {
@@ -124,7 +124,7 @@ const CoinImage = () => {
             <div id='coin-mother' ref={imgH} onTouchStart={onTapBegin} onTouchEnd={onTapEnds}>
                 <div id='coin-ex' className='coin-itself'></div>
                 <img onSelect={() => false} ref={img} id='coinIcon' className='coin-image'
-                     src={turbo.turboMode ? turbo_image : normal_image} alt='DragonCoin'/>
+                     src={normal_image} alt='DragonCoin'/>
             </div>
             <div></div>
         </div>

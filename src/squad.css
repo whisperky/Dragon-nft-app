@@ -26,7 +26,9 @@
     pointer-events: none;
     top: 0;
 }
-
+.squad-header-img {
+    height: 37vh;
+}
 .squad-text-join-title {
     font-size: 36px;
     font-weight: 700;
@@ -275,8 +277,8 @@
     padding: 0 1.5rem;
     color:white;
     width: 100%;
-    font-size: 18px;
-    font-weight: 900;
+    font-size: 16px;
+    font-weight: 500;
 }
 .squad-members-filter .filter {
     opacity: 0.2;
