@@ -216,7 +216,7 @@ const RootLayout = () => {
                     dispatch(setUserPurchaseReturn(data.user));
                     if (data.itemType == 'skin' || data.itemType == 'change_skin') {
                         dispatch(alterActiveSkinsImages(data.user.skin));
-                        navigate('/');
+                        navigate('/dashboard');
                     }
                     if (data.user.turbo != undefined && data.user.turbo.length > 0) {
                         dispatch(setAvailableTurbos(data.user.turbo))

@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {ImageSliceType, MyLeagueImageTypes} from "../types/store.ts";
-import {LeagueImageTypes, SkinImageTypes} from "../types/data.ts";
+import {BoosterImageTypes, DailyBoosterImageTypes, LeagueImageTypes, SkinImageTypes} from "../types/data.ts";
 
 const imageSlice = createSlice({
     name: 'image',
@@ -35,11 +35,55 @@ const imageSlice = createSlice({
         alterActiveSkinsImages: (state, action: { payload: SkinImageTypes }) => {
             state.activeSkins = state.skin.find((x) => x.name == action.payload);
         },
-        addBoosterImages: (state, action) => {
+        addBoosterImages: (state, action: { payload: { name: BoosterImageTypes, img: any, type: 'big' | 'small' } }) => {
             state.booster.push(action.payload);
+            const booster = state.booster.filter((x) => x.name == action.payload.name);
+            if (booster.length > 0) {
+                state.booster = state.booster.map((booster) => {
+                    if (booster.name == action.payload.name) {
+                        if (action.payload.type == 'big') {
+                            booster.img.big = action.payload.img;
+                        } else {
+                            booster.img.small = action.payload.img;
+                        }
+                    }
+                    return booster;
+                });
+            }
+            else {
+                state.booster.push({
+                    name: action.payload.name,
+                    img: {
+                        big: action.payload.type == 'big' ? action.payload.img : null,
+                        small: action.payload.type == 'small' ? action.payload.img : null
+                    }
+                });
+            }
         },
-        addDailyBoosterImages: (state, action) => {
+        addDailyBoosterImages: (state, action: { payload: { name: DailyBoosterImageTypes, img: any, type: 'big' | 'small' } }) => {
             state.dailyBooster.push(action.payload);
+            const dailyBooster = state.dailyBooster.filter((x) => x.name == action.payload.name);
+            if (dailyBooster.length > 0) {
+                state.dailyBooster = state.dailyBooster.map((dailyBooster) => {
+                    if (dailyBooster.name == action.payload.name) {
+                        if (action.payload.type == 'big') {
+                            dailyBooster.img.big = action.payload.img;
+                        } else {
+                            dailyBooster.img.small = action.payload.img;
+                        }
+                    }
+                    return dailyBooster;
+                });
+            }
+            else {
+                state.dailyBooster.push({
+                    name: action.payload.name,
+                    img: {
+                        big: action.payload.type == 'big' ? action.payload.img : null,
+                        small: action.payload.type == 'small' ? action.payload.img : null
+                    }
+                });
+            }
         },
         addSkinImages: (state, action: { payload: { name: SkinImageTypes, img: any, type: 'normal' | 'turbo' } }) => {
             const skin = state.skin.filter((x) => x.name == action.payload.name);

@@ -7,7 +7,7 @@ const Score = () => {
     const image: ImageSliceType = useSelector((state: any) => state.image);
     const COIN_IMG = image.core.find((img) => img.name === 'COIN_TOOL');
     return (
-        <div className="flex justify-around items-center animate__animated  animate__fadeIn animate__slow ">
+        <div className="flex justify-around items-center animate__animated  animate__fadeIn animate__slow mb-2">
             <div className='score-holder flex justify-between items-center'>
                 {COIN_IMG ? <img className='mr-2' src={COIN_IMG?.img.src} alt='DragonCoin'/> : null}
                 <div className='font-extrabold'>

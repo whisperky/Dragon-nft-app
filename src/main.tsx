@@ -6,10 +6,10 @@ import {Provider} from "react-redux";
 import {store} from "./store/store.ts";
 import WebApp from "@twa-dev/sdk";
 
-if (WebApp.initData !== '' && WebApp.initData !== undefined) {
+// if (WebApp.initData !== '' && WebApp.initData !== undefined) {
     ReactDOM.createRoot(document.getElementById('root')!).render(
         <Provider store={store}>
             <App/>
         </Provider>,
     )
-}
+// }

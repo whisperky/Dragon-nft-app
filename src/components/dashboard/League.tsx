@@ -14,7 +14,7 @@ const League = () => {
     const leagueLogo = image.league.find((x) => leagueName(x.name) == leagueName(league.userLeague.preset))?.img.small.src;
     const dispatch = useDispatch();
     return (
-        <div className='flex justify-around mb-10 league-container blur-round-border-bg mx-8 mt-10'>
+        <div className='flex justify-around league-container blur-round-border-bg mx-8 my-8'>
             <div className='league-squad-holder animate__animated animate__fadeIn'>
                 <div className='db-league' onClick={() => {
                     dispatch(setLoadLeaguePage(false))

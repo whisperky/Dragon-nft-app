@@ -107,6 +107,13 @@ export type MyImageTypes = {
     name: ImageTypes;
     img: HTMLImageElement;
 }
+export type MyBoosterImageTypes = {
+    name: DailyBoosterImageTypes | BoosterImageTypes;
+    img: {
+        small: HTMLImageElement;
+        big: HTMLImageElement;
+    }
+}
 export type MySkinImageTypes = {
     name: SkinImageTypes;
     img: {
@@ -125,8 +132,8 @@ export type MyLeagueImageTypes = {
 export type ImageSliceType = {
     core: MyImageTypes[];
     activeSkins: MySkinImageTypes;
-    booster: MyImageTypes[];
-    dailyBooster: MyImageTypes[];
+    booster: MyBoosterImageTypes[];
+    dailyBooster: MyBoosterImageTypes[];
     skin: MySkinImageTypes[];
     others: MyImageTypes[];
     league: MyLeagueImageTypes[];

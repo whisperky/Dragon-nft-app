@@ -1,9 +1,16 @@
 import BOOST_DRAGON from "../../public/icon/boosts/dragon.png";
-import BOOST_BATTREY from "../../public/icon/boosts/battery.png";
+import BOOST_BATTERY from "../../public/icon/boosts/battery.png";
 import BOOST_ENERGY from "../../public/icon/boosts/battery.png";
 import BOOST_MULTITAP from "../../public/icon/boosts/multi-tap.png";
 import BOOST_RECHARGE from "../../public/icon/boosts/recharge-speed.png";
 import BOOST_TAPBOT from "../../public/icon/boosts/tap-bot.png";
+
+import BOOST_BATTERY_BIG from "../../public/icon/boosts/big/battery.png";
+import BOOST_ENERGY_BIG from "../../public/icon/boosts/big/energy.png";
+import BOOST_MULTITAP_BIG from "../../public/icon/boosts/big/multi-tap.png";
+import BOOST_RECHARGE_BIG from "../../public/icon/boosts/big/recharge-speed.png";
+import BOOST_TAPBOT_BIG from "../../public/icon/boosts/big/tap-bot.png";
+import BOOST_DRAGON_BIG from "../../public/icon/boosts/big/dragon.png";
 
 import BASIC from "../../public/icon/boosts/skin/defualt.svg";
 import BITCOIN from "../../public/icon/boosts/skin/bitcoin.svg";
@@ -85,7 +92,7 @@ import CELEBRATION_ICON from "../../public/icon/squad/celebration.svg";
 
 import {addCoinLoadedImg} from "../store/loading.ts";
 import {store} from "../store/store.ts";
-import {LeagueImageTypes, SkinImageTypes} from "../types/data.ts";
+import {BoosterImageTypes, DailyBoosterImageTypes, LeagueImageTypes, SkinImageTypes} from "../types/data.ts";
 import {
     addActiveSkinsImages,
     addBoosterImages, addCoinersImages,
@@ -125,7 +132,7 @@ import {
 //         case 'AUTO_TAP_BOT':
 //             return BOOST_TAPBOT;
 //         case 'ENERGY_LIMIT':
-//             return BOOST_BATTREY;
+//             return BOOST_BATTERY;
 //         case 'ENERGY':
 //             return BOOST_ENERGY;
 //         case 'BASIC':
@@ -160,12 +167,12 @@ const loadCoinImages = (coin: 'BASIC' | 'BITCOIN' | 'JADE_COIN' | 'VOTE_PEDRO') 
 }
 export const loadBoostImages = () => {
     const loadImages = [
-        {name: 'RECHARGING_SPEED', src: [{type: 'normal', img: BOOST_RECHARGE}], type: 'booster'},
-        {name: 'MULTI_TAP', src: [{type: 'normal', img: BOOST_MULTITAP}], type: 'booster'},
-        {name: 'AUTO_TAP_BOT', src: [{type: 'normal', img: BOOST_TAPBOT}], type: 'booster'},
-        {name: 'ENERGY_LIMIT', src: [{type: 'normal', img: BOOST_BATTREY}], type: 'booster'},
-        {name: 'ENERGY', src: [{type: 'normal', img: BOOST_ENERGY}], type: 'dailyBooster'},
-        {name: 'TURBO', src: [{type: 'normal', img: BOOST_DRAGON}], type: 'dailyBooster'},
+        {name: 'RECHARGING_SPEED', src: [{type: 'small', img: BOOST_RECHARGE}, {type: 'big', img: BOOST_RECHARGE_BIG}], type: 'booster'},
+        {name: 'MULTI_TAP', src: [{type: 'small', img: BOOST_MULTITAP}, {type: 'big', img: BOOST_MULTITAP_BIG}], type: 'booster'},
+        {name: 'AUTO_TAP_BOT', src: [{type: 'small', img: BOOST_TAPBOT}, {type: 'big', img: BOOST_TAPBOT_BIG}], type: 'booster'},
+        {name: 'ENERGY_LIMIT', src: [{type: 'small', img: BOOST_BATTERY}, {type: 'big', img: BOOST_BATTERY_BIG}], type: 'booster'},
+        {name: 'ENERGY', src: [{type: 'small', img: BOOST_ENERGY}, {type: 'big', img: BOOST_ENERGY_BIG}], type: 'dailyBooster'},
+        {name: 'TURBO', src: [{type: 'small', img: BOOST_DRAGON}, {type: 'big', img: BOOST_DRAGON_BIG}], type: 'dailyBooster'},
 
         {
             name: 'BASIC',
@@ -191,22 +198,24 @@ export const loadBoostImages = () => {
 
     ];
     return loadImages.forEach((img) => {
-        img.src.forEach((image: { type: 'normal' | 'turbo', img: any }) => {
+        img.src.forEach((image: { type: 'normal' | 'turbo' | 'small' | 'big', img: any }) => {
             const im = new Image()
             im.src = image.img
             im.onload = () => {
                 if (img.type == 'booster') {
                     store.dispatch(addBoosterImages({
-                        name: img.name,
-                        img: im
+                        name: img.name as BoosterImageTypes,
+                        img: im,
+                        type: image.type as 'small' | 'big'
                     }))
                     if (store.getState().image.booster.filter((x) => x.name === 'RECHARGING_SPEED' || x.name === 'MULTI_TAP' || x.name == 'AUTO_TAP_BOT' || x.name == 'ENERGY_LIMIT').length >= 4) {
                         store.dispatch(setBoosterDone(true))
                     }
                 } else if (img.type == 'dailyBooster') {
                     store.dispatch(addDailyBoosterImages({
-                        name: img.name,
-                        img: im
+                        name: img.name as DailyBoosterImageTypes,
+                        img: im,
+                        type: image.type as 'small' | 'big'
                     }))
                     if (store.getState().image.dailyBooster.filter((x) => x.name === 'TURBO' || x.name === 'ENERGY').length >= 2) {
                         store.dispatch(setDailyBoosterDone(true))
@@ -215,7 +224,7 @@ export const loadBoostImages = () => {
                     store.dispatch(addSkinImages({
                         name: img.name as SkinImageTypes,
                         img: im,
-                        type: image.type
+                        type: image.type as 'normal' | 'turbo'
                     }))
                     if (store.getState().image.skin.filter((x) => x.name === 'BASIC' || x.name === 'BITCOIN' || x.name == 'VOTE_PEDRO' || x.name == 'JADE_COIN').length >= 4) {
                         store.dispatch(setSkinDone(true))

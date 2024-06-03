@@ -137,7 +137,7 @@ const SheetComp = () => {
     const skin_img = image.skin.find((x) => x.name == item.image)
 
 
-    const img = game.itemType == "daily_booster" && daily_img != undefined ? daily_img?.img : game.itemType == 'booster' && boost_img != undefined ? boost_img?.img : game.itemType == 'skin' && skin_img != undefined ? skin_img?.img.normal : null;
+    const img = game.itemType == "daily_booster" && daily_img != undefined ? daily_img?.img.big : game.itemType == 'booster' && boost_img != undefined ? boost_img?.img.big : game.itemType == 'skin' && skin_img != undefined ? skin_img?.img.normal : null;
     if (game.itemType == 'skin') {
         const uSkin = skins.userSkins.find((x) => x.skin_id == game.item.id);
         const ownSkin = uSkin != undefined;
@@ -189,7 +189,7 @@ const SheetComp = () => {
                     <Sheet.Header>{customHeader}</Sheet.Header>
                     <Sheet.Content>
                         <div className="bs-container items-stretch px-6">
-                            {img !== null ? <img className='bs-img mx-auto' src={img.src.replace('.png', '-logo.png')}/> : <div className='bs-img mx-auto'></div>}
+                            {img !== null ? <img className='bs-img mx-auto' src={img.src}/> : <div className='bs-img mx-auto'></div>}
                             <div className='bs-title'>{item.name}</div>
                             <span className='bs-subtitle'>{item.description}</span>
                             {/*<span className='bs-over-subtitle'>{item.}</span>*/}

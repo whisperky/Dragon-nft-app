@@ -120,7 +120,7 @@ const CoinImage = () => {
         item.style.transform = `rotateY(0deg) rotateX(0deg)`
     }
     return (score.energy > 0 && !score.coolDown) ? (
-        <div className='coin-image-holder flex justify-around relative mx-10'>
+        <div className='coin-image-holder flex justify-center relative mx-10'>
             <div id='coin-mother' ref={imgH} onTouchStart={onTapBegin} onTouchEnd={onTapEnds}>
                 <div id='coin-ex' className='coin-itself'></div>
                 <img onSelect={() => false} ref={img} id='coinIcon' className='coin-image'
@@ -128,7 +128,7 @@ const CoinImage = () => {
             </div>
             <div></div>
         </div>
-    ) : (<div className='coin-image-holder flex justify-around relative mx-10'>
+    ) : (<div className='coin-image-holder flex justify-center relative mx-10'>
         <div id='coin-mother glitch-container' ref={imgH}>
             <div id='coin-ex' className='coin-itself'></div>
             <img ref={img} id='coinIcon' className='coin-image grayscale-image glitch-animation' src={normal_image}

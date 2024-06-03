@@ -33,7 +33,7 @@ const Boosts = () => {
                 <DailyBoosters/>
                 <BoosterList/>
                 <SkinList/>
-                <p className='boost-builder my-5'>Build with by <span>Open Builders</span></p>
+                <p className='boost-builder mt-5'>Build with ❤ by <span>Dragon Team</span></p>
             </div>
             <div className='footer-square-gradient'></div>
         </div>
