@@ -93,7 +93,7 @@ const LeagueHeader = () => {
             <div className='league-header'>
                 <img className='league-header-bg' src={leagueBg}/>
                 <DragonCoiners/>
-                <div className='flex justify-between items-center'>
+                <div className='flex justify-around items-center'>
                     {LEFT_ARROW_IMG ? <img className={'lh-img ' + (league.no == 1 ? 'opacity-less' : '')}
                                            src={LEFT_ARROW_IMG?.img.src}
                                            onClick={() => dispatch(prevLeague())}/> : null}
