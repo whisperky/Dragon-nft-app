@@ -38,7 +38,7 @@
 }
 
 .coin-image-holder > div:first-child {
-    margin-bottom: 2rem;
+    margin-bottom: 4%;
     touch-action: manipulation;
     animation: zoomIn 2s cubic-bezier(0.075, 0.82, 0.165, 1);
     border-radius: 50%;
@@ -216,7 +216,7 @@
     margin-top: 10px;
     border-radius: 18.4px 18.4px 0 0!important;
     width: 100%;
-    padding: 1.8rem;
+    padding: 6% 1.8rem;
     z-index: 800;
 }
 

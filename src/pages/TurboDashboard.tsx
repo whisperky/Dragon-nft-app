@@ -20,19 +20,19 @@ const TurboDashboard = () => {
     const dispatch = useDispatch();
     WebApp.BackButton.hide()
     const mineTurbo = () => {
-        // user.websocket.emit('mineTurbo', {
-        //     token: turbo.turbo.token,
-        //     taps: turbo.taps,
-        // })
-        // dispatch(resetTurboTaps());
-        // dispatch(turboModeOff());
-        // dispatch(deactivateMineTurbo())
+        user.websocket.emit('mineTurbo', {
+            token: turbo.turbo.token,
+            taps: turbo.taps,
+        })
+        dispatch(resetTurboTaps());
+        dispatch(turboModeOff());
+        dispatch(deactivateMineTurbo())
     }
     useEffect(() => {
         dispatch(resetCoolDown());
-        // dispatch(setTurboTimeout(setTimeout(() => {
-        //     dispatch(activateMineTurbo())
-        // }, turbo.turbo.duration * 1000)));
+        dispatch(setTurboTimeout(setTimeout(() => {
+            dispatch(activateMineTurbo())
+        }, turbo.turbo.duration * 1000)));
         document.body.classList.add('noMovement');
         return () => {
             document.body.classList.remove('noMovement');
@@ -49,8 +49,8 @@ const TurboDashboard = () => {
             <div className='add-pad mb-10 z-[10]'>
                 <Score/>
                 <CoinImage/>
-                <League/>
                 <Energy/>
+                <League/>
                 <DragonHead/>
             </div>
             <DSTools />

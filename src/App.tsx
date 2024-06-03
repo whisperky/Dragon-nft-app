@@ -39,7 +39,7 @@ function App() {
                     },
                     {
                         path: 'dashboard',
-                        element: !turbo.turboMode ? <TurboDashboard/> : <Dashboard/>,
+                        element: turbo.turboMode ? <TurboDashboard/> : <Dashboard/>,
                     },
                     {
                         path: 'boosts',
