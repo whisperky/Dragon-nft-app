@@ -20,6 +20,7 @@ const DailyBoosters = () => {
             showToast(purchase.toast,'You have used all your free booster', 'error')
         }
     };
+    
     return (
         <div className=''>
             <p className='boost-title animate__animated animate__fadeIn animate__slow'>Free daily boosters</p>
@@ -33,7 +34,7 @@ const DailyBoosters = () => {
                             <div className='single-booster glass-hover' key={boost.id}
                                  onClick={() => buyBooster(boost.id)}>
                                 <div>
-                                    {img != undefined ? <img src={img.big.src}/> : null}
+                                    {img && img.big ? <img src={img.big.src}/> : null}
                                 </div>
                                 <div>
                                     <p>{leftB}-<span className='daily-boost-limit'>{boost.limit}</span></p>

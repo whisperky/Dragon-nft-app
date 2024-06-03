@@ -1,48 +1,94 @@
-import { motion } from 'framer-motion';
 import { useNavigate } from "react-router-dom";
+import Carousel from "react-spring-3d-carousel";
+import { config } from "react-spring";
 import WebApp from "@twa-dev/sdk";
-import { useSpringCarousel } from 'react-spring-carousel'
 import React from 'react';
-
-const slideItems = [{
-    id: 'app',
-    img: '/background/dashboard.jpg'
-},{
-    id: 'dragon-war',
-    img: '/background/dragon-war.jpg'
-}]
 const AppSlider = () => {
     const navigate = useNavigate();
-    const [currentSlide, setCurrentSlide] = React.useState(slideItems[0].id)
-    const { carouselFragment, useListenToCustomEvent, slideToPrevItem, slideToNextItem } = useSpringCarousel({
-        itemsPerSlide: 1, 
-        initialStartingPosition: 'center',
-        gutter: 0,
-        items: slideItems.map((item) => {
-            return {
-                ...item,
-                renderItem: (
-                    <div
-                        className={`slide w-full transition-all duration-700 ${currentSlide === item.id
-                            ? 'z-10'
-                            : 'scale-90'
-                            }`}>
-                        <img src={item.img} alt={item.id} className='w-full h-full mx-auto object-cover' onClick={() => navigate('/dashboard')} />
-                    </div>
-                )
-            }
-        })
+    const [state, setState] = React.useState({
+        goToSlide: 0,
+        offsetRadius: 2,
+        showNavigation: false,
+        config: config.gentle
     });
-    useListenToCustomEvent((event) => {
-        if (event.eventName === 'onSlideStartChange') {
-            setCurrentSlide(event?.nextItem?.id)
+
+    let slides = [{
+        key: 1,
+        content: <img src="/background/dashboard.jpg" alt="1" />
+    },{
+        key: 2,
+        content: <img src="/background/dragon-war.jpg" alt="2"/>
+    },{
+        key: 3,
+        content: <div className='w-[50%] h-full rounded-3xl bg-black bg-opacity-50'></div>
+    }].map((slide, index) => {
+        return { ...slide, onClick: () => navigate('/dashboard') };
+    });
+
+    let xDown = null;
+    let yDown = null;
+
+    const getTouches = (evt) => {
+        return (
+        evt.touches || evt.originalEvent.touches // browser API
+        ); // jQuery
+    };
+
+    const handleTouchStart = (evt) => {
+        const firstTouch = getTouches(evt)[0];
+        xDown = firstTouch.clientX;
+        yDown = firstTouch.clientY;
+    };
+
+    const handleTouchMove = (evt) => {
+        if (!xDown || !yDown) {
+        return;
         }
-    })
+
+        let xUp = evt.touches[0].clientX;
+        let yUp = evt.touches[0].clientY;
+
+        let xDiff = xDown - xUp;
+        let yDiff = yDown - yUp;
+
+        if (Math.abs(xDiff) > Math.abs(yDiff)) {
+        /*most significant*/
+        if (xDiff > 0) {
+            /* left swipe */
+            setState(prevState => ({ ...prevState, goToSlide: state.goToSlide + 1 }));
+        } else {
+            /* right swipe */
+            setState(prevState => ({ ...prevState, goToSlide: state.goToSlide - 1 }));
+        }
+        } else {
+        if (yDiff > 0) {
+            /* up swipe */
+        } else {
+            /* down swipe */
+        }
+        }
+        /* reset values */
+        xDown = null;
+        yDown = null;
+    };
+
     return (
         <div className="slider-container w-full mb-8">
             <p className='apps-text-title text-left px-12 mb-6 text-3xl font-bold'>Apps</p>
-            <div className="mx-auto w-9/12 relative">
-                {carouselFragment}
+            <div className="mx-auto w-[150%] translate-x-[-17%] relative">
+                <div
+                className={`slide w-full h-[50vh]`}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                >
+                    <Carousel
+                        slides={slides}
+                        goToSlide={state.goToSlide}
+                        offsetRadius={state.offsetRadius}
+                        showNavigation={state.showNavigation}
+                        animationConfig={state.config}
+                    />
+                </div>
             </div>
         </div>
     );
