@@ -33,7 +33,7 @@ const DailyBoosters = () => {
                             <div className='single-booster glass-hover' key={boost.id}
                                  onClick={() => buyBooster(boost.id)}>
                                 <div>
-                                    {img != undefined ? <img src={img.src}/> : null}
+                                    {img != undefined ? <img src={img.big.src}/> : null}
                                 </div>
                                 <div>
                                     <p>{leftB}-<span className='daily-boost-limit'>{boost.limit}</span></p>

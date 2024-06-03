@@ -6,10 +6,10 @@ import React from 'react';
 
 const slideItems = [{
     id: 'app',
-    img: '../public/background/dashboard.jpg'
+    img: '/background/dashboard.jpg'
 },{
     id: 'dragon-war',
-    img: '../public/background/dragon-war.jpg'
+    img: '/background/dragon-war.jpg'
 }]
 const AppSlider = () => {
     const navigate = useNavigate();

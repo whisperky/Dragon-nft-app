@@ -64,7 +64,7 @@
 
 .coin-image {
     position: relative;
-    margin-top: 20px;
+    margin: 13% 0;
 }
 
 .score-holder > img {
@@ -867,7 +867,7 @@
     height: 100%;
     width: 100%;
     content: "";
-    background: url("../public/background/bg.jpg") no-repeat center center;
+    background: url("/background/bg.jpg") no-repeat center center;
     opacity: 0.22;
     z-index: 0;
 }
@@ -934,7 +934,7 @@
 .earn-user {
     width: 200px;
     height: 200px;
-    background-image: url("../public/icon/earn/earn.png");
+    background-image: url("/icon/earn/earn.png");
     background-size: contain;
     background-position: center;
 }
@@ -942,7 +942,7 @@
 .icon-autotap {
     width: 38px;
     height: 47px;
-    background-image: url("../public/icon/defaults/autotap.png");
+    background-image: url("/icon/defaults/autotap.png");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -951,7 +951,7 @@
 .icon-works {
     width: 47px;
     height: 47px;
-    background-image: url("../public/icon/defaults/works.png");
+    background-image: url("/icon/defaults/works.png");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -960,7 +960,7 @@
 .help-btn {
     width: 32px;
     height: 32px;
-    background-image: url("../public/icon/defaults/help.svg");
+    background-image: url("/icon/defaults/help.svg");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;

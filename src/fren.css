@@ -78,7 +78,6 @@
 .fren-earned {
     justify-content: center;
     width: auto;
-    padding-right: .5em;
     padding-left: 1.5em;
     color: #FFD041;
     font-size: 14px;
@@ -101,7 +100,6 @@
 }
 
 .fren-earn-info {
-    padding-left: 10px;
     font-size: 16px;
 }
 
