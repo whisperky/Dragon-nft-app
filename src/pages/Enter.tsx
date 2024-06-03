@@ -14,7 +14,7 @@ const Enter = () => {
             <div className='header-gradient'></div>
             <p className='enter-header-img'></p>
             <p className='enter-text-title text-center'>Welcome to Dragon Bot</p>
-            <button className='enter-btn' onClick={() => navigate('/apps')}>Enter</button>
+            <button className='enter-btn' onClick={() => navigate('/dashboard')}>Enter</button>
             <div className='footer-gradient'></div>
         </div>
     );
