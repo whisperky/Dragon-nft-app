@@ -214,13 +214,11 @@
 }
 
 .ds-tools {
-    position: absolute !important;
-    bottom: -2px;
+    position: relative !important;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-top: 10px;
     border-radius: 18.4px 18.4px 0 0 !important;
     width: 100%;
     padding: 6% 2.5rem;
@@ -867,19 +865,24 @@
     height: 100vh;
     z-index: 0;
     overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
 }
 
 .page-bg:after {
     position: absolute;
     top: 0;
-    height: 100%;
+    height: 100vh;
     width: 100%;
     content: "";
     background: url("/background/bg.jpg") no-repeat center center;
     opacity: 0.22;
     z-index: 0;
 }
-
+.add-pad.tap {
+    padding-top: 6vh;
+}
 .header-gradient {
     border-radius: 667.008px;
     opacity: 0.6;

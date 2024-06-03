@@ -2,6 +2,7 @@ import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {ImageSliceType} from "../../types/store.ts";
 import {showToast} from "../../helpers/helper.ts";
+import {useEffect} from "react";
 
 const DSTools = () => {
     const purchase = useSelector((state: any) => state.purchase);
@@ -18,13 +19,12 @@ const DSTools = () => {
     }
     const toBoosts = () => {
         navigate(`/boosts`);
-    }
-    const checker = images.core.filter((img) => img.name === 'TOY_TOOL' || img.name === 'COIN_TOOL' || img.name == 'DRAGON_TOOL' || img.name === 'APPS_TOOL')
-    // console.log(images.core)
+    }// console.log(images.core)
     const TOY_TOOL = images.core.find((img) => img.name === 'TOY_TOOL')?.img;
     const COIN_TOOL = images.core.find((img) => img.name === 'COIN_TOOL')?.img;
     const APPS_TOOL = images.core.find((img) => img.name === 'APPS_TOOL')?.img;
     const DRAGON_TOOL = images.core.find((img) => img.name === 'DRAGON_TOOL')?.img;
+
     return (
         <div className='ds-tools animate__animated animate__fadeIn !z-[10] blur-round-border-bg'>
             <div className='ds-tool-box' onClick={toFrens}>

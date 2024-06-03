@@ -33,6 +33,7 @@ import TWITTER_IMG from '/icon/defaults/twitter.png';
 import MEDIUM_IMG from '/icon/defaults/medium.png';
 import TELEGRAM_IMG from '/icon/defaults/telegram.png';
 import AUTO_EARN_BOT_IMG from '/icon/earn/auto-earn.png';
+import APP_BACKGROUND_IMG from '/background/bg.jpg';
 
 import BRONZE_LEAGUE from '/icon/rank/bronze.png';
 import SILVER_LEAGUE from '/icon/rank/silver.png';
@@ -318,7 +319,8 @@ export const loadCoreImages = () => {
         {name: 'TWITTER', src: TWITTER_IMG},
         {name: 'MEDIUM', src: MEDIUM_IMG},
         {name: 'TELEGRAM', src: TELEGRAM_IMG},
-        {name: 'AUTO_EARN_BOT', src: AUTO_EARN_BOT_IMG}
+        {name: 'AUTO_EARN_BOT', src: AUTO_EARN_BOT_IMG},
+        {name: 'APP_BACKGROUND',src: APP_BACKGROUND_IMG}
     ];
     return loadImages.forEach((img) => {
         const im = new Image()
@@ -328,7 +330,7 @@ export const loadCoreImages = () => {
                 name: img.name,
                 img: im
             }))
-            if (store.getState().image.core.filter((x) => x.name === 'TOY_TOOL' || x.name === 'COIN_TOOL' || x.name === 'DRAGON_TOOL' || x.name == 'APPS_TOOL' || x.name == 'CLOSE_ICON' || x.name == 'ENTER_BG' || x.name == 'WELCOME_HEADER' || x.name == 'DRAGON_TAP' || x.name == 'DRAGON_WAR' || x.name == 'TWITTER' || x.name == 'MEDIUM' || x.name == 'TELEGRAM' || x.name == 'AUTO_EARN_BOT').length >= 13) {
+            if (store.getState().image.core.filter((x) => x.name === 'TOY_TOOL' || x.name === 'COIN_TOOL' || x.name === 'DRAGON_TOOL' || x.name == 'APPS_TOOL' || x.name == 'CLOSE_ICON' || x.name == 'ENTER_BG' || x.name == 'WELCOME_HEADER' || x.name == 'DRAGON_TAP' || x.name == 'DRAGON_WAR' || x.name == 'TWITTER' || x.name == 'MEDIUM' || x.name == 'TELEGRAM' || x.name == 'AUTO_EARN_BOT' || x.name == 'APP_BACKGROUND').length >= 14) {
                 store.dispatch(setCoreDone(true))
             }
         }
@@ -404,7 +406,6 @@ export const loadCoinersImages = () => {
         }
     })
 }
-
 export const loadOptionalImages = () => {
     const loadImages = [
         {name: 'JOIN_SQUAD_BG', src: JOIN_SQUAD_BG},
