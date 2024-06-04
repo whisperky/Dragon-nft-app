@@ -897,10 +897,10 @@
     flex-direction: column;
 }
 .no-x-move {
-    overflow-y: hidden !important;
+    overflow-x: hidden !important;
 }
 .no-y-move {
-    overflow-x: hidden !important;
+    overflow-y: hidden !important;
 }
 .no-xy-move {
     overflow-x: hidden !important;
