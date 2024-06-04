@@ -1,10 +1,12 @@
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import Carousel from "react-spring-3d-carousel";
-import { config } from "react-spring";
+import {config} from "react-spring";
 import WebApp from "@twa-dev/sdk";
 import React from 'react';
 import {ImageSliceType} from "../../types/store.ts";
 import {useSelector} from "react-redux";
+import {showToast} from "../../helpers/helper.ts";
+
 const AppSlider = () => {
     const navigate = useNavigate();
     const [state, setState] = React.useState({
@@ -19,15 +21,32 @@ const AppSlider = () => {
 
     let slides = [{
         key: 1,
-        content: <img src={tapIMG?.src} alt="1" />
-    },{
+        content: <div className='app-con '>
+            <img className='app-image' src={tapIMG?.src} alt="1"/>
+            <div className='app-name-con blur-round-border-bg'>
+                <p>Dragon Tap</p>
+                <p>TAP AND EARN</p>
+            </div>
+        </div>
+    }, {
         key: 2,
-        content: <img src={warImg?.src} alt="2"/>
-    },{
+        content: <div className='app-con '>
+            <img className='app-image' src={warImg?.src} alt="1"/>
+            <div className='app-name-con blur-round-border-bg'>
+                <p>Dragon Pot</p>
+                <p>Coming soon</p>
+            </div>
+        </div>
+    }, {
         key: 3,
         content: <div className='w-[50%] h-full rounded-3xl bg-black bg-opacity-50'></div>
     }].map((slide, index) => {
-        return { ...slide, onClick: () => navigate('/dashboard') };
+        switch (slide.key) {
+            case 1:
+                return {...slide, onClick: () => navigate('/dashboard')};
+            default:
+                return {...slide, onClick: () => showToast('dragon', 'Coming soon')};
+        }
     });
 
     let xDown = null;
@@ -35,7 +54,7 @@ const AppSlider = () => {
 
     const getTouches = (evt) => {
         return (
-        evt.touches || evt.originalEvent.touches // browser API
+            evt.touches || evt.originalEvent.touches // browser API
         ); // jQuery
     };
 
@@ -47,7 +66,7 @@ const AppSlider = () => {
 
     const handleTouchMove = (evt) => {
         if (!xDown || !yDown) {
-        return;
+            return;
         }
 
         let xUp = evt.touches[0].clientX;
@@ -57,20 +76,20 @@ const AppSlider = () => {
         let yDiff = yDown - yUp;
 
         if (Math.abs(xDiff) > Math.abs(yDiff)) {
-        /*most significant*/
-        if (xDiff > 0) {
-            /* left swipe */
-            setState(prevState => ({ ...prevState, goToSlide: state.goToSlide + 1 }));
+            /*most significant*/
+            if (xDiff > 0) {
+                /* left swipe */
+                setState(prevState => ({...prevState, goToSlide: state.goToSlide + 1}));
+            } else {
+                /* right swipe */
+                setState(prevState => ({...prevState, goToSlide: state.goToSlide - 1}));
+            }
         } else {
-            /* right swipe */
-            setState(prevState => ({ ...prevState, goToSlide: state.goToSlide - 1 }));
-        }
-        } else {
-        if (yDiff > 0) {
-            /* up swipe */
-        } else {
-            /* down swipe */
-        }
+            if (yDiff > 0) {
+                /* up swipe */
+            } else {
+                /* down swipe */
+            }
         }
         /* reset values */
         xDown = null;
@@ -82,9 +101,9 @@ const AppSlider = () => {
             <p className='apps-text-title text-left px-12 mb-6 text-3xl font-bold'>Apps</p>
             <div className="mx-auto w-[150%] translate-x-[-17%] relative">
                 <div
-                className={`slide w-full h-[50vh]`}
-                onTouchStart={handleTouchStart}
-                onTouchMove={handleTouchMove}
+                    className={`slide w-full h-[50vh]`}
+                    onTouchStart={handleTouchStart}
+                    onTouchMove={handleTouchMove}
                 >
                     <Carousel
                         slides={slides}

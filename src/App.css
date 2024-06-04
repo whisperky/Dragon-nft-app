@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Calistoga&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Calistoga&family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
 .dashboard {
     display: flex;
@@ -89,6 +89,8 @@
     position: relative;
     /*margin: 13% 0;*/
     margin: 11% 0 3% 0;
+    clip-path: circle(49% at 50% 50%);
+
 }
 
 .score-holder > img {
@@ -892,7 +894,16 @@
     justify-content: space-between;
     flex-direction: column;
 }
-
+.no-x-move {
+    overflow-y: hidden !important;
+}
+.no-y-move {
+    overflow-x: hidden !important;
+}
+.no-xy-move {
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+}
 .page-bg:after {
     position: absolute;
     top: 0;
@@ -1029,4 +1040,38 @@
 }
 .turbo-coin {
     animation: spinCoin 1s linear;
+}
+
+.app-con {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    padding: 0 3rem;
+}
+.app-image {
+    height: 57vh;
+}
+.app-name-con {
+    position: absolute;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+    gap: .5vh;
+    padding: .8rem 2rem;
+    width: 62vw;
+    bottom: 5vh;
+}
+.app-name-con > p:first-child {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+}
+.app-name-con > p:last-child {
+    font-size: 11px;
+    color: rgba(209, 209, 209, 1);
 }

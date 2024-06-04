@@ -18,12 +18,12 @@ const Apps = () => {
 
 
     return (
-        <div className='page-bg'>
+        <div className='page-bg no-xy-move'>
             {/*<div className='header-gradient'></div>*/}
             <div className='apps-container h-screen flex flex-col items-center justify-center'>
                 <AppSlider />
                 <div className='apps-buttons-container w-full px-[9%]'>
-                    <p className='apps-text-title text-left my-5 text-3xl font-bold'>Join our social</p>
+                    <p className='apps-text-title text-left my-5 text-3xl font-bold'>Join Our Socials</p>
                     <div className='block flex items-center justify-between'>
                         <div className='blur-round-border-bg p-2' style={{
                             '--radius': '13px',
