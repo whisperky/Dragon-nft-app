@@ -248,7 +248,7 @@
     justify-content: space-between;
     align-items: center;
     border-radius: 18.4px 18.4px 0 0 !important;
-    padding: 6% 2.5rem;
+    padding: 6% 1.8rem;
     z-index: 800;
 }
 
@@ -266,8 +266,8 @@
 }
 
 .ds-tool-box > img {
-    width: 40px !important;
-    height: 40px !important;
+    width: 52px !important;
+    height: 52px !important;
     margin-bottom: 5px;
     object-fit: contain;
 }
