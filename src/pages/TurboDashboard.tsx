@@ -47,7 +47,7 @@ const TurboDashboard = () => {
         <div className='page-bg !overflow-hidden'>
             {/*<div className='header-gradient'></div>*/}
             <div className='turbo-background'></div>
-            <div className='add-pad flex-1 tap z-[10]'>
+            <div className='add-pad tap z-[10]'>
                 <Score isTurbo={true} />
                 <CoinImage isTurbo={true} />
                 <Energy/>

@@ -257,7 +257,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    z-index: 900;
+    z-index: 10;
 }
 
 .ds-tool-box > p {
@@ -908,7 +908,9 @@
 .add-pad.tap {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
+    margin-top: 3vh;
+    height: 100%;
 }
 .header-gradient {
     border-radius: 667.008px;
