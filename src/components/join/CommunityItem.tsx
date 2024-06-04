@@ -5,7 +5,7 @@ import {MouseEventHandler} from "react";
 import {showToast} from "../../helpers/helper.ts";
 import {useNavigate} from "react-router-dom";
 
-const Web3worldItem = ({
+const CommunityItem = ({
                        image,
                        title,
                        subtitle,
@@ -57,8 +57,7 @@ const Web3worldItem = ({
     let imgHelp: MyImageTypes & MySkinImageTypes = [...images.booster, ...images.skin].find((img: any) => img.name == item.image) as any;
     let img = imgHelp !== undefined ? itemType == 'skin' ? imgHelp?.img.normal : imgHelp?.img : null;
     const clickHandler = () => {
-        if(type==="join") {navigate(item.type)}
-        else showToast(purchase.toast, 'Coming Soon', 'error')
+        showToast(purchase.toast, 'Coming Soon', 'error')
     }
     const replaceAll = (subtitle: string)=> {
         let _subtitle = subtitle;
@@ -109,4 +108,4 @@ const Web3worldItem = ({
     );
 };
 
-export default Web3worldItem;
+export default CommunityItem;

@@ -995,3 +995,27 @@
     position: relative;
     margin: 13% 0 5% 0;
 }
+
+.join-image {
+    position: relative;
+    width: 100%;
+}
+
+.join-title {
+    display: flex;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.joins {
+    /*background: linear-gradient(180deg, rgba(252, 32, 32, 0) 0%, #FC2020 100%) no-repeat;*/
+    min-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 100% !important;;
+}
+
+.p_joins {
+    padding: 2em 1.5em;
+}
