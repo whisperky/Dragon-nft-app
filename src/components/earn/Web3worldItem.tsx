@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {ImageSliceType, MyImageTypes, MySkinImageTypes, PurchaseSliceType} from "../../types/store.ts";
 import {MouseEventHandler} from "react";
 import {showToast} from "../../helpers/helper.ts";
+import {useNavigate} from "react-router-dom";
 
 const Web3worldItem = ({
                        image,
@@ -18,7 +19,8 @@ const Web3worldItem = ({
                        trailing,
                        onTrailing,
                        item,
-                       haveEnough
+                       haveEnough,
+                       type
                    }: {
     title: string,
     subtitle?: string,
@@ -33,8 +35,10 @@ const Web3worldItem = ({
     trailing?: 'enabled' | 'disabled' | 'opener' | 'completed' | 'none',
     onTrailing?: MouseEventHandler<HTMLImageElement>
     item: any,
-    haveEnough: boolean
+    haveEnough: boolean,
+    type: String
 }) => {
+    const navigate = useNavigate()
     if (isMax)
         disabled = true;
     const isBot = item.image == 'AUTO_TAP_BOT';
@@ -53,14 +57,8 @@ const Web3worldItem = ({
     let imgHelp: MyImageTypes & MySkinImageTypes = [...images.booster, ...images.skin].find((img: any) => img.name == item.image) as any;
     let img = imgHelp !== undefined ? itemType == 'skin' ? imgHelp?.img.normal : imgHelp?.img : null;
     const clickHandler = () => {
-        if (disabled || trailing == 'enabled') {
-        } else {
-            if (haveEnough || (trailing == 'disabled' && itemType == 'skin')) {
-                dispatch(showBottomSheet({item: item, type: itemType}))
-            } else {
-                showToast(purchase.toast, 'You do not have enough coins', 'error')
-            }
-        }
+        if(type==="join") {navigate(item.type)}
+        else showToast(purchase.toast, 'Coming Soon', 'error')
     }
     return (
         <div className='b-item glass-hover my-3' style={{opacity: disabled && !isBot ? .3 : 1}}

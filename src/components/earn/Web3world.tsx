@@ -1,6 +1,6 @@
 import Web3worldItem from "./Web3worldItem.tsx";
 import {useSelector} from "react-redux";
-import {boosterData, UserData} from "../../types/data.ts";
+import {EarnData, UserData} from "../../types/data.ts";
 import {numify} from "../../helpers/score.helper.ts";
 import {BoostSliceType, ScoreSliceType} from "../../types/store.ts";
 import {calculateBoostPrice, getLevels} from "../../helpers/helper.ts";
@@ -17,6 +17,7 @@ const web3 = [
         price : 10000000,
         short_description : "+1/ sec for each level. 3 levels max limit",
         updatedAt : new Date("2024-02-21T06:02:35.989Z"),
+        type: "join"
     },
     {
         createdAt : new Date("2024-02-21T06:02:35.989Z"),
@@ -29,6 +30,7 @@ const web3 = [
         price : 100000,
         short_description : "+1/ sec for each level. 3 levels max limit",
         updatedAt : new Date("2024-02-21T06:02:35.989Z"),
+        type: "wallet"
     },
     {
         createdAt : new Date("2024-02-21T06:02:35.989Z"),
@@ -38,9 +40,10 @@ const web3 = [
         lvl_diff : 2,
         max_lvl : 3,
         name : "Retweet Post", 
-        price : 1000,
+        price :50000,
         short_description : "+1/ sec for each level. 3 levels max limit",
         updatedAt : new Date("2024-02-21T06:02:35.989Z"),
+        type: "retweet"
     }
 ]
 
@@ -50,14 +53,14 @@ const Web3world = () => {
 
     return (
         <div className=''>
-            <p className='boost-title animate__animated animate__fadeIn animate__slow'>Web 3 world</p>
+            <p className='boost-title animate__animated animate__fadeIn animate__slow'>Dragon world</p>
             <div className='boosters-list glass blur-round-border-bg animate__animated animate__fadeIn animate__slow' style={{
                 '--angle': '135deg',
             } as React.CSSProperties}>
                 {
 
                     web3
-                        .map((item: boosterData) => {
+                        .map((item: EarnData) => {
                             const item_lvl = getLevels({
                                 tap_lvl: score.tap_lvl,
                                 recharge_lvl: score.recharge_lvl,
@@ -82,12 +85,13 @@ const Web3world = () => {
                                 level: item_lvl,
                                 image: item.image,
                                 coin: true,
+                                type: item.type,
                                 trailing: trailing, //  "opener" | "enabled" | "disabled" | "completed"
                                 haveEnough: BigInt(score.value) >= BigInt(itemPrice),
                             };
                         })
                         .sort((a, b) => (a.isMax && !b.isMax ? 1 : b.isMax && !a.isMax ? -1 : 0))
-                        .map(({isMax, item, key, title, subtitle, maxLevel, level, image, coin, trailing, haveEnough}) => (
+                        .map(({isMax, item, key, title, subtitle, maxLevel, level, image, coin, trailing, haveEnough, type}) => (
                             <Web3worldItem
                                 isMax={isMax}
                                 item={item}
@@ -98,6 +102,7 @@ const Web3world = () => {
                                 level={level}
                                 image={image}
                                 coin={coin}
+                                type={type}
                                 haveEnough={haveEnough}
                                 trailing={trailing as "opener" | "enabled" | "disabled" | "completed" | "none"}
                             />

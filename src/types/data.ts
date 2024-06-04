@@ -105,6 +105,19 @@ export type boosterData = {
     createdAt: Date;
     updatedAt: Date;
 }
+export type EarnData = {
+    id: string;
+    name: string;
+    price: number;
+    description: string | null;
+    short_description: string | null;
+    max_lvl: number | null;
+    lvl_diff: number | null;
+    image: any;
+    type: String;
+    createdAt: Date;
+    updatedAt: Date;
+}
 export type skinData = {
     id: string;
     name: string;

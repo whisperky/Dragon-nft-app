@@ -18,7 +18,7 @@ const InviteItem = ({
                        trailing,
                        onTrailing,
                        item,
-                       haveEnough
+                       haveEnough,
                    }: {
     title: string,
     subtitle?: string,
@@ -53,14 +53,7 @@ const InviteItem = ({
     let imgHelp: MyImageTypes & MySkinImageTypes = [...images.booster, ...images.skin].find((img: any) => img.name == item.image) as any;
     let img = imgHelp !== undefined ? itemType == 'skin' ? imgHelp?.img.normal : imgHelp?.img : null;
     const clickHandler = () => {
-        if (disabled || trailing == 'enabled') {
-        } else {
-            if (haveEnough || (trailing == 'disabled' && itemType == 'skin')) {
-                dispatch(showBottomSheet({item: item, type: itemType}))
-            } else {
-                showToast(purchase.toast, 'You do not have enough coins', 'error')
-            }
-        }
+        showToast(purchase.toast, 'Coming Soon.', 'error')
     }
     return (
         <div className='b-item glass-hover my-3' style={{opacity: disabled && !isBot ? .3 : 1}}

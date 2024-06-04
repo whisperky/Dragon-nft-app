@@ -126,7 +126,7 @@ const EarnImage = () => {
             <div className='coin-image-holder flex justify-center relative mx-10'>
                 <div id='coin-mother' ref={imgH}>
                     <div id='coin-ex' className='coin-itself'></div>
-                    <img onSelect={() => false} ref={img} id='coinIcon' className=''
+                    <img onSelect={() => false} ref={img} id='coinIcon' className='earn-image'
                         src={earn_image} alt='DragonCoin'/>
                 </div>
                 
