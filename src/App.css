@@ -38,7 +38,7 @@
 }
 
 .coin-image-holder > div:first-child {
-    margin-bottom: 4%;
+    margin-bottom: 10%;
     touch-action: manipulation;
     animation: zoomIn 2s cubic-bezier(0.075, 0.82, 0.165, 1);
     border-radius: 50%;
@@ -214,13 +214,15 @@
 }
 
 .ds-tools {
-    position: relative !important;
+    position: fixed !important;
+    bottom: 0;
+    left:0;
+    right: 0;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     border-radius: 18.4px 18.4px 0 0 !important;
-    width: 100%;
     padding: 6% 2.5rem;
     z-index: 800;
 }
@@ -242,7 +244,7 @@
     width: 50px !important;
     height: 50px !important;
     margin-bottom: 5px;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .coin-itself {
@@ -881,7 +883,7 @@
     z-index: 0;
 }
 .add-pad.tap {
-    padding-top: 6vh;
+    margin: 17% 0 120px;
 }
 .header-gradient {
     border-radius: 667.008px;

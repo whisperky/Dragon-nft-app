@@ -19,9 +19,9 @@ const Enter = () => {
         }
     }, [0]);
     return (
-        <div className='enter-con page-bg'>
+        <div className='enter-con page-bg !justify-center'>
             {/*<div className='header-gradient'></div>*/}
-            <img className='enter-header-img' src={headerImg?.src} />
+            <img className='enter-header-img object-contain' src={headerImg?.src} />
             <p className='enter-text-title text-center'>Welcome to Dragon Bot</p>
             <button className='enter-btn' onClick={() => navigate('/apps')}><img src={enterBGIMG?.src} /></button>
             {/*<div className='footer-gradient'></div>*/}
