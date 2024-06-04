@@ -46,14 +46,15 @@ const TurboDashboard = () => {
     return (
         <div className='page-bg'>
             {/*<div className='header-gradient'></div>*/}
+            <div className='turbo-background'></div>
             <div className='add-pad tap z-[10]'>
-                <Score/>
-                <CoinImage/>
+                <Score isTurbo={true} />
+                <CoinImage isTurbo={true} />
                 <Energy/>
                 <League/>
                 <DragonHead/>
             </div>
-            <DSTools />
+            <DSTools/>
             {/*<div className='footer-gradient'></div>*/}
         </div>
     );

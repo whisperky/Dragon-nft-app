@@ -37,7 +37,7 @@ const DailyBoosters = () => {
                                     {img && img.big ? <img src={img.big.src}/> : null}
                                 </div>
                                 <div>
-                                    <p>{leftB}-<span className='daily-boost-limit'>{boost.limit}</span></p>
+                                    <p>{leftB}/<span className='daily-boost-limit'>{boost.limit}</span></p>
                                     <p>{boost.name}</p>
                                 </div>
                             </div>

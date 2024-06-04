@@ -14,7 +14,7 @@ import {tapValue} from "../../helpers/score.helper.ts";
 import {ImageSliceType, ScoreSliceType, TurboSliceType, UserSliceType} from "../../types/store.ts";
 import {incrementTurboTaps, resetTurboTaps, turboModeOff} from "../../store/turbo.ts";
 
-const CoinImage = () => {
+const CoinImage = ({isTurbo = false}) => {
     const imgH = React.useRef<HTMLDivElement>(null)
     const img = React.useRef<HTMLImageElement>(null)
     const user: UserSliceType = useSelector((state: any) => state.user);
@@ -123,7 +123,7 @@ const CoinImage = () => {
         <div className='coin-image-holder flex justify-center relative mx-10'>
             <div id='coin-mother' ref={imgH} onTouchStart={onTapBegin} onTouchEnd={onTapEnds}>
                 <div id='coin-ex' className='coin-itself'></div>
-                <img onSelect={() => false} ref={img} id='coinIcon' className='coin-image'
+                <img onSelect={() => false} ref={img} id='coinIcon' className={'coin-image' + (isTurbo ? ' turbo-coin' : '')}
                      src={normal_image} alt='DragonCoin'/>
             </div>
             <div></div>
