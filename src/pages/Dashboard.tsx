@@ -27,7 +27,7 @@ const Dashboard = () => {
     }, [location]);
     return (
         <div className='page-bg'>
-            <div className='add-pad tap mb-2 z-[10]'>
+            <div className='add-pad tap z-[10]'>
                 <Score />
                 <CoinImage />
                 <Energy />
