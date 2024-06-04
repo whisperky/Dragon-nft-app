@@ -890,21 +890,21 @@
 .page-bg {
     position: relative;
     height: 100vh;
-    z-index: 0;
+    /*z-index: 0;*/
     display: flex;
     justify-content: space-between;
     flex-direction: column;
 }
-.page-bg:after {
-    position: absolute;
-    top: 0;
-    height: 100vh;
-    width: 100%;
-    content: "";
-    background: url("/background/bg.jpg") no-repeat center center;
-    opacity: 0.22;
-    z-index: 0;
-}
+/*.page-bg:after {*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    height: 100vh;*/
+/*    width: 100%;*/
+/*    content: "";*/
+/*    background: url("/background/bg.jpg") no-repeat center center;*/
+/*    opacity: 0.22;*/
+/*    z-index: 0;*/
+/*}*/
 .add-pad.tap {
     display: flex;
     flex-direction: column;
