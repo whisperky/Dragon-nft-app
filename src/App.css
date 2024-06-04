@@ -890,27 +890,26 @@
 .page-bg {
     position: relative;
     height: 100vh;
-    /*z-index: 0;*/
+    z-index: 0;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
 }
-/*.page-bg:after {*/
-/*    position: absolute;*/
-/*    top: 0;*/
-/*    height: 100vh;*/
-/*    width: 100%;*/
-/*    content: "";*/
-/*    background: url("/background/bg.jpg") no-repeat center center;*/
-/*    opacity: 0.22;*/
-/*    z-index: 0;*/
-/*}*/
+.page-bg:after {
+    position: absolute;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    content: "";
+    background: url("/background/bg.jpg") no-repeat center center;
+    opacity: 0.22;
+    z-index: 0;
+}
 .add-pad.tap {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    margin-top: 3vh;
-    height: 100%;
+    justify-content: center;
+    margin-top: 2vh;
 }
 .header-gradient {
     border-radius: 667.008px;
