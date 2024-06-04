@@ -908,8 +908,8 @@
 .add-pad.tap {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    margin-top: 2vh;
+    justify-content: space-between;
+    margin-top: 3vh;
 }
 .header-gradient {
     border-radius: 667.008px;
