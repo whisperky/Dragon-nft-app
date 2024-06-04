@@ -31,7 +31,7 @@ function App() {
                 children: [
                     {
                         index: true,
-                        element: turbo.turboMode ? <TurboDashboard/> : <Dashboard/>,
+                        element: <Enter/>,
                     },
                     {
                         path: 'apps',
