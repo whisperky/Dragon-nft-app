@@ -11,7 +11,9 @@ const DSTools = () => {
         navigate('/fren')
     }
     const toEarn = () => {
-        showToast(purchase.toast, 'Coming soon')
+        // showToast(purchase.toast, 'Coming soon')
+        navigate(`/earn`);
+
     }
     const toApps = () => {
         navigate(`/apps`);

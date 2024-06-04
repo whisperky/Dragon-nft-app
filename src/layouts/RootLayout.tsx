@@ -115,6 +115,7 @@ const RootLayout = () => {
                 }
             });
             user.websocket.on('boostData', (bdata: boostWebHookData) => {
+                console.log("bdata: ", bdata)
                 if (bdata.success) {
                     dispatch(setSkins({
                         list: bdata.data.skins,

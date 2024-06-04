@@ -19,6 +19,7 @@ import JoinSquad from "./pages/JoinSquad.tsx";
 import {Toaster} from "sonner";
 import Banned from "./pages/Banned.tsx";
 import TopFren from "./pages/topFren.tsx";
+import Earn from "./pages/Earn.tsx";
 
 function App() {
     const turbo: TurboSliceType = useSelector((state: any) => state.turbo);
@@ -54,6 +55,10 @@ function App() {
                         element: <Fren/>
                     },
                     {
+                        path: 'earn',
+                        element: <Earn/>
+                    },
+                    {
                         path: 'stats',
                         element: <CoinStats/>
                     },
@@ -85,14 +90,14 @@ function App() {
             }
         ]
     );
-    if (WebApp.platform !== 'ios' && WebApp.platform !== 'android')
-        return (
-            <div id='noDesktop'>
-                <span>Desktop is Boring</span>
-                <span>open on phone</span>
-            </div>
-        )
-    else
+    // if (WebApp.platform !== 'ios' && WebApp.platform !== 'android')
+    //     return (
+    //         <div id='noDesktop'>
+    //             <span>Desktop is Boring</span>
+    //             <span>open on phone</span>
+    //         </div>
+    //     )
+    // else
     return (
         <div className="App">
             <div>

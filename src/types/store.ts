@@ -119,6 +119,7 @@ export type MySkinImageTypes = {
     img: {
         normal: HTMLImageElement;
         turbo: HTMLImageElement;
+        earn: HTMLImageElement;
     }
 }
 export type MyLeagueImageTypes = {
