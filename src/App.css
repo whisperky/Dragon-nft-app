@@ -87,10 +87,9 @@
 
 .coin-image {
     position: relative;
-    /*margin: 13% 0;*/
-    margin: 11% 0 3% 0;
     clip-path: circle(49% at 50% 50%);
-
+    max-width: 90%;
+    margin: 0 auto;
 }
 
 .score-holder > img {
@@ -239,8 +238,9 @@
 }
 
 .ds-tools {
-    position: fixed !important;
-    bottom: 0;
+    position: relative !important;
+    flex-shrink: 0;
+    margin-bottom: -1px;
     left:0;
     right: 0;
     display: flex;
@@ -891,20 +891,9 @@
     position: relative;
     height: 100vh;
     z-index: 0;
-    overflow: hidden auto;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-}
-.no-x-move {
-    overflow-x: hidden !important;
-}
-.no-y-move {
-    overflow-y: hidden !important;
-}
-.no-xy-move {
-    overflow-x: hidden !important;
-    overflow-y: hidden !important;
 }
 .page-bg:after {
     position: absolute;
@@ -917,7 +906,9 @@
     z-index: 0;
 }
 .add-pad.tap {
-    margin: 17% 0 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .header-gradient {
     border-radius: 667.008px;

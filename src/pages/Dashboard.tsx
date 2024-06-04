@@ -26,8 +26,8 @@ const Dashboard = () => {
         dispatch(hideBottomSheet());
     }, [location]);
     return (
-        <div className='page-bg no-x-move'>
-            <div className='add-pad tap z-[10]'>
+        <div className='page-bg !overflow-hidden'>
+            <div className='add-pad flex-1 tap z-[10]'>
                 <Score />
                 <CoinImage />
                 <Energy />
