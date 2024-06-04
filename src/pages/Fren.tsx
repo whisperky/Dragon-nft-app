@@ -37,7 +37,7 @@ const Fren = () => {
             {/*<div className='header-gradient'></div>*/}
             <div className="relative z-[10]">
                 <button className='help-btn float-right' onClick={() => navigate(-1)}></button>
-                <p className='fren-title animate__animated animate__fadeIn animate__slow mt-20 clear-both'>Fren Zone</p>
+                <p className='fren-title animate__animated animate__fadeIn animate__slow clear-both'>Fren Zone</p>
                 <a href='https://t.me/DragonFrenZone' className="fren-link" target='_blank' rel='noreferrer'>How to make 1M?</a>
                 <div className='fren-info animate__animated animate__fadeIn blur-round-border-bg' onClick={() => navigate('/top-fren')}>
                     <div className='flex items-center'>

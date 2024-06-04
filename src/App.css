@@ -17,7 +17,30 @@
         background-position: 0 0; /* Start position */
     }
     to {
-        background-position: 0 calc(100% + 20px); /* End position with a 20px gap */
+        background-position: 0 calc(100% + 1500px); /* End position with a 20px gap */
+    }
+}
+
+/* scale up and down */
+@keyframes scaleCounter {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* spin */
+@keyframes spinCoin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
     }
 }
 
@@ -360,7 +383,7 @@
 }
 
 .single-booster > div > p:first-child {
-    font-size: 32px;
+    font-size: 25px;
     font-weight: 300;
     line-height: 32px;
     letter-spacing: 3px;
@@ -966,6 +989,7 @@
 }
 
 .help-btn {
+    display: none;
     width: 32px;
     height: 32px;
     background-image: url("/icon/defaults/help.svg");
@@ -980,4 +1004,29 @@
 
 .slide > div > div {
     width: 85%;
+}
+
+.turbo-background ~ .ds-tools {
+    background: none !important;
+}
+
+.turbo-background {
+    background-image: url("../public/icon/main/earn.png");
+    background-size: 10%;
+    background-repeat: repeat;
+    position: absolute;
+    opacity: .3;
+    height: 100vh;
+    width: 100%;
+    animation: scroll 11s linear infinite; /* Adjust duration and timing function as needed */
+}
+
+.turbo-background ~ .add-pad > .coin-image-holder > div:last-child {
+    background: none;
+}
+.turbo-counter {
+    animation: scaleCounter 1s linear infinite;
+}
+.turbo-coin {
+    animation: spinCoin 1s linear;
 }

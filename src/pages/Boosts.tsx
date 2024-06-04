@@ -26,7 +26,7 @@ const Boosts = () => {
             {/*<div className='header-gradient'></div>*/}
             <div className="relative z-[10]">
                 <button className='help-btn float-right' onClick={() => navigate(-1)}></button>
-                <div className='add-pad flex flex-col items-center mt-20 clear-both'>
+                <div className='add-pad flex flex-col items-center  clear-both'>
                     <Score/>
                     <p className='text-muted py-2 animate__animated animate__fadeIn animate__slow'>Your balance</p>
                 </div>
