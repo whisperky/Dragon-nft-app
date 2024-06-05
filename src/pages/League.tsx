@@ -39,7 +39,7 @@ const League = () => {
         }
         dispatch(setLoadLeaguePage(true));
     }, [0]);
-    return league.loadLeaguePage && image.isLeagueDone /*&& league.haveLoadAtLeastOnce*/ ? (
+    return league.loadLeaguePage && image.isLeagueDone && league.haveLoadAtLeastOnce ? (
         <div>
             <LeagueHeader/>
         </div>
