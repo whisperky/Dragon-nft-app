@@ -185,15 +185,15 @@ export const numberToLeagueSquadPreset = (league: number): LeaguePresets => {
 
 
 }
-export const showToast = (id: string, message: string, type: 'success' | 'error' | 'loading' | 'default' = 'default') => {
+export const showToast = (id: string, message: string, type: 'success' | 'error' | 'loading' | 'default' = 'default', position?: 'top-center' | 'bottom-center') => {
     if (type === 'success')
-        toast.success(message, {id: id});
+        toast.success(message, {id: id, position: position ?? 'bottom-center'});
     else if (type === 'loading')
-        toast.loading(message, {id: id});
+        toast.loading(message, {id: id, position: position ?? 'bottom-center'});
     else if (type === 'error')
-        toast.error(message, {id: id});
+        toast.error(message, {id: id, position: position ?? 'bottom-center'});
     else
-        toast(message, {id: id});
+        toast(message, {id: id, position: position ?? 'bottom-center'});
 }
 export const capitalizeFirstLetter = (string: string) => {
     if (string)

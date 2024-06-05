@@ -1,5 +1,6 @@
 import {Manager} from "socket.io-client";
 import WebApp from "@twa-dev/sdk";
+import {showToast} from "../helpers/helper.ts";
 
 export default class Service {
     static Connect() {
@@ -17,7 +18,8 @@ export default class Service {
         socket.on('connection', () => {
 
         }).on('connect_error', (err: any) => {
-            console.log("Websocket connection error: " + err.message);
+            showToast("Error", `Connection issue, Please restart the game`, 'error','top-center');
+            // console.log("Websocket connection error: " + err.message);
         })
         return socket;
     }
