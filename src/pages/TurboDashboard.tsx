@@ -44,7 +44,7 @@ const TurboDashboard = () => {
         }
     }, [turbo.mineTurbo]);
     return (
-        <div className='page-bg !overflow-hidden'>
+        <div className='page-bg'>
             {/*<div className='header-gradient'></div>*/}
             <div className='turbo-background'></div>
             <div className='add-pad tap z-[10]'>
