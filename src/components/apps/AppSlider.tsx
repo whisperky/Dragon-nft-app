@@ -47,7 +47,7 @@ const AppSlider = () => {
             <img className='app-image' src={mintImg?.src} alt="1"/>
             <div className='app-name-con blur-round-border-bg'>
                 <p>Dragon Mint (Coming Soon)</p>
-                <p>Coming soon</p>
+                <p>Mint your Dragoncoins into valuable Dragon NFT on the Ton Network, and trade them on GetGems!</p>
             </div>
         </div>
     }, {
@@ -55,8 +55,8 @@ const AppSlider = () => {
         content: <div className='app-con '>
             <img className='app-image' src={launchImg?.src} alt="1"/>
             <div className='app-name-con blur-round-border-bg'>
-                <p>Dragon Launchpads (Coming Soon)</p>
-                <p>Coming soon</p>
+                <p>Dragon Launch (Coming Soon)</p>
+                <p>Use your Dragoncoins to buy allocations to special launchpads, or buy a Dragon Pass to get them all!</p>
             </div>
         </div>
     },  {
@@ -64,8 +64,8 @@ const AppSlider = () => {
         content: <div className='app-con '>
             <img className='app-image' src={catchImg?.src} alt="1"/>
             <div className='app-name-con blur-round-border-bg'>
-                <p>Dragon Catch (Coming Soon)</p>
-                <p>Coming soon</p>
+                <p>Dragon Play (Coming Soon)</p>
+                <p>Play mini-games and earn Dragoncoins and other prizes!</p>
             </div>
         </div>
     }

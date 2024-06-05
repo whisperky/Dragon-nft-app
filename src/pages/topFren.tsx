@@ -27,12 +27,12 @@ const TopFren = () => {
             <div className='fren-header'>
                 <div className='fren-header-bg-effect'></div>
                 <p className='fren-header-img' style={{fontSize: '6rem'}}>📣</p>
-                <p className='fren-text-title'>Party kings</p>
-                <p className='fren-text-sm text-glass'>Invite more frens to get here.</p>
+                <p className='fren-text-title'>Dragon Lords 🐉</p>
+                <p className='fren-text-sm text-glass'>Invite frens to help conquer the Dragon.</p>
                 <button className='fren-invite-btn' onClick={() => {
                     WebApp.openTelegramLink(`https://t.me/${import.meta.env.VITE_REACT_APP_BOT_USERNAME}?start=fren`);
                     WebApp.close();
-                }}>Invite frens
+                }}>Invite Frens
                 </button>
             </div>
             <div className='fren-list-con'>
