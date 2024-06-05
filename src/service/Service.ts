@@ -1,9 +1,7 @@
 import {Manager} from "socket.io-client";
 import WebApp from "@twa-dev/sdk";
 import {showToast} from "../helpers/helper.ts";
-import {useNavigate} from "react-router-dom";
-import {store} from "../store/store.ts";
-import {setBanned} from "../store/game.ts";
+
 
 export default class Service {
     static Connect() {
