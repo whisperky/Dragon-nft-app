@@ -4,6 +4,7 @@ import {ImageSliceType, MyImageTypes, MySkinImageTypes, PurchaseSliceType} from 
 import {MouseEventHandler} from "react";
 import {showToast} from "../../helpers/helper.ts";
 import {useNavigate} from "react-router-dom";
+import { numify } from "../../helpers/score.helper.ts";
 
 const Web3worldItem = ({
                        image,
@@ -19,7 +20,6 @@ const Web3worldItem = ({
                        trailing,
                        onTrailing,
                        item,
-                       haveEnough,
                        type
                    }: {
     title: string,
@@ -35,7 +35,6 @@ const Web3worldItem = ({
     trailing?: 'enabled' | 'disabled' | 'opener' | 'completed' | 'none',
     onTrailing?: MouseEventHandler<HTMLImageElement>
     item: any,
-    haveEnough: boolean,
     type: String
 }) => {
     const navigate = useNavigate()
@@ -55,18 +54,12 @@ const Web3worldItem = ({
     const OPEN_IMG = images.optional.find((img: any) => img.name == 'OPEN_ARROW');
     const CHECK_IMG = images.optional.find((img: any) => img.name == 'CHECK_ICON');
     let imgHelp: MyImageTypes & MySkinImageTypes = [...images.booster, ...images.skin].find((img: any) => img.name == item.image) as any;
-    let img = imgHelp !== undefined ? itemType == 'skin' ? imgHelp?.img.normal : imgHelp?.img : null;
+    let img = imgHelp?.img;
     const clickHandler = () => {
         if(type==="join") {navigate(item.type)}
         else showToast(purchase.toast, 'Coming Soon', 'error')
     }
-    const replaceAll = (subtitle: string)=> {
-        let _subtitle = subtitle;
-        while(_subtitle.indexOf(",") !== -1) {
-            _subtitle = _subtitle.replace(",", '') 
-        }
-        return _subtitle
-    }
+
     return (
         <div className='b-item glass-hover my-3' style={{opacity: disabled && !isBot ? .3 : 1}}
              onClick={clickHandler}>
@@ -81,13 +74,13 @@ const Web3worldItem = ({
                             <div className='b-item-price'>
                                 {coin && COIN_IMG ? <img src={COIN_IMG?.img.src} alt='coin'/> : null}
                                 {locked && LOCKED_IMG ? <img src={LOCKED_IMG?.img.src} alt='locked'/> : null}
-                                {parseInt(replaceAll(subtitle)) > 150000 ? <span style={{
+                                {parseInt(item.price) > 150000 ? <span style={{
                                     color: subtitleColor == 'gold' ? '#FFD041' : 'white',
                                     opacity: subtitleColor == 'grey' ? .5 : 1
                                 }}>up to 150,000</span> : <span style={{
                                     color: subtitleColor == 'gold' ? '#FFD041' : 'white',
                                     opacity: subtitleColor == 'grey' ? .5 : 1
-                                }}> + {subtitle}</span>}
+                                }}> + {numify(item.price)}</span>}
                             </div>
                             {/* {level == null || maxLevel == 1 ? <></> : <span className='text-muted'>•</span>}
                             {level == null || maxLevel == 1 ? <></> :

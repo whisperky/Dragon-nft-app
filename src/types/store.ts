@@ -82,6 +82,11 @@ export type FrenSliceType = {
     topFrens: any[];
     isTopFrenLoading: boolean;
 }
+export type EarnSliceType = {
+    bottomSheet: boolean;
+    status: any;
+    totalEarn: number;
+}
 export type TurboSliceType = {
     taps: number;
     power: 'on' | 'off';
