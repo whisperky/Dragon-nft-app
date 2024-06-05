@@ -902,12 +902,15 @@
     background: url("/background/bg.jpg") no-repeat center center;
     opacity: 0.22;
     z-index: 0;
+    background-size: cover;
+    background-position: center;
 }
 .add-pad.tap {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-top: 3vh;
+    padding-top: 4vh;
+    height: 100%;
 }
 .header-gradient {
     border-radius: 667.008px;
