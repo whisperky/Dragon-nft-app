@@ -239,16 +239,14 @@
 
 .ds-tools {
     position: relative !important;
-    flex-shrink: 0;
     margin-bottom: -1px;
-    left:0;
-    right: 0;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     border-radius: 18.4px 18.4px 0 0 !important;
-    padding: 6% 1.8rem;
+    padding: 1rem 1.8rem;
+    width: 100%;
     z-index: 800;
 }
 

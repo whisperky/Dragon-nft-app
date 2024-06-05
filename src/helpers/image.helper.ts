@@ -21,10 +21,10 @@ import JADE_IMAGE from "/skin/Jade.png";
 import PIN_IMAGE from "/skin/Pin.png";
 // import PIN_OPEN_IMAGE from "/skin/Pin.png";
 
-import TOY_TOOL_IMG from '/icon/menu/frens.svg';
-import COIN_TOOL_IMG from '/icon/menu/earn.svg';
-import APPS_TOOL_IMG from '/icon/menu/apps.svg';
-import DRAGON_TOOL_IMG from '/icon/menu/boost.svg';
+import TOY_TOOL_IMG from '/icon/menu/frens.png';
+import COIN_TOOL_IMG from '/icon/menu/earn.png';
+import APPS_TOOL_IMG from '/icon/menu/apps.png';
+import DRAGON_TOOL_IMG from '/icon/menu/boost.png';
 import ENTER_BG_IMG from '/icon/enter/enter.png';
 import WELCOME_HEADER_IMG from '/icon/enter/header.png';
 import DRAGON_TAP_IMG from '/background/dashboard.jpg';
