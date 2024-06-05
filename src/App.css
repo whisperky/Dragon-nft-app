@@ -107,6 +107,7 @@
 
 .league-container {
     border-radius: 14.8px;
+    z-index: 70;
 }
 
 .league-squad-holder {
