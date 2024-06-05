@@ -25,7 +25,7 @@ const AppSlider = () => {
             <img className='app-image' src={tapIMG?.src} alt="1"/>
             <div className='app-name-con blur-round-border-bg'>
                 <p>Dragon Tap</p>
-                <p>TAP AND EARN</p>
+                <p>Where it all began. Tap and Share with your friends to earn Dragoncoins. [WARNING: Highly Addictive]</p>
             </div>
         </div>
     }, {
@@ -33,8 +33,8 @@ const AppSlider = () => {
         content: <div className='app-con '>
             <img className='app-image' src={warImg?.src} alt="1"/>
             <div className='app-name-con blur-round-border-bg'>
-                <p>Dragon Pot</p>
-                <p>Coming soon</p>
+                <p>Dragon Pot (Coming Soon)</p>
+                <p>Buy a ticket, throw as many coins in the Pot as you can, whoever gets the most wins all!</p>
             </div>
         </div>
     }, {

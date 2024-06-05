@@ -8,9 +8,7 @@ import {ImageSliceType} from "../types/store.ts";
 import {useSelector} from "react-redux";
 
 const Apps = () => {
-    const navigate = useNavigate();
-    WebApp.BackButton.onClick(() => navigate(-1))
-    WebApp.BackButton.show();
+    WebApp.BackButton.hide();
     const image: ImageSliceType = useSelector((state: any) => state.image);
     const twitterIMG = image.core.find((img) => img.name === 'TWITTER')?.img;
     const mediumImg = image.core.find((img) => img.name === 'MEDIUM')?.img;
@@ -23,8 +21,8 @@ const Apps = () => {
             <div className='apps-container h-screen flex flex-col items-center justify-center'>
                 <AppSlider />
                 <div className='apps-buttons-container w-full px-[9%]'>
-                    <p className='apps-text-title text-left my-5 text-3xl font-bold'>Join Our Socials</p>
-                    <div className='block flex items-center justify-around'>
+                    <p className='apps-text-title text-left my-5 text-2xl font-bold'>Dragon Community</p>
+                    <div className='block flex items-center justify-between'>
                         <div className='blur-round-border-bg p-2' style={{
                             '--radius': '13px',
                             '--angle': '135deg',

@@ -24,19 +24,26 @@
     position: absolute;
     object-fit: cover;
     pointer-events: none;
-    top: 0;
+    width: 100%;
+    top: -7%;
 }
 .squad-header-img {
     height: 37vh;
 }
 .squad-text-join-title {
-    font-size: 36px;
+    font-size: 30px;
     font-weight: 700;
     margin-bottom: .4rem;
 }
 
 .squad-text-sm {
-    font-size: 18px;
+    font-size: 12px;
+    text-align: center;
+}
+.squad-text-sm-sub {
+    font-size: 12px;
+    width: 50%;
+    text-align: center;
 }
 
 .join-squad-btn {

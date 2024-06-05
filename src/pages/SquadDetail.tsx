@@ -94,7 +94,7 @@ const SquadDetail = () => {
                             </div>
                             <div className='flex gap-2 items-center justify-center'>
                                 {/*<div className='squad-score-coin'></div>*/}
-                                <p className='squad-score-no-text text-glass'>Mined in squad</p>
+                                <p className='squad-score-no-text text-glass'>Mined in clan</p>
                             </div>
                         </div>
                         <div className='col-divider'></div>
@@ -115,16 +115,16 @@ const SquadDetail = () => {
             <div className='squad-detail-btn-con'>
                 {(user.data?.squad_id == squad.squad?.id) ?
                     <button onClick={() => {
-                        WebApp.showConfirm(`You are going to leave ${squad.squad.name} Squad.`, (val) => {
+                        WebApp.showConfirm(`You are going to leave ${squad.squad.name} Clan.`, (val) => {
                             if (val) {
                                 user.websocket.emit('leaveSquad', {
                                     id: squad.squad.id
                                 });
                             }
                         });
-                    }} className={'squad-detail-btn blur-round-border-bg'}>Leave Squad</button> :
+                    }} className={'squad-detail-btn blur-round-border-bg'}>Leave Clan</button> :
                     <button onClick={() => navigate(`/join-squad/${squad.squad.id}`)}
-                            className='squad-detail-btn blur-round-border-bg'>Join Squad</button>}
+                            className='squad-detail-btn blur-round-border-bg'>Join Clan</button>}
             </div>
 
             <div className='squad-members-filter'>

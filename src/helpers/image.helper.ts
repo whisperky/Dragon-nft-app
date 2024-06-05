@@ -237,13 +237,13 @@ export const loadCoinSkinImages = () => {
         {name: 'VOTE_PEDRO_NORMAL', preset: 'VOTE_PEDRO', src: PIN_IMAGE, type: 'normal'},
         // {name: 'VOTE_PEDRO_TURBO', preset: 'VOTE_PEDRO', src: PIN_OPEN_IMAGE, type: 'turbo'},
     ];
-    switch (store.getState().user.data.skin) {
+    switch (store.getState().user.data?.skin) {
         case 'BASIC':
             const normal_image = new Image();
             normal_image.src = DRAGON_ICON_IMAGE;
             normal_image.onload = () => {
                 store.dispatch(addActiveSkinsImages({
-                    name: loadImages.find((x) => x.preset === store.getState().user.data.skin).name,
+                    name: loadImages.find((x) => x.preset === store.getState().user.data?.skin).name,
                     img: {
                         normal: normal_image,
                     }
@@ -256,7 +256,7 @@ export const loadCoinSkinImages = () => {
             normal_image1.src = BTC_IMAGE;
             normal_image1.onload = () => {
                 store.dispatch(addActiveSkinsImages({
-                    name: loadImages.find((x) => x.preset === store.getState().user.data.skin).name,
+                    name: loadImages.find((x) => x.preset === store.getState().user.data?.skin).name,
                     img: {
                         normal: normal_image1,
                     }
@@ -269,7 +269,7 @@ export const loadCoinSkinImages = () => {
             normal_image2.src = PIN_IMAGE;
             normal_image2.onload = () => {
                 store.dispatch(addActiveSkinsImages({
-                    name: loadImages.find((x) => x.preset === store.getState().user.data.skin).name,
+                    name: loadImages.find((x) => x.preset === store.getState().user.data?.skin).name,
                     img: {
                         normal: normal_image2,
                     }
@@ -282,7 +282,7 @@ export const loadCoinSkinImages = () => {
             normal_image3.src = JADE_IMAGE;
             normal_image3.onload = () => {
                 store.dispatch(addActiveSkinsImages({
-                    name: loadImages.find((x) => x.preset === store.getState().user.data.skin).name,
+                    name: loadImages.find((x) => x.preset === store.getState().user.data?.skin).name,
                     img: {
                         normal: normal_image3,
                     }
@@ -295,7 +295,7 @@ export const loadCoinSkinImages = () => {
             normal_image4.src = DRAGON_ICON_IMAGE;
             normal_image4.onload = () => {
                 store.dispatch(addActiveSkinsImages({
-                    name: loadImages.find((x) => x.preset === store.getState().user.data.skin).name,
+                    name: loadImages.find((x) => x.preset === store.getState().user.data?.skin).name,
                     img: {
                         normal: normal_image4,
                     }

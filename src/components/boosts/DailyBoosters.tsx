@@ -23,7 +23,7 @@ const DailyBoosters = () => {
     
     return (
         <div className=''>
-            <p className='boost-title animate__animated animate__fadeIn animate__slow'>Free daily boosters</p>
+            <p className='boost-title animate__animated animate__fadeIn animate__slow'>Free Daily Boosters</p>
             <div className='daily-boosters glass blur-round-border-bg animate__animated animate__fadeIn animate__slow'>
                 {
                     dailyBoosts.map((boost) => {

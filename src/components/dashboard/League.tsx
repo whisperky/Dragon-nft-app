@@ -28,7 +28,7 @@ const League = () => {
                 <div className='col-divider'></div>
                 {squad.userSquad == null ?
                     <div className='db-squad' onClick={() => navigate('/squad')}>
-                        <div>Join Squad</div>
+                        <div>Join Clan</div>
                         <span>⟶</span>
                     </div> : <div className='db-squad' onClick={() => {
                         dispatch(selectSquad(squad.userSquad));

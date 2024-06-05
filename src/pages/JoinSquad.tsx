@@ -45,9 +45,9 @@ const JoinSquad = () => {
                 <div style={{overflow: 'hidden'}}>
                     <div
                         className='animate__animated animate__fadeInDown animate__delay-1s animate__slow flex flex-col items-center'>
-                        <p className='join-squad-title'>Join {squad.squad?.name} Squad</p>
-                        <p className='join-squad-subtitle'>Every tap counts towards your squad score.</p>
-                        <p className='join-squad-subtitle2'>Squad leaderboard will show your contribution</p>
+                        <p className='join-squad-title'>Join {squad.squad?.name} Clan</p>
+                        <p className='join-squad-subtitle'>Every tap counts towards your clan score.</p>
+                        <p className='join-squad-subtitle2'>Clan leaderboard will show your contribution</p>
                         <p className='join-squad-bottom-text'>More fun playing together ✨</p>
                     </div>
                 </div>
@@ -57,7 +57,7 @@ const JoinSquad = () => {
                     user.websocket.emit('joinSquad', {
                         id: squad.squad.id
                     });
-                }}>Join Squad
+                }}>Join Clan
                 </button>
             </div>
         </div>
