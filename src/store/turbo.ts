@@ -41,13 +41,13 @@ const turboSlice = createSlice({
                 const random1 = Math.floor(Math.random() * random_lvl);
                 const random2 = Math.floor(Math.random() * random_lvl);
                 if (random1 == random2) {
-                    const randomHoz = Math.floor(Math.random() * 17);
-                    const randomVer = Math.floor(Math.random() * 30);
+                    const randomHoz = Math.floor(Math.random() * 19);
+                    const randomVer = Math.floor(Math.random() * 33);
 
                     state.ready = true;
                     state.style = {
                         display: 'block',
-                        bottom: `${randomVer}rem`,
+                        top: `${randomVer + 3}rem`,
                         left: `${randomHoz}rem`,
                         animation: 'head-appear 5s forwards, shake 0.5s infinite',
                     }

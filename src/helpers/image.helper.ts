@@ -30,6 +30,9 @@ import ENTER_BG_IMG from '/icon/enter/enter.png';
 import WELCOME_HEADER_IMG from '/icon/enter/header.png';
 import DRAGON_TAP_IMG from '/background/dashboard.jpg';
 import DRAGON_WAR_IMG from '/background/dragon-war.jpg';
+import DRAGON_LAUNCHPADS_IMG from '/background/dragon-launchpads.jpg';
+import DRAGON_MINT_IMG from '/background/dragon-mint.jpg';
+import DRAGON_CATCH_IMG from '/background/dragon-catch.jpg';
 import TWITTER_IMG from '/icon/defaults/twitter.png';
 import MEDIUM_IMG from '/icon/defaults/medium.png';
 import TELEGRAM_IMG from '/icon/defaults/telegram.png';
@@ -318,6 +321,9 @@ export const loadCoreImages = () => {
         {name: 'WELCOME_HEADER', src: WELCOME_HEADER_IMG},
         {name: 'DRAGON_TAP', src: DRAGON_TAP_IMG},
         {name: 'DRAGON_WAR', src: DRAGON_WAR_IMG},
+        {name: 'DRAGON_LAUNCHPADS', src: DRAGON_LAUNCHPADS_IMG},
+        {name: 'DRAGON_MINT', src: DRAGON_MINT_IMG},
+        {name: 'DRAGON_CATCH', src: DRAGON_CATCH_IMG},
         {name: 'TWITTER', src: TWITTER_IMG},
         {name: 'MEDIUM', src: MEDIUM_IMG},
         {name: 'TELEGRAM', src: TELEGRAM_IMG},
@@ -332,7 +338,7 @@ export const loadCoreImages = () => {
                 name: img.name,
                 img: im
             }))
-            if (store.getState().image.core.filter((x) => x.name === 'TOY_TOOL' || x.name === 'COIN_TOOL' || x.name === 'DRAGON_TOOL' || x.name == 'APPS_TOOL' || x.name == 'CLOSE_ICON' || x.name == 'ENTER_BG' || x.name == 'WELCOME_HEADER' || x.name == 'DRAGON_TAP' || x.name == 'DRAGON_WAR' || x.name == 'TWITTER' || x.name == 'MEDIUM' || x.name == 'TELEGRAM' || x.name == 'AUTO_EARN_BOT' || x.name == 'APP_BACKGROUND').length >= 14) {
+            if (store.getState().image.core.filter((x) => x.name === 'TOY_TOOL' || x.name === 'COIN_TOOL' || x.name === 'DRAGON_TOOL' || x.name == 'APPS_TOOL' || x.name == 'CLOSE_ICON' || x.name == 'ENTER_BG' || x.name == 'WELCOME_HEADER' || x.name == 'DRAGON_TAP' || x.name == 'DRAGON_WAR' || x.name == 'DRAGON_LAUNCHPADS' || x.name == 'DRAGON_MINT' || x.name == 'DRAGON_CATCH' || x.name == 'TWITTER' || x.name == 'MEDIUM' || x.name == 'TELEGRAM' || x.name == 'AUTO_EARN_BOT' || x.name == 'APP_BACKGROUND').length >= 17) {
                 store.dispatch(setCoreDone(true))
             }
         }
