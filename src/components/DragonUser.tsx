@@ -40,7 +40,7 @@ const DragonUser = ({id, fName, lName, rank, coin, subtitle, img, onClick, isFix
                 <div className='du-user-info'>
                     <p className='du-user-name'>{name.length > 25 ? name.slice(0, 8) + " ..." : name}</p>
                     {coin ? <p className='du-user-coin'><img
-                        src={image.core.find((img) => img.name === 'COIN_TOOL')?.img.src}/> {BigInt(coin).toLocaleString()}
+                        src={image.core.find((img) => img.name === 'COIN_ICON')?.img.src}/> {BigInt(coin).toLocaleString()}
                     </p> : subtitle}
                 </div>
             </div>

@@ -12,7 +12,7 @@ const CoinStats = () => {
     const game: GameSliceType = useSelector((state: any) => state.game);
     const image: ImageSliceType = useSelector((state: any) => state.image);
 
-    const coinImage = image.core.find((img: any) => img.name === 'COIN_TOOL')?.img.src;
+    const coinImage = image.core.find((img: any) => img.name === 'COIN_ICON')?.img.src;
     const day = (new Date()).getDay();
     let sun = [8,1,12,9,2,10,0,7,8]
     let mon = [0,1,2,3,4,5,6,7,8]

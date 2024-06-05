@@ -66,7 +66,7 @@ const SheetComp = () => {
         containerRef
     );
 
-    const COIN_IMG = image.core.find((i) => i.name === 'COIN_TOOL');
+    const COIN_IMG = image.core.find((i) => i.name === 'COIN_ICON');
     const CLOSE_IMG = image.core.find((i) => i.name === 'CLOSE_ICON');
 
     useModal();

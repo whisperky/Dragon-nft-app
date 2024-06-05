@@ -93,6 +93,7 @@ import CHECK_ICON from "/icon/defaults/right-arrow.svg";
 import CLOSE_ICON from "/icon/defaults/close.svg";
 import LOCKED_ICON from "/icon/boosts/locked.svg";
 import CELEBRATION_ICON from "/icon/squad/celebration.svg";
+import COIN_ICON from "/icon/coin.png";
 
 import {addCoinLoadedImg} from "../store/loading.ts";
 import {store} from "../store/store.ts";
@@ -313,6 +314,7 @@ export const loadCoreImages = () => {
         {name: 'COIN_TOOL', src: COIN_TOOL_IMG},
         {name: 'APPS_TOOL', src: APPS_TOOL_IMG},
         {name: 'DRAGON_TOOL', src: DRAGON_TOOL_IMG},
+        {name: 'COIN_ICON', src: COIN_ICON},
         {name: 'CLOSE_ICON', src: CLOSE_ICON},
         {name: 'ENTER_BG', src: ENTER_BG_IMG},
         {name: 'WELCOME_HEADER', src: WELCOME_HEADER_IMG},
@@ -332,7 +334,7 @@ export const loadCoreImages = () => {
                 name: img.name,
                 img: im
             }))
-            if (store.getState().image.core.filter((x) => x.name === 'TOY_TOOL' || x.name === 'COIN_TOOL' || x.name === 'DRAGON_TOOL' || x.name == 'APPS_TOOL' || x.name == 'CLOSE_ICON' || x.name == 'ENTER_BG' || x.name == 'WELCOME_HEADER' || x.name == 'DRAGON_TAP' || x.name == 'DRAGON_WAR' || x.name == 'TWITTER' || x.name == 'MEDIUM' || x.name == 'TELEGRAM' || x.name == 'AUTO_EARN_BOT' || x.name == 'APP_BACKGROUND').length >= 14) {
+            if (store.getState().image.core.filter((x) => x.name === 'TOY_TOOL' || x.name === 'COIN_TOOL' || x.name === 'DRAGON_TOOL' || x.name == 'APPS_TOOL' || x.name == 'COIN_ICON' || x.name == 'CLOSE_ICON' || x.name == 'ENTER_BG' || x.name == 'WELCOME_HEADER' || x.name == 'DRAGON_TAP' || x.name == 'DRAGON_WAR' || x.name == 'TWITTER' || x.name == 'MEDIUM' || x.name == 'TELEGRAM' || x.name == 'AUTO_EARN_BOT' || x.name == 'APP_BACKGROUND').length >= 14) {
                 store.dispatch(setCoreDone(true))
             }
         }

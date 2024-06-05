@@ -42,7 +42,7 @@ const TopFrenUsers = ({id, fName, lName, rank, coin, subtitle, img, onClick, isF
                         <span className="text-glass text-xs">•</span>
                         <div className='du-user-coin2'>
                             + {numShort(coin)}
-                            <img src={image.core.find((img) => img.name === 'COIN_TOOL')?.img.src} />
+                            <img src={image.core.find((img) => img.name === 'COIN_ICON')?.img.src} />
                         </div>
                     </div>
                 </div>

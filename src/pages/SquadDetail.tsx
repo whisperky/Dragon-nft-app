@@ -14,7 +14,7 @@ import LeagueListSkeleton from "../skeleton/LeagueListSkeleton.tsx";
 const SquadDetail = () => {
     const squad: SquadSliceType = useSelector((state: any) => state.squad);
     const image: ImageSliceType = useSelector((state: any) => state.image);
-    const COIN_IMAGE = image.core.find((img) => img.name === 'COIN_TOOL');
+    const COIN_IMAGE = image.core.find((img) => img.name === 'COIN_ICON');
     const OPEN_ARROW = image.optional.find((img) => img.name === 'OPEN_ARROW');
     const SQUAD_DETAIL_BG = image.optional.find((img) => img.name === 'SQUAD_DETAIL_BG');
     let LEAGUE_IMAGE = null;

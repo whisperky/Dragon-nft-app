@@ -51,7 +51,7 @@ const SheetComp = () => {
     );
     const image: ImageSliceType = useSelector((state: any) => state.image);
     const CLOSE_ICON = image.core.find((i) => i.name === 'CLOSE_ICON');
-    const COIN_IMG = image.core.find((i) => i.name === 'COIN_TOOL');
+    const COIN_IMG = image.core.find((i) => i.name === 'COIN_ICON');
     const AUTO_EARN_IMG = image.core.find((i) => i.name === 'AUTO_EARN_BOT');
 
     useModal();

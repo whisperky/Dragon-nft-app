@@ -264,10 +264,9 @@
 }
 
 .ds-tool-box > img {
-    width: 52px !important;
-    height: 52px !important;
+    width: 58px !important;
+    height: 58px !important;
     margin-bottom: 5px;
-    object-fit: contain;
 }
 
 .coin-itself {

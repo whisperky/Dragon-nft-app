@@ -16,7 +16,7 @@ const Fren = () => {
     const image: ImageSliceType = useSelector((state: any) => state.image);
     const PREMIUM_IMG = image.optional.find((img) => img.name === 'TG_PREMIUM');
     const MAIN_COIN_IMAGE = image.skin.find((img) => img.name === 'BASIC');
-    const COIN_IMAGE = image.core.find((img) => img.name === 'COIN_TOOL');
+    const COIN_IMAGE = image.core.find((img) => img.name === 'COIN_ICON');
     const TOY_IMAGE = image.core.find((img) => img.name === 'TOY_TOOL_BIG');
     const OPEN_IMG = image.optional.find((img) => img.name === 'OPEN_ARROW');
     WebApp.BackButton.onClick(() => navigate(-1))

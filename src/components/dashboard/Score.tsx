@@ -5,7 +5,7 @@ import {ImageSliceType} from "../../types/store.ts";
 const Score = ({isTurbo = false}) => {
     const score = useSelector((state: any) => state.score.value);
     const image: ImageSliceType = useSelector((state: any) => state.image);
-    const COIN_IMG = image.core.find((img) => img.name === 'COIN_TOOL');
+    const COIN_IMG = image.core.find((img) => img.name === 'COIN_ICON');
     return (
         <div className="flex justify-around items-center animate__animated  animate__fadeIn animate__slow my-[5%]">
             <div className={'score-holder flex justify-between items-center'+ (isTurbo ? ' turbo-counter' : '')}>
