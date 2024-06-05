@@ -22,7 +22,6 @@ import PIN_IMAGE from "/skin/Pin.png";
 // import PIN_OPEN_IMAGE from "/skin/Pin.png";
 
 import TOY_TOOL_IMG from '/icon/menu/frens.png';
-import TOY_TOOL_BIG from '/icon/menu/frends_2x.png';
 import COIN_TOOL_IMG from '/icon/menu/earn.png';
 import APPS_TOOL_IMG from '/icon/menu/apps.png';
 import DRAGON_TOOL_IMG from '/icon/menu/boost.png';
@@ -38,6 +37,7 @@ import MEDIUM_IMG from '/icon/defaults/medium.png';
 import TELEGRAM_IMG from '/icon/defaults/telegram.png';
 import AUTO_EARN_BOT_IMG from '/icon/earn/auto-earn.png';
 import APP_BACKGROUND_IMG from '/background/bg.jpg';
+import TOY_EMPTY_IMG from '/icon/menu/frens_2x.png';
 
 import BRONZE_LEAGUE from '/icon/rank/bronze.png';
 import SILVER_LEAGUE from '/icon/rank/silver.png';
@@ -313,7 +313,7 @@ export const loadCoinSkinImages = () => {
 export const loadCoreImages = () => {
     const loadImages = [
         {name: 'TOY_TOOL', src: TOY_TOOL_IMG},
-        {name: 'TOY_TOOL_BIG', src: TOY_TOOL_BIG},
+        {name: 'TOY_EMPTY', src: TOY_EMPTY_IMG},
         {name: 'COIN_TOOL', src: COIN_TOOL_IMG},
         {name: 'APPS_TOOL', src: APPS_TOOL_IMG},
         {name: 'DRAGON_TOOL', src: DRAGON_TOOL_IMG},

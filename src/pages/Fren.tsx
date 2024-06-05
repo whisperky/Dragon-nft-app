@@ -17,7 +17,7 @@ const Fren = () => {
     const PREMIUM_IMG = image.optional.find((img) => img.name === 'TG_PREMIUM');
     const MAIN_COIN_IMAGE = image.skin.find((img) => img.name === 'BASIC');
     const COIN_IMAGE = image.core.find((img) => img.name === 'COIN_ICON');
-    const TOY_IMAGE = image.core.find((img) => img.name === 'TOY_TOOL_BIG');
+    const TOY_IMAGE = image.core.find((img) => img.name === 'TOY_EMPTY');
     const OPEN_IMG = image.optional.find((img) => img.name === 'OPEN_ARROW');
     WebApp.BackButton.onClick(() => navigate(-1))
     WebApp.BackButton.show();
