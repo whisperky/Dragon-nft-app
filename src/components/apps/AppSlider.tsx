@@ -18,6 +18,9 @@ const AppSlider = () => {
     const image: ImageSliceType = useSelector((state: any) => state.image);
     const tapIMG = image.core.find((img) => img.name === 'DRAGON_TAP')?.img;
     const warImg = image.core.find((img) => img.name === 'DRAGON_WAR')?.img;
+    const launchImg = image.core.find((img) => img.name === 'DRAGON_LAUNCHPADS')?.img;
+    const mintImg = image.core.find((img) => img.name === 'DRAGON_MINT')?.img;
+    const catchImg = image.core.find((img) => img.name === 'DRAGON_CATCH')?.img;
 
     let slides = [{
         key: 1,
@@ -25,7 +28,8 @@ const AppSlider = () => {
             <img className='app-image' src={tapIMG?.src} alt="1"/>
             <div className='app-name-con blur-round-border-bg'>
                 <p>Dragon Tap</p>
-                <p>Where it all began. Tap and Share with your friends to earn Dragoncoins. [WARNING: Highly Addictive]</p>
+                <p>Where it all began. Tap and Share with your friends to earn Dragoncoins. [WARNING: Highly
+                    Addictive]</p>
             </div>
         </div>
     }, {
@@ -33,14 +37,39 @@ const AppSlider = () => {
         content: <div className='app-con '>
             <img className='app-image' src={warImg?.src} alt="1"/>
             <div className='app-name-con blur-round-border-bg'>
-                <p>Dragon Bot (Coming Soon)</p>
+                <p>Dragon Pot (Coming Soon)</p>
                 <p>Buy a ticket, throw as many coins in the Pot as you can, whoever gets the most wins all!</p>
             </div>
         </div>
     }, {
         key: 3,
-        content: <div className='w-[50%] h-full rounded-3xl bg-black bg-opacity-50'></div>
-    }].map((slide, index) => {
+        content: <div className='app-con '>
+            <img className='app-image' src={mintImg?.src} alt="1"/>
+            <div className='app-name-con blur-round-border-bg'>
+                <p>Dragon Mint (Coming Soon)</p>
+                <p>Coming soon</p>
+            </div>
+        </div>
+    }, {
+        key: 4,
+        content: <div className='app-con '>
+            <img className='app-image' src={launchImg?.src} alt="1"/>
+            <div className='app-name-con blur-round-border-bg'>
+                <p>Dragon Launchpads (Coming Soon)</p>
+                <p>Coming soon</p>
+            </div>
+        </div>
+    },  {
+        key: 5,
+        content: <div className='app-con '>
+            <img className='app-image' src={catchImg?.src} alt="1"/>
+            <div className='app-name-con blur-round-border-bg'>
+                <p>Dragon Catch (Coming Soon)</p>
+                <p>Coming soon</p>
+            </div>
+        </div>
+    }
+    ].map((slide, index) => {
         switch (slide.key) {
             case 1:
                 return {...slide, onClick: () => navigate('/dashboard')};
