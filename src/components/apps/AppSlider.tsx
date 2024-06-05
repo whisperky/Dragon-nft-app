@@ -33,7 +33,7 @@ const AppSlider = () => {
         content: <div className='app-con '>
             <img className='app-image' src={warImg?.src} alt="1"/>
             <div className='app-name-con blur-round-border-bg'>
-                <p>Dragon Pot (Coming Soon)</p>
+                <p>Dragon Bot (Coming Soon)</p>
                 <p>Buy a ticket, throw as many coins in the Pot as you can, whoever gets the most wins all!</p>
             </div>
         </div>

@@ -22,6 +22,7 @@ import PIN_IMAGE from "/skin/Pin.png";
 // import PIN_OPEN_IMAGE from "/skin/Pin.png";
 
 import TOY_TOOL_IMG from '/icon/menu/frens.png';
+import TOY_TOOL_BIG from '/icon/menu/frends_2x.png';
 import COIN_TOOL_IMG from '/icon/menu/earn.png';
 import APPS_TOOL_IMG from '/icon/menu/apps.png';
 import DRAGON_TOOL_IMG from '/icon/menu/boost.png';
@@ -308,6 +309,7 @@ export const loadCoinSkinImages = () => {
 export const loadCoreImages = () => {
     const loadImages = [
         {name: 'TOY_TOOL', src: TOY_TOOL_IMG},
+        {name: 'TOY_TOOL_BIG', src: TOY_TOOL_BIG},
         {name: 'COIN_TOOL', src: COIN_TOOL_IMG},
         {name: 'APPS_TOOL', src: APPS_TOOL_IMG},
         {name: 'DRAGON_TOOL', src: DRAGON_TOOL_IMG},
