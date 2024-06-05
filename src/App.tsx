@@ -25,6 +25,10 @@ function App() {
     const router = createBrowserRouter(
         [
             {
+                path: '/banned',
+                element: <Banned/>
+            },
+            {
                 path: '/',
                 element: <RootLayout/>,
                 errorElement: <ErrorPage/>,
@@ -71,15 +75,11 @@ function App() {
                     },
                     {
                         path: '/top-fren',
-                        element: <TopFren />
-                    },
-                    {
-                        path: 'banned',
-                        element: <Banned/>
+                        element: <TopFren/>
                     },
                     {
                         path: '*',
-                        element:  turbo.turboMode ? <TurboDashboard/> : <Dashboard/>,
+                        element: turbo.turboMode ? <TurboDashboard/> : <Dashboard/>,
                     },
                 ]
             }
