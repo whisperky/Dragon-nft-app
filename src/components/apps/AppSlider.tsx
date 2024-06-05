@@ -127,7 +127,7 @@ const AppSlider = () => {
 
     return (
         <div className="slider-container w-full mb-8">
-            <p className='apps-text-title text-left px-12 mb-6 text-3xl font-bold'>Apps</p>
+            <p className='apps-text-title text-left px-12 mb-10 text-3xl font-bold'>Apps</p>
             <div className="mx-auto w-[150%] translate-x-[-17%] relative">
                 <div
                     className={`slide w-full h-[50vh]`}
