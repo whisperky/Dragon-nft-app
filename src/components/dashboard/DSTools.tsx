@@ -26,7 +26,7 @@ const DSTools = () => {
     const DRAGON_TOOL = images.core.find((img) => img.name === 'DRAGON_TOOL')?.img;
 
     return (
-        <div className='ds-tools animate__animated animate__fadeIn blur-round-border-bg'>
+        <div className='ds-tools blur-round-border-bg'>
             <div className='ds-tool-box' onClick={toFrens}>
                 <img src={TOY_TOOL?.src} alt='toy'/>
                 <p>Frens</p>
@@ -40,7 +40,7 @@ const DSTools = () => {
                 <p>Apps</p>
             </div>
             <div className='ds-tool-box' onClick={toBoosts}>
-                <img src={DRAGON_TOOL?.src} alt='drogon'/>
+                <img src={DRAGON_TOOL?.src} alt='dragon'/>
                 <p>Boosts</p>
             </div>
         </div>
