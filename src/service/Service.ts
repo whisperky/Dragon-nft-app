@@ -18,8 +18,11 @@ export default class Service {
         socket.on('connection', () => {
 
         }).on('connect_error', (err: any) => {
-            showToast("Error", `Connection issue, Please restart the game`, 'error','top-center');
-            // console.log("Websocket connection error: " + err.message);
+            if (err.message.includes('INVALID_AUTH_DATA')) {
+                showToast("Error", `Hmm...`, 'error','top-center');
+            } else {
+                showToast("Error", `Connection issue, Please restart the game`, 'error','top-center');
+            }            // console.log("Websocket connection error: " + err.message);
         })
         return socket;
     }
