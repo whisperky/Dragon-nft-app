@@ -31,8 +31,7 @@ const web3 = [
 
 const Web3world = () => {
     const score: ScoreSliceType = useSelector((state: any) => state.score);
-    // const boost: BoostSliceType = useSelector((state: any) => state.boost);
-
+    const earn = useSelector((state: any) => state.earn);
     return (
         <div className=''>
             <p className='boost-title animate__animated animate__fadeIn animate__slow'>Dragon world</p>
@@ -40,28 +39,27 @@ const Web3world = () => {
                 '--angle': '135deg',
             } as React.CSSProperties}>
                 {
-
-                    web3
-                        .map((item: EarnData) => {
+                    earn.list
+                        .map((item: any) => {
                             return {
                                 item,
                                 key: item.id,
                                 title: item.name,
                                 image: item.image,
                                 coin: true,
-                                type: item.type,
+                                type: item.task_category,
                             };
                         })
-                        .map(({item, key, title, coin, image, type}) => (
-                            <Web3worldItem
-                                item={item}
-                                key={key}
-                                title={title}
-                                image={image}
-                                coin={coin}
-                                type={type}
-                            />
-                        ))
+                        .map(({item, key, title, coin, image, type}) => 
+                            type === "web3_world" && <Web3worldItem
+                                                        item={item}
+                                                        key={key}
+                                                        title={title}
+                                                        image={image}
+                                                        coin={coin}
+                                                        type={type}
+                                                    />
+                        )
                 }
             </div>
         </div>

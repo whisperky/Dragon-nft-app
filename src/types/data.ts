@@ -165,6 +165,18 @@ export type frenData = {
     createdAt: Date;
     updatedAt: Date;
 }
+export type earnData = {
+    id: string;
+    name: string;
+    image: string;
+    reward: number;
+    company: string | null;
+    description: string | null;
+    task_length: number;
+    task_category: EarnCategoryData;
+    createdAt: Date;
+    updatedAt: Date;
+}
 export type topFrenData = {
     id: string;
     tg_id: string;
@@ -173,6 +185,7 @@ export type topFrenData = {
     frens: number;
     earned: number;
 }
+export type EarnCategoryData = 'specials' | 'onboarding' | "web3_world";
 export type UserDataFren = {
     id: string;
     tg_id: string;
@@ -258,6 +271,12 @@ export type frenWebHookData = {
     success: boolean;
     data: {
         frens: frenData[];
+    }
+}
+export type earnWebHookData = {
+    success: boolean;
+    data: {
+        earns: earnData[];
     }
 }
 export type userDailyBoost = {

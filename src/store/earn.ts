@@ -10,11 +10,17 @@ const earnSlice = createSlice({
             tg_group: false,
             medium: false
         },
+        haveData: false,
+        list: [],
         totalEarn: 0
     } as EarnSliceType,
     reducers: {
         setBottom: (state, action) => {
             state.bottomSheet = action.payload;
+        },
+        setEarns: (state, action) => {
+            state.list = action.payload;
+            state.haveData = true;
         },
         setStatus: (state, action) => {
             console.log(action.payload)
@@ -26,5 +32,5 @@ const earnSlice = createSlice({
     }
 })
 
-export const { setBottom, setStatus } = earnSlice.actions
+export const { setBottom, setStatus, setEarns } = earnSlice.actions
 export default earnSlice.reducer;
