@@ -1,8 +1,8 @@
 import {useDispatch, useSelector} from "react-redux";
-import {ImageSliceType, MyImageTypes, MySkinImageTypes, PurchaseSliceType} from "../../types/store.ts";
-import {MouseEventHandler} from "react";
+import {ImageSliceType, MyImageTypes, MySkinImageTypes} from "../../types/store.ts";
+import {MouseEventHandler, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
-import { setStatus } from "../../store/earn.ts";
+import { setBottom } from "../../store/earn.ts";
 
 const CommunityItem = ({
                        title,
@@ -34,6 +34,7 @@ const CommunityItem = ({
     const isBot = item.image == 'AUTO_TAP_BOT';
     const dispatch = useDispatch();
     const user = useSelector((state: any) => state.user);
+    const task = useSelector((state: any) => state.task);
 
     const images: ImageSliceType = useSelector((state: any) => state.image);
     const COIN_IMG = images.core.find((img: any) => img.name == 'COIN_TOOL');
@@ -44,10 +45,10 @@ const CommunityItem = ({
 
     const clickHandler = () => {
         
-        user.websocket.emit('finishTask', {user: user.data.id, task: item.id});
-        // window.open(item.type_data, '_blank')
+        user.websocket.emit('getFinishTask', {user: user.data.id, task: item.id});
+        window.open(item.type_data, '_blank')
 
-        dispatch(setStatus({type: item.type, value: item.price}))
+        // dispatch(handleFinish({user: user.data.id, task: item.id}))
     }
     const replaceAll = (subtitle: string)=> {
         let _subtitle = subtitle;
@@ -56,6 +57,7 @@ const CommunityItem = ({
         }
         return _subtitle
     }
+
     return (
         <div className='b-item glass-hover my-3' style={{opacity: disabled && !isBot ? .3 : 1}}
              onClick={clickHandler}>

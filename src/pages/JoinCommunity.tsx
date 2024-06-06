@@ -5,14 +5,16 @@ import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import React from "react";
 import { setBottom } from '../store/earn.ts';
+import { setAmount } from '../store/score.ts';
 
 const JoinCommunity = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const user = useSelector((state: any) => state.user);
+    const task = useSelector((state: any) => state.task);
 
     WebApp.BackButton.onClick(() => {
-        dispatch(setBottom(false))
+        // dispatch(setBottom(false))
         navigate(-1)
     })
     WebApp.BackButton.show();
@@ -20,8 +22,11 @@ const JoinCommunity = () => {
     
     const handlerFinish = () => {
         navigate(-1)
-        user.websocket.emit('finishTask');
-        dispatch(setBottom(true))
+        if(task.isTask) {
+            dispatch(setBottom(true));
+            user.websocket.emit('earnTaskRewards', task.totalEarn)
+            dispatch(setAmount(task.totalEarn));
+        }
     }
     
     return (

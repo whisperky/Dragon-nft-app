@@ -12,10 +12,8 @@ const getImage = (type: string) => {
 const Community = () => {
     
     const dispatch = useDispatch();
-    const user = useSelector((state: any) => state.user);
     const task = useSelector((state: any) => state.task);
-    if (task.haveData === false) user.websocket.emit('getTaskData');
-
+    
     return (
         <div className=''>
             <div className='boosters-list glass blur-round-border-bg animate__animated animate__fadeIn animate__slow' style={{

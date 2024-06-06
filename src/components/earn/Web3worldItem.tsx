@@ -3,6 +3,7 @@ import {ImageSliceType, MyImageTypes, MySkinImageTypes, PurchaseSliceType} from 
 import {showToast} from "../../helpers/helper.ts";
 import {useNavigate} from "react-router-dom";
 import { numify } from "../../helpers/score.helper.ts";
+import { setTotalEarn } from "../../store/task.ts";
 
 const Web3worldItem = ({
                        image,
@@ -18,7 +19,10 @@ const Web3worldItem = ({
     type: String
 }) => {
     const navigate = useNavigate()
+    const dispatch = useDispatch();
+
     const purchase: PurchaseSliceType = useSelector((state: any) => state.purchase);
+    const task = useSelector((state: any) => state.task);
 
     const images: ImageSliceType = useSelector((state: any) => state.image);
     const COIN_IMG = images.core.find((img: any) => img.name == 'COIN_TOOL');
@@ -27,11 +31,11 @@ const Web3worldItem = ({
     let img = imgHelp?.img;
 
     const clickHandler = () => {
-        console.log(item.name)
+        dispatch(setTotalEarn(item.reward))
+        if(!task.list.length) return showToast(purchase.toast, 'There is no Tasks.', 'error')
         if(item.name==="Connect with Socials") {navigate('join')}
         else showToast(purchase.toast, 'Coming Soon', 'error')
     }
-
     return (
         <div className='b-item glass-hover my-3' style={{opacity: 1}}
              onClick={clickHandler}>

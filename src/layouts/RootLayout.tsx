@@ -4,7 +4,7 @@ import WebApp from "@twa-dev/sdk";
 import {useDispatch, useSelector} from "react-redux";
 import {changeUserSquad, requestUserData, setUser, setUserPurchaseReturn} from "../store/user.ts";
 import {loadUser} from "../store/loading.ts";
-import {setScore} from "../store/score.ts";
+import {setAmount, setScore} from "../store/score.ts";
 import BottomSheet from "../components/BottomSheet.tsx";
 import {
     boostWebHookData,
@@ -42,7 +42,7 @@ import {setAvailableTurbos} from "../store/turbo.ts";
 import {setLeague, setSquadTop, setUserLeague, setUserTop} from "../store/league.ts";
 import {selectSquad, setTopSquad, setTopSquadUsers, setUserSquad, topSquadLoaded} from "../store/squad.ts";
 import {showToast} from "../helpers/helper.ts";
-import { setTasks } from "../store/task.ts";
+import { setFinishedTasks, setTasks } from "../store/task.ts";
 import { setEarns } from "../store/earn.ts";
 
 const RootLayout = () => {
@@ -120,7 +120,6 @@ const RootLayout = () => {
                 }
             });
             user.websocket.on('boostData', (bdata: boostWebHookData) => {
-                console.log("bdata: ", bdata)
                 if (bdata.success) {
                     dispatch(setSkins({
                         list: bdata.data.skins,
@@ -133,11 +132,17 @@ const RootLayout = () => {
                     }))
                 }
             })
+            
             user.websocket.on('frenData', (fdata: frenWebHookData) => {
                 if (fdata.success) {
                     dispatch(setFrens(fdata.data.frens));
                 }
             });
+            // user.websocket.on('getEarnRewards', (edata: any) => {
+            //     if (edata.success) {
+            //         dispatch(setAmount(edata.amount));
+            //     }
+            // });
             user.websocket.on('taskData', (tdata: taskWebHookData) => {
                 if (tdata.success) {
                     dispatch(setTasks(tdata.data.tasks));
@@ -150,8 +155,12 @@ const RootLayout = () => {
             });
             user.websocket.on('finishTaskData', (fdata: finishWebHookData) => {
                 if (fdata.success) {
-                    console.log(fdata.data.finishTasks)
-                    // dispatch(setEarns(fdata.data.finishTasks))
+                    dispatch(setFinishedTasks(fdata.data.finishTasks))
+                }
+            });
+            user.websocket.on('finishTask', (fdata: finishWebHookData) => {
+                if (fdata.success) {
+                    dispatch(setFinishedTasks(fdata.data.finishTasks))
                 }
             });
             user.websocket.on('topFrenData', (topFData: { success: boolean; frens: topFrenData }) => {

@@ -83,8 +83,12 @@ export type FrenSliceType = {
     isTopFrenLoading: boolean;
 }
 export type taskSliceType = {
+    haveFinishData: boolean;
     haveData: boolean;
     list: any[];
+    finishedTask: any[];
+    isTask: boolean;
+    totalEarn: number;
 }
 export type EarnSliceType = {
     haveData: boolean;

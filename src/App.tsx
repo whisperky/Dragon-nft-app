@@ -95,14 +95,14 @@ function App() {
             }
         ]
     );
-    // if (WebApp.platform !== 'ios' && WebApp.platform !== 'android')
-    //     return (
-    //         <div id='noDesktop'>
-    //             <span>Desktop is Boring</span>
-    //             <span>open on phone</span>
-    //         </div>
-    //     )
-    // else
+    if (WebApp.platform !== 'ios' && WebApp.platform !== 'android')
+        return (
+            <div id='noDesktop'>
+                <span>Desktop is Boring</span>
+                <span>open on phone</span>
+            </div>
+        )
+    else
     return (
         <div className="App">
             <div>

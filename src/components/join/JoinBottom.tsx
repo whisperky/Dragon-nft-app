@@ -10,13 +10,12 @@ import {
     useDialog,
 } from 'react-aria';
 import {numify} from "../../helpers/score.helper.ts";
-import {EarnSliceType, GameSliceType, ImageSliceType} from "../../types/store.ts";
+import {EarnSliceType, GameSliceType, ImageSliceType, taskSliceType} from "../../types/store.ts";
 import { setBottom } from '../../store/earn.ts';
 
 const JoinBottom = () => {
     const earn: EarnSliceType = useSelector((state: any) => state.earn);
     const dispatch = useDispatch();
-
     return (
         <div>
             <Sheet rootId='bottom-sheet'
@@ -40,6 +39,7 @@ const JoinBottom = () => {
 const SheetComp = () => {
     const image: ImageSliceType = useSelector((state: any) => state.image);
     const earn: EarnSliceType = useSelector((state: any) => state.earn);
+    const task: taskSliceType = useSelector((state: any) => state.task);
 
     const dispatch = useDispatch();
     
@@ -81,17 +81,17 @@ const SheetComp = () => {
                 <Sheet.Content>
                     <div className="bs-container items-stretch px-6 py-10">
                         <img className='bs-img mx-auto ' src={'http://localhost:5173/icon/earn/earn_check.png'}/>
-                        <div className='bs-title pt-6'>Congrates</div>
+                        <div className='bs-title pt-6'>Congratulations</div>
                         <span className='bs-subtitle pt-2'>you have completed the task</span>
                         {/*<span className='bs-over-subtitle'>{item.}</span>*/}
                         <div className='bs-pricing pt-4'>
                             <div className='bs-price'>
                                 {COIN_IMG ? <img src={COIN_IMG?.img.src} alt='coin'/> : null}
-                                <span>{numify(earn.totalEarn)}</span>
+                                <span>{numify(task.totalEarn)}</span>
                             </div>
                             
                         </div>
-                        <button className='bs-button my-4' onClick={onPurchaseHandler}>{numify(earn.totalEarn)} DragonCoins</button>
+                        <button className='bs-button my-4' onClick={onPurchaseHandler}>{numify(task.totalEarn)} DragonCoins</button>
                     </div>
                 </Sheet.Content>
             </Sheet.Container>
