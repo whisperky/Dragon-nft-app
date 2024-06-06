@@ -1,42 +1,7 @@
 import CommunityItem from "./CommunityItems.tsx";
-import {EarnData, taskData} from "../../types/data.ts";
+import {taskData} from "../../types/data.ts";
 import {numify} from "../../helpers/score.helper.ts";
 import {useDispatch, useSelector} from "react-redux";
-
-const communities = [
-    {
-        id : "10b96607-8248-4c6e-aa1b-5165d48f969f",
-        image : "EARN_TWITTER",
-        name : "Follow us on Twitter", 
-        price : 30000,
-        url: "https://x.com/DragonDotBot",
-        type: "twitter"
-    },
-    {
-        id : "10b96607-8248-4c6e-aa1b-5165d748f969f",
-        image : "EARN_TELEGRAM",
-        name : "Join Our Telegram Channel", 
-        price : 10000,
-        url: "https://t.me/DragonBotCommunity",
-        type: "tg_channel"
-    },
-    {
-        id : "10b96607-8248-4c6e-aa1b-5165d485f969f",
-        image : "EARN_TELEGRAM",
-        name : "Join Our Telegram Group", 
-        price :50000,
-        url: "https://t.me/DragonBotGC",
-        type: "tg_group"
-    },
-    {
-        id : "10b96607-8248-4c6e-aa1b-5165d2485f969f",
-        image : "EARN_MEDIUM",
-        name : "Follow use on Medium", 
-        price :50000,
-        url: "https://medium.com/@dragonbot",
-        type: "medium"
-    }
-]
 
 const getImage = (type: string) => {
     if(type === "medium") return "EARN_MEDIUM";

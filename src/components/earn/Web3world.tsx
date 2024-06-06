@@ -1,36 +1,7 @@
 import Web3worldItem from "./Web3worldItem.tsx";
 import {useSelector} from "react-redux";
-import {EarnData, UserData} from "../../types/data.ts";
-import {numify} from "../../helpers/score.helper.ts";
-import {BoostSliceType, ScoreSliceType} from "../../types/store.ts";
-import {calculateBoostPrice, getLevels} from "../../helpers/helper.ts";
-
-const web3 = [
-    {
-        id : "10b96607-8248-4c6e-aa1b-5165d48f969f",
-        image : "EARN_COMMUNITY",
-        name : "Connect with Socials", 
-        price : 10000000,
-        type: "join"
-    },
-    {
-        id : "10b96607-8248-4c6e-aa1b-5165d748f969f",
-        image : "EARN_WALLET",
-        name : "Connect Wallet", 
-        price : 100000,
-        type: "wallet"
-    },
-    {
-        id : "10b96607-8248-4c6e-aa1b-5165d485f969f",
-        image : "EARN_TWITTER",
-        name : "Engage with Posts", 
-        price :50000,
-        type: "retweet"
-    }
-]
 
 const Web3world = () => {
-    const score: ScoreSliceType = useSelector((state: any) => state.score);
     const earn = useSelector((state: any) => state.earn);
     return (
         <div className=''>

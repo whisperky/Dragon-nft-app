@@ -1,7 +1,6 @@
 import {showBottomSheet} from "../../store/game.ts";
 import {useDispatch, useSelector} from "react-redux";
 import {ImageSliceType, MyImageTypes, MySkinImageTypes, PurchaseSliceType} from "../../types/store.ts";
-import {MouseEventHandler} from "react";
 import {showToast} from "../../helpers/helper.ts";
 
 const InviteItem = ({

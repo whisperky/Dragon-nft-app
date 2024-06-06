@@ -16,12 +16,11 @@ const JoinCommunity = () => {
         navigate(-1)
     })
     WebApp.BackButton.show();
-    user.websocket.emit('getTaskData');
     const img = React.useRef<HTMLImageElement>(null)
     
     const handlerFinish = () => {
         navigate(-1)
-
+        user.websocket.emit('finishTask');
         dispatch(setBottom(true))
     }
     

@@ -113,6 +113,14 @@ export type EarnData = {
     url?: String;
     type: String;
 }
+export type finishData = {
+    id: string;
+    user_id: string;
+    task_id: string;
+    completed: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+}
 export type skinData = {
     id: string;
     name: string;
@@ -277,6 +285,12 @@ export type earnWebHookData = {
     success: boolean;
     data: {
         earns: earnData[];
+    }
+}
+export type finishWebHookData = {
+    success: boolean;
+    data: {
+        finishTasks: finishData[];
     }
 }
 export type userDailyBoost = {

@@ -14,7 +14,8 @@ import {
     squadDataLeague, topFrenData,
     UserWebhookData,
     taskWebHookData,
-    earnWebHookData
+    earnWebHookData,
+    finishWebHookData
 } from "../types/data.ts";
 import {setSkins, setUserSkins} from "../store/skin.ts";
 import {setBoost, setLeftDailyBoosts} from "../store/boost.ts";
@@ -145,6 +146,12 @@ const RootLayout = () => {
             user.websocket.on('earnData', (edata: earnWebHookData) => {
                 if (edata.success) {
                     dispatch(setEarns(edata.data.earns))
+                }
+            });
+            user.websocket.on('finishTaskData', (fdata: finishWebHookData) => {
+                if (fdata.success) {
+                    console.log(fdata.data.finishTasks)
+                    // dispatch(setEarns(fdata.data.finishTasks))
                 }
             });
             user.websocket.on('topFrenData', (topFData: { success: boolean; frens: topFrenData }) => {

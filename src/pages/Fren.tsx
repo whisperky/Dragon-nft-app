@@ -24,6 +24,7 @@ const Fren = () => {
     const fren = useSelector((state: any) => state.fren);
     const earned = fren.list.reduce((acc: number, fren: any) => acc + fren.earned, 0);
     if (fren.haveData === false) user.websocket.emit('getFrenData');
+    
     useEffect(() => {
         setTimeout(() => {
             document.getElementById('fren-list').scrollTop = 100;

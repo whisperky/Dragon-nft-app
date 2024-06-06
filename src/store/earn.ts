@@ -23,7 +23,6 @@ const earnSlice = createSlice({
             state.haveData = true;
         },
         setStatus: (state, action) => {
-            console.log(action.payload)
             if(action.payload.type === 'twitter' && !state.status.twitter) {state.totalEarn += action.payload.value; state.status.twitter = true}
             if(action.payload.type === 'tg_channel' && !state.status.tg_channel) {state.totalEarn += action.payload.value; state.status.tg_channel = true}
             if(action.payload.type === 'tg_group' && !state.status.tg_group) {state.totalEarn += action.payload.value; state.status.tg_group = true}

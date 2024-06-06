@@ -33,6 +33,7 @@ const CommunityItem = ({
     const navigate = useNavigate()
     const isBot = item.image == 'AUTO_TAP_BOT';
     const dispatch = useDispatch();
+    const user = useSelector((state: any) => state.user);
 
     const images: ImageSliceType = useSelector((state: any) => state.image);
     const COIN_IMG = images.core.find((img: any) => img.name == 'COIN_TOOL');
@@ -42,7 +43,10 @@ const CommunityItem = ({
     let img = imgHelp?.img;
 
     const clickHandler = () => {
-        window.open(item.url, '_blank')
+        
+        user.websocket.emit('finishTask', {user: user.data.id, task: item.id});
+        // window.open(item.type_data, '_blank')
+
         dispatch(setStatus({type: item.type, value: item.price}))
     }
     const replaceAll = (subtitle: string)=> {

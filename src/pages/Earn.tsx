@@ -19,7 +19,8 @@ const Earn = () => {
     const user = useSelector((state: any) => state.user);
     const earn = useSelector((state: any) => state.earn);
     if (earn.haveData === false) user.websocket.emit('getEarnData');
-    
+    if (user.data) user.websocket.emit('getFinishedTask', user.data.id);
+        
     return earn.haveData ? (
         <div className='boosts relative'>
             <div className='header-gradient'></div>
