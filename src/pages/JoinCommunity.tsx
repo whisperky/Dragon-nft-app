@@ -2,19 +2,21 @@ import '../App.css'
 import Community from '../components/join/Community.tsx';
 import WebApp from "@twa-dev/sdk";
 import {useNavigate} from "react-router-dom";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import React from "react";
 import { setBottom } from '../store/earn.ts';
 
 const JoinCommunity = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const user = useSelector((state: any) => state.user);
+
     WebApp.BackButton.onClick(() => {
         dispatch(setBottom(false))
         navigate(-1)
     })
     WebApp.BackButton.show();
-    
+    user.websocket.emit('getTaskData');
     const img = React.useRef<HTMLImageElement>(null)
     
     const handlerFinish = () => {

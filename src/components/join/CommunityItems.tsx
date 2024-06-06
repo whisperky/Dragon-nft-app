@@ -13,6 +13,7 @@ const CommunityItem = ({
                        disabled = false,
                        isMax = false,
                        item,
+                       image
                    }: {
     title: string,
     subtitle?: string,
@@ -37,7 +38,7 @@ const CommunityItem = ({
     const COIN_IMG = images.core.find((img: any) => img.name == 'COIN_TOOL');
     const LOCKED_IMG = images.optional.find((img: any) => img.name == 'LOCKED_ICON');
 
-    let imgHelp: MyImageTypes & MySkinImageTypes = [...images.booster, ...images.skin].find((img: any) => img.name == item.image) as any;
+    let imgHelp: MyImageTypes & MySkinImageTypes = [...images.booster, ...images.skin].find((img: any) => img.name == image) as any;
     let img = imgHelp?.img;
 
     const clickHandler = () => {

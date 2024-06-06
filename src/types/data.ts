@@ -134,10 +134,14 @@ export type userSkinData = {
 }
 export type taskData = {
     id: string;
-    name: string | null;
+    title: string | null;
+    emoji: string | null;
     description: string | null;
-    image: string | null;
-    task_category: taskCategoryData;
+    difficulty: taskDifficultData;
+    type: taskTypeData;
+    social: tasksocialData;
+    type_data: string | null;
+    type_unique: string | null;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -199,7 +203,9 @@ export type UserDataFren = {
 export type userStatusData = 'active' | 'suspended' | 'deactivated';
 export type chatTypeData = 'group' | 'channel';
 export type leagueTypeData = 'miner' | 'squad';
-export type taskCategoryData = 'onboarding' | 'specials' | 'web3_world';
+export type taskDifficultData = 'easy' | 'medium' | 'hard';
+export type taskTypeData = 'web_link' | 'link' | 'socials';
+export type tasksocialData = 'telegram'| 'twitter'| 'tiktok'| 'medium'| 'reddit'| 'twitch'| 'youtube'| 'discord'| 'facebook'| 'whatsapp'| 'linkedin'| 'snapchat'| 'instagram'| 'pinterest'| 'wechat';
 export type transactionTypeData = 'skin' | 'booster' | 'daily_booster';
 
 // helper
@@ -240,6 +246,12 @@ export type boostWebHookData = {
         skins: skinData[];
         userSkins: userSkinData[];
         leftDailyBoosts: userDailyBoost[];
+    }
+}
+export type taskWebHookData = {
+    success: boolean;
+    data: {
+        tasks: taskData[];
     }
 }
 export type frenWebHookData = {

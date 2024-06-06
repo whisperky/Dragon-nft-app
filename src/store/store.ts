@@ -12,6 +12,7 @@ import turbo from "./turbo.ts";
 import league from "./league.ts";
 import squad from "./squad.ts";
 import earn from "./earn.ts";
+import task from './task.ts';
 
 export const store = configureStore({
     reducer: {
@@ -27,7 +28,8 @@ export const store = configureStore({
         turbo: turbo,
         league: league,
         squad: squad,
-        earn: earn
+        earn: earn,
+        task: task
     },
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware({

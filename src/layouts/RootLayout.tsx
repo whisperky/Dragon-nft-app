@@ -12,7 +12,8 @@ import {
     purchaseReturnData,
     squadData,
     squadDataLeague, topFrenData,
-    UserWebhookData
+    UserWebhookData,
+    taskWebHookData
 } from "../types/data.ts";
 import {setSkins, setUserSkins} from "../store/skin.ts";
 import {setBoost, setLeftDailyBoosts} from "../store/boost.ts";
@@ -39,6 +40,7 @@ import {setAvailableTurbos} from "../store/turbo.ts";
 import {setLeague, setSquadTop, setUserLeague, setUserTop} from "../store/league.ts";
 import {selectSquad, setTopSquad, setTopSquadUsers, setUserSquad, topSquadLoaded} from "../store/squad.ts";
 import {showToast} from "../helpers/helper.ts";
+import { setTasks } from "../store/task.ts";
 
 const RootLayout = () => {
     const user: UserSliceType = useSelector((state: any) => state.user);
@@ -133,6 +135,16 @@ const RootLayout = () => {
                     dispatch(setFrens(fdata.data.frens));
                 }
             });
+            user.websocket.on('taskData', (tdata: taskWebHookData) => {
+                if (tdata.success) {
+                    dispatch(setTasks(tdata.data.tasks));
+                }
+            });
+            // user.websocket.on('earnData', (tdata: frenWebHookData) => {
+            //     if (tdata.success) {
+            //         dispatch(setFrens(tdata.data.frens));
+            //     }
+            // });
             user.websocket.on('topFrenData', (topFData: { success: boolean; frens: topFrenData }) => {
                 if (topFData.success) {
                     dispatch(topFrenLoad());

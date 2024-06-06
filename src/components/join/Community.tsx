@@ -1,6 +1,7 @@
 import CommunityItem from "./CommunityItems.tsx";
-import {EarnData} from "../../types/data.ts";
+import {EarnData, taskData} from "../../types/data.ts";
 import {numify} from "../../helpers/score.helper.ts";
+import {useDispatch, useSelector} from "react-redux";
 
 const communities = [
     {
@@ -37,7 +38,18 @@ const communities = [
     }
 ]
 
+const getImage = (type: string) => {
+    if(type === "medium") return "EARN_MEDIUM";
+    if(type === "twitter") return "EARN_TWITTER";
+    if(type === "telegram") return "EARN_TELEGRAM";
+}
+
 const Community = () => {
+    
+    const dispatch = useDispatch();
+    const user = useSelector((state: any) => state.user);
+    const task = useSelector((state: any) => state.task);
+    if (task.haveData === false) user.websocket.emit('getTaskData');
 
     return (
         <div className=''>
@@ -45,16 +57,16 @@ const Community = () => {
                 '--angle': '135deg',
             } as React.CSSProperties}>
                 {
-                    communities
-                        .map((item: EarnData) => {
+                    task.list
+                        .map((item: taskData) => {
                             return {
                                 item,
                                 key: item.id,
-                                title: item.name,
-                                subtitle: numify(item.price),
-                                image: item.image,
+                                title: item.title,
+                                subtitle: numify(50000),
+                                image: getImage(item.social),
                                 coin: true,
-                                url: item.url,
+                                url: item.type_data,
                                 type: item.type,
                             };
                         })

@@ -82,6 +82,10 @@ export type FrenSliceType = {
     topFrens: any[];
     isTopFrenLoading: boolean;
 }
+export type taskSliceType = {
+    haveData: boolean;
+    list: any[];
+}
 export type EarnSliceType = {
     bottomSheet: boolean;
     status: any;
