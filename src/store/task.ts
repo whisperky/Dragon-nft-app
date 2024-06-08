@@ -8,12 +8,16 @@ const taskSlice = createSlice({
         list: [],
         finishedTask: [],
         isTask: false,
-        totalEarn: 0
+        totalEarn: 0,
+        isFinished: false
     } as taskSliceType,
     reducers: {
         setTasks: (state, action) => {
             state.list = action.payload;
             state.haveData = true;
+            if(action.payload && !action.payload.length) {
+                state.isFinished = true;
+            }
         },
         setFinishedTasks: (state, action) => {
             if(!action.payload.length) {
@@ -23,9 +27,13 @@ const taskSlice = createSlice({
         },
         setTotalEarn: (state, action) => {
             state.totalEarn = action.payload
+        },
+        setUserFinishTask: (state, action) => {
+            console.log(action.payload)
+            state.isFinished = action.payload
         }
     }
 })
 
-export const { setTasks, setFinishedTasks,setTotalEarn } = taskSlice.actions
+export const { setTasks, setFinishedTasks,setTotalEarn, setUserFinishTask } = taskSlice.actions
 export default taskSlice.reducer;

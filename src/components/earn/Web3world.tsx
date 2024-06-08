@@ -3,6 +3,7 @@ import {useSelector} from "react-redux";
 
 const Web3world = () => {
     const earn = useSelector((state: any) => state.earn);
+
     return (
         <div className=''>
             <p className='boost-title animate__animated animate__fadeIn animate__slow'>Dragon world</p>

@@ -14,7 +14,6 @@ const JoinCommunity = () => {
     const task = useSelector((state: any) => state.task);
 
     WebApp.BackButton.onClick(() => {
-        // dispatch(setBottom(false))
         navigate(-1)
     })
     WebApp.BackButton.show();
@@ -22,13 +21,13 @@ const JoinCommunity = () => {
     
     const handlerFinish = () => {
         navigate(-1)
-        if(task.isTask) {
+        if(!task.isFinished && task.isTask) {
             dispatch(setBottom(true));
             user.websocket.emit('earnTaskRewards', task.totalEarn)
             dispatch(setAmount(task.totalEarn));
+            return;
         }
     }
-    
     return (
         <div className='joins'>
             <div className='header-gradient'></div>

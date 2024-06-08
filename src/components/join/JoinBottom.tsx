@@ -10,7 +10,7 @@ import {
     useDialog,
 } from 'react-aria';
 import {numify} from "../../helpers/score.helper.ts";
-import {EarnSliceType, GameSliceType, ImageSliceType, taskSliceType} from "../../types/store.ts";
+import {EarnSliceType, ImageSliceType, taskSliceType} from "../../types/store.ts";
 import { setBottom } from '../../store/earn.ts';
 
 const JoinBottom = () => {
@@ -38,7 +38,6 @@ const JoinBottom = () => {
 
 const SheetComp = () => {
     const image: ImageSliceType = useSelector((state: any) => state.image);
-    const earn: EarnSliceType = useSelector((state: any) => state.earn);
     const task: taskSliceType = useSelector((state: any) => state.task);
 
     const dispatch = useDispatch();
@@ -68,7 +67,7 @@ const SheetComp = () => {
        
     return (
         <>
-            <Sheet.Container
+          <Sheet.Container
                 className='sheet-body bs-modal-container blur-round-border-bg'
                 style={{
                     '--angle': '125deg',

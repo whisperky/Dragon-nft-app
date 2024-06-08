@@ -5,7 +5,7 @@ import EarnImage from '../components/earn/EarnImage.tsx';
 import WebApp from "@twa-dev/sdk";
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import React from "react";
+import React, { useEffect } from "react";
 import {hideBottomSheet} from "../store/game.ts";
 import JoinBottom from '../components/join/JoinBottom.tsx';
 import { setBottom } from '../store/earn.ts';
@@ -20,11 +20,14 @@ const Earn = () => {
     WebApp.BackButton.show();
     const user = useSelector((state: any) => state.user);
     const earn = useSelector((state: any) => state.earn);
-    const task = useSelector((state: any) => state.task);
+
+    useEffect(() => {
+        if(user.data) user.websocket.emit('getUserTaskComplete', user.data.id)
+        else navigate(-1)
+    }, [])
 
     if (earn.haveData === false) user.websocket.emit('getEarnData');
-    if (task.haveData === false && user.data) user.websocket.emit('getTaskData', user.data.id);
-      
+
     return earn.haveData ? (
         <div className='boosts relative' onClick={() => dispatch(setBottom(false))}>
             <div className='header-gradient'></div>

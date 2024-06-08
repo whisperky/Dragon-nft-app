@@ -349,7 +349,7 @@ export const loadCoinSkinImages = () => {
             break;
         default:
             const normal_image4 = new Image();
-            normal_image4.src = DRAGON_ICON_IMAGE;
+            normal_image.src = DRAGON_ICON_IMAGE;
             const turbo_image4 = new Image();
             normal_image4.onload = () => {
                 turbo_image4.src = DRAGON_ICON_OPEN_IMAGE;

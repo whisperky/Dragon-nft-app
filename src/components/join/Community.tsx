@@ -10,10 +10,7 @@ const getImage = (type: string) => {
 }
 
 const Community = () => {
-    
-    const dispatch = useDispatch();
     const task = useSelector((state: any) => state.task);
-    
     return (
         <div className=''>
             <div className='boosters-list glass blur-round-border-bg animate__animated animate__fadeIn animate__slow' style={{

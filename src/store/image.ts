@@ -105,7 +105,6 @@ const imageSlice = createSlice({
                         normal: action.payload.type == 'normal' ? action.payload.img : null,
                         turbo: action.payload.type == 'turbo' ? action.payload.img : null,
                         earn: action.payload.type == 'earn' ? action.payload.img : null
-
                     }
                 });
             }

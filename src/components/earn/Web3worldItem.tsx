@@ -4,6 +4,7 @@ import {showToast} from "../../helpers/helper.ts";
 import {useNavigate} from "react-router-dom";
 import { numify } from "../../helpers/score.helper.ts";
 import { setTotalEarn } from "../../store/task.ts";
+import { useEffect } from "react";
 
 const Web3worldItem = ({
                        image,
@@ -23,6 +24,7 @@ const Web3worldItem = ({
 
     const purchase: PurchaseSliceType = useSelector((state: any) => state.purchase);
     const task = useSelector((state: any) => state.task);
+    const user = useSelector((state: any) => state.user);
 
     const images: ImageSliceType = useSelector((state: any) => state.image);
     const COIN_IMG = images.core.find((img: any) => img.name == 'COIN_TOOL');
@@ -30,12 +32,21 @@ const Web3worldItem = ({
     let imgHelp: MyImageTypes & MySkinImageTypes = [...images.booster, ...images.skin].find((img: any) => img.name == image) as any;
     let img = imgHelp?.img;
 
+    useEffect(() => {
+        if(item.task_category == 'web3_world') {
+            user.websocket.emit('getTaskData', { user: user.data.id, earn: item.id });
+        }
+    }, [])
+
     const clickHandler = () => {
+        if(task.isFinished) {
+            return showToast(purchase.toast, 'You have already completed these tasks.', 'error')
+        }
         dispatch(setTotalEarn(item.reward))
-        if(!task.list.length) return showToast(purchase.toast, 'There is no Tasks.', 'error')
         if(item.name==="Connect with Socials") {navigate('join')}
         else showToast(purchase.toast, 'Coming Soon', 'error')
     }
+    
     return (
         <div className='b-item glass-hover my-3' style={{opacity: 1}}
              onClick={clickHandler}>

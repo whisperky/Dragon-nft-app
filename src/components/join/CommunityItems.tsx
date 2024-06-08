@@ -1,8 +1,6 @@
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {ImageSliceType, MyImageTypes, MySkinImageTypes} from "../../types/store.ts";
-import {MouseEventHandler, useEffect} from "react";
-import {useNavigate} from "react-router-dom";
-import { setBottom } from "../../store/earn.ts";
+import {MouseEventHandler} from "react";
 
 const CommunityItem = ({
                        title,
@@ -30,11 +28,8 @@ const CommunityItem = ({
     item: any,
     url: String
 }) => {
-    const navigate = useNavigate()
     const isBot = item.image == 'AUTO_TAP_BOT';
-    const dispatch = useDispatch();
     const user = useSelector((state: any) => state.user);
-    const task = useSelector((state: any) => state.task);
 
     const images: ImageSliceType = useSelector((state: any) => state.image);
     const COIN_IMG = images.core.find((img: any) => img.name == 'COIN_TOOL');
@@ -44,11 +39,8 @@ const CommunityItem = ({
     let img = imgHelp?.img;
 
     const clickHandler = () => {
-        
         user.websocket.emit('getFinishTask', {user: user.data.id, task: item.id});
         window.open(item.type_data, '_blank')
-
-        // dispatch(handleFinish({user: user.data.id, task: item.id}))
     }
     const replaceAll = (subtitle: string)=> {
         let _subtitle = subtitle;
@@ -64,8 +56,7 @@ const CommunityItem = ({
             <div className='flex items-center'>
                 {img != undefined ? <img className='b-item-image' src={img.src}/> : <></>}
                 <div className='b-item-desc'>
-                    <p className='b-item-title flex items-center'>{title} {isBot && isMax ?
-                        <span className='ml-3 b-item-badge glass'>on <span className='ml-1' style={{fontSize: '8px'}}>🟢</span></span> : ''}</p>
+                    <p className='b-item-title flex items-center'>{title} {isBot && isMax ? <span className='ml-3 b-item-badge glass'>on <span className='ml-1' style={{fontSize: '8px'}}>🟢</span></span> : ''}</p>
                         <div className='b-item-pricing'>
                             <div className='b-item-price'>
                                 {coin && COIN_IMG ? <img src={COIN_IMG?.img.src} alt='coin'/> : null}

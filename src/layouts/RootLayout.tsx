@@ -42,7 +42,7 @@ import {setAvailableTurbos} from "../store/turbo.ts";
 import {setLeague, setSquadTop, setUserLeague, setUserTop} from "../store/league.ts";
 import {selectSquad, setTopSquad, setTopSquadUsers, setUserSquad, topSquadLoaded} from "../store/squad.ts";
 import {showToast} from "../helpers/helper.ts";
-import { setFinishedTasks, setTasks } from "../store/task.ts";
+import { setFinishedTasks, setTasks, setUserFinishTask } from "../store/task.ts";
 import { setEarns } from "../store/earn.ts";
 
 const RootLayout = () => {
@@ -138,11 +138,11 @@ const RootLayout = () => {
                     dispatch(setFrens(fdata.data.frens));
                 }
             });
-            // user.websocket.on('getEarnRewards', (edata: any) => {
-            //     if (edata.success) {
-            //         dispatch(setAmount(edata.amount));
-            //     }
-            // });
+            user.websocket.on('UserTaskComplete', (edata: any) => {
+                if (edata.success) {
+                    dispatch(setUserFinishTask(edata.data.finish));
+                }
+            });
             user.websocket.on('taskData', (tdata: taskWebHookData) => {
                 if (tdata.success) {
                     dispatch(setTasks(tdata.data.tasks));
@@ -151,11 +151,6 @@ const RootLayout = () => {
             user.websocket.on('earnData', (edata: earnWebHookData) => {
                 if (edata.success) {
                     dispatch(setEarns(edata.data.earns))
-                }
-            });
-            user.websocket.on('finishTaskData', (fdata: finishWebHookData) => {
-                if (fdata.success) {
-                    dispatch(setFinishedTasks(fdata.data.finishTasks))
                 }
             });
             user.websocket.on('finishTask', (fdata: finishWebHookData) => {

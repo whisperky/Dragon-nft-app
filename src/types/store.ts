@@ -89,6 +89,7 @@ export type taskSliceType = {
     finishedTask: any[];
     isTask: boolean;
     totalEarn: number;
+    isFinished: boolean;
 }
 export type EarnSliceType = {
     haveData: boolean;
