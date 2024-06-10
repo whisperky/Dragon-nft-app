@@ -30,15 +30,13 @@ const Squad = () => {
                 {squadBGImage ? <img className='squad-header-bg' src={squadBGImage?.img.src}/> : null}
                 {CELEBRATION_IMG ?
                     <img className='squad-header-img h-[320px]' src={CELEBRATION_IMG?.img.src} alt='celebration'/> : null}
-                <p className='squad-text-join-title'>Join Squad!</p>
-                <p className='squad-text-sm text-glass'>These squards recruiting now.</p>
-                <p className='squad-text-sm text-glass'>Do you wanna join?</p>
+                <p className='squad-text-join-title'>⚔️ Clan Wars ⚔️</p>
+                <p className='squad-text-sm text-glass'>Pick your clan, unleash the Dragon,</p>
+                <p className='squad-text-sm-sub text-glass'>and climb your way up the ranks for glory and riches!</p>
                 <button className='join-squad-btn' onClick={() => {
                     WebApp.openTelegramLink(`https://t.me/${import.meta.env.VITE_REACT_APP_BOT_USERNAME}?start=squad`);
                     WebApp.close();
-                }}>Join another
-                    squad
-                </button>
+                }}>Create/Join A Clan</button>
             </div>
             <div className='squad-list-con'>
                 {

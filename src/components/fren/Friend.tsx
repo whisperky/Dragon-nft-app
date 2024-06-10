@@ -22,7 +22,7 @@ const Friend = ({id, fName, lName, username, league, is_premium, balance, earned
     const images: ImageSliceType = useSelector((state: any) => state.image);
     const OPEN_IMG = images.optional.find((img) => img.name === 'OPEN_ARROW');
     const PREMIUM_IMG = images.optional.find((img) => img.name === 'TG_PREMIUM');
-    const COIN_IMAGE = images.core.find((img) => img.name === 'COIN_TOOL');
+    const COIN_IMAGE = images.core.find((img) => img.name === 'COIN_ICON');
     const LEAGUE_IMAGE = images.league.find((img) => leagueName(img.name) === leagueName(league));
     return (
         <div className='friend-container'

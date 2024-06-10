@@ -46,7 +46,7 @@ const BoostItem = ({
     //     locked = false;
     // }
     const images: ImageSliceType = useSelector((state: any) => state.image);
-    const COIN_IMG = images.core.find((img: any) => img.name == 'COIN_TOOL');
+    const COIN_IMG = images.core.find((img: any) => img.name == 'COIN_ICON');
     const LOCKED_IMG = images.optional.find((img: any) => img.name == 'LOCKED_ICON');
     const OPEN_IMG = images.optional.find((img: any) => img.name == 'OPEN_ARROW');
     const CHECK_IMG = images.optional.find((img: any) => img.name == 'CHECK_ICON');

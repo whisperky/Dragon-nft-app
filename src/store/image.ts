@@ -92,8 +92,6 @@ const imageSlice = createSlice({
                     if (skin.name == action.payload.name) {
                         if (action.payload.type == 'normal') {
                             skin.img.normal = action.payload.img;
-                        } else {
-                            skin.img.turbo = action.payload.img;
                         }
                     }
                     return skin;

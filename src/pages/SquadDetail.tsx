@@ -14,7 +14,7 @@ import LeagueListSkeleton from "../skeleton/LeagueListSkeleton.tsx";
 const SquadDetail = () => {
     const squad: SquadSliceType = useSelector((state: any) => state.squad);
     const image: ImageSliceType = useSelector((state: any) => state.image);
-    const COIN_IMAGE = image.core.find((img) => img.name === 'COIN_TOOL');
+    const COIN_IMAGE = image.core.find((img) => img.name === 'COIN_ICON');
     const OPEN_ARROW = image.optional.find((img) => img.name === 'OPEN_ARROW');
     const SQUAD_DETAIL_BG = image.optional.find((img) => img.name === 'SQUAD_DETAIL_BG');
     let LEAGUE_IMAGE = null;
@@ -94,7 +94,7 @@ const SquadDetail = () => {
                             </div>
                             <div className='flex gap-2 items-center justify-center'>
                                 {/*<div className='squad-score-coin'></div>*/}
-                                <p className='squad-score-no-text text-glass'>Mined in squad</p>
+                                <p className='squad-score-no-text text-glass'>Mined in clan</p>
                             </div>
                         </div>
                         <div className='col-divider'></div>
@@ -115,22 +115,21 @@ const SquadDetail = () => {
             <div className='squad-detail-btn-con'>
                 {(user.data?.squad_id == squad.squad?.id) ?
                     <button onClick={() => {
-                        WebApp.showConfirm(`You are going to leave ${squad.squad.name} Squad.`, (val) => {
+                        WebApp.showConfirm(`You are going to leave ${squad.squad.name} Clan.`, (val) => {
                             if (val) {
                                 user.websocket.emit('leaveSquad', {
                                     id: squad.squad.id
                                 });
                             }
                         });
-                    }} className={'squad-detail-btn blur-round-border-bg'}>Leave Squad</button> :
+                    }} className={'squad-detail-btn blur-round-border-bg'}>Leave Clan</button> :
                     <button onClick={() => navigate(`/join-squad/${squad.squad.id}`)}
-                            className='squad-detail-btn blur-round-border-bg'>Join Squad</button>}
-                <button className='squad-detail-btn blur-round-border-bg'>Boost</button>
+                            className='squad-detail-btn blur-round-border-bg'>Join Clan</button>}
             </div>
 
             <div className='squad-members-filter'>
-                {filter === 'day' ? <div className='filter px-4 py-1 active'>Day</div> : <div className='filter px-4 py-1' onClick={() => setFilter('day')}>Day</div>}
-                {filter === 'week' ? <div className='filter px-4 py-1 active'>Week</div> : <div className='filter px-4 py-1' onClick={() => setFilter('week')}>Week</div>}
+                {/*{filter === 'day' ? <div className='filter px-4 py-1 active'>Day</div> : <div className='filter px-4 py-1' onClick={() => setFilter('day')}>Day</div>}*/}
+                {/*{filter === 'week' ? <div className='filter px-4 py-1 active'>Week</div> : <div className='filter px-4 py-1' onClick={() => setFilter('week')}>Week</div>}*/}
             </div>
 
             <div className='squad-members'>

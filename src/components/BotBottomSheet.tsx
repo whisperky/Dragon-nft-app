@@ -50,8 +50,9 @@ const SheetComp = () => {
         containerRef
     );
     const image: ImageSliceType = useSelector((state: any) => state.image);
-    const CLOSE_ICON = image.optional.find((i) => i.name === 'CLOSE_ICON');
-    const COIN_IMG = image.core.find((i) => i.name === 'COIN_TOOL');
+    const CLOSE_ICON = image.core.find((i) => i.name === 'CLOSE_ICON');
+    const COIN_IMG = image.core.find((i) => i.name === 'COIN_ICON');
+    const AUTO_EARN_IMG = image.core.find((i) => i.name === 'AUTO_EARN_BOT');
 
     useModal();
     const onPurchaseHandler = () => {
@@ -82,7 +83,7 @@ const SheetComp = () => {
                 <Sheet.Header>{customHeader}</Sheet.Header>
                 <Sheet.Content>
                     <div className="bs-container items-stretch px-6">
-                        <div className='earn-user mx-auto'></div>
+                        <img className='earn-user mx-auto' src={AUTO_EARN_IMG?.img?.src} alt='Auto earn bot' />
                         <div className='bot-bs-title'><p>+{numify(game.botEarn)}</p> {COIN_IMG ?
                             <img src={COIN_IMG?.img.src} alt='coin'/> : null}
                         </div>

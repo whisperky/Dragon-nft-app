@@ -16,8 +16,8 @@ const Fren = () => {
     const image: ImageSliceType = useSelector((state: any) => state.image);
     const PREMIUM_IMG = image.optional.find((img) => img.name === 'TG_PREMIUM');
     const MAIN_COIN_IMAGE = image.skin.find((img) => img.name === 'BASIC');
-    const COIN_IMAGE = image.core.find((img) => img.name === 'COIN_TOOL');
-    const TOY_IMAGE = image.core.find((img) => img.name === 'TOY_TOOL');
+    const COIN_IMAGE = image.core.find((img) => img.name === 'COIN_ICON');
+    const TOY_IMAGE = image.core.find((img) => img.name === 'TOY_EMPTY');
     const OPEN_IMG = image.optional.find((img) => img.name === 'OPEN_ARROW');
     WebApp.BackButton.onClick(() => navigate(-1))
     WebApp.BackButton.show();
@@ -35,11 +35,11 @@ const Fren = () => {
     }, []);
     return TOY_IMAGE && fren.haveData ? (
         <div className='fren-zone-container  relative'>
-            <div className='header-gradient'></div>
+            {/*<div className='header-gradient'></div>*/}
             <div className="relative z-[10]">
                 <button className='help-btn float-right' onClick={() => navigate(-1)}></button>
-                <p className='fren-title animate__animated animate__fadeIn animate__slow mt-20 clear-both'>Fren Zone</p>
-                <a href='https://t.me/DragonFrenZone' className="fren-link" target='_blank' rel='noreferrer'>How to make 1M?</a>
+                <p className='fren-title animate__animated animate__fadeIn animate__slow clear-both'>Fren Zone</p>
+                {/*<a href='https://t.me/DragonFrenZone' className="fren-link" target='_blank' rel='noreferrer'>How to make 1M?</a>*/}
                 <div className='fren-info animate__animated animate__fadeIn blur-round-border-bg' onClick={() => navigate('/top-fren')}>
                     <div className='flex items-center'>
                         <div className='fren-earned'>
@@ -119,7 +119,7 @@ const Fren = () => {
                     </button>
                 </div>
             </div>
-            <div className='footer-square-gradient'></div>
+            {/*<div className='footer-square-gradient'></div>*/}
         </div>
     ) : (<FrenSkeleton/>);
 };

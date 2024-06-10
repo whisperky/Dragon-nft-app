@@ -24,17 +24,26 @@
     position: absolute;
     object-fit: cover;
     pointer-events: none;
-    top: 0;
+    width: 100%;
+    top: -7%;
 }
-
+.squad-header-img {
+    height: 37vh;
+}
 .squad-text-join-title {
-    font-size: 36px;
+    font-size: 30px;
     font-weight: 700;
     margin-bottom: .4rem;
 }
 
 .squad-text-sm {
-    font-size: 18px;
+    font-size: 12px;
+    text-align: center;
+}
+.squad-text-sm-sub {
+    font-size: 12px;
+    width: 50%;
+    text-align: center;
 }
 
 .join-squad-btn {
@@ -100,6 +109,8 @@
 .squad-detail-header-bg {
     position: absolute;
     pointer-events: none;
+    width: 100%;
+    top: -7%;
 }
 .squad-detail-header-box {
     display: flex;
@@ -123,7 +134,7 @@
     background: slategray;
 }
 .squad-detail-name {
-    font-size: 32px;
+    font-size: 20px;
     font-weight: 600;
     text-align: center;
 }
@@ -275,8 +286,8 @@
     padding: 0 1.5rem;
     color:white;
     width: 100%;
-    font-size: 18px;
-    font-weight: 900;
+    font-size: 16px;
+    font-weight: 500;
 }
 .squad-members-filter .filter {
     opacity: 0.2;

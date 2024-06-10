@@ -14,7 +14,7 @@ const League = () => {
     const leagueLogo = image.league.find((x) => leagueName(x.name) == leagueName(league.userLeague.preset))?.img.small.src;
     const dispatch = useDispatch();
     return (
-        <div className='flex justify-around league-container blur-round-border-bg mx-8 my-8'>
+        <div className='flex justify-around league-container blur-round-border-bg mx-8 my-[5%]'>
             <div className='league-squad-holder animate__animated animate__fadeIn'>
                 <div className='db-league' onClick={() => {
                     dispatch(setLoadLeaguePage(false))
@@ -28,7 +28,7 @@ const League = () => {
                 <div className='col-divider'></div>
                 {squad.userSquad == null ?
                     <div className='db-squad' onClick={() => navigate('/squad')}>
-                        <div>Join Squad</div>
+                        <div>Join Clan</div>
                         <span>⟶</span>
                     </div> : <div className='db-squad' onClick={() => {
                         dispatch(selectSquad(squad.userSquad));

@@ -1,4 +1,4 @@
-import {Outlet, useNavigate} from "react-router-dom";
+import {Outlet, useLocation, useNavigate, useNavigation, useParams} from "react-router-dom";
 import {useEffect} from "react";
 import WebApp from "@twa-dev/sdk";
 import {useDispatch, useSelector} from "react-redux";
@@ -305,8 +305,13 @@ const RootLayout = () => {
         if (user.data != null && user.data?.status == 'suspended')
             navigate('/banned')
     }, [user.data?.status]);
+    const location = useLocation();
     return image.isActiveSkinsDone && image.isCoreDone ? (
-        <div className="w-full"><Outlet/><BottomSheet/><BotBottomSheet/></div>) : (<div>
+        <div className="w-full">
+            <Outlet/>
+            <BottomSheet/>
+            {location.pathname == '/dashboard' && <BotBottomSheet/>}
+        </div>) : (<div>
         <div className='preloader flex items-center justify-around'>
             <div className="loader">
                 <div className="loader-inner ball-grid-pulse">
