@@ -19,6 +19,8 @@ import JoinSquad from "./pages/JoinSquad.tsx";
 import {Toaster} from "sonner";
 import Banned from "./pages/Banned.tsx";
 import TopFren from "./pages/topFren.tsx";
+import Earn from "./pages/Earn.tsx";
+import JoinCommunity from "./pages/JoinCommunity.tsx";
 
 function App() {
     const turbo: TurboSliceType = useSelector((state: any) => state.turbo);
@@ -56,6 +58,14 @@ function App() {
                     {
                         path: 'fren',
                         element: <Fren/>
+                    },
+                    {
+                        path: 'earn',
+                        element: <Earn/>
+                    },
+                    {
+                        path: 'earn/join',
+                        element: <JoinCommunity/>
                     },
                     {
                         path: 'stats',

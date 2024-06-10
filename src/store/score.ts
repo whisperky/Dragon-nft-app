@@ -20,6 +20,9 @@ const scoreSlice = createSlice({
         coolDown: false,
     } as ScoreSliceType,
     reducers: {
+        setAmount: (state, action) => {
+            state.value = (parseInt(state.value) + parseInt(action.payload)).toString();
+        },
         setScore: (state, action) => {
             state.tap_lvl = action.payload.tap_lvl;
             state.energy_lvl = action.payload.energy_lvl;
@@ -110,6 +113,7 @@ export const {
     addToTempValue,
     addToValue,
     decreaseValue,
-    resetTempValue
+    resetTempValue,
+    setAmount
 } = scoreSlice.actions
 export default scoreSlice.reducer

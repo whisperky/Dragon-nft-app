@@ -82,6 +82,22 @@ export type FrenSliceType = {
     topFrens: any[];
     isTopFrenLoading: boolean;
 }
+export type taskSliceType = {
+    haveFinishData: boolean;
+    haveData: boolean;
+    list: any[];
+    finishedTask: any[];
+    isTask: boolean;
+    totalEarn: number;
+    isFinished: boolean;
+}
+export type EarnSliceType = {
+    haveData: boolean;
+    list: any[];
+    bottomSheet: boolean;
+    status: any;
+    totalEarn: number;
+}
 export type TurboSliceType = {
     taps: number;
     power: 'on' | 'off';
@@ -118,6 +134,8 @@ export type MySkinImageTypes = {
     name: SkinImageTypes;
     img: {
         normal: HTMLImageElement;
+        turbo: HTMLImageElement;
+        earn: HTMLImageElement;
     }
 }
 export type MyLeagueImageTypes = {

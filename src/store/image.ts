@@ -85,7 +85,7 @@ const imageSlice = createSlice({
                 });
             }
         },
-        addSkinImages: (state, action: { payload: { name: SkinImageTypes, img: any, type: 'normal' | 'turbo' } }) => {
+        addSkinImages: (state, action: { payload: { name: SkinImageTypes, img: any, type: 'normal' | 'turbo' | 'earn' } }) => {
             const skin = state.skin.filter((x) => x.name == action.payload.name);
             if (skin.length > 0) {
                 state.skin = state.skin.map((skin) => {
@@ -101,6 +101,8 @@ const imageSlice = createSlice({
                     name: action.payload.name,
                     img: {
                         normal: action.payload.type == 'normal' ? action.payload.img : null,
+                        turbo: action.payload.type == 'turbo' ? action.payload.img : null,
+                        earn: action.payload.type == 'earn' ? action.payload.img : null
                     }
                 });
             }

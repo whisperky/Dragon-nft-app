@@ -56,6 +56,7 @@ const BoostItem = ({
         if (disabled || trailing == 'enabled') {
         } else {
             if (haveEnough || (trailing == 'disabled' && itemType == 'skin')) {
+                console.log({item: item, type: itemType})
                 dispatch(showBottomSheet({item: item, type: itemType}))
             } else {
                 showToast(purchase.toast, 'You do not have enough coins', 'error')

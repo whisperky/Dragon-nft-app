@@ -105,6 +105,22 @@ export type boosterData = {
     createdAt: Date;
     updatedAt: Date;
 }
+export type EarnData = {
+    id: string;
+    name: string;
+    price: number;
+    image: any;
+    url?: String;
+    type: String;
+}
+export type finishData = {
+    id: string;
+    user_id: string;
+    task_id: string;
+    completed: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+}
 export type skinData = {
     id: string;
     name: string;
@@ -126,10 +142,14 @@ export type userSkinData = {
 }
 export type taskData = {
     id: string;
-    name: string | null;
+    title: string | null;
+    emoji: string | null;
     description: string | null;
-    image: string | null;
-    task_category: taskCategoryData;
+    difficulty: taskDifficultData;
+    type: taskTypeData;
+    social: tasksocialData;
+    type_data: string | null;
+    type_unique: string | null;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -153,6 +173,18 @@ export type frenData = {
     createdAt: Date;
     updatedAt: Date;
 }
+export type earnData = {
+    id: string;
+    name: string;
+    image: string;
+    reward: number;
+    company: string | null;
+    description: string | null;
+    task_length: number;
+    task_category: EarnCategoryData;
+    createdAt: Date;
+    updatedAt: Date;
+}
 export type topFrenData = {
     id: string;
     tg_id: string;
@@ -161,6 +193,7 @@ export type topFrenData = {
     frens: number;
     earned: number;
 }
+export type EarnCategoryData = 'specials' | 'onboarding' | "web3_world";
 export type UserDataFren = {
     id: string;
     tg_id: string;
@@ -191,7 +224,9 @@ export type UserDataFren = {
 export type userStatusData = 'active' | 'suspended' | 'deactivated';
 export type chatTypeData = 'group' | 'channel';
 export type leagueTypeData = 'miner' | 'squad';
-export type taskCategoryData = 'onboarding' | 'specials' | 'web3_world';
+export type taskDifficultData = 'easy' | 'medium' | 'hard';
+export type taskTypeData = 'web_link' | 'link' | 'socials';
+export type tasksocialData = 'telegram'| 'twitter'| 'tiktok'| 'medium'| 'reddit'| 'twitch'| 'youtube'| 'discord'| 'facebook'| 'whatsapp'| 'linkedin'| 'snapchat'| 'instagram'| 'pinterest'| 'wechat';
 export type transactionTypeData = 'skin' | 'booster' | 'daily_booster';
 
 // helper
@@ -234,10 +269,28 @@ export type boostWebHookData = {
         leftDailyBoosts: userDailyBoost[];
     }
 }
+export type taskWebHookData = {
+    success: boolean;
+    data: {
+        tasks: taskData[];
+    }
+}
 export type frenWebHookData = {
     success: boolean;
     data: {
         frens: frenData[];
+    }
+}
+export type earnWebHookData = {
+    success: boolean;
+    data: {
+        earns: earnData[];
+    }
+}
+export type finishWebHookData = {
+    success: boolean;
+    data: {
+        finishTasks: finishData[];
     }
 }
 export type userDailyBoost = {
