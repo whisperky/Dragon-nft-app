@@ -22,7 +22,9 @@ const Earn = () => {
     const earn = useSelector((state: any) => state.earn);
 
     useEffect(() => {
-        if(user.data) user.websocket.emit('getUserTaskComplete', user.data.id)
+        if(user.data) {
+            user.websocket.emit('getTaskData', { user: user.data.id});
+        }
         else navigate(-1)
     }, [])
 

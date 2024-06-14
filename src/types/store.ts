@@ -90,6 +90,7 @@ export type taskSliceType = {
     isTask: boolean;
     totalEarn: number;
     isFinished: boolean;
+    selectedTask: any[];
 }
 export type EarnSliceType = {
     haveData: boolean;

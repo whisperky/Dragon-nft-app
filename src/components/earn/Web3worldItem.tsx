@@ -3,7 +3,7 @@ import {ImageSliceType, MyImageTypes, MySkinImageTypes, PurchaseSliceType} from 
 import {showToast} from "../../helpers/helper.ts";
 import {useNavigate} from "react-router-dom";
 import { numify } from "../../helpers/score.helper.ts";
-import { setTotalEarn } from "../../store/task.ts";
+import { setSelectedTasks, setTotalEarn } from "../../store/task.ts";
 import { useEffect } from "react";
 
 const Web3worldItem = ({
@@ -32,24 +32,19 @@ const Web3worldItem = ({
     let imgHelp: MyImageTypes & MySkinImageTypes = [...images.booster, ...images.skin].find((img: any) => img.name == image) as any;
     let img = imgHelp?.img;
 
-    useEffect(() => {
-        if(item.task_category == 'web3_world') {
-            user.websocket.emit('getTaskData', { user: user.data.id, earn: item.id });
+    const clickHandler = (id) => {
+        const _tasksByEarn = task.list.filter(_task => _task.earn_id === id)
+        if(!_tasksByEarn.length) {
+            return showToast(purchase.toast, 'There is no tasks.', 'error')
         }
-    }, [])
-
-    const clickHandler = () => {
-        if(task.isFinished) {
-            return showToast(purchase.toast, 'You have already completed these tasks.', 'error')
-        }
+        dispatch(setSelectedTasks(_tasksByEarn))
         dispatch(setTotalEarn(item.reward))
-        if(item.name==="Connect with Socials") {navigate('join')}
-        else showToast(purchase.toast, 'Coming Soon', 'error')
+        navigate('join')
     }
-    
+   
     return (
         <div className='b-item glass-hover my-3' style={{opacity: 1}}
-             onClick={clickHandler}>
+             onClick={() => clickHandler(item.id)}>
             <div className='flex items-center'>
                 {img != undefined ? <img className='b-item-image' src={img.src}/> : <></>}
                 <div className='b-item-desc'>

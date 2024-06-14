@@ -281,6 +281,10 @@ export type frenWebHookData = {
         frens: frenData[];
     }
 }
+export type rewardWebHookData = {
+    success: boolean;
+    amount: number
+}
 export type earnWebHookData = {
     success: boolean;
     data: {
