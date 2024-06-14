@@ -1,6 +1,6 @@
-import {Manager} from "socket.io-client";
+import { Manager } from "socket.io-client";
 import WebApp from "@twa-dev/sdk";
-import {showToast} from "../helpers/helper.ts";
+import { showToast } from "../helpers/helper.ts";
 
 
 export default class Service {

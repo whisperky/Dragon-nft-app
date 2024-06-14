@@ -1,13 +1,12 @@
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {ImageSliceType, MyImageTypes, MySkinImageTypes} from "../../types/store.ts";
 import {MouseEventHandler} from "react";
+import { showToast } from "../../helpers/helper.ts";
+import { setSelectedTasks } from "../../store/task.ts";
 
 const CommunityItem = ({
                        title,
-                       subtitle,
                        subtitleColor,
-                       coin,
-                       locked,
                        disabled = false,
                        isMax = false,
                        item,
@@ -28,26 +27,35 @@ const CommunityItem = ({
     item: any,
     url: String
 }) => {
+    const dispatch = useDispatch();
     const isBot = item.image == 'AUTO_TAP_BOT';
     const user = useSelector((state: any) => state.user);
+    const task = useSelector((state: any) => state.task);
 
     const images: ImageSliceType = useSelector((state: any) => state.image);
-    const COIN_IMG = images.core.find((img: any) => img.name == 'COIN_TOOL');
-    const LOCKED_IMG = images.optional.find((img: any) => img.name == 'LOCKED_ICON');
+    const purchase = useSelector((state: any) => state.purchase);
+    // const LOCKED_IMG = images.optional.find((img: any) => img.name == 'LOCKED_ICON');
 
+    
     let imgHelp: MyImageTypes & MySkinImageTypes = [...images.booster, ...images.skin].find((img: any) => img.name == image) as any;
     let img = imgHelp?.img;
 
     const clickHandler = () => {
-        user.websocket.emit('getFinishTask', {user: user.data.id, task: item.id});
-        window.open(item.type_data, '_blank')
-    }
-    const replaceAll = (subtitle: string)=> {
-        let _subtitle = subtitle;
-        while(_subtitle.indexOf(",") !== -1) {
-            _subtitle = _subtitle.replace(",", '') 
+        if(item.completed) {
+            showToast(purchase.toast, 'This task is already completed.', 'error')
+            return
         }
-        return _subtitle
+        
+        let _tasks: any[] = []
+        task.selectedTask.forEach(_task => {
+            if(_task.id === item.id) {
+                _tasks = [..._tasks, {..._task, completed: true}]
+            }
+            else _tasks = [..._tasks, _task]
+        })
+        dispatch(setSelectedTasks(_tasks))
+        user.websocket.emit('getFinishTask', {user: user.data.id, task: item.task_id});
+        window.open(item.type_data, '_blank')
     }
 
     return (
@@ -56,18 +64,13 @@ const CommunityItem = ({
             <div className='flex items-center'>
                 {img != undefined ? <img className='b-item-image' src={img.src}/> : <></>}
                 <div className='b-item-desc'>
-                    <p className='b-item-title flex items-center'>{title} {isBot && isMax ? <span className='ml-3 b-item-badge glass'>on <span className='ml-1' style={{fontSize: '8px'}}>🟢</span></span> : ''}</p>
+                    <p className='b-item-title flex items-center'>{title}</p>
                         <div className='b-item-pricing'>
                             <div className='b-item-price'>
-                                {coin && COIN_IMG ? <img src={COIN_IMG?.img.src} alt='coin'/> : null}
-                                {locked && LOCKED_IMG ? <img src={LOCKED_IMG?.img.src} alt='locked'/> : null}
-                                {parseInt(replaceAll(subtitle)) > 150000 ? <span style={{
+                                 <span style={{
                                     color: subtitleColor == 'gold' ? '#FFD041' : 'white',
                                     opacity: subtitleColor == 'grey' ? .5 : 1
-                                }}>up to 150,000</span> : <span style={{
-                                    color: subtitleColor == 'gold' ? '#FFD041' : 'white',
-                                    opacity: subtitleColor == 'grey' ? .5 : 1
-                                }}> + {subtitle}</span>}
+                                }}>{item.completed ? "Task completed" : 'Task uncompleted'}</span>
                             </div>
                          </div>
                 </div>

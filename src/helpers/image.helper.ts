@@ -12,13 +12,14 @@ import BOOST_RECHARGE_BIG from "/icon/boosts/big/recharge-speed.png";
 import BOOST_TAPBOT_BIG from "/icon/boosts/big/tap-bot.png";
 import BOOST_DRAGON_BIG from "/icon/boosts/big/dragon.png";
 
-import EARN_DRAGON_BIG from "/icon/earn/dragon-image.png";
-import EARN_DRAGON from "/icon/earn/dragon.png";
-import EARN_COMMUNITY from "/icon/earn/community.png";
-import EARN_TWITTER from "/icon/earn/twitter.png";
-import EARN_WALLET from "/icon/earn/wallet.png";
-import EARN_MEDIUM from "/icon/earn/medium.png";
-import EARN_TELEGRAM from "/icon/earn/telegram.png";
+import EARN_DRAGON_BIG from '/icon/earn/dragon-image.png';
+import EARN_DRAGON from '/icon/earn/dragon.png'
+import EARN_COMMUNITY from '/icon/earn/community.png'
+import EARN_TWITTER from '/icon/earn/twitter.png'
+import EARN_WALLET from '/icon/earn/wallet.png'
+import EARN_MEDIUM from '/icon/earn/medium.png'
+import EARN_WEBSITE from '/icon/earn/website.png'
+import EARN_TELEGRAM from '/icon/earn/telegram.png'
 
 import BASIC from "/icon/boosts/skin/defualt.svg";
 import BITCOIN from "/icon/boosts/skin/bitcoin.svg";
@@ -173,103 +174,20 @@ import {
 //     }
 // }
 export const loadBoostImages = () => {
-  const loadImages = [
-    {
-      name: "RECHARGING_SPEED",
-      src: [
-        { type: "small", img: BOOST_RECHARGE },
-        { type: "big", img: BOOST_RECHARGE_BIG },
-      ],
-      type: "booster",
-    },
-    {
-      name: "EARN_DRAGON",
-      src: [
-        { type: "small", img: EARN_DRAGON },
-        { type: "big", img: EARN_DRAGON },
-      ],
-      type: "booster",
-    },
-    {
-      name: "EARN_COMMUNITY",
-      src: [
-        { type: "small", img: EARN_COMMUNITY },
-        { type: "big", img: EARN_COMMUNITY },
-      ],
-      type: "booster",
-    },
-    {
-      name: "EARN_TWITTER",
-      src: [
-        { type: "small", img: EARN_TWITTER },
-        { type: "big", img: EARN_TWITTER },
-      ],
-      type: "booster",
-    },
-    {
-      name: "EARN_WALLET",
-      src: [
-        { type: "small", img: EARN_WALLET },
-        { type: "big", img: EARN_WALLET },
-      ],
-      type: "booster",
-    },
-    {
-      name: "EARN_MEDIUM",
-      src: [
-        { type: "small", img: EARN_MEDIUM },
-        { type: "big", img: EARN_MEDIUM },
-      ],
-      type: "booster",
-    },
-    {
-      name: "EARN_TELEGRAM",
-      src: [
-        { type: "small", img: EARN_TELEGRAM },
-        { type: "big", img: EARN_TELEGRAM },
-      ],
-      type: "booster",
-    },
-    {
-      name: "MULTI_TAP",
-      src: [
-        { type: "small", img: BOOST_MULTITAP },
-        { type: "big", img: BOOST_MULTITAP_BIG },
-      ],
-      type: "booster",
-    },
-    {
-      name: "AUTO_TAP_BOT",
-      src: [
-        { type: "small", img: BOOST_TAPBOT },
-        { type: "big", img: BOOST_TAPBOT_BIG },
-      ],
-      type: "booster",
-    },
-    {
-      name: "ENERGY_LIMIT",
-      src: [
-        { type: "small", img: BOOST_BATTERY },
-        { type: "big", img: BOOST_BATTERY_BIG },
-      ],
-      type: "booster",
-    },
-    {
-      name: "ENERGY",
-      src: [
-        { type: "small", img: BOOST_ENERGY },
-        { type: "big", img: BOOST_ENERGY_BIG },
-      ],
-      type: "dailyBooster",
-    },
-    {
-      name: "TURBO",
-      src: [
-        { type: "small", img: BOOST_DRAGON },
-        { type: "big", img: BOOST_DRAGON_BIG },
-      ],
-      type: "dailyBooster",
-    },
+    const loadImages = [
+        {name: 'RECHARGING_SPEED', src: [{type: 'small', img: BOOST_RECHARGE}, {type: 'big', img: BOOST_RECHARGE_BIG}], type: 'booster'},
+        {name: 'EARN_DRAGON', src: [{type: 'small', img: EARN_DRAGON}, {type: 'big', img: EARN_DRAGON}], type: 'booster'},
+        {name: 'EARN_COMMUNITY', src: [{type: 'small', img: EARN_COMMUNITY}, {type: 'big', img: EARN_COMMUNITY}], type: 'booster'},
+        {name: 'EARN_TWITTER', src: [{type: 'small', img: EARN_TWITTER}, {type: 'big', img: EARN_TWITTER}], type: 'booster'},
+        {name: 'EARN_WALLET', src: [{type: 'small', img: EARN_WALLET}, {type: 'big', img: EARN_WALLET}], type: 'booster'},
+        {name: 'EARN_MEDIUM', src: [{type: 'small', img: EARN_MEDIUM}, {type: 'big', img: EARN_MEDIUM}], type: 'booster'},
+        {name: 'EARN_WEBSITE', src: [{type: 'small', img: EARN_WEBSITE}, {type: 'big', img: EARN_WEBSITE}], type: 'booster'},
+        {name: 'EARN_TELEGRAM', src: [{type: 'small', img: EARN_TELEGRAM}, {type: 'big', img: EARN_TELEGRAM}], type: 'booster'},
+        {name: 'MULTI_TAP', src: [{type: 'small', img: BOOST_MULTITAP}, {type: 'big', img: BOOST_MULTITAP_BIG}], type: 'booster'},
+        {name: 'AUTO_TAP_BOT', src: [{type: 'small', img: BOOST_TAPBOT}, {type: 'big', img: BOOST_TAPBOT_BIG}], type: 'booster'},
+        {name: 'ENERGY_LIMIT', src: [{type: 'small', img: BOOST_BATTERY}, {type: 'big', img: BOOST_BATTERY_BIG}], type: 'booster'},
+        {name: 'ENERGY', src: [{type: 'small', img: BOOST_ENERGY}, {type: 'big', img: BOOST_ENERGY_BIG}], type: 'dailyBooster'},
+        {name: 'TURBO', src: [{type: 'small', img: BOOST_DRAGON}, {type: 'big', img: BOOST_DRAGON_BIG}], type: 'dailyBooster'},
 
     {
       name: "BASIC",

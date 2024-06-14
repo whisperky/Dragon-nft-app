@@ -7,6 +7,7 @@ const getImage = (type: string) => {
     if(type === "medium") return "EARN_MEDIUM";
     if(type === "twitter") return "EARN_TWITTER";
     if(type === "telegram") return "EARN_TELEGRAM";
+    if(type === "website") return "EARN_WEBSITE";
 }
 
 const Community = () => {
@@ -17,7 +18,7 @@ const Community = () => {
                 '--angle': '135deg',
             } as React.CSSProperties}>
                 {
-                    task.list
+                    task.selectedTask
                         .map((item: taskData) => {
                             return {
                                 item,

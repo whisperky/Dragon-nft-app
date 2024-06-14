@@ -6,6 +6,7 @@ const taskSlice = createSlice({
         haveData: false,
         haveFinishData: false,
         list: [],
+        selectedTask: [],
         finishedTask: [],
         isTask: false,
         totalEarn: 0,
@@ -13,27 +14,29 @@ const taskSlice = createSlice({
     } as taskSliceType,
     reducers: {
         setTasks: (state, action) => {
-            state.list = action.payload;
+            // console.log(action.payload)
+            state.list = [...action.payload];
             state.haveData = true;
-            if(action.payload && !action.payload.length) {
-                state.isFinished = true;
-            }
         },
         setFinishedTasks: (state, action) => {
+            console.log(state.list)
+            
             if(!action.payload.length) {
                 state.isTask = true;
             }
-            state.list = action.payload;
+            // state.list = action.payload;
         },
         setTotalEarn: (state, action) => {
             state.totalEarn = action.payload
         },
         setUserFinishTask: (state, action) => {
-            console.log(action.payload)
             state.isFinished = action.payload
+        },
+        setSelectedTasks: (state, action) => {
+            state.selectedTask = [...action.payload]
         }
     }
 })
 
-export const { setTasks, setFinishedTasks,setTotalEarn, setUserFinishTask } = taskSlice.actions
+export const { setTasks, setFinishedTasks,setTotalEarn, setUserFinishTask, setSelectedTasks } = taskSlice.actions
 export default taskSlice.reducer;

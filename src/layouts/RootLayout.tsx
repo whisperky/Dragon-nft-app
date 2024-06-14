@@ -15,7 +15,8 @@ import {
     UserWebhookData,
     taskWebHookData,
     earnWebHookData,
-    finishWebHookData
+    finishWebHookData,
+    rewardWebHookData
 } from "../types/data.ts";
 import {setSkins, setUserSkins} from "../store/skin.ts";
 import {setBoost, setLeftDailyBoosts} from "../store/boost.ts";
@@ -43,7 +44,7 @@ import {setLeague, setSquadTop, setUserLeague, setUserTop} from "../store/league
 import {selectSquad, setTopSquad, setTopSquadUsers, setUserSquad, topSquadLoaded} from "../store/squad.ts";
 import {showToast} from "../helpers/helper.ts";
 import { setFinishedTasks, setTasks, setUserFinishTask } from "../store/task.ts";
-import { setEarns } from "../store/earn.ts";
+import { setBottom, setEarns } from "../store/earn.ts";
 
 const RootLayout = () => {
     const user: UserSliceType = useSelector((state: any) => state.user);
@@ -153,9 +154,12 @@ const RootLayout = () => {
                     dispatch(setEarns(edata.data.earns))
                 }
             });
-            user.websocket.on('finishTask', (fdata: finishWebHookData) => {
-                if (fdata.success) {
-                    dispatch(setFinishedTasks(fdata.data.finishTasks))
+            user.websocket.on('getEarnRewards', (edata: rewardWebHookData) => {
+                if (edata.success) {
+                    if(edata.amount) {
+                        dispatch(setBottom(true))
+                        dispatch(setAmount(edata.amount));
+                    }
                 }
             });
             user.websocket.on('topFrenData', (topFData: { success: boolean; frens: topFrenData }) => {
