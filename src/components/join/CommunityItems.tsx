@@ -53,7 +53,7 @@ const CommunityItem = ({
             }
             else _tasks = [..._tasks, _task]
         })
-        dispatch(setSelectedTasks(_tasks))
+        dispatch(setSelectedTasks({tasks: _tasks}))
         user.websocket.emit('getFinishTask', {user: user.data.id, task: item.task_id});
         window.open(item.type_data, '_blank')
     }
