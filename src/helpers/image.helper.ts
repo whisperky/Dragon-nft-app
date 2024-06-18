@@ -18,6 +18,7 @@ import EARN_COMMUNITY from '/icon/earn/community.png'
 import EARN_TWITTER from '/icon/earn/twitter.png'
 import EARN_WALLET from '/icon/earn/wallet.png'
 import EARN_MEDIUM from '/icon/earn/medium.png'
+import EARN_CHECK_REWARD from '/icon/earn/earn_check.png'
 import EARN_WEBSITE from '/icon/earn/website.png'
 import EARN_TELEGRAM from '/icon/earn/telegram.png'
 
@@ -182,6 +183,7 @@ export const loadBoostImages = () => {
         {name: 'EARN_WALLET', src: [{type: 'small', img: EARN_WALLET}, {type: 'big', img: EARN_WALLET}], type: 'booster'},
         {name: 'EARN_MEDIUM', src: [{type: 'small', img: EARN_MEDIUM}, {type: 'big', img: EARN_MEDIUM}], type: 'booster'},
         {name: 'EARN_WEBSITE', src: [{type: 'small', img: EARN_WEBSITE}, {type: 'big', img: EARN_WEBSITE}], type: 'booster'},
+        {name: 'EARN_CHECK_REWARD', src: [{type: 'small', img: EARN_CHECK_REWARD}, {type: 'big', img: EARN_CHECK_REWARD}], type: 'booster'},
         {name: 'EARN_TELEGRAM', src: [{type: 'small', img: EARN_TELEGRAM}, {type: 'big', img: EARN_TELEGRAM}], type: 'booster'},
         {name: 'MULTI_TAP', src: [{type: 'small', img: BOOST_MULTITAP}, {type: 'big', img: BOOST_MULTITAP_BIG}], type: 'booster'},
         {name: 'AUTO_TAP_BOT', src: [{type: 'small', img: BOOST_TAPBOT}, {type: 'big', img: BOOST_TAPBOT_BIG}], type: 'booster'},
