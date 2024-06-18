@@ -7,6 +7,7 @@ const taskSlice = createSlice({
         haveFinishData: false,
         list: [],
         selectedTask: [],
+        selectedTitle: '',
         finishedTask: [],
         isTask: false,
         totalEarn: 0,
@@ -33,7 +34,8 @@ const taskSlice = createSlice({
             state.isFinished = action.payload
         },
         setSelectedTasks: (state, action) => {
-            state.selectedTask = [...action.payload]
+            state.selectedTask = [...action.payload.tasks]
+            state.selectedTitle = action.payload.title
         }
     }
 })

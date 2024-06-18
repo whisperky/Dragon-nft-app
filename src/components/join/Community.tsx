@@ -14,6 +14,7 @@ const Community = () => {
     const task = useSelector((state: any) => state.task);
     return (
         <div className=''>
+            <p className='join-title animate__animated animate__fadeIn animate__slow clear-both '>{task.selectedTitle}</p>
             <div className='boosters-list glass blur-round-border-bg animate__animated animate__fadeIn animate__slow' style={{
                 '--angle': '135deg',
             } as React.CSSProperties}>

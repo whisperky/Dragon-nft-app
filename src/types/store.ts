@@ -84,6 +84,7 @@ export type FrenSliceType = {
 }
 export type taskSliceType = {
     haveFinishData: boolean;
+    selectedTitle: string;
     haveData: boolean;
     list: any[];
     finishedTask: any[];
