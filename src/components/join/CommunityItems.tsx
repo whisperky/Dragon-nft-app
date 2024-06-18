@@ -3,6 +3,7 @@ import {ImageSliceType, MyImageTypes, MySkinImageTypes} from "../../types/store.
 import {MouseEventHandler} from "react";
 import { showToast } from "../../helpers/helper.ts";
 import { setSelectedTasks } from "../../store/task.ts";
+import WebApp from "@twa-dev/sdk";
 
 const CommunityItem = ({
                        title,
@@ -55,7 +56,7 @@ const CommunityItem = ({
         })
         dispatch(setSelectedTasks({tasks: _tasks}))
         user.websocket.emit('getFinishTask', {user: user.data.id, task: item.task_id});
-        window.open(item.type_data, '_blank')
+        WebApp.openLink(item.type_data)
     }
 
     return (
