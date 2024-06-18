@@ -51,6 +51,7 @@ const SheetComp = () => {
 
     const COIN_IMG = image.core.find((i) => i.name === 'COIN_TOOL');
     const CLOSE_IMG = image.optional.find((i) => i.name === 'CLOSE_ICON');
+    const CHECK_ICON = image.booster.find(i => i.name === 'EARN_CHECK_REWARD') as any
 
     useModal();
     const onPurchaseHandler = () => {
@@ -79,7 +80,7 @@ const SheetComp = () => {
                 <Sheet.Header>{customHeader}</Sheet.Header>
                 <Sheet.Content>
                     <div className="bs-container items-stretch px-6 py-10">
-                        <img className='bs-img mx-auto ' src={'http://localhost:5173/icon/earn/earn_check.png'}/>
+                        <img className='bs-img mx-auto ' src={CHECK_ICON?.img.src}/>
                         <div className='bs-title pt-6'>Congratulations</div>
                         <span className='bs-subtitle pt-2'>you have completed the task</span>
                         {/*<span className='bs-over-subtitle'>{item.}</span>*/}

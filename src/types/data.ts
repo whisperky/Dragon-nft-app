@@ -350,7 +350,7 @@ export type GameData = {
 }
 // universal
 
-export type BoosterImageTypes = 'RECHARGING_SPEED' | 'MULTI_TAP' | 'AUTO_TAP_BOT' | 'ENERGY_LIMIT';
+export type BoosterImageTypes = 'RECHARGING_SPEED' | 'MULTI_TAP' | 'AUTO_TAP_BOT' | 'ENERGY_LIMIT' | 'EARN_CHECK_REWARD';
 export type DailyBoosterImageTypes = 'ENERGY' | 'TURBO';
 export type SkinImageTypes = 'BASIC' | 'BITCOIN' | 'VOTE_PEDRO' | 'JADE_COIN';
 export type ImageTypes = BoosterImageTypes | DailyBoosterImageTypes | SkinImageTypes | string;
