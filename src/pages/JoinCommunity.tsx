@@ -30,7 +30,7 @@ const JoinCommunity = () => {
             <img ref={img} id='coinIcon' className='join-image' src="/background/join_background.png" alt='DragonCoin'/>
             <div className='relative p_joins'>
                 <div className="relative z-[10]">
-                   <p className='join-title animate__animated animate__fadeIn animate__slow clear-both '>Join Our Community</p>
+                   {/* <p className='join-title animate__animated animate__fadeIn animate__slow clear-both '>Join Our Community</p> */}
                     <Community />
                 </div>
                 <div className="bs-container items-stretch mt-5">

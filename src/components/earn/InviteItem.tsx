@@ -1,5 +1,7 @@
 import {showBottomSheet} from "../../store/game.ts";
 import {useDispatch, useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
+
 import {ImageSliceType, MyImageTypes, MySkinImageTypes, PurchaseSliceType} from "../../types/store.ts";
 import {showToast} from "../../helpers/helper.ts";
 
@@ -15,6 +17,8 @@ const InviteItem = ({
     coin?: boolean,
 }) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate()
+
     const purchase: PurchaseSliceType = useSelector((state: any) => state.purchase);
     const images: ImageSliceType = useSelector((state: any) => state.image);
     const COIN_IMG = images.core.find((img: any) => img.name == 'COIN_TOOL');
@@ -22,7 +26,9 @@ const InviteItem = ({
     let img = imgHelp?.img;
 
     const clickHandler = () => {
-        showToast(purchase.toast, 'Coming Soon.', 'error')
+        // showToast(purchase.toast, 'Coming Soon.', 'error')
+        navigate('/fren')
+
     }
     return (
         <div className='b-item glass-hover my-3' style={{opacity: 1}} onClick={clickHandler}>

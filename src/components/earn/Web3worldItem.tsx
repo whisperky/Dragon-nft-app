@@ -32,19 +32,19 @@ const Web3worldItem = ({
     let imgHelp: MyImageTypes & MySkinImageTypes = [...images.booster, ...images.skin].find((img: any) => img.name == image) as any;
     let img = imgHelp?.img;
 
-    const clickHandler = (id) => {
+    const clickHandler = (id, title) => {
         const _tasksByEarn = task.list.filter(_task => _task.earn_id === id)
         if(!_tasksByEarn.length) {
             return showToast(purchase.toast, 'There is no tasks.', 'error')
         }
-        dispatch(setSelectedTasks(_tasksByEarn))
+        dispatch(setSelectedTasks({tasks: _tasksByEarn, title: title}))
         dispatch(setTotalEarn(item.reward))
         navigate('join')
     }
    
     return (
         <div className='b-item glass-hover my-3' style={{opacity: 1}}
-             onClick={() => clickHandler(item.id)}>
+             onClick={() => clickHandler(item.id, title)}>
             <div className='flex items-center'>
                 {img != undefined ? <img className='b-item-image' src={img.src}/> : <></>}
                 <div className='b-item-desc'>
