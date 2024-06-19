@@ -42,6 +42,7 @@ const CommunityItem = ({
     let img = imgHelp?.img;
 
     const clickHandler = () => {
+        console.log(item.type_data)
         if(item.completed) {
             showToast(purchase.toast, 'This task is already completed.', 'error')
             return
@@ -57,6 +58,7 @@ const CommunityItem = ({
         dispatch(setSelectedTasks({tasks: _tasks}))
         user.websocket.emit('getFinishTask', {user: user.data.id, task: item.task_id});
         WebApp.openLink(item.type_data)
+        
     }
 
     return (
