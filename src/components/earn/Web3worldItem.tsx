@@ -52,10 +52,7 @@ const Web3worldItem = ({
                         <div className='b-item-pricing'>
                             <div className='b-item-price'>
                                 {coin && COIN_IMG ? <img src={COIN_IMG?.img.src} alt='coin'/> : null}
-                                {parseInt(item.reward) > 150000 ? <span style={{
-                                    color: 'white',
-                                    opacity: 1
-                                }}>up to 150,000</span> : <span style={{
+                                {<span style={{
                                     color: 'white',
                                     opacity: 1
                                 }}> + {numify(item.reward)}</span>}

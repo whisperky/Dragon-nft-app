@@ -28,7 +28,6 @@ const InviteItem = ({
     const clickHandler = () => {
         // showToast(purchase.toast, 'Coming Soon.', 'error')
         navigate('/fren')
-
     }
     return (
         <div className='b-item glass-hover my-3' style={{opacity: 1}} onClick={clickHandler}>
