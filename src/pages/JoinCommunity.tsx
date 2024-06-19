@@ -27,7 +27,7 @@ const JoinCommunity = () => {
     return (
         <div className='joins'>
             <div className='header-gradient'></div>
-            <img ref={img} id='coinIcon' className='join-image' src="/background/join_background.png" alt='DragonCoin'/>
+            <img ref={img} id='coinIcon' className='join-image' src="/background/join_background.jpg" alt='DragonCoin'/>
             <div className='relative p_joins'>
                 <div className="relative z-[10]">
                    {/* <p className='join-title animate__animated animate__fadeIn animate__slow clear-both '>Join Our Community</p> */}
