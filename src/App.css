@@ -1043,6 +1043,8 @@
 .earn-image {
   position: relative;
   margin: 13% 0 5% 0;
+  width: 170px;
+  height: 170px;
 }
 
 .join-image {
