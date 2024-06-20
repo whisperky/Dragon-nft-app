@@ -6,7 +6,8 @@ const EarnImage = () => {
     const imgH = React.useRef<HTMLDivElement>(null)
     const img = React.useRef<HTMLImageElement>(null)
     const image: ImageSliceType = useSelector((state: any) => state.image);
-    const earn_image = image.activeSkins.img == undefined ? '' : image.activeSkins.img.earn.src;
+    const normal_image = image.activeSkins.img == undefined ? '' : image.activeSkins.img.normal.src;
+
     const earn = useSelector((state: any) => state.earn);
 
     return (earn.haveData) ? (
@@ -15,7 +16,7 @@ const EarnImage = () => {
                 <div id='coin-mother' ref={imgH}>
                     <div id='coin-ex' className='coin-itself'></div>
                     <img onSelect={() => false} ref={img} id='coinIcon' className='earn-image'
-                        src={earn_image} alt='DragonCoin'/>
+                        src={normal_image} alt='DragonCoin'/>
                 </div>
                 
                 <div></div>
