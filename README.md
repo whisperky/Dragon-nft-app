@@ -1,3 +1,13 @@
+# Dragon NFT Game
+
+<p align="center">
+  <img src="https://github.com/whisperky/Dragon-nft-app/blob/main/public/1.jpg" />
+</p>
+<br></br>
+<p align="center">
+  <img src="https://github.com/whisperky/Dragon-nft-app/blob/main/public/2.jpg" />
+</p>
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
