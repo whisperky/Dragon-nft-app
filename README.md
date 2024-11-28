@@ -71,3 +71,17 @@ npm run dev
 pnpm dev
 yarn dev
 ```
+
+## Project Structure
+
+- `/src` - Source code
+  - `/components` - Reusable React components
+  - `/pages` - Page components
+  - `/store` - Redux store configuration
+  - `/helpers` - Helper functions
+  - `/skeleton` - Loading skeleton components
+  - `/styles` - CSS styles
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
