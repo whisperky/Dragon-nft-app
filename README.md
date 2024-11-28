@@ -3,38 +3,71 @@
 <p align="center">
   <img src="https://github.com/whisperky/Dragon-nft-app/blob/main/public/background/1.jpg" />
 </p>
-<br></br>
+
 <p align="center">
   <img src="https://github.com/whisperky/Dragon-nft-app/blob/main/public/background/2.jpg" />
 </p>
 
-# React + TypeScript + Vite
+## Description
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Dragon NFT Game is a Telegram Web App built with React, TypeScript, and Vite. The game allows users to interact with dragons, earn coins, and participate in social features like inviting friends and joining squads.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Dragon interaction and coin earning system
+- Friend invitation system with rewards
+- Squad system for group gameplay
+- League-based progression
+- Telegram Premium integration
+- Real-time updates using WebSocket
+- Responsive design optimized for mobile
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- React 18
+- TypeScript
+- Vite
+- Redux Toolkit
+- Socket.io Client
+- TailwindCSS
+- React Router DOM
+- React Spring
+- Telegram Web App SDK
 
-- Configure the top-level `parserOptions` property like this:
+## Getting Started
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+### Prerequisites
+
+- Node.js (v14 or higher)
+- pnpm (recommended) or npm
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/whisperky/Dragon-nft-app.git
+cd Dragon-nft-app
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+2. Install dependencies:
+
+```bash
+npm install
+pnpm install
+yarn install
+```
+
+3. Create a `.env` file in the root directory and add your environment variables:
+
+```env
+VITE_REACT_APP_BOT_USERNAME=your_bot_username
+```
+
+4. Start the development server:
+
+```bash
+npm run dev
+pnpm dev
+yarn dev
+```
